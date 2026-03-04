@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAB Brasil — Análise Diagnóstica CRM Email Marketing | Ivoire Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0F172A;
+    --card: #1E293B;
+    --card2: #243047;
+    --border: #334155;
+    --orange: #FF6B35;
+    --teal: #4ECDC4;
+    --blue: #3B82F6;
+    --purple: #8B5CF6;
+    --green: #10B981;
+    --yellow: #F59E0B;
+    --pink: #EC4899;
+    --cyan: #06B6D4;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+    --subtle: #64748B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--orange), #FF8C42);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .header-titles h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .header-titles p {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-orange { background: rgba(255,107,53,0.15); color: var(--orange); border: 1px solid rgba(255,107,53,0.3); }
+  .badge-teal { background: rgba(78,205,196,0.15); color: var(--teal); border: 1px solid rgba(78,205,196,0.3); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); border: 1px solid rgba(139,92,246,0.3); }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+  .badge-red { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-muted { background: rgba(100,116,139,0.2); color: var(--muted); border: 1px solid var(--border); }
+
+  /* ── NAVIGATION ── */
+  .nav-container {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 69px;
+    z-index: 99;
+  }
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 18px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-transform: none;
+  }
+  .nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+  .nav-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+  .nav-tab .tab-num {
+    width: 20px;
+    height: 20px;
+    background: var(--border);
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .nav-tab.active .tab-num { background: var(--orange); color: white; }
+
+  /* ── MAIN LAYOUT ── */
+  .main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 28px 24px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADERS ── */
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 22px;
+    background: var(--orange);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    margin-left: 13px;
+  }
+
+  .section-gap { margin-top: 36px; }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-2px); border-color: var(--orange); }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent, var(--orange)), transparent);
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .kpi-icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 20px;
+    opacity: 0.6;
+  }
+
+  /* ── CHART CARDS ── */
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+  }
+  .chart-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .chart-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .chart-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .chart-body {
+    position: relative;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+
+  @media (max-width: 1024px) {
+    .grid-2, .grid-3, .grid-1-2, .grid-2-1 { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .main-content { padding: 16px 12px; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .nav-tab { padding: 12px 12px; font-size: 12px; }
+  }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: rgba(255,255,255,0.04);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(51,65,85,0.5);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+  .td-name {
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .td-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .td-badge { white-space: nowrap; }
+
+  .rate-good { color: var(--green); }
+  .rate-ok { color: var(--yellow); }
+  .rate-bad { color: #EF4444; }
+
+  /* ── INSIGHT CARDS ── */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .insight-card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-color, var(--border));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s;
+  }
+  .insight-card:hover { transform: translateY(-2px); }
+  .insight-card.positive { border-left-color: var(--green); background: rgba(16,185,129,0.04); }
+  .insight-card.alert { border-left-color: #EF4444; background: rgba(239,68,68,0.04); }
+  .insight-card.info { border-left-color: var(--blue); background: rgba(59,130,246,0.04); }
+  .insight-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .insight-icon { font-size: 22px; flex-shrink: 0; }
+  .insight-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .insight-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .insight-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── RECOMMENDATION CARDS ── */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  .rec-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .rec-card:hover { transform: translateY(-2px); border-color: var(--orange); }
+  .rec-header { display: flex; align-items: flex-start; gap: 14px; }
+  .rec-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+  .rec-title { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+  .rec-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .rec-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .rec-kpi {
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--orange);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rec-kpi::before { content: 'KPI'; font-size: 10px; background: var(--orange); color: white; padding: 1px 6px; border-radius: 4px; }
+
+  /* ── HEATMAP ── */
+  .heatmap-wrap { overflow-x: auto; }
+  .heatmap-table { border-collapse: collapse; font-size: 11px; width: 100%; }
+  .heatmap-table th {
+    padding: 6px 8px;
+    text-align: center;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 10px;
+    background: transparent;
+  }
+  .heatmap-table td {
+    padding: 4px;
+    text-align: center;
+    border: none;
+  }
+  .heatmap-table td div {
+    width: 100%;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    cursor: default;
+    transition: transform 0.15s;
+  }
+  .heatmap-table td div:hover { transform: scale(1.15); z-index: 1; position: relative; }
+  .heatmap-day { text-align: left !important; font-weight: 600; color: var(--text); padding: 4px 10px 4px 0 !important; white-space: nowrap; }
+
+  /* ── ALERT BOX ── */
+  .alert-box {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-left: 4px solid var(--yellow);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .alert-text h4 { font-size: 14px; font-weight: 700; color: var(--yellow); margin-bottom: 4px; }
+  .alert-text p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── SOURCE LIST ── */
+  .source-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .source-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .source-name { font-weight: 500; }
+  .source-bar-wrap { flex: 1; margin: 0 12px; height: 4px; background: var(--border); border-radius: 2px; }
+  .source-bar { height: 4px; background: var(--orange); border-radius: 2px; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    padding: 28px 24px;
+    background: var(--card);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .footer-text { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .footer-text strong { color: var(--text); }
+  .footer-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  /* ── MINI STAT ── */
+  .mini-stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .mini-stat { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .mini-stat-label { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .mini-stat-val { font-size: 18px; font-weight: 800; color: var(--text); }
+
+  /* ── DOTS LEGEND ── */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">IAB</div>
+      <div class="header-titles">
+        <h1>IAB Brasil — Email Marketing Analytics</h1>
+        <p>Análise Diagnóstica CRM &amp; GA4 &nbsp;·&nbsp; Realizado por Ivoire Agency</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="badge badge-orange">12 meses</span>
+      <span class="badge badge-teal">RD Station CRM</span>
+      <span class="badge badge-blue">Google Analytics 4</span>
+      <span class="badge badge-muted">Mar 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-container">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="switchTab(0)" data-tab="0">
+      <span class="tab-num">1</span> Visão Geral
+    </button>
+    <button class="nav-tab" onclick="switchTab(1)" data-tab="1">
+      <span class="tab-num">2</span> Campanhas &amp; UTM
+    </button>
+    <button class="nav-tab" onclick="switchTab(2)" data-tab="2">
+      <span class="tab-num">3</span> Tendência &amp; Timing
+    </button>
+    <button class="nav-tab" onclick="switchTab(3)" data-tab="3">
+      <span class="tab-num">4</span> Páginas &amp; Comportamento
+    </button>
+    <button class="nav-tab" onclick="switchTab(4)" data-tab="4">
+      <span class="tab-num">5</span> CRM &amp; Pipeline
+    </button>
+    <button class="nav-tab" onclick="switchTab(5)" data-tab="5">
+      <span class="tab-num">6</span> Insights
+    </button>
+    <button class="nav-tab" onclick="switchTab(6)" data-tab="6">
+      <span class="tab-num">7</span> Recomendações
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+<!-- ════════════════════════════════════════
+     TAB 1: VISÃO GERAL
+════════════════════════════════════════ -->
+<section class="tab-panel active" id="tab-0">
+
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent:#FF6B35">
+      <div class="kpi-icon">📧</div>
+      <div class="kpi-label">Sessões Email 12m</div>
+      <div class="kpi-value" style="color:var(--orange)">19.335</div>
+      <div class="kpi-sub">Canal: email / medium</div>
+    </div>
+    <div class="kpi-card" style="--accent:#4ECDC4">
+      <div class="kpi-icon">📊</div>
+      <div class="kpi-label">Share do Canal Email</div>
+      <div class="kpi-value" style="color:var(--teal)">17,7%</div>
+      <div class="kpi-sub">3º maior canal do site</div>
+    </div>
+    <div class="kpi-card" style="--accent:#10B981">
+      <div class="kpi-icon">✅</div>
+      <div class="kpi-label">Taxa de Rejeição Email</div>
+      <div class="kpi-value" style="color:var(--green)">10,1%</div>
+      <div class="kpi-sub">Benchmark mercado: 35–55%</div>
+    </div>
+    <div class="kpi-card" style="--accent:#8B5CF6">
+      <div class="kpi-icon">🏔️</div>
+      <div class="kpi-label">Mês Pico</div>
+      <div class="kpi-value" style="color:var(--purple)">Ago 2025</div>
+      <div class="kpi-sub">4.013 sessões via email</div>
+    </div>
+    <div class="kpi-card" style="--accent:#3B82F6">
+      <div class="kpi-icon">👤</div>
+      <div class="kpi-label">Contatos CRM</div>
+      <div class="kpi-value" style="color:var(--blue)">524</div>
+      <div class="kpi-sub">RD Station CRM</div>
+    </div>
+    <div class="kpi-card" style="--accent:#F59E0B">
+      <div class="kpi-icon">💼</div>
+      <div class="kpi-label">Deals no Pipeline</div>
+      <div class="kpi-value" style="color:var(--yellow)">72</div>
+      <div class="kpi-sub">69 em andamento · 3 ganhos</div>
+    </div>
+    <div class="kpi-card" style="--accent:#EC4899">
+      <div class="kpi-icon">🛍️</div>
+      <div class="kpi-label">Produtos no Catálogo</div>
+      <div class="kpi-value" style="color:var(--pink)">105</div>
+      <div class="kpi-sub">5 categorias de produto</div>
+    </div>
+    <div class="kpi-card" style="--accent:#06B6D4">
+      <div class="kpi-icon">🌐</div>
+      <div class="kpi-label">Total Sessões Site 12m</div>
+      <div class="kpi-value" style="color:var(--cyan)">109.186</div>
+      <div class="kpi-sub">Todos os canais GA4</div>
+    </div>
+  </div>
+
+  <div class="grid-2-1">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sessões Mensais via Email — 13 meses</div>
+          <div class="chart-sub">Mar 2025 – Mar 2026 &nbsp;·&nbsp; Canal: email / email</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px">
+        <canvas id="monthlyTrendChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Share por Canal</div>
+          <div class="chart-sub">% das sessões totais do site</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px">
+        <canvas id="channelShareChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Taxa de Rejeição por Canal — Email vs. Concorrentes</div>
+        <div class="chart-sub">Quanto menor, melhor. Email: 10,1% — excepcionalmente abaixo do benchmark</div>
+      </div>
+      <span class="badge badge-green">Email: campeão de qualidade</span>
+    </div>
+    <div class="chart-body" style="height:280px">
+      <canvas id="bounceCompareChart"></canvas>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 2: CAMPANHAS & UTM
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-1">
+
+  <div class="alert-box">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-text">
+      <h4>Problema de Padronização UTM Detectado</h4>
+      <p>Apenas parte das campanhas segue nomenclatura padronizada. Campaigns com nomes como <code>(referral)</code>, prefixos inconsistentes (<code>i_</code>, <code>iab_</code>, <code>institucional_</code>) e categorias misturadas no utm_campaign dificultam análise automatizada. A Recomendação #1 deste relatório aborda este ponto com prioridade imediata.</p>
+    </div>
+  </div>
+
+  <div class="grid-2-1">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Top 10 Campanhas por Sessões</div>
+          <div class="chart-sub">Rankings das campanhas com maior volume de tráfego gerado</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:320px">
+        <canvas id="top10CampsChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sessões por Categoria</div>
+          <div class="chart-sub">7 categorias de campanha</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:320px">
+        <canvas id="catDoughnutChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Top 15 Campanhas — Detalhamento Completo</div>
+        <div class="chart-sub">Ordenado por volume de sessões</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="campaignsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Campanha</th>
+            <th>Categoria</th>
+            <th class="td-num">Sessões</th>
+            <th class="td-num">Usuários</th>
+            <th class="td-num">Rejeição</th>
+            <th class="td-num">Duração Méd.</th>
+            <th class="td-num">Sessões Eng.</th>
+          </tr>
+        </thead>
+        <tbody id="campaignsTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 3: TENDÊNCIA & TIMING
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-2">
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Evolução Mensal: Sessões, Usuários e Taxa de Rejeição</div>
+        <div class="chart-sub">Eixo duplo — Sessões/Usuários (esq.) e Rejeição % (dir.) — Mar 2025 a Mar 2026</div>
+      </div>
+    </div>
+    <div class="chart-body" style="height:320px">
+      <canvas id="dualAxisChart"></canvas>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sessões por Dia da Semana</div>
+          <div class="chart-sub">Qui lidera com 6.665 sessões — 34% do total semanal</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:250px">
+        <canvas id="bestDaysChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sessões por Hora do Dia</div>
+          <div class="chart-sub">Pico: 11h (2.952) e 14h (2.921) — janela de ouro</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:250px">
+        <canvas id="bestHoursChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Heatmap de Engajamento — Dia × Hora</div>
+        <div class="chart-sub">Cor mais intensa = mais sessões. Pico absoluto: Qui 14h com 1.642 sessões.</div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(255,107,53,0.2)"></div>Baixo</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(255,107,53,0.5)"></div>Médio</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#FF6B35"></div>Alto</div>
+      </div>
+    </div>
+    <div class="heatmap-wrap">
+      <table class="heatmap-table" id="heatmapTable"></table>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 4: PÁGINAS & COMPORTAMENTO
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-3">
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Top 15 Landing Pages via Email</div>
+        <div class="chart-sub">Páginas de destino mais acessadas pelo tráfego de email marketing</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Página</th>
+            <th class="td-num">Sessões</th>
+            <th class="td-num">Usuários</th>
+            <th class="td-num">Rejeição</th>
+            <th class="td-num">Duração Méd.</th>
+            <th class="td-num">Pageviews</th>
+            <th class="td-num">Conversões</th>
+          </tr>
+        </thead>
+        <tbody id="pagesTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Sessões vs. Taxa de Rejeição por Landing Page</div>
+          <div class="chart-sub">Ideal: alto volume + baixa rejeição (canto inferior direito)</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px">
+        <canvas id="scatterChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Dispositivos — Tráfego Email</div>
+          <div class="chart-sub">Desktop domina com 83,4% das sessões</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px">
+        <canvas id="deviceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Top Eventos do Tráfego Email</div>
+        <div class="chart-sub">Volume de acionamentos de eventos por usuários vindos de email</div>
+      </div>
+    </div>
+    <div class="chart-body" style="height:280px">
+      <canvas id="eventsChart"></canvas>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 5: CRM & PIPELINE
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-4">
+
+  <div class="kpi-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
+    <div class="kpi-card" style="--accent:#FF6B35">
+      <div class="kpi-icon">👥</div>
+      <div class="kpi-label">Total Contatos</div>
+      <div class="kpi-value" style="color:var(--orange)">524</div>
+      <div class="kpi-sub">Base ativa no CRM</div>
+    </div>
+    <div class="kpi-card" style="--accent:#4ECDC4">
+      <div class="kpi-icon">💼</div>
+      <div class="kpi-label">Total Deals</div>
+      <div class="kpi-value" style="color:var(--teal)">72</div>
+      <div class="kpi-sub">Pipeline ativo</div>
+    </div>
+    <div class="kpi-card" style="--accent:#8B5CF6">
+      <div class="kpi-icon">🛍️</div>
+      <div class="kpi-label">Total Produtos</div>
+      <div class="kpi-value" style="color:var(--purple)">105</div>
+      <div class="kpi-sub">Catálogo RD Station</div>
+    </div>
+    <div class="kpi-card" style="--accent:#10B981">
+      <div class="kpi-icon">🏷️</div>
+      <div class="kpi-label">Total Segmentos</div>
+      <div class="kpi-value" style="color:var(--green)">59</div>
+      <div class="kpi-sub">Setores representados</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Contatos Criados por Mês</div>
+          <div class="chart-sub">Set/2024 pico: 364 novos contatos</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:260px">
+        <canvas id="contactsByMonthChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Deals por Status</div>
+          <div class="chart-sub">72 total — 69 em andamento, 3 ganhos</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:260px">
+        <canvas id="dealStatusChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2-1">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Categorias de Produtos</div>
+          <div class="chart-sub">Distribuição do catálogo por categoria</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:240px">
+        <canvas id="productCatsChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Origem dos Deals</div>
+          <div class="chart-sub">Fontes de entrada no pipeline</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:240px">
+        <canvas id="dealSourceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Top Cargos dos Contatos CRM</div>
+          <div class="chart-sub">Perfil executivo de alto nível — CMO lidera</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Cargo</th>
+              <th class="td-num">Contatos</th>
+              <th class="td-num">% Base</th>
+            </tr>
+          </thead>
+          <tbody id="jobTitlesTbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Funis de Venda</div>
+          <div class="chart-sub">8 funis configurados no CRM</div>
+        </div>
+      </div>
+      <ul class="source-list" id="funnelList"></ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 6: INSIGHTS
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-5">
+  <div class="section-title">Insights da Análise</div>
+  <div class="section-subtitle">Conclusões derivadas do cruzamento de GA4 + CRM — priorizadas por impacto</div>
+
+  <div class="insight-grid" id="insightsGrid"></div>
+
+  <div class="divider"></div>
+
+  <div class="section-title section-gap">Sumário Quantitativo</div>
+  <div class="section-subtitle">Dados que sustentam os insights acima</div>
+
+  <div class="grid-3">
+    <div class="chart-card">
+      <div class="chart-title" style="margin-bottom:16px">Canal Email — Performance vs. Canais</div>
+      <div class="mini-stat-row" style="flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Rejeição Email</span>
+          <span style="font-weight:700;color:var(--green)">10,1%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Rejeição Organic Search</span>
+          <span style="font-weight:700;color:var(--yellow)">13,5%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Rejeição Direct</span>
+          <span style="font-weight:700;color:var(--teal)">7,4%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+          <span style="font-size:13px;color:var(--muted)">Benchmark Email Mercado</span>
+          <span style="font-weight:700;color:#EF4444">35–55%</span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title" style="margin-bottom:16px">Concentração de Tráfego</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Ago 2025 / Total 12m</span>
+          <span style="font-weight:700;color:var(--orange)">20,8%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Campanha #1 / Total</span>
+          <span style="font-weight:700;color:var(--orange)">8,9%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">AdTech &amp; Branding / Total</span>
+          <span style="font-weight:700;color:var(--orange)">43,0%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+          <span style="font-size:13px;color:var(--muted)">Desktop / Total Email</span>
+          <span style="font-weight:700;color:var(--orange)">83,4%</span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title" style="margin-bottom:16px">CRM — Indicadores-Chave</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Taxa de Conversão Deals</span>
+          <span style="font-weight:700;color:var(--yellow)">4,2%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Deals via E-mail (CRM)</span>
+          <span style="font-weight:700;color:var(--yellow)">15,3%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px;color:var(--muted)">Pico Captação (Set/2024)</span>
+          <span style="font-weight:700;color:var(--green)">364</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+          <span style="font-size:13px;color:var(--muted)">Funis configurados CRM</span>
+          <span style="font-weight:700;color:var(--blue)">8</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     TAB 7: RECOMENDAÇÕES
+════════════════════════════════════════ -->
+<section class="tab-panel" id="tab-6">
+  <div class="section-title">Recomendações Estratégicas</div>
+  <div class="section-subtitle">10 ações priorizadas por impacto e urgência — direcionadas à equipe IAB Brasil</div>
+  <div class="rec-grid" id="recsGrid"></div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-text">
+      <strong>IAB Brasil × Ivoire Agency</strong> — Análise Diagnóstica de CRM Email Marketing<br>
+      Dados: RD Station CRM + Google Analytics 4 &nbsp;·&nbsp; Gerado em 03/03/2026
+    </div>
+    <div class="footer-badges">
+      <span class="badge badge-teal">RD Station CRM</span>
+      <span class="badge badge-blue">Google Analytics 4</span>
+      <span class="badge badge-purple">Claude AI</span>
+      <span class="badge badge-orange">Ivoire Agency</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ────────────────────────────────────────
+// DATA
+// ────────────────────────────────────────
+const DATA = {
+  monthlyTrend: [
+    { month: "Mar/25", sessions: 686, users: 441, bounce_rate: 10.5, avg_duration: 193 },
+    { month: "Abr/25", sessions: 1498, users: 969, bounce_rate: 11.0, avg_duration: 176 },
+    { month: "Mai/25", sessions: 1264, users: 834, bounce_rate: 10.6, avg_duration: 135 },
+    { month: "Jun/25", sessions: 1172, users: 820, bounce_rate: 11.1, avg_duration: 137 },
+    { month: "Jul/25", sessions: 1306, users: 1084, bounce_rate: 5.8, avg_duration: 74 },
+    { month: "Ago/25", sessions: 4013, users: 3493, bounce_rate: 2.9, avg_duration: 61 },
+    { month: "Set/25", sessions: 3651, users: 2139, bounce_rate: 5.7, avg_duration: 185 },
+    { month: "Out/25", sessions: 744, users: 405, bounce_rate: 10.8, avg_duration: 182 },
+    { month: "Nov/25", sessions: 289, users: 172, bounce_rate: 11.8, avg_duration: 144 },
+    { month: "Dez/25", sessions: 644, users: 465, bounce_rate: 7.8, avg_duration: 159 },
+    { month: "Jan/26", sessions: 2152, users: 1829, bounce_rate: 4.3, avg_duration: 68 },
+    { month: "Fev/26", sessions: 1803, users: 1267, bounce_rate: 8.2, avg_duration: 99 },
+    { month: "Mar/26", sessions: 211, users: 183, bounce_rate: 4.7, avg_duration: 47 }
+  ],
+  channelShare: [
+    { name: "Organic Search", sessions: 41382, share: 37.9, bounce: 13.5, color: "#3B82F6" },
+    { name: "Direct", sessions: 30987, share: 28.4, bounce: 7.4, color: "#4ECDC4" },
+    { name: "Email", sessions: 19335, share: 17.7, bounce: 10.1, color: "#FF6B35" },
+    { name: "Referral", sessions: 7794, share: 7.1, bounce: 13.2, color: "#8B5CF6" },
+    { name: "Unassigned", sessions: 5760, share: 5.3, bounce: 14.0, color: "#64748B" },
+    { name: "Organic Social", sessions: 3584, share: 3.3, bounce: 7.0, color: "#EC4899" },
+    { name: "Paid Search", sessions: 265, share: 0.2, bounce: 0, color: "#F59E0B" }
+  ],
+  campaigns: [
+    { name: "iab_iab_ia_summit_-_email_save_the_date_-_base_geral_-_02", category: "IA Summit", sessions: 1716, users: 1516, bounce_rate: 3.4, avg_duration: 47, engaged: 1657 },
+    { name: "adtech__branding_-_newsletter_-_regua_12", category: "AdTech & Branding", sessions: 1460, users: 606, bounce_rate: 8.0, avg_duration: 256, engaged: 1343 },
+    { name: "i_eventos_adtech__branding_-_newsletter_-_regua-7_-_com_virada_de_lote", category: "AdTech & Branding", sessions: 1342, users: 1248, bounce_rate: 1.9, avg_duration: 43, engaged: 1316 },
+    { name: "i_eventos_adtech__branding_-_newsletter_-_regua-7_-_sem_virada_de_lote_v2", category: "AdTech & Branding", sessions: 1170, users: 1094, bounce_rate: 1.8, avg_duration: 47, engaged: 1149 },
+    { name: "iab_emkt_evento_adtech_-_regua_6", category: "AdTech & Branding", sessions: 769, users: 692, bounce_rate: 3.3, avg_duration: 39, engaged: 744 },
+    { name: "repique_adtech__branding_-_newsletter_-_regua_12", category: "AdTech & Branding", sessions: 661, users: 330, bounce_rate: 4.5, avg_duration: 187, engaged: 631 },
+    { name: "iab_evento_adtech_-_regua_11__e-mail_marketing", category: "AdTech & Branding", sessions: 570, users: 487, bounce_rate: 3.5, avg_duration: 61, engaged: 550 },
+    { name: "i_eventos_adtech__branding_-_newsletter_-_regua-1", category: "AdTech & Branding", sessions: 538, users: 483, bounce_rate: 3.2, avg_duration: 42, engaged: 521 },
+    { name: "relgov_2025_boletim_de_transparencia_-_marco_2025", category: "RelGov", sessions: 469, users: 336, bounce_rate: 9.8, avg_duration: 133, engaged: 423 },
+    { name: "i_institucional_iab_news__maio25", category: "Newsletter", sessions: 466, users: 268, bounce_rate: 13.9, avg_duration: 170, engaged: 401 },
+    { name: "i_eventos_adtech__branding_-_newsletter_-_regua-2", category: "AdTech & Branding", sessions: 454, users: 405, bounce_rate: 1.3, avg_duration: 87, engaged: 448 },
+    { name: "i_institucional_iab_news__marco25_semana_2", category: "Newsletter", sessions: 454, users: 261, bounce_rate: 12.8, avg_duration: 180, engaged: 396 },
+    { name: "iab_news_iab_-_janeiro_-_semana_2_-_2", category: "Newsletter", sessions: 447, users: 284, bounce_rate: 10.1, avg_duration: 135, engaged: 402 },
+    { name: "i_institucional_masterclass_inovacao_e_criatividade", category: "Cursos", sessions: 381, users: 283, bounce_rate: 7.6, avg_duration: 140, engaged: 352 },
+    { name: "i_eventos_adtech__branding_-_newsletter_-_regua-3", category: "AdTech & Branding", sessions: 367, users: 327, bounce_rate: 1.9, avg_duration: 30, engaged: 360 }
+  ],
+  campaignCategories: [
+    { name: "AdTech & Branding", sessions: 8290, users: 6268, campaigns: 21, avg_bounce: 8.0, color: "#FF6B35" },
+    { name: "Newsletter", sessions: 4342, users: 2671, campaigns: 25, avg_bounce: 11.9, color: "#4ECDC4" },
+    { name: "IA Summit", sessions: 2660, users: 2205, campaigns: 7, avg_bounce: 7.3, color: "#8B5CF6" },
+    { name: "Outros", sessions: 2010, users: 1447, campaigns: 45, avg_bounce: 11.4, color: "#64748B" },
+    { name: "RelGov", sessions: 938, users: 789, campaigns: 3, avg_bounce: 5.8, color: "#3B82F6" },
+    { name: "Cursos", sessions: 726, users: 507, campaigns: 6, avg_bounce: 8.7, color: "#10B981" },
+    { name: "Associação", sessions: 253, users: 169, campaigns: 5, avg_bounce: 12.3, color: "#F59E0B" }
+  ],
+  landingPages: [
+    { page: "/adtech-e-branding-2025", title: "Adtech & Branding 2025", sessions: 7342, users: 5937, bounce_rate: 0.0, avg_duration: 93, page_views: 9969, conversions: 20243 },
+    { page: "(not set)", title: "IAB IA Summit | 27 mar | SP", sessions: 3498, users: 2792, bounce_rate: 5.8, avg_duration: 52, page_views: 0, conversions: 4073 },
+    { page: "/forum-de-politicas-publicas-para-publicidade-digital", title: "Fórum Políticas Públicas", sessions: 1415, users: 1158, bounce_rate: 0.0, avg_duration: 104, page_views: 1709, conversions: 3636 },
+    { page: "/evento/adtech-branding-2025", title: "Adtech & Branding 2025 - IAB", sessions: 733, users: 563, bounce_rate: 0.0, avg_duration: 137, page_views: 841, conversions: 1530 },
+    { page: "/", title: "IAB Brasil (Homepage)", sessions: 677, users: 450, bounce_rate: 0.0, avg_duration: 137, page_views: 778, conversions: 1497 },
+    { page: "/adtech-e-branding-2025 (v2)", title: "Adtech & Branding 2025 - IAB (v2)", sessions: 311, users: 279, bounce_rate: 0.0, avg_duration: 86, page_views: 383, conversions: 731 },
+    { page: "/masterclass/inovacao-e-criatividade…", title: "Inovação e Criatividade Masterclass", sessions: 311, users: 282, bounce_rate: 0.0, avg_duration: 113, page_views: 349, conversions: 819 },
+    { page: "(not set) — AdTech", title: "Adtech & Branding 2025 (sem URL)", sessions: 306, users: 200, bounce_rate: 93.5, avg_duration: 30, page_views: 0, conversions: 0 },
+    { page: "/mapa-mental-do-ecossistema-de-video-digital", title: "Mapa Mental Vídeo Digital", sessions: 304, users: 252, bounce_rate: 0.0, avg_duration: 200, page_views: 449, conversions: 1273 },
+    { page: "/guia-manual-de-conformidade…ia", title: "Manual IA Conformidade", sessions: 265, users: 192, bounce_rate: 0.0, avg_duration: 147, page_views: 401, conversions: 1178 },
+    { page: "/cursos", title: "Cursos IAB Brasil", sessions: 240, users: 162, bounce_rate: 0.0, avg_duration: 161, page_views: 326, conversions: 595 },
+    { page: "/cursos/combo-start-no-digital…", title: "Combo Start no Digital", sessions: 227, users: 180, bounce_rate: 0.0, avg_duration: 109, page_views: 243, conversions: 449 },
+    { page: "/pesquisa-digital-adspend-2025", title: "Digital AdSpend 2025", sessions: 222, users: 148, bounce_rate: 0.0, avg_duration: 196, page_views: 324, conversions: 916 },
+    { page: "/cursos/brand-safety-ad-quality-roi", title: "Brand Safety + Ad Quality + ROI", sessions: 164, users: 127, bounce_rate: 0.0, avg_duration: 145, page_views: 175, conversions: 334 },
+    { page: "/pesquisa-panorama-dooh-2025", title: "Panorama DOOH 2025", sessions: 161, users: 110, bounce_rate: 0.0, avg_duration: 146, page_views: 223, conversions: 569 }
+  ],
+  bestDays: [
+    { day: "Qui", sessions: 6665 },
+    { day: "Seg", sessions: 3554 },
+    { day: "Qua", sessions: 3409 },
+    { day: "Sex", sessions: 3175 },
+    { day: "Ter", sessions: 2870 },
+    { day: "Dom", sessions: 204 },
+    { day: "Sáb", sessions: 197 }
+  ],
+  bestHours: [
+    { hour: "11h", sessions: 2952 },
+    { hour: "14h", sessions: 2921 },
+    { hour: "9h", sessions: 2440 },
+    { hour: "15h", sessions: 2137 },
+    { hour: "16h", sessions: 1736 },
+    { hour: "10h", sessions: 1491 },
+    { hour: "17h", sessions: 1197 },
+    { hour: "12h", sessions: 1170 }
+  ],
+  heatmap: {
+    "Qui": { "9": 676, "10": 347, "11": 945, "12": 591, "13": 147, "14": 1642, "15": 806, "16": 391, "17": 459, "18": 274, "19": 81, "20": 52, "21": 55, "22": 44, "23": 40 },
+    "Sex": { "9": 934, "10": 282, "11": 459, "12": 180, "13": 161, "14": 219, "15": 208, "16": 174, "17": 135, "18": 76, "19": 36, "20": 31, "21": 20, "22": 25, "23": 17 },
+    "Qua": { "9": 218, "10": 290, "11": 1085, "12": 138, "13": 92, "14": 200, "15": 339, "16": 199, "17": 159, "18": 334, "19": 89, "20": 47, "21": 32, "22": 45, "23": 25 },
+    "Seg": { "9": 320, "10": 252, "11": 169, "12": 99, "13": 181, "14": 510, "15": 449, "16": 685, "17": 229, "18": 220, "19": 164, "20": 66, "21": 44, "22": 37, "23": 39 },
+    "Ter": { "9": 271, "10": 299, "11": 264, "12": 138, "13": 200, "14": 322, "15": 310, "16": 267, "17": 186, "18": 187, "19": 76, "20": 41, "21": 38, "22": 33, "23": 23 },
+    "Dom": { "9": 10, "10": 6, "11": 14, "12": 11, "13": 13, "14": 17, "15": 17, "16": 10, "17": 12, "18": 15, "19": 12, "20": 6, "21": 17, "22": 10, "23": 14 },
+    "Sáb": { "9": 11, "10": 15, "11": 16, "12": 13, "13": 11, "14": 11, "15": 8, "16": 10, "17": 17, "18": 11, "19": 6, "20": 7, "21": 7, "22": 9, "23": 15 }
+  },
+  devices: [
+    { name: "Desktop", sessions: 16294, share: 83.4, color: "#FF6B35" },
+    { name: "Mobile", sessions: 3232, share: 16.5, color: "#4ECDC4" },
+    { name: "Tablet", sessions: 11, share: 0.1, color: "#8B5CF6" }
+  ],
+  events: [
+    { name: "page_view", count: 23533 },
+    { name: "session_start", count: 19482 },
+    { name: "RD Landing Pages", count: 15260 },
+    { name: "first_visit", count: 12112 },
+    { name: "user_engagement", count: 11770 },
+    { name: "RD Formulario Embutido", count: 9957 },
+    { name: "scroll", count: 3529 },
+    { name: "click", count: 1855 },
+    { name: "form_start", count: 1536 },
+    { name: "form_submit", count: 1404 },
+    { name: "file_download", count: 820 }
+  ],
+  contactsByMonth: [
+    { month: "Mar/24", contacts: 1 },
+    { month: "Mai/24", contacts: 16 },
+    { month: "Jun/24", contacts: 19 },
+    { month: "Jul/24", contacts: 2 },
+    { month: "Ago/24", contacts: 29 },
+    { month: "Set/24", contacts: 364 },
+    { month: "Out/24", contacts: 93 }
+  ],
+  dealsByStatus: [
+    { name: "Em Andamento", count: 69, color: "#3B82F6" },
+    { name: "Ganhos", count: 3, color: "#10B981" }
+  ],
+  dealsBySource: [
+    { name: "Desconhecida", count: 26, color: "#64748B" },
+    { name: "Contato por E-mail", count: 11, color: "#FF6B35" },
+    { name: "Cliente Ativo", count: 10, color: "#4ECDC4" },
+    { name: "Contato por Telefone", count: 2, color: "#8B5CF6" },
+    { name: "Indicação por Parceiros", count: 1, color: "#10B981" }
+  ],
+  productCategories: [
+    { name: "Associação", count: 50, color: "#FF6B35" },
+    { name: "Outros", count: 40, color: "#4ECDC4" },
+    { name: "Patrocínio", count: 6, color: "#8B5CF6" },
+    { name: "Eventos", count: 5, color: "#3B82F6" },
+    { name: "Cursos", count: 4, color: "#10B981" }
+  ],
+  topJobTitles: [
+    ["CMO", 71], ["CEO", 30], ["CONSELHO", 20], ["Sócio", 6],
+    ["Diretora de Marketing", 5], ["Co-President & Financial Dir.", 5],
+    ["Diretor", 5], ["Managing Director", 5], ["Product Owner", 4], ["Diretor de Marketing", 4]
+  ],
+  funnels: [
+    { name: "Associação", stages: 8 },
+    { name: "Educação In Company", stages: 8 },
+    { name: "Educação B2C", stages: 6 },
+    { name: "Patrocínio", stages: 7 },
+    { name: "Pós-Venda Associação", stages: 6 },
+    { name: "Pós-Venda Educação B2B", stages: 6 },
+    { name: "Pós-Venda Educação B2C", stages: 6 },
+    { name: "Pós-Venda Patrocínio", stages: 6 }
+  ],
+  insights: [
+    { type: "positive", icon: "🏆", category: "Canal Email", priority: "high", title: "Email é o 3º maior canal do site com 17.7% do tráfego", detail: "Com 19.335 sessões nos últimos 12 meses, o email supera redes sociais e pagos. Canal email da IAB tem performance significativamente acima da média do mercado para associações B2B." },
+    { type: "positive", icon: "⭐", category: "Qualidade de Tráfego", priority: "high", title: "Taxa de rejeição do email excepcionalmente baixa: 10,1%", detail: "A média do email marketing brasileiro fica entre 35-55%. O IAB Brasil tem 10,1% — indicando que os destinatários chegam altamente engajados e encontram conteúdo relevante. Isso valida a segmentação e o alinhamento das CTAs." },
+    { type: "positive", icon: "📈", category: "Sazonalidade", priority: "medium", title: "Pico de tráfego email em 08/2025: 4.013 sessões", detail: "Agosto 2025 registrou o maior volume do período (4.013 sessões), coincidindo com campanhas do IAB IA Summit. Eventos próprios são o maior driver de tráfego email — oportunidade de amplificar este padrão para outros eventos." },
+    { type: "positive", icon: "🎯", category: "Campanhas", priority: "high", title: "'AdTech & Branding' é a categoria de email com mais tráfego", detail: "8.290 sessões geradas por campanhas de 'AdTech & Branding'. Validação de que este tipo de conteúdo tem maior ressonância com a base. Recomenda-se aumentar frequência e profundidade deste conteúdo." },
+    { type: "info", icon: "⏰", category: "Timing", priority: "medium", title: "Melhor engajamento: Quinta-feira entre 11h–14h", detail: "Dados do GA4 mostram que Qui e Seg geram mais sessões via email. Alinhar disparos com esta janela temporal pode aumentar abertura e cliques sem nenhum custo adicional." }
+  ],
+  recommendations: [
+    { priority: 1, area: "UTM & Rastreamento", action: "Padronizar 100% dos UTMs em todos os disparos", detail: "Implementar template obrigatório: utm_source=RD Station | utm_medium=email | utm_campaign=[categoria_nome_data]. Criar documento de nomenclatura e treinamento da equipe.", impact: "Alto", effort: "Baixo", kpi: "100% de atribuição de tráfego email no GA4", urgency: "Imediato" },
+    { priority: 2, area: "Automações", action: "Criar Welcome Series para novos contatos CRM", detail: "Fluxo automatizado 5 emails para novos leads: D+0 Boas-vindas > D+3 Apresentação IAB Brasil > D+7 Conteúdo top (pesquisa/relatório) > D+14 Convite próximo evento > D+21 Call para associação.", impact: "Alto", effort: "Médio", kpi: "+30% engajamento de novos contatos nos primeiros 30 dias", urgency: "Curto prazo" },
+    { priority: 3, area: "Eventos & Lançamentos", action: "Amplificar régua de email para todos os eventos IAB", detail: "O IA Summit gerou o maior pico do ano. Replicar esta régua (Save the Date → Abertura de Inscrições → Last Call → Pós-evento) para AdTech & Branding 2025 e demais eventos.", impact: "Alto", effort: "Médio", kpi: "+25% inscrições via email em eventos", urgency: "Curto prazo" },
+    { priority: 4, area: "Mobile & CRO", action: "Auditoria e otimização mobile-first de landing pages", detail: "Com maioria mobile, auditar todas as páginas de destino dos emails (homepage, eventos, cursos). Testar velocidade, CTAs, formulários e legibilidade em telas pequenas.", impact: "Alto", effort: "Médio", kpi: "Reduzir bounce rate mobile de email em 20%", urgency: "Médio prazo" },
+    { priority: 5, area: "Segmentação", action: "Segmentar base por cargo e área de atuação para personalização", detail: "Com 524 contatos e 59 segmentos de organização, criar trilhas de conteúdo segmentadas: executivos de mídia (cases/ROI), agências (ferramentas/tendências), anunciantes (pesquisas/benchmarks).", impact: "Alto", effort: "Alto", kpi: "+15% CTOR por segmento relevante", urgency: "Médio prazo" },
+    { priority: 6, area: "Newsletter", action: "Estruturar IAB News como produto editorial semanal", detail: "Newsletter semanal com: 1 destaque editorial, 1 pesquisa/relatório, 1 evento próximo, 1 comitê em destaque, 1 oportunidade de associação. Testar A/B assunto semanalmente.", impact: "Médio", effort: "Médio", kpi: "Aumentar engajamento newsletter em 20%", urgency: "Médio prazo" },
+    { priority: 7, area: "Timing & Frequência", action: "Otimizar janela de envio para Qui entre 11h–13h", detail: "Dados GA4 mostram padrão claro de engajamento. Alinhar todos os disparos marketing com esta janela, especialmente para newsletters e conteúdos não urgentes.", impact: "Médio", effort: "Baixo", kpi: "+10% sessions via email sem aumento de volume de envios", urgency: "Imediato" },
+    { priority: 8, area: "Conteúdo & Copy", action: "Implementar A/B test sistemático em linha de assunto", detail: "Em 100% dos disparos, testar 2 variações de assunto: urgência vs curiosidade, com número vs sem, personalizado vs genérico. Documentar vencedores e criar banco de assuntos de alta performance.", impact: "Médio", effort: "Baixo", kpi: "+10–15% taxa de abertura", urgency: "Curto prazo" },
+    { priority: 9, area: "CRM & Nurturing", action: "Criar fluxo de reengajamento para oportunidades paradas no pipeline", detail: "Com 72 deals no CRM, identificar deals sem atividade há 60+ dias e criar sequência automática de reengajamento via email com conteúdo relevante ao estágio do funil.", impact: "Alto", effort: "Médio", kpi: "+20% taxa de fechamento de deals parados", urgency: "Médio prazo" },
+    { priority: 10, area: "Entregabilidade", action: "Auditoria de entregabilidade e higienização da base", detail: "Validar configurações SPF, DKIM e DMARC para o domínio iabbrasil.org.br. Segmentar inativos há 6+ meses para campanha de reativação antes de exclusão. Implementar double opt-in para novos cadastros.", impact: "Alto", effort: "Médio", kpi: "Entregabilidade >99%, bounce rate <1%", urgency: "Médio prazo" }
+  ]
+};
+
+// ────────────────────────────────────────
+// CHART DEFAULTS
+// ────────────────────────────────────────
+Chart.defaults.color = '#94A3B8';
+Chart.defaults.borderColor = '#334155';
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+const CHART_OPTS = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: { color: '#94A3B8', padding: 16, font: { size: 12 }, boxWidth: 12, boxHeight: 12 }
+    },
+    tooltip: {
+      backgroundColor: '#1E293B',
+      borderColor: '#334155',
+      borderWidth: 1,
+      titleColor: '#F1F5F9',
+      bodyColor: '#94A3B8',
+      padding: 12,
+      cornerRadius: 8
+    }
+  }
+};
+
+// ────────────────────────────────────────
+// TAB SWITCHING
+// ────────────────────────────────────────
+const chartRegistry = {};
+const initializedTabs = new Set([0]);
+
+function switchTab(idx) {
+  document.querySelectorAll('.tab-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.nav-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  if (!initializedTabs.has(idx)) {
+    initializedTabs.add(idx);
+    setTimeout(() => initTabCharts(idx), 60);
+  }
+}
+
+// ────────────────────────────────────────
+// HELPERS
+// ────────────────────────────────────────
+function fmtNum(n) { return new Intl.NumberFormat('pt-BR').format(n); }
+function fmtDur(s) {
+  const m = Math.floor(s / 60), sec = s % 60;
+  return m > 0 ? `${m}m ${sec}s` : `${sec}s`;
+}
+function bounceClass(r) {
+  if (r <= 5) return 'rate-good';
+  if (r <= 15) return 'rate-ok';
+  return 'rate-bad';
+}
+function hexAlpha(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ────────────────────────────────────────
+// BUILD TABLES
+// ────────────────────────────────────────
+function buildCampaignsTable() {
+  const tbody = document.getElementById('campaignsTbody');
+  const catColors = {
+    "AdTech & Branding": "badge-orange", "Newsletter": "badge-teal",
+    "IA Summit": "badge-purple", "RelGov": "badge-blue",
+    "Cursos": "badge-green", "Outros": "badge-muted", "Associação": "badge-yellow"
+  };
+  DATA.campaigns.forEach((c, i) => {
+    const tr = document.createElement('tr');
+    const label = c.name.replace(/_/g, ' ').substring(0, 55) + (c.name.length > 55 ? '…' : '');
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-size:12px">${i+1}</td>
+      <td class="td-name" title="${c.name}">${label}</td>
+      <td class="td-badge"><span class="badge ${catColors[c.category]||'badge-muted'}">${c.category}</span></td>
+      <td class="td-num">${fmtNum(c.sessions)}</td>
+      <td class="td-num">${fmtNum(c.users)}</td>
+      <td class="td-num ${bounceClass(c.bounce_rate)}">${c.bounce_rate}%</td>
+      <td class="td-num">${fmtDur(c.avg_duration)}</td>
+      <td class="td-num">${fmtNum(c.engaged)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildPagesTable() {
+  const tbody = document.getElementById('pagesTbody');
+  DATA.landingPages.forEach((p, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-size:12px">${i+1}</td>
+      <td class="td-name" title="${p.page}">${p.title}</td>
+      <td class="td-num">${fmtNum(p.sessions)}</td>
+      <td class="td-num">${fmtNum(p.users)}</td>
+      <td class="td-num ${bounceClass(p.bounce_rate)}">${p.bounce_rate}%</td>
+      <td class="td-num">${fmtDur(p.avg_duration)}</td>
+      <td class="td-num">${fmtNum(p.page_views)}</td>
+      <td class="td-num" style="color:var(--teal)">${fmtNum(p.conversions)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildJobTitlesTable() {
+  const tbody = document.getElementById('jobTitlesTbody');
+  DATA.topJobTitles.forEach(([title, count], i) => {
+    const pct = ((count / 524) * 100).toFixed(1);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-size:12px">${i+1}</td>
+      <td style="font-weight:500">${title}</td>
+      <td class="td-num" style="color:var(--orange)">${count}</td>
+      <td class="td-num" style="color:var(--muted)">${pct}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildFunnelList() {
+  const list = document.getElementById('funnelList');
+  const colors = ['#FF6B35','#4ECDC4','#8B5CF6','#3B82F6','#10B981','#F59E0B','#EC4899','#06B6D4'];
+  DATA.funnels.forEach((f, i) => {
+    const li = document.createElement('li');
+    li.className = 'source-item';
+    li.innerHTML = `
+      <span class="source-name" style="color:${colors[i%colors.length]}">${f.name}</span>
+      <span style="font-size:11px;color:var(--muted);margin-left:auto">${f.stages} etapas</span>
+    `;
+    list.appendChild(li);
+  });
+}
+
+function buildInsights() {
+  const grid = document.getElementById('insightsGrid');
+  const priorityLabels = { high: 'Alta Prioridade', medium: 'Prioridade Média', low: 'Baixa Prioridade' };
+  const priorityClasses = { high: 'badge-red', medium: 'badge-yellow', low: 'badge-green' };
+  DATA.insights.forEach(ins => {
+    const div = document.createElement('div');
+    div.className = `insight-card ${ins.type}`;
+    div.innerHTML = `
+      <div class="insight-badges">
+        <span class="badge badge-muted">${ins.category}</span>
+        <span class="badge ${priorityClasses[ins.priority]||'badge-muted'}">${priorityLabels[ins.priority]||ins.priority}</span>
+        <span class="badge ${ins.type === 'positive' ? 'badge-green' : ins.type === 'alert' ? 'badge-red' : 'badge-blue'}">${ins.type === 'positive' ? 'Positivo' : ins.type === 'alert' ? 'Alerta' : 'Info'}</span>
+      </div>
+      <div class="insight-header">
+        <span class="insight-icon">${ins.icon}</span>
+        <span class="insight-title">${ins.title}</span>
+      </div>
+      <div class="insight-detail">${ins.detail}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function buildRecommendations() {
+  const grid = document.getElementById('recsGrid');
+  const impactClass = { 'Alto': 'badge-red', 'Médio': 'badge-yellow', 'Baixo': 'badge-green' };
+  const urgencyClass = { 'Imediato': 'badge-red', 'Curto prazo': 'badge-yellow', 'Médio prazo': 'badge-blue' };
+  const areaColors = ['#FF6B35','#4ECDC4','#8B5CF6','#3B82F6','#10B981','#F59E0B','#EC4899','#06B6D4','#FF6B35','#4ECDC4'];
+  DATA.recommendations.forEach((r, i) => {
+    const div = document.createElement('div');
+    div.className = 'rec-card';
+    div.innerHTML = `
+      <div class="rec-header">
+        <div class="rec-num">#${r.priority}</div>
+        <div>
+          <div class="rec-title">${r.action}</div>
+          <div class="rec-badges">
+            <span class="badge" style="background:${hexAlpha(areaColors[i]||'#FF6B35',0.15)};color:${areaColors[i]||'#FF6B35'};border:1px solid ${hexAlpha(areaColors[i]||'#FF6B35',0.3)}">${r.area}</span>
+            <span class="badge ${impactClass[r.impact]||'badge-muted'}">Impacto: ${r.impact}</span>
+            <span class="badge badge-muted">Esforço: ${r.effort}</span>
+            <span class="badge ${urgencyClass[r.urgency]||'badge-blue'}">${r.urgency}</span>
+          </div>
+        </div>
+      </div>
+      <div class="rec-detail">${r.detail}</div>
+      <div class="rec-kpi">${r.kpi}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function buildHeatmap() {
+  const table = document.getElementById('heatmapTable');
+  const days = ['Qui', 'Seg', 'Ter', 'Qua', 'Sex', 'Dom', 'Sáb'];
+  const hours = ['9','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+
+  // Find max for color scaling
+  let maxVal = 0;
+  days.forEach(d => {
+    hours.forEach(h => {
+      const v = DATA.heatmap[d] && DATA.heatmap[d][h] ? DATA.heatmap[d][h] : 0;
+      if (v > maxVal) maxVal = v;
+    });
+  });
+
+  // Header row
+  const thead = document.createElement('thead');
+  let headRow = '<tr><th style="text-align:left;padding-right:8px">Dia</th>';
+  hours.forEach(h => { headRow += `<th>${h}h</th>`; });
+  headRow += '</tr>';
+  thead.innerHTML = headRow;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  days.forEach(d => {
+    const tr = document.createElement('tr');
+    let row = `<td class="heatmap-day">${d}</td>`;
+    hours.forEach(h => {
+      const val = DATA.heatmap[d] && DATA.heatmap[d][h] ? DATA.heatmap[d][h] : 0;
+      const ratio = maxVal > 0 ? val / maxVal : 0;
+      const alpha = 0.08 + ratio * 0.92;
+      const textOpacity = ratio > 0.3 ? 0.9 : 0.5;
+      const bg = `rgba(255,107,53,${alpha.toFixed(2)})`;
+      const label = val > 0 ? (val >= 100 ? fmtNum(val) : val) : '';
+      row += `<td><div style="background:${bg};color:rgba(255,255,255,${textOpacity})" title="${d} ${h}h: ${fmtNum(val)} sessões">${label}</div></td>`;
+    });
+    tr.innerHTML = row;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+}
+
+// ────────────────────────────────────────
+// CHARTS — TAB 1
+// ────────────────────────────────────────
+function initTab0Charts() {
+  // Monthly trend
+  const ctx1 = document.getElementById('monthlyTrendChart').getContext('2d');
+  const gradient = ctx1.createLinearGradient(0, 0, 0, 280);
+  gradient.addColorStop(0, 'rgba(255,107,53,0.3)');
+  gradient.addColorStop(1, 'rgba(255,107,53,0.0)');
+  chartRegistry.monthlyTrend = new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: DATA.monthlyTrend.map(d => d.month),
+      datasets: [{
+        label: 'Sessões Email',
+        data: DATA.monthlyTrend.map(d => d.sessions),
+        borderColor: '#FF6B35',
+        backgroundColor: gradient,
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#FF6B35',
+        pointRadius: 4,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { display: false },
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => ` ${fmtNum(ctx.parsed.y)} sessões`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.5)' }, ticks: { color: '#64748B', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(51,65,85,0.5)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Channel share doughnut
+  chartRegistry.channelShare = new Chart(document.getElementById('channelShareChart'), {
+    type: 'doughnut',
+    data: {
+      labels: DATA.channelShare.map(d => d.name),
+      datasets: [{
+        data: DATA.channelShare.map(d => d.sessions),
+        backgroundColor: DATA.channelShare.map(d => d.color),
+        borderColor: '#1E293B',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      cutout: '60%',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { position: 'bottom', labels: { ...CHART_OPTS.plugins.legend.labels, padding: 10 } },
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => ` ${ctx.label}: ${fmtNum(ctx.parsed)} sess. (${DATA.channelShare[ctx.dataIndex].share}%)`
+          }
+        }
+      }
+    }
+  });
+
+  // Bounce rate compare
+  const bounceData = DATA.channelShare.filter(c => c.bounce > 0);
+  chartRegistry.bounceCompare = new Chart(document.getElementById('bounceCompareChart'), {
+    type: 'bar',
+    data: {
+      labels: bounceData.map(d => d.name),
+      datasets: [{
+        label: 'Taxa de Rejeição (%)',
+        data: bounceData.map(d => d.bounce),
+        backgroundColor: bounceData.map(d => d.name === 'Email' ? '#FF6B35' : hexAlpha('#94A3B8', 0.4)),
+        borderColor: bounceData.map(d => d.name === 'Email' ? '#FF6B35' : 'transparent'),
+        borderWidth: 2,
+        borderRadius: 6
+      }, {
+        label: 'Benchmark mín. mercado',
+        data: bounceData.map(() => 35),
+        type: 'line',
+        borderColor: '#EF4444',
+        borderDash: [6, 4],
+        borderWidth: 1.5,
+        pointRadius: 0,
+        fill: false,
+        tension: 0
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      indexAxis: 'x',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { display: true, labels: { ...CHART_OPTS.plugins.legend.labels } },
+        tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.3)' }, ticks: { color: '#64748B', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(51,65,85,0.3)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => v + '%' }, beginAtZero: true, max: 20 }
+      }
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// CHARTS — TAB 2
+// ────────────────────────────────────────
+function initTab1Charts() {
+  const top10 = DATA.campaigns.slice(0, 10);
+
+  chartRegistry.top10Camps = new Chart(document.getElementById('top10CampsChart'), {
+    type: 'bar',
+    data: {
+      labels: top10.map((c, i) => `#${i+1} ${c.name.replace(/_/g,' ').substring(0, 30)}…`),
+      datasets: [{
+        label: 'Sessões',
+        data: top10.map(c => c.sessions),
+        backgroundColor: top10.map(c => {
+          const cat = DATA.campaignCategories.find(x => x.name === c.category);
+          return cat ? hexAlpha(cat.color, 0.75) : hexAlpha('#64748B', 0.6);
+        }),
+        borderColor: top10.map(c => {
+          const cat = DATA.campaignCategories.find(x => x.name === c.category);
+          return cat ? cat.color : '#64748B';
+        }),
+        borderWidth: 2,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      indexAxis: 'y',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { display: false },
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            title: ctx => top10[ctx[0].dataIndex].name.replace(/_/g,' '),
+            label: ctx => ` ${fmtNum(ctx.parsed.x)} sessões | ${top10[ctx[0].dataIndex].category}`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.3)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) } },
+        y: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 10 } } }
+      }
+    }
+  });
+
+  chartRegistry.catDoughnut = new Chart(document.getElementById('catDoughnutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: DATA.campaignCategories.map(c => c.name),
+      datasets: [{
+        data: DATA.campaignCategories.map(c => c.sessions),
+        backgroundColor: DATA.campaignCategories.map(c => c.color),
+        borderColor: '#1E293B',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      cutout: '55%',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { position: 'bottom', labels: { ...CHART_OPTS.plugins.legend.labels, padding: 8 } },
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => ` ${ctx.label}: ${fmtNum(ctx.parsed)} sessões`
+          }
+        }
+      }
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// CHARTS — TAB 3
+// ────────────────────────────────────────
+function initTab2Charts() {
+  const ctx = document.getElementById('dualAxisChart').getContext('2d');
+  const gradSessions = ctx.createLinearGradient(0, 0, 0, 320);
+  gradSessions.addColorStop(0, 'rgba(255,107,53,0.25)');
+  gradSessions.addColorStop(1, 'rgba(255,107,53,0.0)');
+  const gradUsers = ctx.createLinearGradient(0, 0, 0, 320);
+  gradUsers.addColorStop(0, 'rgba(78,205,196,0.2)');
+  gradUsers.addColorStop(1, 'rgba(78,205,196,0.0)');
+
+  chartRegistry.dualAxis = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: DATA.monthlyTrend.map(d => d.month),
+      datasets: [
+        {
+          label: 'Sessões',
+          data: DATA.monthlyTrend.map(d => d.sessions),
+          borderColor: '#FF6B35',
+          backgroundColor: gradSessions,
+          borderWidth: 2.5,
+          fill: true,
+          tension: 0.4,
+          yAxisID: 'y',
+          pointRadius: 4,
+          pointHoverRadius: 7,
+          pointBackgroundColor: '#FF6B35'
+        },
+        {
+          label: 'Usuários',
+          data: DATA.monthlyTrend.map(d => d.users),
+          borderColor: '#4ECDC4',
+          backgroundColor: gradUsers,
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          yAxisID: 'y',
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#4ECDC4'
+        },
+        {
+          label: 'Rejeição %',
+          data: DATA.monthlyTrend.map(d => d.bounce_rate),
+          borderColor: '#EF4444',
+          borderWidth: 2,
+          borderDash: [5, 3],
+          fill: false,
+          tension: 0.4,
+          yAxisID: 'y2',
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#EF4444'
+        }
+      ]
+    },
+    options: {
+      ...CHART_OPTS,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        ...CHART_OPTS.plugins,
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => {
+              if (ctx.datasetIndex === 2) return ` ${ctx.dataset.label}: ${ctx.parsed.y}%`;
+              return ` ${ctx.dataset.label}: ${fmtNum(ctx.parsed.y)}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 } } },
+        y: { position: 'left', grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) }, beginAtZero: true },
+        y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#EF4444', font: { size: 11 }, callback: v => v + '%' }, beginAtZero: true, max: 16 }
+      }
+    }
+  });
+
+  // Best days
+  const dayColors = DATA.bestDays.map(d => d.day === 'Qui' ? '#FF6B35' : hexAlpha('#4ECDC4', 0.65));
+  chartRegistry.bestDays = new Chart(document.getElementById('bestDaysChart'), {
+    type: 'bar',
+    data: {
+      labels: DATA.bestDays.map(d => d.day),
+      datasets: [{ label: 'Sessões', data: DATA.bestDays.map(d => d.sessions), backgroundColor: dayColors, borderRadius: 8 }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: { ...CHART_OPTS.plugins, legend: { display: false }, tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${fmtNum(ctx.parsed.y)} sessões` } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 12, weight: '600' } } },
+        y: { grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Best hours
+  const hourColors = DATA.bestHours.map((h, i) => i < 2 ? '#FF6B35' : hexAlpha('#4ECDC4', 0.65));
+  chartRegistry.bestHours = new Chart(document.getElementById('bestHoursChart'), {
+    type: 'bar',
+    data: {
+      labels: DATA.bestHours.map(d => d.hour),
+      datasets: [{ label: 'Sessões', data: DATA.bestHours.map(d => d.sessions), backgroundColor: hourColors, borderRadius: 8 }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: { ...CHART_OPTS.plugins, legend: { display: false }, tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${fmtNum(ctx.parsed.y)} sessões` } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 12, weight: '600' } } },
+        y: { grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// CHARTS — TAB 4
+// ────────────────────────────────────────
+function initTab3Charts() {
+  // Scatter
+  const scatterData = DATA.landingPages.map(p => ({
+    x: p.sessions,
+    y: p.bounce_rate,
+    label: p.title
+  }));
+
+  chartRegistry.scatter = new Chart(document.getElementById('scatterChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Landing Pages',
+        data: scatterData,
+        backgroundColor: scatterData.map(d => d.y < 10 ? hexAlpha('#10B981', 0.75) : d.y < 30 ? hexAlpha('#F59E0B', 0.75) : hexAlpha('#EF4444', 0.75)),
+        pointRadius: 8,
+        pointHoverRadius: 12
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { display: false },
+        tooltip: {
+          ...CHART_OPTS.plugins.tooltip,
+          callbacks: {
+            label: ctx => [`${ctx.raw.label}`, `Sessões: ${fmtNum(ctx.parsed.x)}`, `Rejeição: ${ctx.parsed.y}%`]
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.4)' }, title: { display: true, text: 'Sessões', color: '#64748B' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) } },
+        y: { grid: { color: 'rgba(51,65,85,0.4)' }, title: { display: true, text: 'Taxa de Rejeição (%)', color: '#64748B' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => v + '%' } }
+      }
+    }
+  });
+
+  // Device doughnut
+  chartRegistry.device = new Chart(document.getElementById('deviceChart'), {
+    type: 'doughnut',
+    data: {
+      labels: DATA.devices.map(d => `${d.name} (${d.share}%)`),
+      datasets: [{
+        data: DATA.devices.map(d => d.sessions),
+        backgroundColor: DATA.devices.map(d => d.color),
+        borderColor: '#1E293B',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      cutout: '60%',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { position: 'bottom', labels: { ...CHART_OPTS.plugins.legend.labels } },
+        tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.label}: ${fmtNum(ctx.parsed)} sessões` } }
+      }
+    }
+  });
+
+  // Events bar
+  chartRegistry.events = new Chart(document.getElementById('eventsChart'), {
+    type: 'bar',
+    data: {
+      labels: DATA.events.map(e => e.name),
+      datasets: [{
+        label: 'Acionamentos',
+        data: DATA.events.map(e => e.count),
+        backgroundColor: [
+          '#FF6B35','#4ECDC4','#8B5CF6','#3B82F6','#10B981',
+          '#F59E0B','#EC4899','#06B6D4','#FF6B35','#4ECDC4','#8B5CF6'
+        ].map(c => hexAlpha(c, 0.75)),
+        borderColor: ['#FF6B35','#4ECDC4','#8B5CF6','#3B82F6','#10B981','#F59E0B','#EC4899','#06B6D4','#FF6B35','#4ECDC4','#8B5CF6'],
+        borderWidth: 2,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      indexAxis: 'y',
+      plugins: { ...CHART_OPTS.plugins, legend: { display: false }, tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${fmtNum(ctx.parsed.x)} acionamentos` } } },
+      scales: {
+        x: { grid: { color: 'rgba(51,65,85,0.3)' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => fmtNum(v) } },
+        y: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// CHARTS — TAB 5
+// ────────────────────────────────────────
+function initTab4Charts() {
+  // Contacts by month
+  chartRegistry.contactsByMonth = new Chart(document.getElementById('contactsByMonthChart'), {
+    type: 'bar',
+    data: {
+      labels: DATA.contactsByMonth.map(d => d.month),
+      datasets: [{
+        label: 'Novos Contatos',
+        data: DATA.contactsByMonth.map(d => d.contacts),
+        backgroundColor: DATA.contactsByMonth.map(d => d.contacts === 364 ? '#FF6B35' : hexAlpha('#4ECDC4', 0.65)),
+        borderRadius: 8
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: { ...CHART_OPTS.plugins, legend: { display: false }, tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${fmtNum(ctx.parsed.y)} contatos` } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 } }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Deal status doughnut
+  chartRegistry.dealStatus = new Chart(document.getElementById('dealStatusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: DATA.dealsByStatus.map(d => d.name),
+      datasets: [{
+        data: DATA.dealsByStatus.map(d => d.count),
+        backgroundColor: DATA.dealsByStatus.map(d => d.color),
+        borderColor: '#1E293B',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      cutout: '65%',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { position: 'bottom', labels: { ...CHART_OPTS.plugins.legend.labels } },
+        tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed} deals` } }
+      }
+    }
+  });
+
+  // Product categories
+  chartRegistry.productCats = new Chart(document.getElementById('productCatsChart'), {
+    type: 'bar',
+    data: {
+      labels: DATA.productCategories.map(p => p.name),
+      datasets: [{
+        label: 'Produtos',
+        data: DATA.productCategories.map(p => p.count),
+        backgroundColor: DATA.productCategories.map(p => hexAlpha(p.color, 0.75)),
+        borderColor: DATA.productCategories.map(p => p.color),
+        borderWidth: 2,
+        borderRadius: 8
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      plugins: { ...CHART_OPTS.plugins, legend: { display: false }, tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.parsed.y} produtos` } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(51,65,85,0.4)' }, ticks: { color: '#64748B', font: { size: 11 } }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Deal source
+  chartRegistry.dealSource = new Chart(document.getElementById('dealSourceChart'), {
+    type: 'doughnut',
+    data: {
+      labels: DATA.dealsBySource.map(d => d.name),
+      datasets: [{
+        data: DATA.dealsBySource.map(d => d.count),
+        backgroundColor: DATA.dealsBySource.map(d => d.color),
+        borderColor: '#1E293B',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      ...CHART_OPTS,
+      cutout: '55%',
+      plugins: {
+        ...CHART_OPTS.plugins,
+        legend: { position: 'bottom', labels: { ...CHART_OPTS.plugins.legend.labels, padding: 8 } },
+        tooltip: { ...CHART_OPTS.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed} deals` } }
+      }
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// INIT BY TAB INDEX
+// ────────────────────────────────────────
+function initTabCharts(idx) {
+  if (idx === 0) initTab0Charts();
+  else if (idx === 1) initTab1Charts();
+  else if (idx === 2) initTab2Charts();
+  else if (idx === 3) initTab3Charts();
+  else if (idx === 4) initTab4Charts();
+}
+
+// ────────────────────────────────────────
+// BOOTSTRAP
+// ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  buildCampaignsTable();
+  buildPagesTable();
+  buildJobTitlesTable();
+  buildFunnelList();
+  buildHeatmap();
+  buildInsights();
+  buildRecommendations();
+
+  // Init tab 0 charts after a short delay to ensure layout
+  setTimeout(() => initTab0Charts(), 100);
+});
+</script>
+</body>
+</html>
