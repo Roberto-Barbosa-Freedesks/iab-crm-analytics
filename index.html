@@ -197,14 +197,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .period-label-bar { background: rgba(255,107,53,0.06); border: 1px solid rgba(255,107,53,0.15); border-radius: 8px; padding: 8px 16px; margin-bottom: 20px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .period-label-bar span { color: var(--orange); font-weight: 600; }
 
-/* CUSTOM PERIOD PICKER */
-.custom-period-panel { display:none; align-items:center; gap:8px; margin-top:8px; padding:10px 14px; background:rgba(255,107,53,0.06); border:1px solid rgba(255,107,53,0.2); border-radius:8px; flex-wrap:wrap; }
-.custom-period-panel.open { display:flex; }
-.custom-period-panel label { font-size:11px; color:var(--muted); font-weight:600; }
-.custom-period-panel select { background:var(--card2); border:1px solid var(--border); color:var(--text); font-size:12px; padding:5px 8px; border-radius:6px; font-family:inherit; cursor:pointer; }
-.custom-period-panel select:focus { outline:none; border-color:var(--orange); }
-.btn-apply-custom { background:var(--orange); color:#fff; border:none; font-size:11px; font-weight:700; padding:6px 14px; border-radius:6px; cursor:pointer; font-family:inherit; transition:opacity 0.2s; }
-.btn-apply-custom:hover { opacity:0.85; }
 
 /* BI ANALYSIS BOXES */
 .bi-section { margin-top:36px; padding-top:24px; border-top:2px solid var(--border); }
@@ -265,25 +257,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
           <button class="period-btn" data-period="3M" onclick="setPeriod('3M')">3M</button>
           <button class="period-btn" data-period="6M" onclick="setPeriod('6M')">6M</button>
           <button class="period-btn active" data-period="12M" onclick="setPeriod('12M')">12M</button>
-          <button class="period-btn" data-period="custom" onclick="toggleCustomPicker()">Personalizado</button>
-        </div>
-        <div class="custom-period-panel" id="customPeriodPanel">
-          <label>De:</label>
-          <select id="customFrom" onchange="applyCustomPeriod()">
-            <option value="0">Mar/25</option><option value="1">Abr/25</option><option value="2">Mai/25</option>
-            <option value="3">Jun/25</option><option value="4">Jul/25</option><option value="5">Ago/25</option>
-            <option value="6">Set/25</option><option value="7">Out/25</option><option value="8">Nov/25</option>
-            <option value="9">Dez/25</option><option value="10">Jan/26</option><option value="11">Fev/26</option>
-            <option value="12">Mar/26</option>
-          </select>
-          <label>Até:</label>
-          <select id="customTo" onchange="applyCustomPeriod()">
-            <option value="0">Mar/25</option><option value="1">Abr/25</option><option value="2">Mai/25</option>
-            <option value="3">Jun/25</option><option value="4">Jul/25</option><option value="5">Ago/25</option>
-            <option value="6">Set/25</option><option value="7">Out/25</option><option value="8">Nov/25</option>
-            <option value="9">Dez/25</option><option value="10">Jan/26</option><option value="11">Fev/26</option>
-            <option value="12" selected>Mar/26</option>
-          </select>
         </div>
       </div>
       <span class="badge badge-green">● RD Station Marketing</span>
@@ -10930,40 +10903,13 @@ DATA.opensHeatmap = DATA.heatmap; // Real GA4 sessions data
 // PERIOD FILTER LOGIC
 // ════════════════════════════════════════════════════════════
 let currentPeriod = '12M';
-let customStart = 0, customEnd = 12;
 const MONTH_NAMES = ['Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
 const PERIOD_RANGES = {
-  '12M':   { start:0,  end:12, label:'Últimos 12 meses (Mar/25–Mar/26)' },
-  '6M':    { start:7,  end:12, label:'Últimos 6 meses (Out/25–Mar/26)' },
-  '3M':    { start:10, end:12, label:'Últimos 3 meses (Jan/26–Mar/26)' },
-  'custom':{ start:0,  end:12, label:'Personalizado' }
+  '12M': { start:0, end:12, label:'Últimos 12 meses (Mar/25–Mar/26)' },
+  '6M':  { start:6, end:12, label:'Últimos 6 meses (Set/25–Mar/26)' },
+  '3M':  { start:9, end:12, label:'Últimos 4 meses (Dez/25–Mar/26)' }
 };
 
-function toggleCustomPicker() {
-  const panel = document.getElementById('customPeriodPanel');
-  panel.classList.toggle('open');
-  if (panel.classList.contains('open')) {
-    setPeriodActive('custom');
-    applyCustomPeriod();
-  }
-}
-
-function applyCustomPeriod() {
-  customStart = parseInt(document.getElementById('customFrom').value);
-  customEnd   = parseInt(document.getElementById('customTo').value);
-  if (customEnd < customStart) customEnd = customStart;
-  PERIOD_RANGES['custom'].start = customStart;
-  PERIOD_RANGES['custom'].end   = customEnd;
-  const label = MONTH_NAMES[customStart] + (customStart === customEnd ? '' : ' – ' + MONTH_NAMES[customEnd]);
-  PERIOD_RANGES['custom'].label = 'Personalizado: ' + label;
-  currentPeriod = 'custom';
-  setPeriodActive('custom');
-  const lbl = PERIOD_RANGES['custom'].label;
-  document.querySelectorAll('#periodLabel,#periodLabel0,#periodLabel2').forEach(el => { if(el) el.textContent = lbl; });
-  updateAllMetrics();
-  refreshCharts();
-  updateBIBoxes();
-}
 
 function setPeriodActive(p) {
   document.querySelectorAll('.period-btn').forEach(b => b.classList.toggle('active', b.dataset.period === p));
@@ -10972,8 +10918,6 @@ function setPeriodActive(p) {
 function setPeriod(p) {
   currentPeriod = p;
   setPeriodActive(p);
-  // Close custom picker if switching to preset
-  if (p !== 'custom') document.getElementById('customPeriodPanel').classList.remove('open');
   const lbl = PERIOD_RANGES[p].label;
   document.querySelectorAll('#periodLabel,#periodLabel0,#periodLabel2').forEach(el => { if(el) el.textContent = lbl; });
   updateAllMetrics();
@@ -11106,14 +11050,10 @@ function updateAllMetrics() {
   // RD Station Email — real from CSV exports
   const rdsT = DATA.rdsTotals || {};
   const baseAtiva = rdsT.max_list_size || 38845;
-  setMetric('total-leads',         baseAtiva.toLocaleString('pt-BR'));
-  setMetric('total-leads-crm',     baseAtiva.toLocaleString('pt-BR'));
-  setMetric('rds-open-rate',       (rdsT.avg_open_rate||23.5).toFixed(1).replace('.',',')+'\u00a0%');
-  setMetric('rds-ctor',            (rdsT.avg_ctor||4.07).toFixed(2).replace('.',',')+'\u00a0%');
-  setMetric('rds-delivery',        (rdsT.avg_delivery_rate||98.5).toFixed(1).replace('.',',')+'\u00a0%');
-  setMetric('rds-campaigns',       (rdsT.total_campaigns||157).toString());
+  setMetric('total-leads',     baseAtiva.toLocaleString('pt-BR'));
+  setMetric('total-leads-crm', baseAtiva.toLocaleString('pt-BR'));
   // RD Station volume — filtered by period
-  const rdsf = getFilteredRdsMonthly();
+  const rdsf     = getFilteredRdsMonthly();
   const cleanRds = rdsf.filter(m => !m.has_estimated);
   const fEntregues = cleanRds.reduce((a,b)=>a+(b.entregues||0),0);
   const fOpens     = rdsf.reduce((a,b)=>a+(b.opens||0),0);
@@ -11121,6 +11061,17 @@ function updateAllMetrics() {
   setMetric('rds-total-entregues', fEntregues > 0 ? fEntregues.toLocaleString('pt-BR') : (rdsT.total_entregues||2281659).toLocaleString('pt-BR'));
   setMetric('rds-total-opens',     fOpens > 0     ? fOpens.toLocaleString('pt-BR')     : (rdsT.total_opens||537325).toLocaleString('pt-BR'));
   setMetric('rds-total-clicks',    fClicks > 0    ? fClicks.toLocaleString('pt-BR')    : (rdsT.total_clicks||21876).toLocaleString('pt-BR'));
+  // KPIs de taxa — calculados do período filtrado
+  const fOpenRate  = fEntregues > 0 ? (fOpens/fEntregues*100)  : (rdsT.avg_open_rate||23.5);
+  const fCTOR      = fOpens > 0     ? (fClicks/fOpens*100)     : (rdsT.avg_ctor||4.07);
+  const fDelivery  = cleanRds.length > 0
+                     ? cleanRds.reduce((a,b)=>a+(b.delivery_rate||0),0)/cleanRds.length
+                     : (rdsT.avg_delivery_rate||98.5);
+  const fCampCount = rdsf.reduce((a,b)=>a+(b.campaigns||0),0) || (rdsT.total_campaigns||157);
+  setMetric('rds-open-rate',  fOpenRate.toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('rds-ctor',       fCTOR.toFixed(2).replace('.',',')+'\u00a0%');
+  setMetric('rds-delivery',   fDelivery.toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('rds-campaigns',  fCampCount.toString());
   // GA4 metrics
   setMetric('total-aberturas',  fmtNum(engaged));
   setMetric('email-sessions',   fmtNum(sessoes));
@@ -11128,18 +11079,22 @@ function updateAllMetrics() {
   // Bounce rate (weighted avg over filtered months)
   const avgBounce = ga4f.length > 0 ? (ga4f.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4f.length).toFixed(1) : '0';
   setMetric('bounce-rate', avgBounce+'%');
-  // Tab 1 mini-KPIs — RDS campaign stats
-  setMetric('rds-camp-total', (rdsT.total_campaigns||157).toString());
-  setMetric('rds-avg-ctor',   (rdsT.avg_ctor||4.07).toFixed(2).replace('.',',')+'\u00a0%');
-  const allCamps = DATA.rdsCampaignsAll || DATA.rdsTopCampaigns || [];
-  if (allCamps.length > 0) {
-    const topOR   = [...allCamps].sort((a,b)=>b.open_rate-a.open_rate)[0];
-    const topOpen = [...allCamps].sort((a,b)=>b.opens-a.opens)[0];
-    setMetric('rds-camp-top-or',       topOR   ? topOR.open_rate.toFixed(1).replace('.',',')+'\u00a0%' : '—');
-    setMetric('rds-camp-top-or-name',  topOR   ? (topOR.name.length>30?topOR.name.slice(0,30)+'…':topOR.name) : 'campanha');
-    setMetric('rds-camp-top-opens',    topOpen ? topOpen.opens.toLocaleString('pt-BR') : '—');
-    setMetric('rds-camp-top-opens-name', topOpen ? (topOpen.name.length>30?topOpen.name.slice(0,30)+'…':topOpen.name) : 'campanha');
-  }
+  // Tab 1 mini-KPIs — RDS campaign stats (filtered by period)
+  setMetric('rds-camp-total', fCampCount.toString());
+  setMetric('rds-avg-ctor',   fCTOR.toFixed(2).replace('.',',')+'\u00a0%');
+  const _r = PERIOD_RANGES[currentPeriod];
+  const _allMonths = DATA.monthlyTrend.map(m=>m.month);
+  const _MO = {'Jan':'01','Fev':'02','Mar':'03','Abr':'04','Mai':'05','Jun':'06','Jul':'07','Ago':'08','Set':'09','Out':'10','Nov':'11','Dez':'12'};
+  const _l2ym = lbl => { const[mo,yr]=lbl.split('/'); return '20'+yr+'-'+(_MO[mo]||'01'); };
+  const _sYM = _l2ym(_allMonths[_r.start]), _eYM = _l2ym(_allMonths[_r.end]);
+  const filtCamps = (DATA.rdsCampaignsAll||DATA.rdsTopCampaigns||[])
+    .filter(c=>!c.year_month||(c.year_month>=_sYM&&c.year_month<=_eYM));
+  const topOR   = [...filtCamps].sort((a,b)=>b.open_rate-a.open_rate)[0];
+  const topOpen = [...filtCamps].sort((a,b)=>b.opens-a.opens)[0];
+  setMetric('rds-camp-top-or',         topOR   ? topOR.open_rate.toFixed(1).replace('.',',')+'\u00a0%' : '—');
+  setMetric('rds-camp-top-or-name',    topOR   ? (topOR.name.length>30?topOR.name.slice(0,30)+'…':topOR.name) : 'campanha');
+  setMetric('rds-camp-top-opens',      topOpen ? topOpen.opens.toLocaleString('pt-BR') : '—');
+  setMetric('rds-camp-top-opens-name', topOpen ? (topOpen.name.length>30?topOpen.name.slice(0,30)+'…':topOpen.name) : 'campanha');
   // RDS Channel KPIs
   const emailCh = (DATA.rdsChannels||[]).find(c=>c.channel_key==='email') || {visits:20698,conversoes:326,conv_rate:1.58};
   setMetric('rds-email-visits',     (emailCh.visits||20698).toLocaleString('pt-BR'));
@@ -11148,10 +11103,8 @@ function updateAllMetrics() {
   setMetric('rds-email-visits2',    (emailCh.visits||20698).toLocaleString('pt-BR'));
   setMetric('rds-email-convs2',     (emailCh.conversoes||326).toLocaleString('pt-BR'));
   setMetric('rds-email-conv-rate2', (emailCh.conv_rate||1.58).toFixed(2).replace('.',',')+'\u00a0%');
-  // Update funnel with RD Station + GA4 real data
-  const rdsAll = DATA.rdsEmailMonthly || [];
-  const cleanAll = rdsAll.filter(m => !m.has_estimated);
-  buildEmailFunnel(sessoes, engaged, cleanAll.reduce((a,b)=>a+(b.entregues||0),0), rdsAll.reduce((a,b)=>a+(b.opens||0),0), rdsAll.reduce((a,b)=>a+(b.clicks||0),0));
+  // Update funnel with RD Station + GA4 real data (filtered by period)
+  buildEmailFunnel(sessoes, engaged, fEntregues, fOpens, fClicks);
 }
 
 function getFilteredRdsMonthly() {
@@ -11272,9 +11225,10 @@ function buildEmailFunnel(sessoes, engaged, entregues, opens, clicks) {
 function buildCRMFunnel() {
   const container = document.getElementById('crmFunnel');
   if (!container) return;
-  const totalSessoes = DATA.monthlyTrend.reduce((a,b)=>a+(b.sessions||0),0);
-  const totalEngaged = DATA.monthlyTrend.reduce((a,b)=>a+(b.engaged||0),0);
-  const totalConv    = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
+  const ga4fCRM      = getFilteredData(DATA.monthlyTrend);
+  const totalSessoes = ga4fCRM.reduce((a,b)=>a+(b.sessions||0),0);
+  const totalEngaged = ga4fCRM.reduce((a,b)=>a+(b.engaged||0),0);
+  const totalConv    = ga4fCRM.reduce((a,b)=>a+(b.conversions||0),0);
   const baseLeads = (DATA.rdsTotals && DATA.rdsTotals.max_list_size) ? DATA.rdsTotals.max_list_size : 38845;
   const steps = [
     { label:'Base de Leads',  value:baseLeads,     rate:'Base RD Station', color:'#8B5CF6' },
@@ -11644,7 +11598,7 @@ function initTab1Charts() {
   }
   // RDS Volume by Period (bar: entregues + opens per period)
   destroyChart('rdsVolumeByPeriodChart');
-  const rdsMonthly = DATA.rdsEmailMonthly || [];
+  const rdsMonthly = getFilteredRdsMonthly();
   // Aggregate by period: sum entregues and opens per period_label
   const periodMap = {};
   rdsMonthly.forEach(m => {
@@ -11674,8 +11628,15 @@ function initTab1Charts() {
       }
     });
   }
-  // Top 20 RDS campaigns table
-  const topCamps = (DATA.rdsCampaignsAll||DATA.rdsTopCampaigns||[]).sort((a,b)=>b.opens-a.opens).slice(0,20);
+  // Top 20 RDS campaigns table — filtered by period
+  const _rp = PERIOD_RANGES[currentPeriod];
+  const _mths = DATA.monthlyTrend.map(m=>m.month);
+  const _MOP = {'Jan':'01','Fev':'02','Mar':'03','Abr':'04','Mai':'05','Jun':'06','Jul':'07','Ago':'08','Set':'09','Out':'10','Nov':'11','Dez':'12'};
+  const _l2ymp = lbl => { const[mo,yr]=lbl.split('/'); return '20'+yr+'-'+(_MOP[mo]||'01'); };
+  const _sYMp = _l2ymp(_mths[_rp.start]), _eYMp = _l2ymp(_mths[_rp.end]);
+  const topCamps = (DATA.rdsCampaignsAll||DATA.rdsTopCampaigns||[])
+    .filter(c=>!c.year_month||(c.year_month>=_sYMp&&c.year_month<=_eYMp))
+    .sort((a,b)=>b.opens-a.opens).slice(0,20);
   const tbody = document.getElementById('rdsTopCampaignsBody');
   if (tbody) {
     tbody.innerHTML = topCamps.map((c,i)=>`<tr>
@@ -11697,9 +11658,9 @@ function initTab1Charts() {
 // TAB 2 CHARTS — Tendência & Timing
 // ════════════════════════════════════════════════════════════
 function initTab2Charts() {
-  // RDS Email Monthly chart (14 months, grey for estimated months)
+  // RDS Email Monthly chart — filtered by selected period
   destroyChart('rdsEmailMonthlyChart');
-  const rdsMonAll = DATA.rdsEmailMonthly || [];
+  const rdsMonAll = getFilteredRdsMonthly();
   if (document.getElementById('rdsEmailMonthlyChart') && rdsMonAll.length > 0) {
     const rdsLabels    = rdsMonAll.map(m=>{ const [y,mo]=m.year_month.split('-'); const MON=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return MON[parseInt(mo)-1]+'/'+y.slice(2); });
     const isEst        = rdsMonAll.map(m=>m.has_estimated||false);
@@ -11733,9 +11694,9 @@ function initTab2Charts() {
       }
     });
   }
-  // RDS CTOR by month
+  // RDS CTOR by month — filtered
   destroyChart('rdsCTORChart');
-  const cleanMons = (DATA.rdsEmailMonthly||[]).filter(m=>!m.has_estimated);
+  const cleanMons = rdsMonAll.filter(m=>!m.has_estimated);
   if (document.getElementById('rdsCTORChart') && cleanMons.length > 0) {
     const ctorLabels = cleanMons.map(m=>{ const [y,mo]=m.year_month.split('-'); const MON=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return MON[parseInt(mo)-1]+'/'+y.slice(2); });
     const peakCtor   = cleanMons.reduce((pi,m,i,a)=>m.ctor>a[pi].ctor?i:pi,0);
