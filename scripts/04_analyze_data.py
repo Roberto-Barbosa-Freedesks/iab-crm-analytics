@@ -226,6 +226,24 @@ def generate_demo_ga4_data():
          "sessions": "850", "activeUsers": "695", "bounceRate": "0.3740", "averageSessionDuration": "162.8"},
     ]
 
+    import datetime
+    email_by_date = []
+    start_date = datetime.date(2023, 3, 1) # Support 12+ months back
+    for i in range(400):
+        d = start_date + datetime.timedelta(days=i)
+        date_str = d.strftime("%Y%m%d")
+        sessions = random.randint(10, 150)
+        email_by_date.append({
+            "date": date_str,
+            "sessionDefaultChannelGroup": "Email",
+            "sessions": str(sessions),
+            "activeUsers": str(int(sessions * 0.82)),
+            "newUsers": str(int(sessions * 0.35)),
+            "engagedSessions": str(int(sessions * 0.68)),
+            "bounceRate": str(round(random.uniform(0.28, 0.52), 4)),
+            "averageSessionDuration": str(round(random.uniform(90, 240), 1))
+        })
+
     return {
         "channel_overview": [
             {"sessionDefaultChannelGroup": "Email", "sessionMedium": "email",
@@ -234,6 +252,7 @@ def generate_demo_ga4_data():
              "bounceRate": "0.3912", "averageSessionDuration": "154.7",
              "screenPageViewsPerSession": "2.84"}
         ],
+        "email_by_date": email_by_date,
         "email_by_month": email_by_month,
         "email_campaigns_utm": email_campaigns,
         "email_landing_pages": email_landing,
@@ -528,6 +547,21 @@ def analyze_ga4_data(ga4_data):
         })
     results["monthly_trend"] = monthly_trend
 
+    # Daily trend (for dynamic JS filtering)
+    daily = ga4_data.get("email_by_date", [])
+    daily_trend = []
+    for d in sorted(daily, key=lambda x: x.get("date", "")):
+        daily_trend.append({
+            "date": d.get("date", ""),
+            "sessions": int(d.get("sessions", 0)),
+            "active_users": int(d.get("activeUsers", 0)),
+            "new_users": int(d.get("newUsers", 0)),
+            "engaged_sessions": int(d.get("engagedSessions", 0)),
+            "bounce_rate": round(float(d.get("bounceRate", 0)) * 100, 2),
+            "avg_duration": round(float(d.get("averageSessionDuration", 0)), 1)
+        })
+    results["daily_trend"] = daily_trend
+
     # Campaign performance
     campaigns = ga4_data.get("email_campaigns_utm", [])
     camp_perf = []
@@ -777,32 +811,34 @@ def main():
         "generated_at": datetime.now().isoformat(),
         "client": "IAB Brasil",
         "agency": "Ivoire",
+        "ga4_raw": ga4_data,
+        "rds_raw": {"emails": rds_data.get("emails", []) if rds_data else []},
         "rds_analysis": rds_analysis,
         "ga4_analysis": ga4_analysis,
         "insights": insights,
         "recommendations": recommendations
     }
 
-    # Save analysis
-    output_file = DATA_DIR / "full_analysis.json"
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(full_analysis, f, ensure_ascii=False, indent=2, default=str)
-
-    print(f"\n✅ Análise salva em: {output_file}")
-    print(f"\n📊 Resumo da análise:")
-    if rds_analysis.get("summary"):
-        s = rds_analysis["summary"]
-        print(f"   Emails analisados: {s['total_emails']}")
-        print(f"   Total de envios: {s['total_sends']:,}")
-        print(f"   Taxa de abertura média: {s['avg_open_rate']}%")
-        print(f"   Taxa de clique média: {s['avg_click_rate']}%")
-        print(f"   CTOR médio: {s['avg_ctor']}%")
-
-    if ga4_analysis.get("email_overview"):
-        ov = ga4_analysis["email_overview"]
-        print(f"\n   Sessões via email (GA4): {ov['sessions']:,}")
-        print(f"   Bounce rate: {ov['bounce_rate']}%")
-        print(f"   Duração média sessão: {ov['avg_session_duration']}s")
+    # Inject into index.html
+    html_file = BASE_DIR / "output" / "index.html"
+    if html_file.exists():
+        with open(html_file, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        # We will look for a marker in the HTML
+        import re
+        marker_start = "// AUTO-GENERATED DATA INJECTION POINT"
+        marker_end = "// END AUTO-GENERATED DATA"
+        pattern = f"({marker_start}).*?({marker_end})"
+        
+        json_str = json.dumps(full_analysis, ensure_ascii=False)
+        replacement = f"\\1\nconst DATA_RAW = {json_str};\n\\2"
+        
+        new_html = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
+        
+        with open(html_file, "w", encoding="utf-8") as f:
+            f.write(new_html)
+        print(f"✅ Injetado no dashboard em: {html_file}")
 
     print(f"\n   💡 {len(insights)} insights gerados")
     print(f"   📋 {len(recommendations)} recomendações estratégicas")
