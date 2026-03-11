@@ -402,7 +402,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
       <div class="kpi-label">Share de Tráfego</div>
-      <div class="kpi-value">16,9%</div>
+      <div class="kpi-value" data-metric="rds-email-share-pct">16,9%</div>
       <div class="kpi-sub">3º maior canal RD Station</div>
       <div class="kpi-icon">📊</div>
     </div>
@@ -430,7 +430,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card" style="--accent:var(--teal)">
       <div class="kpi-label">Share do Canal</div>
-      <div class="kpi-value">18,6%</div>
+      <div class="kpi-value" data-metric="email-share-ga4">18,6%</div>
       <div class="kpi-sub">3º maior canal do site</div>
       <div class="kpi-icon">📈</div>
     </div>
@@ -444,7 +444,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card" style="--accent:var(--cyan)">
       <div class="kpi-label">Sessões Totais</div>
-      <div class="kpi-value">111.355</div>
+      <div class="kpi-value" data-metric="total-sessions">111.355</div>
       <div class="kpi-sub">Todos os canais · GA4</div>
       <div class="kpi-icon">🌐</div>
     </div>
@@ -811,17 +811,17 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
       <div class="kpi-label">Busca Orgânica</div>
-      <div class="kpi-value">48.002</div>
+      <div class="kpi-value" data-metric="rds-organic-visits">48.002</div>
       <div class="kpi-sub">39,1% · 1º canal</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--blue)">
       <div class="kpi-label">Total Visitas RDS</div>
-      <div class="kpi-value">122.633</div>
+      <div class="kpi-value" data-metric="rds-total-visits">122.633</div>
       <div class="kpi-sub">Todos os canais</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--purple)">
       <div class="kpi-label">Email vs Orgânica</div>
-      <div class="kpi-value">43,1%</div>
+      <div class="kpi-value" data-metric="rds-email-organic-ratio">43,1%</div>
       <div class="kpi-sub">Email/Orgânica ratio</div>
     </div>
   </div>
@@ -966,7 +966,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
       <div class="kpi-label"><span class="tt">Taxa de Engajamento<span class="tt-icon">?</span><span class="tt-box">Sessões engajadas / total de sessões × 100. Benchmark mercado: 40-60%. IAB supera amplamente.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--green)">93,5%</div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--green)" data-metric="eng-rate">93,5%</div>
       <div class="kpi-sub">Benchmark: 40–60%</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--red)">
@@ -976,7 +976,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--blue)">
       <div class="kpi-label"><span class="tt">Canal Email (Share)<span class="tt-icon">?</span><span class="tt-box">Percentual do tráfego total do site originado via email. 3º maior canal de aquisição.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--blue)">18,6%</div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--blue)" data-metric="email-share-ga4">18,6%</div>
       <div class="kpi-sub">3º maior canal · GA4</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--purple)">
@@ -986,7 +986,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
       <div class="kpi-label"><span class="tt">Desktop vs Mobile<span class="tt-icon">?</span><span class="tt-box">Distribuição de dispositivos nas sessões via email. Desktop domina o acesso B2B.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--orange)">84,1%</div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--orange)" data-metric="desktop-pct">84,1%</div>
       <div class="kpi-sub">Desktop · 15,9% Mobile</div>
     </div>
   </div>
@@ -11095,14 +11095,36 @@ function updateAllMetrics() {
   setMetric('rds-camp-top-or-name',    topOR   ? (topOR.name.length>30?topOR.name.slice(0,30)+'…':topOR.name) : 'campanha');
   setMetric('rds-camp-top-opens',      topOpen ? topOpen.opens.toLocaleString('pt-BR') : '—');
   setMetric('rds-camp-top-opens-name', topOpen ? (topOpen.name.length>30?topOpen.name.slice(0,30)+'…':topOpen.name) : 'campanha');
-  // RDS Channel KPIs
-  const emailCh = (DATA.rdsChannels||[]).find(c=>c.channel_key==='email') || {visits:20698,conversoes:326,conv_rate:1.58};
-  setMetric('rds-email-visits',     (emailCh.visits||20698).toLocaleString('pt-BR'));
-  setMetric('rds-email-convs',      (emailCh.conversoes||326).toLocaleString('pt-BR'));
-  setMetric('rds-email-conv-rate',  (emailCh.conv_rate||1.58).toFixed(2).replace('.',',')+'\u00a0%');
-  setMetric('rds-email-visits2',    (emailCh.visits||20698).toLocaleString('pt-BR'));
-  setMetric('rds-email-convs2',     (emailCh.conversoes||326).toLocaleString('pt-BR'));
-  setMetric('rds-email-conv-rate2', (emailCh.conv_rate||1.58).toFixed(2).replace('.',',')+'\u00a0%');
+  // RDS Channel KPIs — scaled by period
+  const sf = getScaleFactor();
+  const emailCh    = (DATA.rdsChannels||[]).find(c=>c.channel_key==='email')    || {visits:20698,conversoes:326,conv_rate:1.58};
+  const orgCh      = (DATA.rdsChannels||[]).find(c=>c.channel_key==='organica') || {visits:48002};
+  const rdsTotalVisAll = (DATA.rdsChannels||[]).reduce((a,b)=>a+(b.visits||0),0) || 122633;
+  const rdsEmailVis   = Math.round((emailCh.visits||20698)*sf);
+  const rdsEmailConvs = Math.round((emailCh.conversoes||326)*sf);
+  const rdsOrgVis     = Math.round((orgCh.visits||48002)*sf);
+  const rdsTotalVisF  = Math.round(rdsTotalVisAll*sf);
+  const rdsEmailPct   = rdsTotalVisF > 0 ? (rdsEmailVis/rdsTotalVisF*100) : 16.9;
+  const rdsConvRate   = rdsEmailVis > 0 ? (rdsEmailConvs/rdsEmailVis*100) : 1.58;
+  setMetric('rds-email-visits',         rdsEmailVis.toLocaleString('pt-BR'));
+  setMetric('rds-email-convs',          rdsEmailConvs.toLocaleString('pt-BR'));
+  setMetric('rds-email-conv-rate',      rdsConvRate.toFixed(2).replace('.',',')+'\u00a0%');
+  setMetric('rds-email-visits2',        rdsEmailVis.toLocaleString('pt-BR'));
+  setMetric('rds-email-convs2',         rdsEmailConvs.toLocaleString('pt-BR'));
+  setMetric('rds-email-conv-rate2',     rdsConvRate.toFixed(2).replace('.',',')+'\u00a0%');
+  setMetric('rds-email-share-pct',      rdsEmailPct.toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('rds-organic-visits',       rdsOrgVis.toLocaleString('pt-BR'));
+  setMetric('rds-total-visits',         rdsTotalVisF.toLocaleString('pt-BR'));
+  setMetric('rds-email-organic-ratio',  rdsOrgVis>0 ? (rdsEmailVis/rdsOrgVis*100).toFixed(1).replace('.',',')+'\u00a0%' : '43,1\u00a0%');
+  // GA4 channel-scaled KPIs
+  const filtChansScaled = (DATA.channels||[]).map(c=>({...c, sessions:Math.round((c.sessions||0)*sf)}));
+  const filtTotalSess   = filtChansScaled.reduce((a,b)=>a+(b.sessions||0),0) || 1;
+  const emailChanSess   = filtChansScaled.find(c=>c.name==='Email')?.sessions || Math.round(sessoes);
+  const emailShareGA4   = (emailChanSess/filtTotalSess*100);
+  setMetric('total-sessions',  filtTotalSess.toLocaleString('pt-BR'));
+  setMetric('email-share-ga4', emailShareGA4.toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('eng-rate',        engRate+'\u00a0%');
+  setMetric('desktop-pct',     ((DATA.devices||[]).find(d=>d.name==='Desktop')?.share||84.1).toFixed(1).replace('.',',')+'\u00a0%');
   // Update funnel with RD Station + GA4 real data (filtered by period)
   buildEmailFunnel(sessoes, engaged, fEntregues, fOpens, fClicks);
 }
@@ -11395,11 +11417,12 @@ function buildHeatmap() {
   if (!table) return;
   const days = ['Qui','Seg','Ter','Qua','Sex','Dom','Sáb'];
   const hours = [9,10,11,12,13,14,15,16,17,18];
+  const hmSF = getScaleFactor();
 
-  // Find max value for color scaling
+  // Find max value for color scaling (pre-scaled)
   let maxVal = 0;
   days.forEach(d => hours.forEach(h => {
-    const v = (DATA.opensHeatmap[d]||{})[h]||0;
+    const v = Math.round(((DATA.opensHeatmap[d]||{})[h]||0) * hmSF);
     if (v > maxVal) maxVal = v;
   }));
 
@@ -11410,7 +11433,7 @@ function buildHeatmap() {
   days.forEach(d => {
     html += `<tr><td style="padding:6px 10px;font-weight:700;color:var(--text);font-size:12px;white-space:nowrap;">${d}</td>`;
     hours.forEach(h => {
-      const v = (DATA.opensHeatmap[d]||{})[h]||0;
+      const v = Math.round(((DATA.opensHeatmap[d]||{})[h]||0) * hmSF);
       const intensity = maxVal > 0 ? v / maxVal : 0;
       const alpha = 0.08 + intensity * 0.85;
       const textColor = intensity > 0.5 ? '#FFFFFF' : '#94A3B8';
@@ -11535,9 +11558,10 @@ function initTab0Charts() {
     }
   });
 
-  // RDS Channel Chart — donut showing all channels
+  // RDS Channel Chart — donut showing all channels (scaled by period)
   destroyChart('rdsChannelChart');
-  const rdsChans = DATA.rdsChannels || [];
+  const rdsChansSF  = getScaleFactor();
+  const rdsChans = (DATA.rdsChannels||[]).map(c=>({...c, visits:Math.round((c.visits||0)*rdsChansSF)}));
   const chanColors = {'organica':'#10B981','direto':'#3B82F6','email':'#FF6B35','referencia':'#8B5CF6','outros':'#F59E0B','social':'#EC4899','pago':'#06B6D4','busca_paga':'#06B6D4'};
   const rdsChansColors = rdsChans.map(c=>chanColors[c.channel_key]||'#64748B');
   const rdsChansTotal  = rdsChans.reduce((a,b)=>a+(b.visits||0),0)||1;
@@ -11545,7 +11569,7 @@ function initTab0Charts() {
     chartRegistry.rdsChannelChart = new Chart(document.getElementById('rdsChannelChart'), {
       type:'doughnut',
       data:{
-        labels: rdsChans.map(c=>c.channel+' ('+c.visit_share+'%)'),
+        labels: rdsChans.map(c=>c.channel+' ('+((c.visits/rdsChansTotal)*100).toFixed(1)+'%)'),
         datasets:[{ data:rdsChans.map(c=>c.visits), backgroundColor:rdsChansColors, borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
       },
       options:{
@@ -11559,15 +11583,15 @@ function initTab0Charts() {
     });
   }
 
-  // Init funnel with RD Station + GA4 real data
+  // Init funnel with RD Station + GA4 real data (filtered by period)
   const ga4F = getFilteredData(DATA.monthlyTrend);
-  const rdsAll0 = DATA.rdsEmailMonthly || [];
-  const cleanRds0 = rdsAll0.filter(m => !m.has_estimated);
+  const rdsf0    = getFilteredRdsMonthly();
+  const cleanRds0 = rdsf0.filter(m => !m.has_estimated);
   buildEmailFunnel(
     sumField(ga4F,'sessions'), sumField(ga4F,'engaged'),
     cleanRds0.reduce((a,b)=>a+(b.entregues||0),0),
-    rdsAll0.reduce((a,b)=>a+(b.opens||0),0),
-    rdsAll0.reduce((a,b)=>a+(b.clicks||0),0)
+    rdsf0.reduce((a,b)=>a+(b.opens||0),0),
+    rdsf0.reduce((a,b)=>a+(b.clicks||0),0)
   );
 }
 
@@ -11841,9 +11865,15 @@ function initTab2Charts() {
 // TAB 3 CHARTS — Canais & Captação
 // ════════════════════════════════════════════════════════════
 function initTab3Charts() {
-  // RDS Channel Visits bar
+  // RDS Channel Visits bar (scaled by period)
   destroyChart('rdsChannelVisitsChart');
-  const rdsChansAll = DATA.rdsChannels || [];
+  const tab3SF = getScaleFactor();
+  const rdsChansAll = (DATA.rdsChannels||[]).map(c=>({
+    ...c,
+    visits:    Math.round((c.visits||0)*tab3SF),
+    conversoes:Math.round((c.conversoes||0)*tab3SF)
+  }));
+  const tab3TotalVis = rdsChansAll.reduce((a,b)=>a+(b.visits||0),0)||1;
   const chColors = {'organica':'#10B981','direto':'#3B82F6','email':'#FF6B35','referencia':'#8B5CF6','outros':'#F59E0B','social':'#EC4899','pago':'#06B6D4','busca_paga':'#06B6D4'};
   if (document.getElementById('rdsChannelVisitsChart') && rdsChansAll.length > 0) {
     chartRegistry.rdsChannelVisitsChart = new Chart(document.getElementById('rdsChannelVisitsChart'), {
@@ -11858,11 +11888,11 @@ function initTab3Charts() {
           x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:20} },
           y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
         },
-        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} visitas (${rdsChansAll[ctx.dataIndex]?.visit_share}%)` } } }
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} visitas (${((rdsChansAll[ctx.dataIndex]?.visits||0)/tab3TotalVis*100).toFixed(1)}%)` } } }
       }
     });
   }
-  // RDS Conversions bar
+  // RDS Conversions bar (scaled by period)
   destroyChart('rdsConversionsChart');
   if (document.getElementById('rdsConversionsChart') && rdsChansAll.length > 0) {
     chartRegistry.rdsConversionsChart = new Chart(document.getElementById('rdsConversionsChart'), {
@@ -11877,28 +11907,33 @@ function initTab3Charts() {
           x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:20} },
           y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
         },
-        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} conversões (${rdsChansAll[ctx.dataIndex]?.conv_rate}%)` } } }
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} conversões` } } }
       }
     });
   }
-  // Forms table
+  // Forms table (scaled by period)
   const formsTbody = document.getElementById('rdsFormsTableBody');
   if (formsTbody) {
     const formsPeriods = DATA.rdsFormsByPeriod || [];
-    const totalVis  = formsPeriods.reduce((a,b)=>a+(b.mailing_visitors||0),0);
-    const totalLeds = formsPeriods.reduce((a,b)=>a+(b.mailing_leads||0),0);
-    formsTbody.innerHTML = formsPeriods.map(fp=>{
+    const scaledForms = formsPeriods.map(fp=>({
+      ...fp,
+      mailing_visitors: Math.round((fp.mailing_visitors||0)*tab3SF),
+      mailing_leads:    Math.round((fp.mailing_leads||0)*tab3SF)
+    }));
+    const totalVis  = scaledForms.reduce((a,b)=>a+(b.mailing_visitors||0),0);
+    const totalLeds = scaledForms.reduce((a,b)=>a+(b.mailing_leads||0),0);
+    formsTbody.innerHTML = scaledForms.map(fp=>{
       const convRate = fp.mailing_visitors > 0 ? (fp.mailing_leads/fp.mailing_visitors*100).toFixed(2) : '0';
       return `<tr><td>${fp.period}</td><td>${(fp.mailing_visitors||0).toLocaleString('pt-BR')}</td><td style="font-weight:600;color:var(--teal)">${(fp.mailing_leads||0).toLocaleString('pt-BR')}</td><td>${convRate}%</td></tr>`;
     }).join('') + `<tr style="background:rgba(78,205,196,0.07);font-weight:600;"><td>TOTAL</td><td>${totalVis.toLocaleString('pt-BR')}</td><td style="color:var(--teal)">${totalLeds.toLocaleString('pt-BR')}</td><td>${totalVis>0?(totalLeds/totalVis*100).toFixed(2):'0'}%</td></tr>`;
   }
-  // LPs table
+  // LPs table (scaled by period)
   const lpsTbody = document.getElementById('rdsLPsTableBody');
   if (lpsTbody) {
     const lps = (DATA.rdsLandingPagesActive||[]).sort((a,b)=>(b.visitors||0)-(a.visitors||0)).slice(0,15);
     lpsTbody.innerHTML = lps.map((lp,i)=>{
-      const vis  = lp.visitors||0;
-      const leds = lp.leads||0;
+      const vis  = Math.round((lp.visitors||0)*tab3SF);
+      const leds = Math.round((lp.leads||0)*tab3SF);
       const rate = vis > 0 ? (leds/vis*100).toFixed(1) : '0';
       const name = (lp.name||lp.title||'—').length > 50 ? (lp.name||lp.title).slice(0,50)+'…' : (lp.name||lp.title||'—');
       return `<tr><td>${i+1}</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</td><td style="font-weight:600">${vis.toLocaleString('pt-BR')}</td><td style="color:var(--teal)">${leds.toLocaleString('pt-BR')}</td><td>${rate}%</td></tr>`;
@@ -11956,13 +11991,24 @@ function initTab3Charts() {
 // TAB 4 CHARTS — CRM & Pipeline
 // ════════════════════════════════════════════════════════════
 function initTab4Charts() {
-  // CRM Contacts by month
+  // CRM Contacts by month — filtered by selected period
   destroyChart('crmContactsChart');
+  const crmR = PERIOD_RANGES[currentPeriod];
+  const crmAllMonths = DATA.monthlyTrend.map(m=>m.month);
+  const _CMO = {'Jan':'01','Fev':'02','Mar':'03','Abr':'04','Mai':'05','Jun':'06','Jul':'07','Ago':'08','Set':'09','Out':'10','Nov':'11','Dez':'12'};
+  const _c2ym = lbl => { const[mo,yr]=lbl.split('/'); return '20'+yr+'-'+(_CMO[mo]||'01'); };
+  const crmStartYM = _c2ym(crmAllMonths[crmR.start]);
+  const crmEndYM   = _c2ym(crmAllMonths[crmR.end]);
+  const filtCrmContacts = (DATA.crmContacts||[]).filter(c => {
+    const ym = _c2ym(c.month);
+    return ym >= crmStartYM && ym <= crmEndYM;
+  });
+  const crmContactsData = filtCrmContacts.length > 0 ? filtCrmContacts : (DATA.crmContacts||[]);
   chartRegistry.crmContactsChart = new Chart(document.getElementById('crmContactsChart'), {
     type:'bar',
     data:{
-      labels: DATA.crmContacts.map(c=>c.month),
-      datasets:[{ label:'Contatos CRM', data:DATA.crmContacts.map(c=>c.contacts), backgroundColor:DATA.crmContacts.map((_,i)=>i===5?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: crmContactsData.map(c=>c.month),
+      datasets:[{ label:'Contatos CRM', data:crmContactsData.map(c=>c.contacts), backgroundColor:crmContactsData.map((_,i)=>i===crmContactsData.length-1?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -12041,7 +12087,8 @@ function refreshCharts() {
   Object.keys(chartRegistry).forEach(id => destroyChart(id));
   // Reset tabInited so every tab re-inits with fresh data when next visited
   Object.keys(tabInited).forEach(k => delete tabInited[k]);
-  // Rebuild period-sensitive tables
+  // Rebuild period-sensitive tables and heatmap
+  buildHeatmap();
   buildCampaignsTable();
   buildPagesTable();
   // Re-init the currently visible tab immediately
