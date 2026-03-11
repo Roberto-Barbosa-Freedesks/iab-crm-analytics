@@ -307,9 +307,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 <nav class="nav-container">
   <div class="nav-inner">
     <button class="nav-tab active" onclick="switchTab(0)"><span class="tab-num">1</span> Visão Geral</button>
-    <button class="nav-tab" onclick="switchTab(1)"><span class="tab-num">2</span> Campanhas & UTM</button>
+    <button class="nav-tab" onclick="switchTab(1)"><span class="tab-num">2</span> Email · Campanhas</button>
     <button class="nav-tab" onclick="switchTab(2)"><span class="tab-num">3</span> Tendência & Timing</button>
-    <button class="nav-tab" onclick="switchTab(3)"><span class="tab-num">4</span> Páginas & Comportamento</button>
+    <button class="nav-tab" onclick="switchTab(3)"><span class="tab-num">4</span> Canais & Captação</button>
     <button class="nav-tab" onclick="switchTab(4)"><span class="tab-num">5</span> CRM & Pipeline</button>
     <button class="nav-tab" onclick="switchTab(5)"><span class="tab-num">6</span> Insights</button>
     <button class="nav-tab" onclick="switchTab(6)"><span class="tab-num">7</span> Recomendações</button>
@@ -404,6 +404,44 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="kpi-sub">Cliques reais RD Station</div>
       <div class="kpi-icon">🖱️</div>
     </div>
+  </div>
+
+  <!-- RD Station Análise de Canais -->
+  <div class="src-header src-rds"><span class="src-dot rds"></span> RD Station Marketing — Análise de Canais</div>
+  <div class="kpi-grid-sm">
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
+      <div class="kpi-label">Visitas via Email</div>
+      <div class="kpi-value" data-metric="rds-email-visits">20.698</div>
+      <div class="kpi-sub">Canal email · RD Station</div>
+      <div class="kpi-icon">🔗</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--teal)">
+      <div class="kpi-label">Conversões Email</div>
+      <div class="kpi-value" data-metric="rds-email-convs">326</div>
+      <div class="kpi-sub">Formulários preenchidos</div>
+      <div class="kpi-icon">✅</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--yellow)">
+      <div class="kpi-label">Taxa Conv. Email</div>
+      <div class="kpi-value" data-metric="rds-email-conv-rate">1,58%</div>
+      <div class="kpi-sub">Benchmark: 1–3%</div>
+      <div class="kpi-icon">📈</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
+      <div class="kpi-label">Share de Tráfego</div>
+      <div class="kpi-value">16,9%</div>
+      <div class="kpi-sub">3º maior canal RD Station</div>
+      <div class="kpi-icon">📊</div>
+    </div>
+  </div>
+  <div class="chart-card" style="margin-bottom:28px;">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Distribuição de Canais RD Station <span class="section-src-badge ssb-rds">RD Station</span></div>
+        <div class="chart-sub">Visitas por canal de aquisição (Jan/25–Fev/26) · Email = 16,9%</div>
+      </div>
+    </div>
+    <div class="chart-body" style="height:280px"><canvas id="rdsChannelChart"></canvas></div>
   </div>
 
   <!-- GA4 Section -->
@@ -522,41 +560,83 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 
 
 <!-- ══════════════════════════════════════════════════
-     TAB 1 — CAMPANHAS & UTM
+     TAB 1 — EMAIL · CAMPANHAS
 ══════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab1">
+
+  <!-- RDS Primary Section -->
+  <div class="src-header src-rds"><span class="src-dot rds"></span> RD Station Marketing — Campanhas de Email</div>
 
   <div class="mini-kpi-row">
     <div class="mini-kpi">
       <div class="mini-kpi-label">Total Campanhas</div>
-      <div class="mini-kpi-value" style="color:var(--orange)" data-metric="camp-total">188</div>
-      <div class="mini-kpi-sub">Rastreadas no período</div>
+      <div class="mini-kpi-value" style="color:var(--orange)" data-metric="rds-camp-total">157</div>
+      <div class="mini-kpi-sub">Jan/25–Fev/26 · RD Station</div>
     </div>
     <div class="mini-kpi">
-      <div class="mini-kpi-label">Categorias</div>
-      <div class="mini-kpi-value" style="color:var(--teal)">7</div>
-      <div class="mini-kpi-sub">Tipos de campanha</div>
+      <div class="mini-kpi-label">Maior Open Rate</div>
+      <div class="mini-kpi-value" style="color:var(--teal)" data-metric="rds-camp-top-or">—</div>
+      <div class="mini-kpi-sub" data-metric="rds-camp-top-or-name">campanha</div>
     </div>
     <div class="mini-kpi">
-      <div class="mini-kpi-label">AdTech & Branding</div>
-      <div class="mini-kpi-value" style="color:var(--blue)" data-metric="camp-adtech-pct">43%</div>
-      <div class="mini-kpi-sub">Das sessões email</div>
+      <div class="mini-kpi-label">Maior Aberturas</div>
+      <div class="mini-kpi-value" style="color:var(--blue)" data-metric="rds-camp-top-opens">—</div>
+      <div class="mini-kpi-sub" data-metric="rds-camp-top-opens-name">campanha</div>
     </div>
     <div class="mini-kpi">
-      <div class="mini-kpi-label">Newsletter</div>
-      <div class="mini-kpi-value" style="color:var(--purple)" data-metric="camp-newsletter-pct">22%</div>
-      <div class="mini-kpi-sub">Das sessões email</div>
-    </div>
-    <div class="mini-kpi">
-      <div class="mini-kpi-label">Melhor Categoria</div>
-      <div class="mini-kpi-value" style="color:var(--green)" data-metric="camp-best-cat">IA Summit</div>
-      <div class="mini-kpi-sub" data-metric="camp-best-cat-pct">sessões no período</div>
+      <div class="mini-kpi-label">Média CTOR</div>
+      <div class="mini-kpi-value" style="color:var(--green)" data-metric="rds-avg-ctor">4,07%</div>
+      <div class="mini-kpi-sub">Click-to-Open Rate</div>
     </div>
   </div>
 
-  <!-- GA4 Campaigns Table -->
-  <div class="section-title">Top 15 Campanhas — Métricas GA4 <span class="section-src-badge ssb-ga4">GA4</span></div>
-  <div class="section-subtitle">Sessões, bounce rate e duração média de sessão por campanha de email</div>
+  <!-- Categories donut + Volume by period -->
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Campanhas por Categoria <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">157 campanhas · 6 categorias</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px"><canvas id="rdsCampaignCategoriesChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Volume por Período <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">Entregues e Abertos por período (5 exportações)</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px"><canvas id="rdsVolumeByPeriodChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Top 20 Campaigns Table -->
+  <div class="section-title">Top 20 Campanhas — Por Aberturas <span class="section-src-badge ssb-rds">RD Station</span></div>
+  <div class="section-subtitle">Ordenado por total de aberturas · Dados reais dos relatórios RD Station Marketing (Jan/25–Fev/26)</div>
+  <div class="table-wrap" style="margin-bottom:28px">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campanha</th>
+          <th>Categoria</th>
+          <th>Entregues</th>
+          <th>Aberturas</th>
+          <th>Cliques</th>
+          <th>Taxa Abertura</th>
+          <th>CTOR</th>
+        </tr>
+      </thead>
+      <tbody id="rdsTopCampaignsBody"></tbody>
+    </table>
+  </div>
+
+  <!-- GA4 Secondary Section -->
+  <div class="src-header src-ga4"><span class="src-dot ga4"></span> Google Analytics 4 — UTM Campaigns</div>
+  <div class="section-title">Top 15 Campanhas — Sessões GA4 <span class="section-src-badge ssb-ga4">GA4</span></div>
+  <div class="section-subtitle">Sessões, bounce rate e duração média de sessão por campanha · Dados reais GA4 Data API</div>
   <div class="table-wrap" style="margin-bottom:24px">
     <table class="data-table" id="campaignsTableGA4">
       <thead>
@@ -574,30 +654,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </table>
   </div>
 
-
-  <!-- Category Performance Charts -->
-  <div class="section-title section-gap">Performance por Categoria <span class="section-src-badge ssb-both">RDS + GA4</span></div>
-  <div class="section-subtitle">Sessões GA4 reais agrupadas por tipo de campanha · Dados via GA4 Data API</div>
-  <div class="grid-2">
-    <div class="chart-card">
-      <div class="chart-header">
-        <div>
-          <div class="chart-title">Sessões por Categoria de Campanha</div>
-          <div class="chart-sub">Sessões GA4 por tipo de campanha de email</div>
-        </div>
-      </div>
-      <div class="chart-body" style="height:280px"><canvas id="catSessionsChart"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-header">
-        <div>
-          <div class="chart-title">Distribuição por Categoria</div>
-          <div class="chart-sub">Share de sessões email por categoria</div>
-        </div>
-      </div>
-      <div class="chart-body" style="height:280px"><canvas id="catDonutChart"></canvas></div>
-    </div>
-  </div>
   <div class="bi-section">
     <div class="bi-section-label"><span>Camada de Análise</span></div>
     <div class="bi-boxes" id="bi-tab1"></div>
@@ -617,7 +673,45 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 
   <div class="period-label-bar">📅 Período selecionado: <span id="periodLabel2">Últimos 12 meses (Mar/25–Mar/26)</span> — Filtro ativo via seletor no topo da página</div>
 
-  <!-- Section 1: Monthly Evolution -->
+  <!-- Section 1: RDS Monthly Evolution (PRIMARY) -->
+  <div class="src-header src-rds"><span class="src-dot rds"></span> RD Station Marketing — Evolução Mensal de Email</div>
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">
+          Evolução Mensal: Entregues · Abertos · Taxa de Abertura
+          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">14 meses (Jan/25–Fev/26). Barras cinzas = Jan/Fev 2025 (dados estimados — entregues não disponíveis no exportador RD Station para esses meses). Taxa de abertura calculada apenas sobre meses com entrega confirmada.</span></span>
+          <span class="section-src-badge ssb-rds">RD Station</span>
+        </div>
+        <div class="chart-sub">Jan/25–Fev/26 · 14 meses · Barras cinzas = dados estimados (Jan/Fev 25)</div>
+      </div>
+    </div>
+    <div class="chart-body" style="height:320px"><canvas id="rdsEmailMonthlyChart"></canvas></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:20px;margin-bottom:8px;">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">CTOR por Mês <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">Click-to-Open Rate mensal · Benchmark B2B: 4–8%</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:240px"><canvas id="rdsCTORChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Taxa de Abertura por Mês <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">Open Rate mensal · Benchmark B2B: 20–25%</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:240px"><canvas id="rdsOpenRateChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Section 2: GA4 Monthly Evolution (SECONDARY) -->
+  <div class="src-header src-ga4" style="margin-top:32px;"><span class="src-dot ga4"></span> Google Analytics 4 — Timing e Comportamento</div>
   <div class="section-title">Evolução Mensal de Sessões via Email <span class="section-src-badge ssb-ga4">GA4</span></div>
   <div class="section-subtitle">Sessões, usuários e taxa de engajamento via email. Use o filtro de período acima para 3M/6M/12M.</div>
   <div class="chart-card">
@@ -719,54 +813,122 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 
 
 <!-- ══════════════════════════════════════════════════
-     TAB 3 — PÁGINAS & COMPORTAMENTO
+     TAB 3 — CANAIS & CAPTAÇÃO
 ══════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab3">
 
-  <div class="section-title">Páginas de Destino & Comportamento <span class="section-src-badge ssb-ga4">Google Analytics 4</span></div>
-  <div class="section-subtitle">Análise das landing pages mais acessadas via email marketing · Dados GA4 · 12 meses</div>
+  <!-- RDS Primary Section: Channels -->
+  <div class="src-header src-rds"><span class="src-dot rds"></span> RD Station Marketing — Análise de Canais (Jan/25–Fev/26)</div>
 
-  <!-- Landing pages table -->
-  <div class="table-wrap" style="margin-bottom:24px">
-    <table class="data-table" id="pagesTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Página / Título</th>
-          <th>Sessões</th>
-          <th>Usuários</th>
-          <th>Bounce %</th>
-          <th>Duração (s)</th>
-          <th>Page Views</th>
-          <th>Conversões</th>
-        </tr>
-      </thead>
-      <tbody id="pagesTableBody"></tbody>
-    </table>
+  <div class="kpi-grid-sm" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
+      <div class="kpi-label">Visitas Email (RDS)</div>
+      <div class="kpi-value" data-metric="rds-email-visits2">20.698</div>
+      <div class="kpi-sub">16,9% do total de visitas</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--teal)">
+      <div class="kpi-label">Conversões Email</div>
+      <div class="kpi-value" data-metric="rds-email-convs2">326</div>
+      <div class="kpi-sub">Formulários preenchidos</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--yellow)">
+      <div class="kpi-label">Taxa Conv. Email</div>
+      <div class="kpi-value" data-metric="rds-email-conv-rate2">1,58%</div>
+      <div class="kpi-sub">Benchmark: 1–3%</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
+      <div class="kpi-label">Busca Orgânica</div>
+      <div class="kpi-value">48.002</div>
+      <div class="kpi-sub">39,1% · 1º canal</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--blue)">
+      <div class="kpi-label">Total Visitas RDS</div>
+      <div class="kpi-value">122.633</div>
+      <div class="kpi-sub">Todos os canais</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--purple)">
+      <div class="kpi-label">Email vs Orgânica</div>
+      <div class="kpi-value">43,1%</div>
+      <div class="kpi-sub">Email/Orgânica ratio</div>
+    </div>
   </div>
 
   <div class="grid-2">
-    <!-- Avg duration bar chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Visitas por Canal <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">Top canais de aquisição · total acumulado Jan/25–Fev/26</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px"><canvas id="rdsChannelVisitsChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Conversões por Canal <span class="section-src-badge ssb-rds">RD Station</span></div>
+          <div class="chart-sub">Total de conversões (formulários) por canal</div>
+        </div>
+      </div>
+      <div class="chart-body" style="height:280px"><canvas id="rdsConversionsChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Formulários Section -->
+  <div class="section-title section-gap">Captação via Formulários <span class="section-src-badge ssb-rds">RD Station</span></div>
+  <div class="section-subtitle">Leads captados pelo formulário "Mailing Home Site" por período · 476 leads acumulados</div>
+  <div class="table-wrap" style="margin-bottom:24px">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Período</th>
+          <th>Visitantes Mailing</th>
+          <th>Leads Captados</th>
+          <th>Taxa Conv.</th>
+        </tr>
+      </thead>
+      <tbody id="rdsFormsTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Landing Pages Section -->
+  <div class="section-title section-gap">Landing Pages Ativas <span class="section-src-badge ssb-rds">RD Station</span></div>
+  <div class="section-subtitle">Top landing pages com visitantes · dados agregados Jan/25–Fev/26</div>
+  <div class="table-wrap" style="margin-bottom:28px">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Landing Page</th>
+          <th>Visitantes</th>
+          <th>Leads</th>
+          <th>Taxa Conv.</th>
+        </tr>
+      </thead>
+      <tbody id="rdsLPsTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- GA4 Secondary Section -->
+  <div class="src-header src-ga4" style="margin-top:32px;"><span class="src-dot ga4"></span> Google Analytics 4 — Comportamento e Dispositivos</div>
+  <div class="grid-2">
     <div class="chart-card">
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Duração Média de Sessão por Landing Page
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Usuários vindos de email · tempo médio em segundos por página de destino. Páginas com maior tempo indicam conteúdo mais relevante.</span></span>
+            Duração Média por Landing Page
             <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
-          <div class="chart-sub">Usuários vindos de email · tempo médio em segundos</div>
+          <div class="chart-sub">Tempo médio em segundos por página de destino</div>
         </div>
       </div>
       <div class="chart-body" style="height:300px"><canvas id="pageDurationChart"></canvas></div>
     </div>
-    <!-- Devices donut -->
     <div class="chart-card">
       <div class="chart-header">
         <div>
           <div class="chart-title">
             Dispositivos
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Distribuição de sessões por tipo de dispositivo. Desktop domina (84,1%) indicando audiência B2B.</span></span>
             <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
           <div class="chart-sub">Desktop 84,1% · Mobile 15,9% · Tablet 0,0%</div>
@@ -776,45 +938,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
   </div>
 
-  <!-- Events chart -->
-  <div class="section-title section-gap">Eventos GA4 <span class="section-src-badge ssb-ga4">Google Analytics 4</span></div>
-  <div class="section-subtitle">Top eventos rastreados no site · Sessões originadas via email marketing</div>
-  <div class="chart-card">
-    <div class="chart-header">
-      <div>
-        <div class="chart-title">
-          Principais Eventos GA4
-          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Eventos rastreados pelo GA4 para sessões vindas de email. RD Landing Pages e RD Formulario indicam integrações de formulário.</span></span>
-        </div>
-        <div class="chart-sub">Contagem de eventos por tipo · período completo 12 meses</div>
-      </div>
-    </div>
-    <div class="chart-body" style="height:260px"><canvas id="eventsChart"></canvas></div>
-  </div>
-
-  <!-- Best days / hours comparison -->
-  <div class="section-title section-gap">Melhores Horários — Comparação GA4 × RD Station <span class="section-src-badge ssb-both">RDS + GA4</span></div>
-  <div class="section-subtitle">Sessões GA4 por hora (usuários email) versus aberturas RD Station por hora — padrão consistente</div>
-  <div class="grid-2">
-    <div class="chart-card">
-      <div class="chart-header">
-        <div>
-          <div class="chart-title">Sessões GA4 por Dia da Semana</div>
-          <div class="chart-sub">Qui lidera com 6.665 sessões (email)</div>
-        </div>
-      </div>
-      <div class="chart-body" style="height:240px"><canvas id="ga4DaysChart"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-header">
-        <div>
-          <div class="chart-title">Sessões GA4 por Hora do Dia</div>
-          <div class="chart-sub">11h (2.952) e 14h (2.921) são os picos</div>
-        </div>
-      </div>
-      <div class="chart-body" style="height:240px"><canvas id="ga4HoursChart"></canvas></div>
-    </div>
-  </div>
   <div class="bi-section">
     <div class="bi-section-label"><span>Camada de Análise</span></div>
     <div class="bi-boxes" id="bi-tab3"></div>
@@ -6334,7 +6457,8 @@ const DATA = {
       "ctr": 1.23,
       "ctor": 3.27,
       "delivery_rate": 97.87,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "RelGov"
     },
     {
       "sent_at": "2025-04-25 13:53:29",
@@ -6352,7 +6476,8 @@ const DATA = {
       "ctr": 1.77,
       "ctor": 3.98,
       "delivery_rate": 99.53,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-04-28 16:22:02",
@@ -6370,7 +6495,8 @@ const DATA = {
       "ctr": 1.19,
       "ctor": 2.73,
       "delivery_rate": 99.7,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Educação"
     },
     {
       "sent_at": "2025-10-16 13:00:00",
@@ -6388,7 +6514,8 @@ const DATA = {
       "ctr": 0.57,
       "ctor": 2.5,
       "delivery_rate": 98.59,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-10-02 14:00:00",
@@ -6406,7 +6533,8 @@ const DATA = {
       "ctr": 0.78,
       "ctor": 3.47,
       "delivery_rate": 98.67,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-08-14 11:43:34",
@@ -6424,7 +6552,8 @@ const DATA = {
       "ctr": 0.45,
       "ctor": 1.96,
       "delivery_rate": 98.78,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Eventos"
     },
     {
       "sent_at": "2026-01-29 14:05:00",
@@ -6442,7 +6571,8 @@ const DATA = {
       "ctr": 1.16,
       "ctor": 5.18,
       "delivery_rate": 98.8,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Eventos"
     },
     {
       "sent_at": "2025-08-15 10:00:00",
@@ -6460,7 +6590,8 @@ const DATA = {
       "ctr": 0.61,
       "ctor": 2.64,
       "delivery_rate": 98.58,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-05-29 09:00:00",
@@ -6478,7 +6609,8 @@ const DATA = {
       "ctr": 0.36,
       "ctor": 1.61,
       "delivery_rate": 97.68,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Eventos"
     },
     {
       "sent_at": "2025-03-27 15:27:16",
@@ -6496,7 +6628,8 @@ const DATA = {
       "ctr": 2.6,
       "ctor": 5.03,
       "delivery_rate": 99.56,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Outros"
     },
     {
       "sent_at": "2025-04-04 15:37:43",
@@ -6514,7 +6647,8 @@ const DATA = {
       "ctr": 2.66,
       "ctor": 5.08,
       "delivery_rate": 99.69,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-11-13 17:30:00",
@@ -6532,7 +6666,8 @@ const DATA = {
       "ctr": 0.36,
       "ctor": 1.65,
       "delivery_rate": 98.3,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
     },
     {
       "sent_at": "2025-09-04 10:00:00",
@@ -6550,7 +6685,8 @@ const DATA = {
       "ctr": 0.55,
       "ctor": 2.5,
       "delivery_rate": 98.51,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Eventos"
     },
     {
       "sent_at": "2026-01-23 11:15:00",
@@ -6568,7 +6704,8 @@ const DATA = {
       "ctr": 0.84,
       "ctor": 3.84,
       "delivery_rate": 96.85,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Outros"
     },
     {
       "sent_at": "2025-03-10 14:26:54",
@@ -6586,7 +6723,3150 @@ const DATA = {
       "ctr": 2.67,
       "ctor": 5.36,
       "delivery_rate": 99.5,
-      "data_quality": "ok"
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-05-09 10:14:45",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] IAB News | Maio.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37465,
+      "entregues": 36749,
+      "bounce": 706,
+      "opens": 8044,
+      "clicks": 367,
+      "unsub": 49,
+      "spam": 0,
+      "open_rate": 21.89,
+      "ctr": 1.0,
+      "ctor": 4.56,
+      "delivery_rate": 98.09,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-12-16 14:30:00",
+      "year_month": "2025-12",
+      "name": "Recesso 2025 | IAB Brasil",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38769,
+      "entregues": 37981,
+      "bounce": 782,
+      "opens": 8023,
+      "clicks": 85,
+      "unsub": 105,
+      "spam": 1,
+      "open_rate": 21.12,
+      "ctr": 0.22,
+      "ctor": 1.06,
+      "delivery_rate": 97.97,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-09-26 10:00:00",
+      "year_month": "2025-09",
+      "name": "[I] [Institucional] Data Stories | Setembro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38034,
+      "entregues": 37483,
+      "bounce": 549,
+      "opens": 8008,
+      "clicks": 159,
+      "unsub": 52,
+      "spam": 0,
+      "open_rate": 21.36,
+      "ctr": 0.42,
+      "ctor": 1.99,
+      "delivery_rate": 98.55,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-08-07 15:00:00",
+      "year_month": "2025-08",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36774,
+      "entregues": 36162,
+      "bounce": 612,
+      "opens": 7899,
+      "clicks": 779,
+      "unsub": 9,
+      "spam": 0,
+      "open_rate": 21.84,
+      "ctr": 2.15,
+      "ctor": 9.86,
+      "delivery_rate": 98.34,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-01 11:30:00",
+      "year_month": "2025-08",
+      "name": "[I] [Institucional]  IAB News | Julho.25 - 2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36847,
+      "entregues": 35887,
+      "bounce": 959,
+      "opens": 7874,
+      "clicks": 124,
+      "unsub": 28,
+      "spam": 1,
+      "open_rate": 21.94,
+      "ctr": 0.35,
+      "ctor": 1.57,
+      "delivery_rate": 97.39,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    }
+  ],
+  "rdsCampaignCategories": [
+    {
+      "name": "Institucional / Newsletter",
+      "campaigns": 67,
+      "selecionados": 1332415,
+      "entregues": 1140936,
+      "opens": 266062,
+      "clicks": 11973,
+      "open_rate": 23.32,
+      "ctor": 4.5
+    },
+    {
+      "name": "Eventos",
+      "campaigns": 45,
+      "selecionados": 775262,
+      "entregues": 729233,
+      "opens": 159732,
+      "clicks": 5748,
+      "open_rate": 21.9,
+      "ctor": 3.6
+    },
+    {
+      "name": "Outros",
+      "campaigns": 31,
+      "selecionados": 309076,
+      "entregues": 269715,
+      "opens": 60998,
+      "clicks": 2240,
+      "open_rate": 22.62,
+      "ctor": 3.67
+    },
+    {
+      "name": "Educação",
+      "campaigns": 7,
+      "selecionados": 54516,
+      "entregues": 54291,
+      "opens": 24950,
+      "clicks": 981,
+      "open_rate": 45.96,
+      "ctor": 3.93
+    },
+    {
+      "name": "RelGov",
+      "campaigns": 6,
+      "selecionados": 52320,
+      "entregues": 51328,
+      "opens": 17986,
+      "clicks": 735,
+      "open_rate": 35.04,
+      "ctor": 4.09
+    },
+    {
+      "name": "Mídia Solutions",
+      "campaigns": 1,
+      "selecionados": 36830,
+      "entregues": 36156,
+      "opens": 7597,
+      "clicks": 200,
+      "open_rate": 21.01,
+      "ctor": 2.63
+    }
+  ],
+  "rdsCampaignsAll": [
+    {
+      "sent_at": "2025-01-21 09:42:47",
+      "year_month": "2025-01",
+      "name": "[I] [Institucional] Diretoria e Conselho 2025",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 37714,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 20,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.05,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-01-23 09:10:10",
+      "year_month": "2025-01",
+      "name": "[I] [Institucional] [IAB Trends] - AUDIO. temática jan.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17332,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 18,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.1,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-01-28 11:16:36",
+      "year_month": "2025-01",
+      "name": "[Comitês] Teste - Quer sediar um dos nossos comitês?",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 1008,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 2,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.2,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-01-31 09:30:20",
+      "year_month": "2025-01",
+      "name": "[I] [Institucional] IAB News | Janeiro.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17365,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 14,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.08,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-01-31 16:24:54",
+      "year_month": "2025-01",
+      "name": "[I] Follow IAB | Fevereiro 2024",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-01-31 18:25:04",
+      "year_month": "2025-01",
+      "name": "[I] Follow IAB | Fevereiro 2025",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-03 11:24:03",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Patrocínio do AdTech 2025 | Segundo disparo",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17338,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 18,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.1,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-02-06 11:50:59",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] [IAB Trends] - Geral | FEVEREIRO.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17254,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 17,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.1,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-11 17:52:11",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Divulgação do Combo 'Start no Digital'",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17152,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 18,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.1,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-13 09:19:22",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Presidentes e Vice-Presidentes dos Comitês de 2025",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 17018,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 17,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.1,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-17 10:10:41",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Data Stories | Dezembro 2024",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16992,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 19,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.11,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-17 15:19:59",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Tá na Rede - Lançamento fev.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 14,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-18 14:22:49",
+      "year_month": "2025-02",
+      "name": "[Conteúdo] Pesquisa de DOOH 2025 - 1º disparo",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16951,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 20,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.12,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-02-20 17:06:26",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] IAB News | Fevereiro.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16840,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 23,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.14,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-24 11:43:35",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] [IAB Trends] - Geral | 2ª de FEVEREIRO.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16795,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 23,
+      "clicks": 0,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.14,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-25 15:07:25",
+      "year_month": "2025-02",
+      "name": "[Conteúdo] Scape IA 2025 - 1º disparo",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16776,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 21,
+      "clicks": 1,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 0.13,
+      "ctr": 0.01,
+      "ctor": 4.76,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-02-25 16:17:39",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Radar IAB - Masterclass Criatividade fev.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-02-27 09:40:19",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Radar IAB - Guia de Incidentes fev.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-27 11:14:58",
+      "year_month": "2025-02",
+      "name": "[I] [Institucional] Radar IAB - Guia de Incidentes fev.25",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-27 12:17:01",
+      "year_month": "2025-02",
+      "name": "[I] Follow IAB | Março 2025",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 13,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-02-27 17:39:10",
+      "year_month": "2025-02",
+      "name": "[Institucional] AdTech 2025: últimas oportunidades de patrocínio!",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 16669,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 22,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.13,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "entregues_estimated",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-02-28 15:07:54",
+      "year_month": "2025-02",
+      "name": "[Conteúdo] Pesquisa de DOOH 2025 - 2º disparo",
+      "period_label": "01-2025 a 02-2025",
+      "selecionados": 0,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 21,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-03-07 11:25:42",
+      "year_month": "2025-03",
+      "name": "[I] [Interno] Compartilha Aí! - fev.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 13,
+      "entregues": 13,
+      "bounce": 0,
+      "opens": 12,
+      "clicks": 1,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 92.31,
+      "ctr": 7.69,
+      "ctor": 8.33,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-03-10 14:26:54",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] Masterclass Inovação e Criatividade",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16399,
+      "entregues": 16317,
+      "bounce": 82,
+      "opens": 8131,
+      "clicks": 436,
+      "unsub": 11,
+      "spam": 2,
+      "open_rate": 49.83,
+      "ctr": 2.67,
+      "ctor": 5.36,
+      "delivery_rate": 99.5,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-03-11 11:44:58",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] Radar IAB | IABcast - Especial Comitê de Vídeo Digital mar.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 13,
+      "entregues": 13,
+      "bounce": 0,
+      "opens": 12,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 92.31,
+      "ctr": 15.38,
+      "ctor": 16.67,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-03-14 11:32:03",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] IAB News | Março.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16214,
+      "entregues": 16143,
+      "bounce": 71,
+      "opens": 6797,
+      "clicks": 297,
+      "unsub": 13,
+      "spam": 3,
+      "open_rate": 42.1,
+      "ctr": 1.84,
+      "ctor": 4.37,
+      "delivery_rate": 99.56,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-03-18 15:16:42",
+      "year_month": "2025-03",
+      "name": "[RELGOV 2025] Boletim de Transparência Fevereiro 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 439,
+      "entregues": 436,
+      "bounce": 2,
+      "opens": 157,
+      "clicks": 24,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 36.01,
+      "ctr": 5.5,
+      "ctor": 15.29,
+      "delivery_rate": 99.32,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-03-19 13:38:55",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] Radar IAB | Manual de Conformidade e Boas Práticas sobre Inteligência Artificial na Publicidade Digital",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 14,
+      "entregues": 14,
+      "bounce": 0,
+      "opens": 13,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 92.86,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-03-20 18:02:51",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] [IAB Trends] - Geral | MARÇO.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16080,
+      "entregues": 16019,
+      "bounce": 61,
+      "opens": 6859,
+      "clicks": 295,
+      "unsub": 16,
+      "spam": 1,
+      "open_rate": 42.82,
+      "ctr": 1.84,
+      "ctor": 4.3,
+      "delivery_rate": 99.62,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-03-24 10:57:31",
+      "year_month": "2025-03",
+      "name": "[Comercial] e-mail de Patrocínio Evento Brasília 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16976,
+      "entregues": 16780,
+      "bounce": 167,
+      "opens": 7830,
+      "clicks": 159,
+      "unsub": 17,
+      "spam": 0,
+      "open_rate": 46.66,
+      "ctr": 0.95,
+      "ctor": 2.03,
+      "delivery_rate": 98.85,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-03-24 15:23:30",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] Radar IAB | Guia de Retail Media para Varejistas",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 14,
+      "entregues": 14,
+      "bounce": 0,
+      "opens": 11,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 78.57,
+      "ctr": 14.29,
+      "ctor": 18.18,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-03-27 15:27:16",
+      "year_month": "2025-03",
+      "name": "[Conteúdo] Pesquisa de DOOH 2025 - 3º disparo",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16162,
+      "entregues": 16091,
+      "bounce": 71,
+      "opens": 8311,
+      "clicks": 418,
+      "unsub": 13,
+      "spam": 0,
+      "open_rate": 51.65,
+      "ctr": 2.6,
+      "ctor": 5.03,
+      "delivery_rate": 99.56,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-03-31 09:22:49",
+      "year_month": "2025-03",
+      "name": "[I] Follow IAB | Abril 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 14,
+      "entregues": 14,
+      "bounce": 0,
+      "opens": 11,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 78.57,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-01 13:42:37",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] IAB News | Março.25 (Semana 2)",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16021,
+      "entregues": 15947,
+      "bounce": 74,
+      "opens": 7200,
+      "clicks": 584,
+      "unsub": 14,
+      "spam": 0,
+      "open_rate": 45.15,
+      "ctr": 3.66,
+      "ctor": 8.11,
+      "delivery_rate": 99.54,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-03 16:38:13",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] [IAB Trends] - Geral | ABRIL.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 15931,
+      "entregues": 15870,
+      "bounce": 61,
+      "opens": 6841,
+      "clicks": 315,
+      "unsub": 17,
+      "spam": 2,
+      "open_rate": 43.11,
+      "ctr": 1.98,
+      "ctor": 4.6,
+      "delivery_rate": 99.62,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-04 15:37:43",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Data Stories | Abril 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 15899,
+      "entregues": 15849,
+      "bounce": 50,
+      "opens": 8280,
+      "clicks": 421,
+      "unsub": 9,
+      "spam": 0,
+      "open_rate": 52.24,
+      "ctr": 2.66,
+      "ctor": 5.08,
+      "delivery_rate": 99.69,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-07 18:04:47",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Evento Brasília | E-mail de convite para associados",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 4086,
+      "entregues": 4015,
+      "bounce": 70,
+      "opens": 1086,
+      "clicks": 88,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 27.05,
+      "ctr": 2.19,
+      "ctor": 8.1,
+      "delivery_rate": 98.26,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-04-08 11:20:34",
+      "year_month": "2025-04",
+      "name": "[Comercial] Patrocine e-mail IAB Trends",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 15826,
+      "entregues": 15761,
+      "bounce": 65,
+      "opens": 7792,
+      "clicks": 310,
+      "unsub": 14,
+      "spam": 0,
+      "open_rate": 49.44,
+      "ctr": 1.97,
+      "ctor": 3.98,
+      "delivery_rate": 99.59,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-10 17:18:24",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Evento Brasília | Convite para associados 2",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 4036,
+      "entregues": 3996,
+      "bounce": 38,
+      "opens": 1073,
+      "clicks": 150,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 26.85,
+      "ctr": 3.75,
+      "ctor": 13.98,
+      "delivery_rate": 99.01,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-04-11 14:53:04",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] E-mail Marketing | Cursos abertos - Abr.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 15831,
+      "entregues": 15774,
+      "bounce": 57,
+      "opens": 7272,
+      "clicks": 236,
+      "unsub": 13,
+      "spam": 0,
+      "open_rate": 46.1,
+      "ctr": 1.5,
+      "ctor": 3.25,
+      "delivery_rate": 99.64,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-04-16 14:52:41",
+      "year_month": "2025-04",
+      "name": "[RELGOV 2025] Boletim de Transparência - Março 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37447,
+      "entregues": 36650,
+      "bounce": 783,
+      "opens": 13781,
+      "clicks": 451,
+      "unsub": 115,
+      "spam": 0,
+      "open_rate": 37.6,
+      "ctr": 1.23,
+      "ctor": 3.27,
+      "delivery_rate": 97.87,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-04-17 14:38:55",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] [IAB Trends] - Curadoria Associados | ABRIL.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 20288,
+      "entregues": 20194,
+      "bounce": 94,
+      "opens": 7791,
+      "clicks": 523,
+      "unsub": 23,
+      "spam": 0,
+      "open_rate": 38.58,
+      "ctr": 2.59,
+      "ctor": 6.71,
+      "delivery_rate": 99.54,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-22 15:34:20",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para convidados da Ana Moises",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 72,
+      "entregues": 67,
+      "bounce": 3,
+      "opens": 7,
+      "clicks": 4,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 10.45,
+      "ctr": 5.97,
+      "ctor": 57.14,
+      "delivery_rate": 93.06,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-04-23 09:02:45",
+      "year_month": "2025-04",
+      "name": "[Institucional] [Report 2024] Comunicado | Convocação | AGO - final (Envio 23/04)",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 164,
+      "entregues": 164,
+      "bounce": 0,
+      "opens": 75,
+      "clicks": 9,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 45.73,
+      "ctr": 5.49,
+      "ctor": 12.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-25 13:53:29",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] IAB News | Abril.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 20703,
+      "entregues": 20606,
+      "bounce": 96,
+      "opens": 9168,
+      "clicks": 365,
+      "unsub": 24,
+      "spam": 0,
+      "open_rate": 44.49,
+      "ctr": 1.77,
+      "ctor": 3.98,
+      "delivery_rate": 99.53,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-28 11:15:14",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Radar IAB - Digital AdSpend 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 14,
+      "entregues": 14,
+      "bounce": 0,
+      "opens": 11,
+      "clicks": 3,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 78.57,
+      "ctr": 21.43,
+      "ctor": 27.27,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-04-28 16:22:02",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] E-mail Marketing | Cursos Brand Safety - Abr.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 20665,
+      "entregues": 20603,
+      "bounce": 62,
+      "opens": 8967,
+      "clicks": 245,
+      "unsub": 32,
+      "spam": 0,
+      "open_rate": 43.52,
+      "ctr": 1.19,
+      "ctor": 2.73,
+      "delivery_rate": 99.7,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-04-29 11:01:33",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para o Comitê de Assuntos Jurídicos",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 229,
+      "entregues": 221,
+      "bounce": 1,
+      "opens": 76,
+      "clicks": 12,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 34.39,
+      "ctr": 5.43,
+      "ctor": 15.79,
+      "delivery_rate": 96.51,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-04-30 09:12:27",
+      "year_month": "2025-04",
+      "name": "[Institucional] [Report 2024] Comunicado | IAB 2ª Convocação | AGO - final (Envio 30/04)",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 164,
+      "entregues": 163,
+      "bounce": 1,
+      "opens": 71,
+      "clicks": 7,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 43.56,
+      "ctr": 4.29,
+      "ctor": 9.86,
+      "delivery_rate": 99.39,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-05-05 13:49:41",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | E-mail de convite para inscritos no último evento",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 70,
+      "entregues": 53,
+      "bounce": 3,
+      "opens": 18,
+      "clicks": 9,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 33.96,
+      "ctr": 16.98,
+      "ctor": 50.0,
+      "delivery_rate": 75.71,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-06 16:43:53",
+      "year_month": "2025-05",
+      "name": "[I] Follow IAB | Maio 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 14,
+      "entregues": 14,
+      "bounce": 0,
+      "opens": 10,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 71.43,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-05-07 13:37:51",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para não inscritos na Sympla",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 57,
+      "entregues": 53,
+      "bounce": 3,
+      "opens": 27,
+      "clicks": 5,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 50.94,
+      "ctr": 9.43,
+      "ctor": 18.52,
+      "delivery_rate": 92.98,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-08 14:46:10",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | Lembrete 15 dias para o Fórum",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 110,
+      "entregues": 110,
+      "bounce": 0,
+      "opens": 56,
+      "clicks": 19,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 50.91,
+      "ctr": 17.27,
+      "ctor": 33.93,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-09 10:14:45",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] IAB News | Maio.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37465,
+      "entregues": 36749,
+      "bounce": 706,
+      "opens": 8044,
+      "clicks": 367,
+      "unsub": 49,
+      "spam": 0,
+      "open_rate": 21.89,
+      "ctr": 1.0,
+      "ctor": 4.56,
+      "delivery_rate": 98.09,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-05-12 14:03:38",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para não inscritos na Sympla Reforço",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 100,
+      "entregues": 98,
+      "bounce": 2,
+      "opens": 40,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 40.82,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 98.0,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-14 14:22:21",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para não inscritos na Sympla 3",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 108,
+      "entregues": 104,
+      "bounce": 3,
+      "opens": 50,
+      "clicks": 3,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 48.08,
+      "ctr": 2.88,
+      "ctor": 6.0,
+      "delivery_rate": 96.3,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-15 16:56:26",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | Lembrete 7 dias para o Fórum",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 166,
+      "entregues": 165,
+      "bounce": 1,
+      "opens": 83,
+      "clicks": 18,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 50.3,
+      "ctr": 10.91,
+      "ctor": 21.69,
+      "delivery_rate": 99.4,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-19 15:34:18",
+      "year_month": "2025-05",
+      "name": "[RELGOV 2025] Boletim de Transparência - Abril 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 4154,
+      "entregues": 4099,
+      "bounce": 54,
+      "opens": 1309,
+      "clicks": 89,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 31.93,
+      "ctr": 2.17,
+      "ctor": 6.8,
+      "delivery_rate": 98.68,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-05-20 10:41:21",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | E-mail para não inscritos na Sympla 4",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 107,
+      "entregues": 105,
+      "bounce": 2,
+      "opens": 41,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 39.05,
+      "ctr": 1.9,
+      "ctor": 4.88,
+      "delivery_rate": 98.13,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-21 18:29:12",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] Evento Brasília | Lembrete É amanhã para o Fórum",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 236,
+      "entregues": 232,
+      "bounce": 2,
+      "opens": 129,
+      "clicks": 17,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 55.6,
+      "ctr": 7.33,
+      "ctor": 13.18,
+      "delivery_rate": 98.31,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-23 17:11:57",
+      "year_month": "2025-05",
+      "name": "[I] [Eventos] Fórum | Pesquisa de Satisfação",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 170,
+      "entregues": 168,
+      "bounce": 1,
+      "opens": 80,
+      "clicks": 16,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 47.62,
+      "ctr": 9.52,
+      "ctor": 20.0,
+      "delivery_rate": 98.82,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-27 16:52:47",
+      "year_month": "2025-05",
+      "name": "[I] [Eventos] Fórum | Pesquisa de Satisfação - Reforço",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 169,
+      "entregues": 168,
+      "bounce": 1,
+      "opens": 71,
+      "clicks": 14,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 42.26,
+      "ctr": 8.33,
+      "ctor": 19.72,
+      "delivery_rate": 99.41,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-29 09:00:00",
+      "year_month": "2025-05",
+      "name": "[Institucional] AdTech 2025: últimas oportunidades de patrocínio! - Reforço",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37667,
+      "entregues": 36794,
+      "bounce": 865,
+      "opens": 8312,
+      "clicks": 134,
+      "unsub": 52,
+      "spam": 2,
+      "open_rate": 22.59,
+      "ctr": 0.36,
+      "ctor": 1.61,
+      "delivery_rate": 97.68,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-05-29 09:10:00",
+      "year_month": "2025-05",
+      "name": "[I] Follow IAB | Junho 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 12,
+      "entregues": 12,
+      "bounce": 0,
+      "opens": 10,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 83.33,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-05-29 15:28:55",
+      "year_month": "2025-05",
+      "name": "[I] [Institucional] [IAB Trends] - MAIO.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37475,
+      "entregues": 36901,
+      "bounce": 572,
+      "opens": 7249,
+      "clicks": 315,
+      "unsub": 25,
+      "spam": 1,
+      "open_rate": 19.64,
+      "ctr": 0.85,
+      "ctor": 4.35,
+      "delivery_rate": 98.47,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-05 14:15:48",
+      "year_month": "2025-06",
+      "name": "[Institucional] AdTech & Branding 2025 vem aí!",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37465,
+      "entregues": 36621,
+      "bounce": 841,
+      "opens": 7727,
+      "clicks": 278,
+      "unsub": 28,
+      "spam": 0,
+      "open_rate": 21.1,
+      "ctr": 0.76,
+      "ctor": 3.6,
+      "delivery_rate": 97.75,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-06-12 15:24:07",
+      "year_month": "2025-06",
+      "name": "[I] [Institucional] IAB News | Junho.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37239,
+      "entregues": 36610,
+      "bounce": 625,
+      "opens": 6919,
+      "clicks": 441,
+      "unsub": 28,
+      "spam": 3,
+      "open_rate": 18.9,
+      "ctr": 1.2,
+      "ctor": 6.37,
+      "delivery_rate": 98.31,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-16 14:22:39",
+      "year_month": "2025-06",
+      "name": "[RELGOV 2025] Boletim de Transparência - Maio 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 4023,
+      "entregues": 3990,
+      "bounce": 32,
+      "opens": 1103,
+      "clicks": 87,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 27.64,
+      "ctr": 2.18,
+      "ctor": 7.89,
+      "delivery_rate": 99.18,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-06-18 14:54:16",
+      "year_month": "2025-06",
+      "name": "[I] [Institucional] [IAB Trends] - junho.2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37141,
+      "entregues": 36648,
+      "bounce": 489,
+      "opens": 6782,
+      "clicks": 422,
+      "unsub": 27,
+      "spam": 1,
+      "open_rate": 18.51,
+      "ctr": 1.15,
+      "ctor": 6.22,
+      "delivery_rate": 98.67,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-25 15:26:08",
+      "year_month": "2025-06",
+      "name": "[I] [Institucional] Data Stories | Junho 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37084,
+      "entregues": 36463,
+      "bounce": 619,
+      "opens": 7723,
+      "clicks": 266,
+      "unsub": 21,
+      "spam": 0,
+      "open_rate": 21.18,
+      "ctr": 0.73,
+      "ctor": 3.44,
+      "delivery_rate": 98.33,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-26 14:07:56",
+      "year_month": "2025-06",
+      "name": "[I] [Institucional] IAB News | Junho.25 2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37043,
+      "entregues": 36600,
+      "bounce": 442,
+      "opens": 6954,
+      "clicks": 346,
+      "unsub": 26,
+      "spam": 0,
+      "open_rate": 19.0,
+      "ctr": 0.95,
+      "ctor": 4.98,
+      "delivery_rate": 98.8,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-30 09:19:56",
+      "year_month": "2025-06",
+      "name": "[I] Follow IAB | Julho 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 12,
+      "entregues": 12,
+      "bounce": 0,
+      "opens": 9,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 75.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-06-30 14:25:14",
+      "year_month": "2025-06",
+      "name": "[I] [Eventos] Pré-venda Adtech & Branding",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37012,
+      "entregues": 36574,
+      "bounce": 437,
+      "opens": 7747,
+      "clicks": 180,
+      "unsub": 26,
+      "spam": 0,
+      "open_rate": 21.18,
+      "ctr": 0.49,
+      "ctor": 2.32,
+      "delivery_rate": 98.82,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-07-03 16:00:15",
+      "year_month": "2025-07",
+      "name": "[I] [Institucional] IAB Trends | Jul.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36986,
+      "entregues": 36550,
+      "bounce": 434,
+      "opens": 7316,
+      "clicks": 311,
+      "unsub": 27,
+      "spam": 0,
+      "open_rate": 20.02,
+      "ctr": 0.85,
+      "ctor": 4.25,
+      "delivery_rate": 98.82,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-07-15 14:33:22",
+      "year_month": "2025-07",
+      "name": "[I] [Institucional] IAB News | Julho.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37022,
+      "entregues": 36229,
+      "bounce": 787,
+      "opens": 7164,
+      "clicks": 166,
+      "unsub": 34,
+      "spam": 1,
+      "open_rate": 19.77,
+      "ctr": 0.46,
+      "ctor": 2.32,
+      "delivery_rate": 97.86,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-07-18 13:38:56",
+      "year_month": "2025-07",
+      "name": "[I] [Eventos] Adtech & Branding Últimas Cotas | Julho.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36939,
+      "entregues": 36311,
+      "bounce": 628,
+      "opens": 7797,
+      "clicks": 137,
+      "unsub": 22,
+      "spam": 2,
+      "open_rate": 21.47,
+      "ctr": 0.38,
+      "ctor": 1.76,
+      "delivery_rate": 98.3,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-07-21 10:08:20",
+      "year_month": "2025-07",
+      "name": "[I] [RelGov] Boletim de Transparência jun.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 3945,
+      "entregues": 3884,
+      "bounce": 61,
+      "opens": 971,
+      "clicks": 64,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 25.0,
+      "ctr": 1.65,
+      "ctor": 6.59,
+      "delivery_rate": 98.45,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-07-24 17:30:00",
+      "year_month": "2025-07",
+      "name": "[I] [Institucional] IAB Trends | Jul.25 | 2a. Ed.",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36930,
+      "entregues": 35864,
+      "bounce": 1064,
+      "opens": 7282,
+      "clicks": 397,
+      "unsub": 16,
+      "spam": 0,
+      "open_rate": 20.3,
+      "ctr": 1.11,
+      "ctor": 5.45,
+      "delivery_rate": 97.11,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-07-28 16:00:00",
+      "year_month": "2025-07",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-1",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36893,
+      "entregues": 35816,
+      "bounce": 1077,
+      "opens": 7189,
+      "clicks": 203,
+      "unsub": 26,
+      "spam": 0,
+      "open_rate": 20.07,
+      "ctr": 0.57,
+      "ctor": 2.82,
+      "delivery_rate": 97.08,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-07-30 18:40:00",
+      "year_month": "2025-07",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-3",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36892,
+      "entregues": 36203,
+      "bounce": 686,
+      "opens": 7780,
+      "clicks": 186,
+      "unsub": 27,
+      "spam": 1,
+      "open_rate": 21.49,
+      "ctr": 0.51,
+      "ctor": 2.39,
+      "delivery_rate": 98.13,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-01 11:30:00",
+      "year_month": "2025-08",
+      "name": "[I] [Institucional]  IAB News | Julho.25 - 2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36847,
+      "entregues": 35887,
+      "bounce": 959,
+      "opens": 7874,
+      "clicks": 124,
+      "unsub": 28,
+      "spam": 1,
+      "open_rate": 21.94,
+      "ctr": 0.35,
+      "ctor": 1.57,
+      "delivery_rate": 97.39,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-08-04 13:45:00",
+      "year_month": "2025-08",
+      "name": "[I] Follow IAB | Agosto 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 12,
+      "entregues": 12,
+      "bounce": 0,
+      "opens": 9,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 75.0,
+      "ctr": 16.67,
+      "ctor": 22.22,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-08-07 10:14:07",
+      "year_month": "2025-08",
+      "name": "[IAB] EMKT IAB Media Solutions",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36830,
+      "entregues": 36156,
+      "bounce": 671,
+      "opens": 7597,
+      "clicks": 200,
+      "unsub": 7,
+      "spam": 0,
+      "open_rate": 21.01,
+      "ctr": 0.55,
+      "ctor": 2.63,
+      "delivery_rate": 98.17,
+      "data_quality": "ok",
+      "category": "Mídia Solutions"
+    },
+    {
+      "sent_at": "2025-08-07 15:00:00",
+      "year_month": "2025-08",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36774,
+      "entregues": 36162,
+      "bounce": 612,
+      "opens": 7899,
+      "clicks": 779,
+      "unsub": 9,
+      "spam": 0,
+      "open_rate": 21.84,
+      "ctr": 2.15,
+      "ctor": 9.86,
+      "delivery_rate": 98.34,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-12 08:55:49",
+      "year_month": "2025-08",
+      "name": "[I] [RelGov] Boletim de Transparência jul.25",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 2312,
+      "entregues": 2269,
+      "bounce": 43,
+      "opens": 665,
+      "clicks": 20,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 29.31,
+      "ctr": 0.88,
+      "ctor": 3.01,
+      "delivery_rate": 98.14,
+      "data_quality": "ok",
+      "category": "RelGov"
+    },
+    {
+      "sent_at": "2025-08-14 11:43:34",
+      "year_month": "2025-08",
+      "name": "[IAB] EMKT Evento Adtech - Régua 6",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36784,
+      "entregues": 36334,
+      "bounce": 448,
+      "opens": 8439,
+      "clicks": 165,
+      "unsub": 30,
+      "spam": 1,
+      "open_rate": 23.23,
+      "ctr": 0.45,
+      "ctor": 1.96,
+      "delivery_rate": 98.78,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-15 10:00:00",
+      "year_month": "2025-08",
+      "name": "[I] [Institucional] Data Stories | Agosto 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36700,
+      "entregues": 36180,
+      "bounce": 520,
+      "opens": 8421,
+      "clicks": 222,
+      "unsub": 26,
+      "spam": 1,
+      "open_rate": 23.28,
+      "ctr": 0.61,
+      "ctor": 2.64,
+      "delivery_rate": 98.58,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-08-21 09:30:00",
+      "year_month": "2025-08",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-7 - Sem virada de lote V2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36714,
+      "entregues": 36286,
+      "bounce": 420,
+      "opens": 7760,
+      "clicks": 270,
+      "unsub": 30,
+      "spam": 0,
+      "open_rate": 21.39,
+      "ctr": 0.74,
+      "ctor": 3.48,
+      "delivery_rate": 98.83,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-21 11:10:21",
+      "year_month": "2025-08",
+      "name": "ERRATA [Eventos] Adtech & Branding - Newsletter - Régua-7 - Sem virada de lote V2",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36648,
+      "entregues": 36275,
+      "bounce": 373,
+      "opens": 7664,
+      "clicks": 146,
+      "unsub": 32,
+      "spam": 1,
+      "open_rate": 21.13,
+      "ctr": 0.4,
+      "ctor": 1.91,
+      "delivery_rate": 98.98,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-08-27 11:23:21",
+      "year_month": "2025-08",
+      "name": "[I] [Eventos] Adtech & Branding - Newsletter - Régua-7 - Com virada de lote",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 37034,
+      "entregues": 36187,
+      "bounce": 831,
+      "opens": 7202,
+      "clicks": 172,
+      "unsub": 37,
+      "spam": 0,
+      "open_rate": 19.9,
+      "ctr": 0.48,
+      "ctor": 2.39,
+      "delivery_rate": 97.71,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-02 15:30:00",
+      "year_month": "2025-09",
+      "name": "[I] Follow IAB | Setembro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 11,
+      "entregues": 11,
+      "bounce": 0,
+      "opens": 9,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 81.82,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-09-03 10:00:00",
+      "year_month": "2025-09",
+      "name": "[IAB] Adtech - E-mail marketing de Save The Date do evento",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1463,
+      "entregues": 1425,
+      "bounce": 19,
+      "opens": 512,
+      "clicks": 96,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 35.93,
+      "ctr": 6.74,
+      "ctor": 18.75,
+      "delivery_rate": 97.4,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-04 10:00:00",
+      "year_month": "2025-09",
+      "name": "[IAB] Evento Adtech - Régua 8 | E-mail Marketing",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 37755,
+      "entregues": 37191,
+      "bounce": 559,
+      "opens": 8190,
+      "clicks": 205,
+      "unsub": 29,
+      "spam": 0,
+      "open_rate": 22.02,
+      "ctr": 0.55,
+      "ctor": 2.5,
+      "delivery_rate": 98.51,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-05 09:00:00",
+      "year_month": "2025-09",
+      "name": "[IAB] Evento Adtech - Régua 11 | E-mail Marketing",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 37666,
+      "entregues": 37220,
+      "bounce": 445,
+      "opens": 7758,
+      "clicks": 152,
+      "unsub": 31,
+      "spam": 0,
+      "open_rate": 20.84,
+      "ctr": 0.41,
+      "ctor": 1.96,
+      "delivery_rate": 98.82,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-08 09:00:00",
+      "year_month": "2025-09",
+      "name": "Adtech & Branding - Newsletter - Régua 12",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1788,
+      "entregues": 1771,
+      "bounce": 13,
+      "opens": 708,
+      "clicks": 279,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 39.98,
+      "ctr": 15.75,
+      "ctor": 39.41,
+      "delivery_rate": 99.05,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-08 18:45:00",
+      "year_month": "2025-09",
+      "name": "[REPIQUE] Adtech & Branding - Newsletter - Régua 12",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1350,
+      "entregues": 1336,
+      "bounce": 12,
+      "opens": 459,
+      "clicks": 157,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 34.36,
+      "ctr": 11.75,
+      "ctor": 34.2,
+      "delivery_rate": 98.96,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-11 17:45:00",
+      "year_month": "2025-09",
+      "name": "IAB_Evento_Adtech_Regua13_Emkt_Pos-evento-01",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1922,
+      "entregues": 1916,
+      "bounce": 6,
+      "opens": 758,
+      "clicks": 86,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 39.56,
+      "ctr": 4.49,
+      "ctor": 11.35,
+      "delivery_rate": 99.69,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2025-09-19 11:15:00",
+      "year_month": "2025-09",
+      "name": "[I] [Institucional]  IAB News | Setembro.25",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38128,
+      "entregues": 37490,
+      "bounce": 630,
+      "opens": 6913,
+      "clicks": 240,
+      "unsub": 43,
+      "spam": 1,
+      "open_rate": 18.44,
+      "ctr": 0.64,
+      "ctor": 3.47,
+      "delivery_rate": 98.33,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-09-25 10:15:00",
+      "year_month": "2025-09",
+      "name": "IAB Trends | Set.25",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38083,
+      "entregues": 37479,
+      "bounce": 602,
+      "opens": 7254,
+      "clicks": 180,
+      "unsub": 56,
+      "spam": 1,
+      "open_rate": 19.35,
+      "ctr": 0.48,
+      "ctor": 2.48,
+      "delivery_rate": 98.41,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-09-26 10:00:00",
+      "year_month": "2025-09",
+      "name": "[I] [Institucional] Data Stories | Setembro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38034,
+      "entregues": 37483,
+      "bounce": 549,
+      "opens": 8008,
+      "clicks": 159,
+      "unsub": 52,
+      "spam": 0,
+      "open_rate": 21.36,
+      "ctr": 0.42,
+      "ctor": 1.99,
+      "delivery_rate": 98.55,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-09-29 14:30:00",
+      "year_month": "2025-09",
+      "name": "Follow IAB | Outubro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 10,
+      "entregues": 10,
+      "bounce": 0,
+      "opens": 8,
+      "clicks": 1,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 80.0,
+      "ctr": 10.0,
+      "ctor": 12.5,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-09-30 09:00:00",
+      "year_month": "2025-09",
+      "name": "[I] Comunicado de Inscrições de Chapas | AGO 2025-2026",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 187,
+      "entregues": 185,
+      "bounce": 2,
+      "opens": 79,
+      "clicks": 5,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 42.7,
+      "ctr": 2.7,
+      "ctor": 6.33,
+      "delivery_rate": 98.93,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-02 14:00:00",
+      "year_month": "2025-10",
+      "name": "IAB News | Outubro.25 - 1 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38055,
+      "entregues": 37549,
+      "bounce": 505,
+      "opens": 8445,
+      "clicks": 293,
+      "unsub": 75,
+      "spam": 7,
+      "open_rate": 22.49,
+      "ctr": 0.78,
+      "ctor": 3.47,
+      "delivery_rate": 98.67,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-10-16 13:00:00",
+      "year_month": "2025-10",
+      "name": "IAB News | Outubro.25 - 2 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38140,
+      "entregues": 37601,
+      "bounce": 528,
+      "opens": 8643,
+      "clicks": 216,
+      "unsub": 76,
+      "spam": 1,
+      "open_rate": 22.99,
+      "ctr": 0.57,
+      "ctor": 2.5,
+      "delivery_rate": 98.59,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-10-17 09:00:00",
+      "year_month": "2025-10",
+      "name": "Associados | Promoção 50% OFF",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 2374,
+      "entregues": 2360,
+      "bounce": 14,
+      "opens": 659,
+      "clicks": 36,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 27.92,
+      "ctr": 1.53,
+      "ctor": 5.46,
+      "delivery_rate": 99.41,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-17 11:00:00",
+      "year_month": "2025-10",
+      "name": "[Repique] Associados | Promoção 50% OFF",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 2373,
+      "entregues": 2362,
+      "bounce": 11,
+      "opens": 484,
+      "clicks": 18,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 20.49,
+      "ctr": 0.76,
+      "ctor": 3.72,
+      "delivery_rate": 99.54,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-22 11:13:18",
+      "year_month": "2025-10",
+      "name": "[I] Comunicado de Chapas Inscritas | AGO 2025-2026",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 185,
+      "entregues": 184,
+      "bounce": 1,
+      "opens": 79,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 42.93,
+      "ctr": 1.09,
+      "ctor": 2.53,
+      "delivery_rate": 99.46,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-23 14:00:00",
+      "year_month": "2025-10",
+      "name": "IAB Trends | Out.25",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38040,
+      "entregues": 37596,
+      "bounce": 441,
+      "opens": 7298,
+      "clicks": 287,
+      "unsub": 68,
+      "spam": 2,
+      "open_rate": 19.41,
+      "ctr": 0.76,
+      "ctor": 3.93,
+      "delivery_rate": 98.83,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-10-23 18:00:00",
+      "year_month": "2025-10",
+      "name": "Lembrete | MasterClass - IA - 20241024",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 490,
+      "entregues": 480,
+      "bounce": 2,
+      "opens": 157,
+      "clicks": 20,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 32.71,
+      "ctr": 4.17,
+      "ctor": 12.74,
+      "delivery_rate": 97.96,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-10-24 09:00:00",
+      "year_month": "2025-10",
+      "name": "[I] Edital de Convocação para Eleição Diretoria | AGO 2025-2026",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 184,
+      "entregues": 184,
+      "bounce": 0,
+      "opens": 82,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 44.57,
+      "ctr": 1.09,
+      "ctor": 2.44,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-24 16:00:00",
+      "year_month": "2025-10",
+      "name": "Participantes MasterClass IA | Promoção 30% OFF",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 559,
+      "entregues": 558,
+      "bounce": 1,
+      "opens": 230,
+      "clicks": 19,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 41.22,
+      "ctr": 3.41,
+      "ctor": 8.26,
+      "delivery_rate": 99.82,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-10-29 09:00:00",
+      "year_month": "2025-10",
+      "name": "Participantes MasterClass IA | Pesquisa de Satisfação",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 559,
+      "entregues": 559,
+      "bounce": 0,
+      "opens": 193,
+      "clicks": 25,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 34.53,
+      "ctr": 4.47,
+      "ctor": 12.95,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Educação"
+    },
+    {
+      "sent_at": "2025-10-30 16:00:00",
+      "year_month": "2025-10",
+      "name": "IAB News | Novembro 25 - 1 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38328,
+      "entregues": 37847,
+      "bounce": 478,
+      "opens": 7775,
+      "clicks": 167,
+      "unsub": 86,
+      "spam": 3,
+      "open_rate": 20.54,
+      "ctr": 0.44,
+      "ctor": 2.15,
+      "delivery_rate": 98.75,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-10-31 09:04:39",
+      "year_month": "2025-10",
+      "name": "[I] Comunicado de 2ª chamada para a AGO | AGO 2025-2026",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 184,
+      "entregues": 183,
+      "bounce": 1,
+      "opens": 80,
+      "clicks": 3,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 43.72,
+      "ctr": 1.64,
+      "ctor": 3.75,
+      "delivery_rate": 99.46,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-10-31 15:30:00",
+      "year_month": "2025-10",
+      "name": "Follow IAB | Novembro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 11,
+      "entregues": 11,
+      "bounce": 0,
+      "opens": 10,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 90.91,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-11-06 15:00:00",
+      "year_month": "2025-11",
+      "name": "IAB Trends | Nov.25 | 1a. Ed.",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38346,
+      "entregues": 37445,
+      "bounce": 894,
+      "opens": 7588,
+      "clicks": 233,
+      "unsub": 118,
+      "spam": 2,
+      "open_rate": 20.26,
+      "ctr": 0.62,
+      "ctor": 3.07,
+      "delivery_rate": 97.65,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-11-13 17:30:00",
+      "year_month": "2025-11",
+      "name": "IAB News | Novembro 25 - 2 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38323,
+      "entregues": 37673,
+      "bounce": 646,
+      "opens": 8248,
+      "clicks": 136,
+      "unsub": 130,
+      "spam": 1,
+      "open_rate": 21.89,
+      "ctr": 0.36,
+      "ctor": 1.65,
+      "delivery_rate": 98.3,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-11-17 16:00:00",
+      "year_month": "2025-11",
+      "name": "Eleições para os comitês do IAB Brasil 2026 | E-mail 1",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1282,
+      "entregues": 1252,
+      "bounce": 15,
+      "opens": 545,
+      "clicks": 77,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 43.53,
+      "ctr": 6.15,
+      "ctor": 14.13,
+      "delivery_rate": 97.66,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-11-17 17:15:00",
+      "year_month": "2025-11",
+      "name": "Eleições para os comitês do IAB Brasil 2026 | E-mail 1 (base interna IAB)",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 11,
+      "entregues": 11,
+      "bounce": 0,
+      "opens": 8,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 72.73,
+      "ctr": 18.18,
+      "ctor": 25.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-11-25 09:00:00",
+      "year_month": "2025-11",
+      "name": "Eleições para os comitês do IAB Brasil 2026 | E-mail 2",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 1268,
+      "entregues": 1260,
+      "bounce": 8,
+      "opens": 485,
+      "clicks": 62,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 38.49,
+      "ctr": 4.92,
+      "ctor": 12.78,
+      "delivery_rate": 99.37,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-11-27 09:30:00",
+      "year_month": "2025-11",
+      "name": "IAB News | Novembro 25 - Semana 4",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38595,
+      "entregues": 38069,
+      "bounce": 524,
+      "opens": 7651,
+      "clicks": 913,
+      "unsub": 127,
+      "spam": 1,
+      "open_rate": 20.1,
+      "ctr": 2.4,
+      "ctor": 11.93,
+      "delivery_rate": 98.64,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-11-27 11:35:00",
+      "year_month": "2025-11",
+      "name": "Follow IAB | Dezembro 2025",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 11,
+      "entregues": 11,
+      "bounce": 0,
+      "opens": 10,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 90.91,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-11-27 14:30:00",
+      "year_month": "2025-11",
+      "name": "Eleições para os comitês do IAB Brasil 2026 | E-mail 3",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 2000,
+      "entregues": 1922,
+      "bounce": 47,
+      "opens": 739,
+      "clicks": 34,
+      "unsub": 6,
+      "spam": 0,
+      "open_rate": 38.45,
+      "ctr": 1.77,
+      "ctor": 4.6,
+      "delivery_rate": 96.1,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-03 09:00:00",
+      "year_month": "2025-12",
+      "name": "Mapa Mental do Ecossistema de Vídeo Digital",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38845,
+      "entregues": 38156,
+      "bounce": 686,
+      "opens": 4606,
+      "clicks": 244,
+      "unsub": 41,
+      "spam": 0,
+      "open_rate": 12.07,
+      "ctr": 0.64,
+      "ctor": 5.3,
+      "delivery_rate": 98.23,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-04 12:00:00",
+      "year_month": "2025-12",
+      "name": "Candidatos Eleições Comitês 2026 (resumido)",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1929,
+      "entregues": 1900,
+      "bounce": 29,
+      "opens": 719,
+      "clicks": 11,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 37.84,
+      "ctr": 0.58,
+      "ctor": 1.53,
+      "delivery_rate": 98.5,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-04 16:00:00",
+      "year_month": "2025-12",
+      "name": "IAB Trends | Dez.25 | 1a. Ed.",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38793,
+      "entregues": 38113,
+      "bounce": 677,
+      "opens": 7182,
+      "clicks": 618,
+      "unsub": 120,
+      "spam": 0,
+      "open_rate": 18.84,
+      "ctr": 1.62,
+      "ctor": 8.6,
+      "delivery_rate": 98.25,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2025-12-04 16:15:00",
+      "year_month": "2025-12",
+      "name": "Errata: Candidatos Eleições Comitês 2026 (resumido)",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1928,
+      "entregues": 1902,
+      "bounce": 26,
+      "opens": 555,
+      "clicks": 4,
+      "unsub": 1,
+      "spam": 0,
+      "open_rate": 29.18,
+      "ctr": 0.21,
+      "ctor": 0.72,
+      "delivery_rate": 98.65,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-05 16:00:00",
+      "year_month": "2025-12",
+      "name": "#1 - Creator Economy: Candidatos Eleições Comitês 2026",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1921,
+      "entregues": 1895,
+      "bounce": 26,
+      "opens": 677,
+      "clicks": 11,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 35.73,
+      "ctr": 0.58,
+      "ctor": 1.62,
+      "delivery_rate": 98.65,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-05 16:15:00",
+      "year_month": "2025-12",
+      "name": "#2 - DOOH: Candidatos Eleições Comitês 2026",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1920,
+      "entregues": 1894,
+      "bounce": 24,
+      "opens": 674,
+      "clicks": 2,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 35.59,
+      "ctr": 0.11,
+      "ctor": 0.3,
+      "delivery_rate": 98.65,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-05 16:30:00",
+      "year_month": "2025-12",
+      "name": "#3 - IA: Candidatos Eleições Comitês 2026",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1915,
+      "entregues": 1880,
+      "bounce": 35,
+      "opens": 662,
+      "clicks": 3,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 35.21,
+      "ctr": 0.16,
+      "ctor": 0.45,
+      "delivery_rate": 98.17,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-05 16:45:00",
+      "year_month": "2025-12",
+      "name": "#4 - Retail Media: Candidatos Eleições Comitês 2026",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1915,
+      "entregues": 1885,
+      "bounce": 28,
+      "opens": 675,
+      "clicks": 4,
+      "unsub": 3,
+      "spam": 0,
+      "open_rate": 35.81,
+      "ctr": 0.21,
+      "ctor": 0.59,
+      "delivery_rate": 98.43,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-09 19:20:00",
+      "year_month": "2025-12",
+      "name": "#8 -  Eleições para os comitês - É amanhã",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1908,
+      "entregues": 1853,
+      "bounce": 55,
+      "opens": 716,
+      "clicks": 9,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 38.64,
+      "ctr": 0.49,
+      "ctor": 1.26,
+      "delivery_rate": 97.12,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-10 09:00:00",
+      "year_month": "2025-12",
+      "name": "#9 -  Eleições para os comitês - É hoje",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1901,
+      "entregues": 1861,
+      "bounce": 40,
+      "opens": 689,
+      "clicks": 108,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 37.02,
+      "ctr": 5.8,
+      "ctor": 15.67,
+      "delivery_rate": 97.9,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-12 09:00:00",
+      "year_month": "2025-12",
+      "name": "Resultado das eleições dos Comitês 2026 | IAB Brasil",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1898,
+      "entregues": 1847,
+      "bounce": 51,
+      "opens": 727,
+      "clicks": 23,
+      "unsub": 2,
+      "spam": 0,
+      "open_rate": 39.36,
+      "ctr": 1.25,
+      "ctor": 3.16,
+      "delivery_rate": 97.31,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-16 14:30:00",
+      "year_month": "2025-12",
+      "name": "Recesso 2025 | IAB Brasil",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38769,
+      "entregues": 37981,
+      "bounce": 782,
+      "opens": 8023,
+      "clicks": 85,
+      "unsub": 105,
+      "spam": 1,
+      "open_rate": 21.12,
+      "ctr": 0.22,
+      "ctor": 1.06,
+      "delivery_rate": 97.97,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2025-12-18 15:30:00",
+      "year_month": "2025-12",
+      "name": "IAB News | Dezembro 25 - Semana 2",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38671,
+      "entregues": 38075,
+      "bounce": 594,
+      "opens": 7851,
+      "clicks": 702,
+      "unsub": 102,
+      "spam": 1,
+      "open_rate": 20.62,
+      "ctr": 1.84,
+      "ctor": 8.94,
+      "delivery_rate": 98.46,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-01-23 11:15:00",
+      "year_month": "2026-01",
+      "name": "[IAB] NEWS IAB - JANEIRO - SEMANA 2 - 2",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38684,
+      "entregues": 37465,
+      "bounce": 1212,
+      "opens": 8141,
+      "clicks": 313,
+      "unsub": 97,
+      "spam": 3,
+      "open_rate": 21.73,
+      "ctr": 0.84,
+      "ctor": 3.84,
+      "delivery_rate": 96.85,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2026-01-26 16:00:00",
+      "year_month": "2026-01",
+      "name": "[I] [Institucional] Pesquisa de IA Nielsen | 2026 - 1º disparo",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38424,
+      "entregues": 37665,
+      "bounce": 755,
+      "opens": 7736,
+      "clicks": 164,
+      "unsub": 121,
+      "spam": 0,
+      "open_rate": 20.54,
+      "ctr": 0.44,
+      "ctor": 2.12,
+      "delivery_rate": 98.02,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-01-28 09:00:00",
+      "year_month": "2026-01",
+      "name": "[IAB] IAB IA Summit - Email Save the date - Base seleta - 01",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 389,
+      "entregues": 369,
+      "bounce": 18,
+      "opens": 137,
+      "clicks": 22,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 37.13,
+      "ctr": 5.96,
+      "ctor": 16.06,
+      "delivery_rate": 94.86,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-01-29 14:05:00",
+      "year_month": "2026-01",
+      "name": "[IAB] IAB IA Summit - Email Save the date - Base geral - 02",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38091,
+      "entregues": 37635,
+      "bounce": 451,
+      "opens": 8430,
+      "clicks": 437,
+      "unsub": 156,
+      "spam": 0,
+      "open_rate": 22.4,
+      "ctr": 1.16,
+      "ctor": 5.18,
+      "delivery_rate": 98.8,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-02 11:30:00",
+      "year_month": "2026-02",
+      "name": "[IAB] Follow IAB / Janeiro 2026",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 13,
+      "entregues": 13,
+      "bounce": 0,
+      "opens": 13,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 100.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-02-02 12:00:00",
+      "year_month": "2026-02",
+      "name": "[IAB] Follow IAB / Janeiro 2026 - correção",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 13,
+      "entregues": 13,
+      "bounce": 0,
+      "opens": 12,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 92.31,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-02-02 17:02:41",
+      "year_month": "2026-02",
+      "name": "[I] [Institucional] Pesquisa de IA Nielsen | 2026 - 2º disparo",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38376,
+      "entregues": 37948,
+      "bounce": 427,
+      "opens": 7766,
+      "clicks": 367,
+      "unsub": 99,
+      "spam": 0,
+      "open_rate": 20.46,
+      "ctr": 0.97,
+      "ctor": 4.73,
+      "delivery_rate": 98.88,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-02-03 09:30:00",
+      "year_month": "2026-02",
+      "name": "[IAB Brasil] E-mail Combo Start no Digital",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38336,
+      "entregues": 37911,
+      "bounce": 425,
+      "opens": 7772,
+      "clicks": 186,
+      "unsub": 103,
+      "spam": 1,
+      "open_rate": 20.5,
+      "ctr": 0.49,
+      "ctor": 2.39,
+      "delivery_rate": 98.89,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2026-02-05 11:35:00",
+      "year_month": "2026-02",
+      "name": "[IAB] IAB IA Summit - Emkt Base seleta + Base Geral / O que te espera",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38016,
+      "entregues": 36784,
+      "bounce": 1230,
+      "opens": 7340,
+      "clicks": 218,
+      "unsub": 97,
+      "spam": 1,
+      "open_rate": 19.95,
+      "ctr": 0.59,
+      "ctor": 2.97,
+      "delivery_rate": 96.76,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-05 17:10:00",
+      "year_month": "2026-02",
+      "name": "[TRENDS] Publicação - News Trends - 05/fev",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38203,
+      "entregues": 37616,
+      "bounce": 586,
+      "opens": 7322,
+      "clicks": 332,
+      "unsub": 93,
+      "spam": 2,
+      "open_rate": 19.47,
+      "ctr": 0.88,
+      "ctor": 4.53,
+      "delivery_rate": 98.46,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2026-02-05 19:51:39",
+      "year_month": "2026-02",
+      "name": "[IAB] Conclua sua inscrição: IA Summit",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 1,
+      "entregues": 0,
+      "bounce": 1,
+      "opens": 0,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 0.0,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-06 13:30:49",
+      "year_month": "2026-02",
+      "name": "[I] [Institucional] Pesquisa de IA Nielsen | 2026 - 3º disparo",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38164,
+      "entregues": 37794,
+      "bounce": 367,
+      "opens": 7478,
+      "clicks": 177,
+      "unsub": 92,
+      "spam": 1,
+      "open_rate": 19.79,
+      "ctr": 0.47,
+      "ctor": 2.37,
+      "delivery_rate": 99.03,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-02-10 18:15:00",
+      "year_month": "2026-02",
+      "name": "[IAB] IAB IA Summit | Últimos dias de desconto",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 37565,
+      "entregues": 37078,
+      "bounce": 484,
+      "opens": 7326,
+      "clicks": 291,
+      "unsub": 95,
+      "spam": 3,
+      "open_rate": 19.76,
+      "ctr": 0.78,
+      "ctor": 3.97,
+      "delivery_rate": 98.7,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-12 11:00:00",
+      "year_month": "2026-02",
+      "name": "[IAB] IAB IA Summit | A segunda chance que você esperava",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 37526,
+      "entregues": 37146,
+      "bounce": 380,
+      "opens": 7354,
+      "clicks": 196,
+      "unsub": 86,
+      "spam": 0,
+      "open_rate": 19.8,
+      "ctr": 0.53,
+      "ctor": 2.67,
+      "delivery_rate": 98.99,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-19 18:00:00",
+      "year_month": "2026-02",
+      "name": "[IAB] News IAB / Fevereiro - Semana 2",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38046,
+      "entregues": 37662,
+      "bounce": 383,
+      "opens": 7413,
+      "clicks": 244,
+      "unsub": 64,
+      "spam": 0,
+      "open_rate": 19.68,
+      "ctr": 0.65,
+      "ctor": 3.29,
+      "delivery_rate": 98.99,
+      "data_quality": "ok",
+      "category": "Outros"
+    },
+    {
+      "sent_at": "2026-02-23 16:00:00",
+      "year_month": "2026-02",
+      "name": "[IAB] Palestrante confirmado | IAB IA Summit - V2",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 37245,
+      "entregues": 36879,
+      "bounce": 364,
+      "opens": 7480,
+      "clicks": 218,
+      "unsub": 60,
+      "spam": 0,
+      "open_rate": 20.28,
+      "ctr": 0.59,
+      "ctor": 2.91,
+      "delivery_rate": 99.02,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-23 16:30:00",
+      "year_month": "2026-02",
+      "name": "[IAB] Palestrante confirmado | IAB IA Summit - PARA QUEM COMPROU",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 34,
+      "entregues": 34,
+      "bounce": 0,
+      "opens": 22,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 64.71,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-26 17:30:00",
+      "year_month": "2026-02",
+      "name": "[TRENDS] IAB Trends: mercado em foco",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 37964,
+      "entregues": 37524,
+      "bounce": 439,
+      "opens": 7297,
+      "clicks": 608,
+      "unsub": 40,
+      "spam": 0,
+      "open_rate": 19.45,
+      "ctr": 1.62,
+      "ctor": 8.33,
+      "delivery_rate": 98.84,
+      "data_quality": "ok",
+      "category": "Institucional / Newsletter"
+    },
+    {
+      "sent_at": "2026-02-27 09:30:00",
+      "year_month": "2026-02",
+      "name": "IAB IA Summit - Até 23h59 - Para quem comprou",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 49,
+      "entregues": 49,
+      "bounce": 0,
+      "opens": 28,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 57.14,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-27 09:30:00",
+      "year_month": "2026-02",
+      "name": "IAB IA Summit - Até 23h59 - V2 - para quem nao comprou",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 36832,
+      "entregues": 36453,
+      "bounce": 378,
+      "opens": 6982,
+      "clicks": 225,
+      "unsub": 41,
+      "spam": 0,
+      "open_rate": 19.15,
+      "ctr": 0.62,
+      "ctor": 3.22,
+      "delivery_rate": 98.97,
+      "data_quality": "ok",
+      "category": "Eventos"
+    },
+    {
+      "sent_at": "2026-02-27 09:37:11",
+      "year_month": "2026-02",
+      "name": "IAB IA Summit - Até 23h59 - Para quem comprou [correto]",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 49,
+      "entregues": 49,
+      "bounce": 0,
+      "opens": 25,
+      "clicks": 0,
+      "unsub": 0,
+      "spam": 0,
+      "open_rate": 51.02,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 100.0,
+      "data_quality": "ok",
+      "category": "Eventos"
     }
   ],
   "rdsChannels": [
@@ -6671,6 +9951,408 @@ const DATA = {
       "conv_rate": 0.0
     }
   ],
+  "rdsChannelByPeriod": [
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 6337,
+      "conv_rate": 0.0177,
+      "conversoes": 112
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 3466,
+      "conv_rate": 0.0568,
+      "conversoes": 197
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 168,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 1457,
+      "conv_rate": 0.0247,
+      "conversoes": 36
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 1464,
+      "conv_rate": 0.0273,
+      "conversoes": 40
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 208,
+      "conv_rate": 0.2356,
+      "conversoes": 49
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 501,
+      "conv_rate": 0.0279,
+      "conversoes": 14
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "01-2025 a 02-2025",
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 2017
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 10361,
+      "conv_rate": 0.0159,
+      "conversoes": 165
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 7074,
+      "conv_rate": 0.0875,
+      "conversoes": 619
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 130,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 2219,
+      "conv_rate": 0.0243,
+      "conversoes": 54
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 3447,
+      "conv_rate": 0.0284,
+      "conversoes": 98
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 252,
+      "conv_rate": 0.0,
+      "conversoes": 264
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 967,
+      "conv_rate": 0.0196,
+      "conversoes": 19
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 3599
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 11706,
+      "conv_rate": 0.0173,
+      "conversoes": 203
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 8527,
+      "conv_rate": 0.0698,
+      "conversoes": 595
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 72,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 1741,
+      "conv_rate": 0.0586,
+      "conversoes": 102
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 6444,
+      "conv_rate": 0.0154,
+      "conversoes": 99
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 1066,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 898,
+      "conv_rate": 0.01,
+      "conversoes": 9
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 2231
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 12924,
+      "conv_rate": 0.0234,
+      "conversoes": 302
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 8840,
+      "conv_rate": 0.0635,
+      "conversoes": 561
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 50,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 2621,
+      "conv_rate": 0.0404,
+      "conversoes": 106
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 4745,
+      "conv_rate": 0.0145,
+      "conversoes": 69
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 4367,
+      "conv_rate": 0.0005,
+      "conversoes": 2
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 1167,
+      "conv_rate": 0.0249,
+      "conversoes": 29
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 4215
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 6674,
+      "conv_rate": 0.0488,
+      "conversoes": 326
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 6288,
+      "conv_rate": 0.0496,
+      "conversoes": 312
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 27,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 1093,
+      "conv_rate": 0.0906,
+      "conversoes": 99
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 4598,
+      "conv_rate": 0.0043,
+      "conversoes": 20
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 203,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 531,
+      "conv_rate": 0.0094,
+      "conversoes": 5
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 0
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conv_rate": 0.0,
+      "conversoes": 1337
+    }
+  ],
   "rdsTotals": {
     "total_campaigns": 157,
     "total_selecionados": 2560419,
@@ -6689,6 +10371,193 @@ const DATA = {
     "period_end": "2026-02-27",
     "rates_based_on": "entregues (Mar 2025 – Feb 2026, Entregues > 0)"
   },
+  "rdsFormsByPeriod": [
+    {
+      "period": "01-2025 a 02-2025",
+      "mailing_visitors": 7039,
+      "mailing_leads": 75
+    },
+    {
+      "period": "03-2025 a 05-2025",
+      "mailing_visitors": 10948,
+      "mailing_leads": 110
+    },
+    {
+      "period": "06-2025 a 08-2025",
+      "mailing_visitors": 10839,
+      "mailing_leads": 114
+    },
+    {
+      "period": "09-2025 a 11-2025",
+      "mailing_visitors": 12415,
+      "mailing_leads": 117
+    },
+    {
+      "period": "12-2025 a 02-2026",
+      "mailing_visitors": 7790,
+      "mailing_leads": 60
+    }
+  ],
+  "rdsFormsAllPeriods": [
+    {
+      "visitors": 49031,
+      "leads": 476,
+      "name": "[I][formulário] Mailing Home Site",
+      "conv_rate": 0.97
+    },
+    {
+      "visitors": 135,
+      "leads": 0,
+      "name": "[I][formulário] Recebimento de releases",
+      "conv_rate": 0.0
+    },
+    {
+      "visitors": 16,
+      "leads": 10,
+      "name": "[I][formulário] Newsletter",
+      "conv_rate": 62.5
+    },
+    {
+      "visitors": 10,
+      "leads": 0,
+      "name": "[I][Inglês] Quero me associar",
+      "conv_rate": 0.0
+    },
+    {
+      "visitors": 2,
+      "leads": 0,
+      "name": "[I] Cadastrados Site",
+      "conv_rate": 0.0
+    },
+    {
+      "visitors": 0,
+      "leads": 0,
+      "name": "[I][Português] Quero me associar",
+      "conv_rate": 0.0
+    }
+  ],
+  "rdsLandingPagesActive": [
+    {
+      "name": "Adtech e Branding 2025",
+      "visitors": 12457,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "iab.IA Summit",
+      "visitors": 3576,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Evento BSB",
+      "visitors": 2514,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Adtech - Evento",
+      "visitors": 576,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[I] LP - Institucional",
+      "visitors": 139,
+      "leads": 1,
+      "conv_rate": 0.72
+    },
+    {
+      "name": "Grade de Educação 2025",
+      "visitors": 120,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[H] Landing page In Company",
+      "visitors": 65,
+      "leads": 5,
+      "conv_rate": 7.69
+    },
+    {
+      "name": "[I] Pack de Materiais | Transparência &amp; Segurança na Publicidade Digital",
+      "visitors": 58,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[H] LP Publicidade para Todes",
+      "visitors": 41,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[I][Versão 2] Hub de conteudo",
+      "visitors": 26,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[H] LP - INSIGHTS PARA 2023",
+      "visitors": 24,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Inscreva-se Educação",
+      "visitors": 22,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "[I][Versão 1] Fim dos Cookies",
+      "visitors": 16,
+      "leads": 2,
+      "conv_rate": 12.5
+    },
+    {
+      "name": "[I] Hub de conteúdo | LGPD",
+      "visitors": 15,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Guia de Uso da Inteligência Artificial na Publicidade Digital",
+      "visitors": 13,
+      "leads": 5,
+      "conv_rate": 38.46
+    },
+    {
+      "name": "[I] [Institucional] Relações Governamentais",
+      "visitors": 9,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Guia de Brand Suitability e combate à fraude",
+      "visitors": 9,
+      "leads": 1,
+      "conv_rate": 11.11
+    },
+    {
+      "name": "#Publi 2024: O impacto da creator economy entre gerações do Brasil",
+      "visitors": 9,
+      "leads": 2,
+      "conv_rate": 22.22
+    },
+    {
+      "name": "[H] LP - Brand Safety",
+      "visitors": 9,
+      "leads": 0,
+      "conv_rate": 0.0
+    },
+    {
+      "name": "Agenda Regulatoria",
+      "visitors": 7,
+      "leads": 1,
+      "conv_rate": 14.29
+    }
+  ],
   "rdsWorkflows": [
     {
       "name": "[H] Autoresponder - Fim dos cookies",
@@ -7093,18 +10962,26 @@ function updateAllMetrics() {
   // Bounce rate (weighted avg over filtered months)
   const avgBounce = ga4f.length > 0 ? (ga4f.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4f.length).toFixed(1) : '0';
   setMetric('bounce-rate', avgBounce+'%');
-  // Tab 1 mini-KPIs — campaign category shares (scaled proportionally)
-  const sf = getScaleFactor();
-  const scaledCats   = DATA.campaignCategories.map(c=>({...c, sessions: Math.round(c.sessions*sf)}));
-  const totalCatSess = scaledCats.reduce((a,b)=>a+b.sessions,0) || 1;
-  const adtechCat    = scaledCats.find(c=>c.name.includes('AdTech')||c.name.includes('Branding')) || {sessions:0};
-  const newsCat      = scaledCats.find(c=>c.name.toLowerCase().includes('newsletter')||c.name.toLowerCase().includes('news')) || {sessions:0};
-  const topCat       = [...scaledCats].sort((a,b)=>b.sessions-a.sessions)[0] || {name:'—',sessions:0};
-  setMetric('camp-total',          DATA.campaigns.length.toString());
-  setMetric('camp-adtech-pct',     Math.round(adtechCat.sessions/totalCatSess*100)+'%');
-  setMetric('camp-newsletter-pct', Math.round(newsCat.sessions/totalCatSess*100)+'%');
-  setMetric('camp-best-cat',       topCat.name);
-  setMetric('camp-best-cat-pct',   fmtNum(topCat.sessions)+' sessões no período');
+  // Tab 1 mini-KPIs — RDS campaign stats
+  setMetric('rds-camp-total', (rdsT.total_campaigns||157).toString());
+  setMetric('rds-avg-ctor',   (rdsT.avg_ctor||4.07).toFixed(2).replace('.',',')+'\u00a0%');
+  const allCamps = DATA.rdsCampaignsAll || DATA.rdsTopCampaigns || [];
+  if (allCamps.length > 0) {
+    const topOR   = [...allCamps].sort((a,b)=>b.open_rate-a.open_rate)[0];
+    const topOpen = [...allCamps].sort((a,b)=>b.opens-a.opens)[0];
+    setMetric('rds-camp-top-or',       topOR   ? topOR.open_rate.toFixed(1).replace('.',',')+'\u00a0%' : '—');
+    setMetric('rds-camp-top-or-name',  topOR   ? (topOR.name.length>30?topOR.name.slice(0,30)+'…':topOR.name) : 'campanha');
+    setMetric('rds-camp-top-opens',    topOpen ? topOpen.opens.toLocaleString('pt-BR') : '—');
+    setMetric('rds-camp-top-opens-name', topOpen ? (topOpen.name.length>30?topOpen.name.slice(0,30)+'…':topOpen.name) : 'campanha');
+  }
+  // RDS Channel KPIs
+  const emailCh = (DATA.rdsChannels||[]).find(c=>c.channel_key==='email') || {visits:20698,conversoes:326,conv_rate:1.58};
+  setMetric('rds-email-visits',     (emailCh.visits||20698).toLocaleString('pt-BR'));
+  setMetric('rds-email-convs',      (emailCh.conversoes||326).toLocaleString('pt-BR'));
+  setMetric('rds-email-conv-rate',  (emailCh.conv_rate||1.58).toFixed(2).replace('.',',')+'\u00a0%');
+  setMetric('rds-email-visits2',    (emailCh.visits||20698).toLocaleString('pt-BR'));
+  setMetric('rds-email-convs2',     (emailCh.conversoes||326).toLocaleString('pt-BR'));
+  setMetric('rds-email-conv-rate2', (emailCh.conv_rate||1.58).toFixed(2).replace('.',',')+'\u00a0%');
   // Update funnel with RD Station + GA4 real data
   const rdsAll = DATA.rdsEmailMonthly || [];
   const cleanAll = rdsAll.filter(m => !m.has_estimated);
@@ -7190,13 +11067,20 @@ function buildEmailFunnel(sessoes, engaged, entregues, opens, clicks) {
   entregues = entregues || 0; opens = opens || 0; clicks = clicks || 0;
   let steps;
   if (entregues > 0) {
-    // Full RD Station + GA4 funnel
-    const maxVal = entregues;
-    steps = [
-      { label:'Entregues',  src:'RD Station', value:entregues, rate:'100%',                                        color:'#8B5CF6', width:100 },
+    // Full RD Station 5-step funnel
+    const enviados = (DATA.rdsTotals && DATA.rdsTotals.total_selecionados) ? DATA.rdsTotals.total_selecionados : 0;
+    const maxVal = enviados > 0 ? enviados : entregues;
+    steps = enviados > 0 ? [
+      { label:'Enviados',   src:'RD Station', value:enviados,  rate:'100%',                                        color:'#64748B', width:100 },
+      { label:'Entregues',  src:'RD Station', value:entregues, rate:(entregues/maxVal*100).toFixed(1)+'%',         color:'#8B5CF6', width:Math.round(entregues/maxVal*100) },
       { label:'Abertos',    src:'RD Station', value:opens,     rate:(opens/maxVal*100).toFixed(1)+'%',             color:'#4ECDC4', width:Math.round(opens/maxVal*100) },
-      { label:'Clicados',   src:'RD Station', value:clicks,    rate:(clicks/maxVal*100).toFixed(1)+'%',            color:'#3B82F6', width:Math.max(Math.round(clicks/maxVal*100),4) },
-      { label:'Sessões GA4',src:'GA4',        value:sessoes,   rate:(sessoes/maxVal*100).toFixed(1)+'%',           color:'#FF6B35', width:Math.max(Math.round(sessoes/maxVal*100),4) }
+      { label:'Clicados',   src:'RD Station', value:clicks,    rate:(clicks/maxVal*100).toFixed(1)+'%',            color:'#3B82F6', width:Math.max(Math.round(clicks/maxVal*100),3) },
+      { label:'Sessões GA4',src:'GA4',        value:sessoes,   rate:(sessoes/maxVal*100).toFixed(1)+'%',           color:'#FF6B35', width:Math.max(Math.round(sessoes/maxVal*100),3) }
+    ] : [
+      { label:'Entregues',  src:'RD Station', value:entregues, rate:'100%',                                        color:'#8B5CF6', width:100 },
+      { label:'Abertos',    src:'RD Station', value:opens,     rate:(opens/entregues*100).toFixed(1)+'%',          color:'#4ECDC4', width:Math.round(opens/entregues*100) },
+      { label:'Clicados',   src:'RD Station', value:clicks,    rate:(clicks/entregues*100).toFixed(1)+'%',         color:'#3B82F6', width:Math.max(Math.round(clicks/entregues*100),3) },
+      { label:'Sessões GA4',src:'GA4',        value:sessoes,   rate:(sessoes/entregues*100).toFixed(1)+'%',        color:'#FF6B35', width:Math.max(Math.round(sessoes/entregues*100),3) }
     ];
   } else {
     // GA4-only fallback
@@ -7225,15 +11109,13 @@ function buildCRMFunnel() {
   const totalSessoes = DATA.monthlyTrend.reduce((a,b)=>a+(b.sessions||0),0);
   const totalEngaged = DATA.monthlyTrend.reduce((a,b)=>a+(b.engaged||0),0);
   const totalConv    = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
-  const steps = [
   const baseLeads = (DATA.rdsTotals && DATA.rdsTotals.max_list_size) ? DATA.rdsTotals.max_list_size : 38845;
-  const steps2 = [
+  const steps = [
     { label:'Base de Leads',  value:baseLeads,     rate:'Base RD Station', color:'#8B5CF6' },
     { label:'Sessões GA4',    value:totalSessoes,  rate:'Cliques em email', color:'#3B82F6' },
     { label:'Engajadas',      value:totalEngaged,  rate:(totalEngaged/totalSessoes*100).toFixed(1)+'%', color:'#10B981' },
     { label:'Conversões',     value:totalConv,     rate:(totalConv/totalSessoes*100).toFixed(1)+'%',    color:'#FF6B35' }
   ];
-  const steps = steps2;
   const maxV = baseLeads;
   container.innerHTML = steps.map((s,i) => `
     ${i>0?'<div class="funnel-arrow" style="font-size:20px;padding:0 6px;color:#64748B;align-self:center;">→</div>':''}
@@ -7533,6 +11415,30 @@ function initTab0Charts() {
     }
   });
 
+  // RDS Channel Chart — donut showing all channels
+  destroyChart('rdsChannelChart');
+  const rdsChans = DATA.rdsChannels || [];
+  const chanColors = {'organica':'#10B981','direto':'#3B82F6','email':'#FF6B35','referencia':'#8B5CF6','outros':'#F59E0B','social':'#EC4899','pago':'#06B6D4','busca_paga':'#06B6D4'};
+  const rdsChansColors = rdsChans.map(c=>chanColors[c.channel_key]||'#64748B');
+  const rdsChansTotal  = rdsChans.reduce((a,b)=>a+(b.visits||0),0)||1;
+  if (document.getElementById('rdsChannelChart')) {
+    chartRegistry.rdsChannelChart = new Chart(document.getElementById('rdsChannelChart'), {
+      type:'doughnut',
+      data:{
+        labels: rdsChans.map(c=>c.channel+' ('+c.visit_share+'%)'),
+        datasets:[{ data:rdsChans.map(c=>c.visits), backgroundColor:rdsChansColors, borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
+      },
+      options:{
+        ...CHART_OPTS, cutout:'60%',
+        plugins:{
+          ...CHART_OPTS.plugins,
+          legend:{ position:'bottom', labels:{...CHART_OPTS.plugins.legend.labels,padding:8,font:{size:10}} },
+          tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.label.split(' (')[0]}: ${(rdsChans[ctx.dataIndex]?.visits||0).toLocaleString('pt-BR')} visitas` } }
+        }
+      }
+    });
+  }
+
   // Init funnel with RD Station + GA4 real data
   const ga4F = getFilteredData(DATA.monthlyTrend);
   const rdsAll0 = DATA.rdsEmailMonthly || [];
@@ -7546,48 +11452,77 @@ function initTab0Charts() {
 }
 
 // ════════════════════════════════════════════════════════════
-// TAB 1 CHARTS — Campanhas & UTM
+// TAB 1 CHARTS — Email · Campanhas
 // ════════════════════════════════════════════════════════════
 function initTab1Charts() {
-  // Category sessions bar — scaled to selected period
-  destroyChart('catSessionsChart');
-  const catSF = getScaleFactor();
-  const scaledCatData = DATA.campaignCategories.map(c=>({...c, sessions: Math.round(c.sessions*catSF)}));
-  chartRegistry.catSessionsChart = new Chart(document.getElementById('catSessionsChart'), {
-    type:'bar',
-    data:{
-      labels: scaledCatData.map(c=>c.name),
-      datasets:[
-        { label:'Sessões GA4', data:scaledCatData.map(c=>c.sessions), backgroundColor:scaledCatData.map(c=>hexAlpha(c.color,0.7)), borderColor:scaledCatData.map(c=>c.color), borderWidth:2, borderRadius:6 }
-      ]
-    },
-    options:{
-      ...CHART_OPTS,
-      scales:{
-        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
-        y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
+  const catColors = ['#10B981','#FF6B35','#3B82F6','#8B5CF6','#F59E0B','#EC4899'];
+  // RDS Campaign Categories donut
+  destroyChart('rdsCampaignCategoriesChart');
+  const rdsCats = DATA.rdsCampaignCategories || [];
+  if (document.getElementById('rdsCampaignCategoriesChart') && rdsCats.length > 0) {
+    chartRegistry.rdsCampaignCategoriesChart = new Chart(document.getElementById('rdsCampaignCategoriesChart'), {
+      type:'doughnut',
+      data:{
+        labels: rdsCats.map(c=>c.name+' ('+c.campaigns+')'),
+        datasets:[{ data:rdsCats.map(c=>c.opens), backgroundColor:catColors.slice(0,rdsCats.length), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
       },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
-    }
-  });
-
-  // Category donut — scaled to selected period
-  destroyChart('catDonutChart');
-  chartRegistry.catDonutChart = new Chart(document.getElementById('catDonutChart'), {
-    type:'doughnut',
-    data:{
-      labels: scaledCatData.map(c=>c.name),
-      datasets:[{ data:scaledCatData.map(c=>c.sessions), backgroundColor:scaledCatData.map(c=>c.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
-    },
-    options:{
-      ...CHART_OPTS, cutout:'60%',
-      plugins:{
-        ...CHART_OPTS.plugins,
-        legend:{ position:'bottom', labels:{...CHART_OPTS.plugins.legend.labels,padding:6,font:{size:10}} },
-        tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.parsed.toLocaleString('pt-BR')} sessões` } }
+      options:{
+        ...CHART_OPTS, cutout:'58%',
+        plugins:{
+          ...CHART_OPTS.plugins,
+          legend:{ position:'bottom', labels:{...CHART_OPTS.plugins.legend.labels,padding:8,font:{size:10}} },
+          tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${rdsCats[ctx.dataIndex]?.name}: ${(rdsCats[ctx.dataIndex]?.opens||0).toLocaleString('pt-BR')} aberturas · ${rdsCats[ctx.dataIndex]?.open_rate}% OR` } }
+        }
       }
-    }
+    });
+  }
+  // RDS Volume by Period (bar: entregues + opens per period)
+  destroyChart('rdsVolumeByPeriodChart');
+  const rdsMonthly = DATA.rdsEmailMonthly || [];
+  // Aggregate by period: sum entregues and opens per period_label
+  const periodMap = {};
+  rdsMonthly.forEach(m => {
+    const pl = m.period_label || m.year_month;
+    if (!periodMap[pl]) periodMap[pl] = {period:pl,entregues:0,opens:0};
+    periodMap[pl].entregues += m.entregues||0;
+    periodMap[pl].opens     += m.opens||0;
   });
+  const periods = Object.values(periodMap).sort((a,b)=>a.period.localeCompare(b.period));
+  if (document.getElementById('rdsVolumeByPeriodChart') && periods.length > 0) {
+    chartRegistry.rdsVolumeByPeriodChart = new Chart(document.getElementById('rdsVolumeByPeriodChart'), {
+      type:'bar',
+      data:{
+        labels: periods.map(p=>p.period),
+        datasets:[
+          { label:'Entregues', data:periods.map(p=>p.entregues), backgroundColor:'rgba(139,92,246,0.6)', borderColor:'#8B5CF6', borderWidth:2, borderRadius:4 },
+          { label:'Abertos',   data:periods.map(p=>p.opens),     backgroundColor:'rgba(78,205,196,0.6)', borderColor:'#4ECDC4', borderWidth:2, borderRadius:4 }
+        ]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:20} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{ position:'top', labels:{...CHART_OPTS.plugins.legend.labels} } }
+      }
+    });
+  }
+  // Top 20 RDS campaigns table
+  const topCamps = (DATA.rdsCampaignsAll||DATA.rdsTopCampaigns||[]).sort((a,b)=>b.opens-a.opens).slice(0,20);
+  const tbody = document.getElementById('rdsTopCampaignsBody');
+  if (tbody) {
+    tbody.innerHTML = topCamps.map((c,i)=>`<tr>
+      <td>${i+1}</td>
+      <td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.name}</td>
+      <td><span class="badge badge-muted" style="font-size:10px;">${c.category||'—'}</span></td>
+      <td>${(c.entregues||0).toLocaleString('pt-BR')}</td>
+      <td style="font-weight:600;color:var(--teal)">${(c.opens||0).toLocaleString('pt-BR')}</td>
+      <td>${(c.clicks||0).toLocaleString('pt-BR')}</td>
+      <td style="color:${(c.open_rate||0)>=20?'var(--green)':'var(--yellow)'}">${(c.open_rate||0).toFixed(1).replace('.',',')}%</td>
+      <td>${(c.ctor||0).toFixed(2).replace('.',',')}%</td>
+    </tr>`).join('');
+  }
 }
 </script>
 
@@ -7596,6 +11531,85 @@ function initTab1Charts() {
 // TAB 2 CHARTS — Tendência & Timing
 // ════════════════════════════════════════════════════════════
 function initTab2Charts() {
+  // RDS Email Monthly chart (14 months, grey for estimated months)
+  destroyChart('rdsEmailMonthlyChart');
+  const rdsMonAll = DATA.rdsEmailMonthly || [];
+  if (document.getElementById('rdsEmailMonthlyChart') && rdsMonAll.length > 0) {
+    const rdsLabels    = rdsMonAll.map(m=>{ const [y,mo]=m.year_month.split('-'); const MON=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return MON[parseInt(mo)-1]+'/'+y.slice(2); });
+    const isEst        = rdsMonAll.map(m=>m.has_estimated||false);
+    const entreguesData= rdsMonAll.map(m=>m.has_estimated?null:(m.entregues||0));
+    const opensData    = rdsMonAll.map(m=>m.opens||0);
+    const orData       = rdsMonAll.map(m=>m.has_estimated?null:(m.open_rate||0));
+    const entreguesBg  = rdsMonAll.map(m=>m.has_estimated?'rgba(100,116,139,0.3)':'rgba(139,92,246,0.55)');
+    const entreguesBdr = rdsMonAll.map(m=>m.has_estimated?'#475569':'#8B5CF6');
+    const opensBg      = rdsMonAll.map(m=>m.has_estimated?'rgba(100,116,139,0.2)':'rgba(78,205,196,0.5)');
+    const opensBdr     = rdsMonAll.map(m=>m.has_estimated?'#475569':'#4ECDC4');
+    chartRegistry.rdsEmailMonthlyChart = new Chart(document.getElementById('rdsEmailMonthlyChart'), {
+      type:'bar',
+      data:{
+        labels: rdsLabels,
+        datasets:[
+          { type:'bar',  label:'Entregues', data:entreguesData, backgroundColor:entreguesBg, borderColor:entreguesBdr, borderWidth:2, borderRadius:4 },
+          { type:'bar',  label:'Abertos',   data:opensData,     backgroundColor:opensBg,     borderColor:opensBdr,     borderWidth:2, borderRadius:4 },
+          { type:'line', label:'Open Rate %',data:orData,       borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.08)', pointBackgroundColor:'#FF6B35', pointRadius:4, tension:0.35, yAxisID:'yR', spanGaps:true }
+        ]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9}} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true },
+          yR:{ position:'right', grid:{display:false}, ticks:{color:'#FF6B35',font:{size:10},callback:v=>v+'%'}, min:0, max:60 }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{ position:'top', labels:{...CHART_OPTS.plugins.legend.labels} },
+          tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ afterTitle:ctx=>{ const i=ctx[0].dataIndex; return isEst[i]?'⚠️ Dados estimados (entregues não disponível)':''; } } }
+        }
+      }
+    });
+  }
+  // RDS CTOR by month
+  destroyChart('rdsCTORChart');
+  const cleanMons = (DATA.rdsEmailMonthly||[]).filter(m=>!m.has_estimated);
+  if (document.getElementById('rdsCTORChart') && cleanMons.length > 0) {
+    const ctorLabels = cleanMons.map(m=>{ const [y,mo]=m.year_month.split('-'); const MON=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return MON[parseInt(mo)-1]+'/'+y.slice(2); });
+    const peakCtor   = cleanMons.reduce((pi,m,i,a)=>m.ctor>a[pi].ctor?i:pi,0);
+    chartRegistry.rdsCTORChart = new Chart(document.getElementById('rdsCTORChart'), {
+      type:'bar',
+      data:{
+        labels: ctorLabels,
+        datasets:[{ label:'CTOR %', data:cleanMons.map(m=>m.ctor||0), backgroundColor:cleanMons.map((_,i)=>i===peakCtor?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:4 }]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9}} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10},callback:v=>v+'%'}, beginAtZero:true }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` CTOR: ${ctx.parsed.y.toFixed(2)}%` } } }
+      }
+    });
+  }
+  // RDS Open Rate by month
+  destroyChart('rdsOpenRateChart');
+  if (document.getElementById('rdsOpenRateChart') && cleanMons.length > 0) {
+    const ctorLabels = cleanMons.map(m=>{ const [y,mo]=m.year_month.split('-'); const MON=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; return MON[parseInt(mo)-1]+'/'+y.slice(2); });
+    chartRegistry.rdsOpenRateChart = new Chart(document.getElementById('rdsOpenRateChart'), {
+      type:'line',
+      data:{
+        labels: ctorLabels,
+        datasets:[{ label:'Open Rate %', data:cleanMons.map(m=>m.open_rate||0), borderColor:'#4ECDC4', backgroundColor:'rgba(78,205,196,0.1)', pointBackgroundColor:'#4ECDC4', pointRadius:4, tension:0.35, fill:true }]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9}} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10},callback:v=>v+'%'}, beginAtZero:true }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` Open Rate: ${ctx.parsed.y.toFixed(1)}%` } } }
+      }
+    });
+  }
+
   // Monthly evolution (multi-line) — real GA4 sessions data
   destroyChart('rdEvolutionChart');
   const rds = getFilteredData(DATA.rdMonthly);
@@ -7697,15 +11711,76 @@ function initTab2Charts() {
 }
 
 // ════════════════════════════════════════════════════════════
-// TAB 3 CHARTS — Páginas & Comportamento
+// TAB 3 CHARTS — Canais & Captação
 // ════════════════════════════════════════════════════════════
 function initTab3Charts() {
+  // RDS Channel Visits bar
+  destroyChart('rdsChannelVisitsChart');
+  const rdsChansAll = DATA.rdsChannels || [];
+  const chColors = {'organica':'#10B981','direto':'#3B82F6','email':'#FF6B35','referencia':'#8B5CF6','outros':'#F59E0B','social':'#EC4899','pago':'#06B6D4','busca_paga':'#06B6D4'};
+  if (document.getElementById('rdsChannelVisitsChart') && rdsChansAll.length > 0) {
+    chartRegistry.rdsChannelVisitsChart = new Chart(document.getElementById('rdsChannelVisitsChart'), {
+      type:'bar',
+      data:{
+        labels: rdsChansAll.map(c=>c.channel),
+        datasets:[{ label:'Visitas', data:rdsChansAll.map(c=>c.visits), backgroundColor:rdsChansAll.map(c=>hexAlpha(chColors[c.channel_key]||'#64748B',0.7)), borderColor:rdsChansAll.map(c=>chColors[c.channel_key]||'#64748B'), borderWidth:2, borderRadius:6 }]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:20} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} visitas (${rdsChansAll[ctx.dataIndex]?.visit_share}%)` } } }
+      }
+    });
+  }
+  // RDS Conversions bar
+  destroyChart('rdsConversionsChart');
+  if (document.getElementById('rdsConversionsChart') && rdsChansAll.length > 0) {
+    chartRegistry.rdsConversionsChart = new Chart(document.getElementById('rdsConversionsChart'), {
+      type:'bar',
+      data:{
+        labels: rdsChansAll.map(c=>c.channel),
+        datasets:[{ label:'Conversões', data:rdsChansAll.map(c=>c.conversoes||0), backgroundColor:rdsChansAll.map(c=>hexAlpha(chColors[c.channel_key]||'#64748B',0.7)), borderColor:rdsChansAll.map(c=>chColors[c.channel_key]||'#64748B'), borderWidth:2, borderRadius:6 }]
+      },
+      options:{
+        ...CHART_OPTS,
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:20} },
+          y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
+        },
+        plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} conversões (${rdsChansAll[ctx.dataIndex]?.conv_rate}%)` } } }
+      }
+    });
+  }
+  // Forms table
+  const formsTbody = document.getElementById('rdsFormsTableBody');
+  if (formsTbody) {
+    const formsPeriods = DATA.rdsFormsByPeriod || [];
+    const totalVis  = formsPeriods.reduce((a,b)=>a+(b.mailing_visitors||0),0);
+    const totalLeds = formsPeriods.reduce((a,b)=>a+(b.mailing_leads||0),0);
+    formsTbody.innerHTML = formsPeriods.map(fp=>{
+      const convRate = fp.mailing_visitors > 0 ? (fp.mailing_leads/fp.mailing_visitors*100).toFixed(2) : '0';
+      return `<tr><td>${fp.period}</td><td>${(fp.mailing_visitors||0).toLocaleString('pt-BR')}</td><td style="font-weight:600;color:var(--teal)">${(fp.mailing_leads||0).toLocaleString('pt-BR')}</td><td>${convRate}%</td></tr>`;
+    }).join('') + `<tr style="background:rgba(78,205,196,0.07);font-weight:600;"><td>TOTAL</td><td>${totalVis.toLocaleString('pt-BR')}</td><td style="color:var(--teal)">${totalLeds.toLocaleString('pt-BR')}</td><td>${totalVis>0?(totalLeds/totalVis*100).toFixed(2):'0'}%</td></tr>`;
+  }
+  // LPs table
+  const lpsTbody = document.getElementById('rdsLPsTableBody');
+  if (lpsTbody) {
+    const lps = (DATA.rdsLandingPagesActive||[]).sort((a,b)=>(b.visitors||0)-(a.visitors||0)).slice(0,15);
+    lpsTbody.innerHTML = lps.map((lp,i)=>{
+      const vis  = lp.visitors||0;
+      const leds = lp.leads||0;
+      const rate = vis > 0 ? (leds/vis*100).toFixed(1) : '0';
+      const name = (lp.name||lp.title||'—').length > 50 ? (lp.name||lp.title).slice(0,50)+'…' : (lp.name||lp.title||'—');
+      return `<tr><td>${i+1}</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</td><td style="font-weight:600">${vis.toLocaleString('pt-BR')}</td><td style="color:var(--teal)">${leds.toLocaleString('pt-BR')}</td><td>${rate}%</td></tr>`;
+    }).join('');
+  }
+  // GA4 secondary: Page duration + Devices
   const pageSF = getScaleFactor();
   const scaledPages   = DATA.landingPages.map(p=>({...p, sessions:Math.round(p.sessions*pageSF), users:Math.round(p.users*pageSF)}));
   const scaledDevices = DATA.devices.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
-  const scaledEvents  = DATA.events.map(e=>({...e, count:Math.round(e.count*pageSF)}));
-  const scaledGa4Days  = DATA.ga4Days.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
-  const scaledGa4Hours = DATA.ga4Hours.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
   // Page duration horizontal bar
   destroyChart('pageDurationChart');
   const pageLabels = scaledPages.map(p => p.title.length > 22 ? p.title.substring(0,22)+'…' : p.title);
@@ -7746,60 +11821,6 @@ function initTab3Charts() {
     }
   });
 
-  // Events bar — scaled
-  destroyChart('eventsChart');
-  chartRegistry.eventsChart = new Chart(document.getElementById('eventsChart'), {
-    type:'bar',
-    data:{
-      labels: scaledEvents.map(e=>e.name),
-      datasets:[{ label:'Eventos', data:scaledEvents.map(e=>e.count), backgroundColor:scaledEvents.map(e=>hexAlpha(e.color,0.75)), borderColor:scaledEvents.map(e=>e.color), borderWidth:2, borderRadius:6 }]
-    },
-    options:{
-      ...CHART_OPTS,
-      scales:{
-        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:9},maxRotation:30} },
-        y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
-      },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} eventos` } } }
-    }
-  });
-
-  // GA4 Days — scaled
-  destroyChart('ga4DaysChart');
-  const peakDayIdx = scaledGa4Days.reduce((pi,d,i,a)=>d.sessions>a[pi].sessions?i:pi,0);
-  chartRegistry.ga4DaysChart = new Chart(document.getElementById('ga4DaysChart'), {
-    type:'bar',
-    data:{
-      labels: scaledGa4Days.map(d=>d.day),
-      datasets:[{ label:'Sessões GA4', data:scaledGa4Days.map(d=>d.sessions), backgroundColor:scaledGa4Days.map((_,i)=>i===peakDayIdx?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
-    },
-    options:{
-      ...CHART_OPTS,
-      scales:{
-        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:11,weight:'600'}} },
-        y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
-      },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
-    }
-  });
-
-  // GA4 Hours — scaled
-  destroyChart('ga4HoursChart');
-  chartRegistry.ga4HoursChart = new Chart(document.getElementById('ga4HoursChart'), {
-    type:'bar',
-    data:{
-      labels: scaledGa4Hours.map(d=>d.hour),
-      datasets:[{ label:'Sessões GA4', data:scaledGa4Hours.map(d=>d.sessions), backgroundColor:scaledGa4Hours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
-    },
-    options:{
-      ...CHART_OPTS,
-      scales:{
-        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
-        y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
-      },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
-    }
-  });
 }
 </script>
 
