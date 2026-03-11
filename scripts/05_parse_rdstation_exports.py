@@ -241,6 +241,48 @@ def aggregate_channels_total(channel_records: list[dict]) -> list[dict]:
     result.sort(key=lambda x: x["visits"], reverse=True)
     return result
 
+# ── CAMPAIGN CATEGORIES (RDS-based) ───────────────────────────────────────────
+
+def categorize_rds(name: str) -> str:
+    n = name.lower()
+    if any(k in n for k in ["adtech", "ia summit", "forum", "fórum", "bsb", "evento", "eventos", "régua"]):
+        return "Eventos"
+    elif any(k in n for k in ["relgov", "boletim de transparência", "relações governamentais"]):
+        return "RelGov"
+    elif any(k in n for k in ["curso", "masterclass", "certif", "educação", "in company"]):
+        return "Educação"
+    elif any(k in n for k in ["media solutions", "iab media"]):
+        return "Mídia Solutions"
+    elif any(k in n for k in ["iab news", "iab trends", "data stories", "radar iab", "follow iab",
+                               "newsletter", "institucional", "associação", "patrocínio"]):
+        return "Institucional / Newsletter"
+    else:
+        return "Outros"
+
+def aggregate_campaign_categories(emails: list[dict]) -> list[dict]:
+    """Aggregate emails by RDS category — opens, clicks, campaigns count."""
+    agg: dict[str, dict] = defaultdict(lambda: {
+        "name": "", "campaigns": 0, "selecionados": 0, "entregues": 0,
+        "opens": 0, "clicks": 0
+    })
+    for e in emails:
+        cat = e.get("category", "Outros")
+        agg[cat]["name"]         = cat
+        agg[cat]["campaigns"]   += 1
+        agg[cat]["selecionados"]+= e["selecionados"]
+        agg[cat]["entregues"]   += e["entregues"]
+        agg[cat]["opens"]       += e["opens"]
+        agg[cat]["clicks"]      += e["clicks"]
+
+    result = []
+    for d in agg.values():
+        denom = d["entregues"] if d["entregues"] > 0 else d["selecionados"]
+        d["open_rate"] = pct(d["opens"],  denom)
+        d["ctor"]      = pct(d["clicks"], d["opens"]) if d["opens"] else 0.0
+        result.append(d)
+    result.sort(key=lambda x: x["opens"], reverse=True)
+    return result
+
 # ── FORMS ─────────────────────────────────────────────────────────────────────
 
 def parse_forms_latest() -> list[dict]:
@@ -261,6 +303,38 @@ def parse_forms_latest() -> list[dict]:
         })
     result.sort(key=lambda x: x["visitors"], reverse=True)
     return result
+
+def parse_forms_by_period() -> list[dict]:
+    """Parse all forms across all periods, returning per-period lead counts."""
+    MAILING_KEY = "mailing home site"
+    result = []
+    totals_by_form: dict[str, dict] = defaultdict(lambda: {
+        "visitors": 0, "leads": 0
+    })
+    for period in PERIODS:
+        path = find_csv(period, "forms")
+        if not path:
+            continue
+        period_leads     = 0
+        period_visitors  = 0
+        for row in read_csv(path):
+            name = row.get("Nome do formulário", "").strip()
+            if not name:
+                continue
+            v = safe_int(row.get("Visitantes"))
+            l = safe_int(row.get("Leads"))
+            totals_by_form[name]["visitors"] += v
+            totals_by_form[name]["leads"]    += l
+            if MAILING_KEY in name.lower():
+                period_leads    += l
+                period_visitors += v
+        result.append({
+            "period":            period,
+            "mailing_visitors":  period_visitors,
+            "mailing_leads":     period_leads,
+        })
+    # Attach grand totals
+    return result, dict(totals_by_form)
 
 # ── LANDING PAGES ─────────────────────────────────────────────────────────────
 
@@ -343,9 +417,11 @@ def main():
     print("  RD Station Marketing — CSV Exports Parser")
     print("=" * 60)
 
-    # 1. Emails
+    # 1. Emails — add category field to each campaign
     print("\n📧 Parsing email campaigns...")
     emails = parse_emails()
+    for e in emails:
+        e["category"] = categorize_rds(e["name"])
     monthly = aggregate_monthly(emails)
     totals  = compute_totals(emails)
     print(f"   → {totals['total_campaigns']} unique campaigns")
@@ -353,12 +429,17 @@ def main():
     print(f"   → Avg open rate: {totals['avg_open_rate']:.1f}%")
     print(f"   → Avg CTR: {totals['avg_ctr']:.2f}%  |  CTOR: {totals['avg_ctor']:.2f}%")
 
-    # 2. Top campaigns (by opens, excluding estimated-delivery rows)
-    clean_emails  = [e for e in emails if e["data_quality"] == "ok"]
-    top_campaigns = sorted(clean_emails, key=lambda e: e["opens"], reverse=True)[:20]
+    # 2. Top 20 campaigns (by opens, all campaigns including estimated)
+    top_campaigns = sorted(emails, key=lambda e: e["opens"], reverse=True)[:20]
     print(f"\n🏆 Top 20 campaigns by opens captured")
 
-    # 3. Channels
+    # 3. Campaign categories (RDS-based)
+    campaign_categories = aggregate_campaign_categories(emails)
+    print(f"\n🏷️  Campaign categories:")
+    for cat in campaign_categories:
+        print(f"   {cat['name']:<28}: {cat['campaigns']:>3} camps | {cat['opens']:>6,} opens | {cat['open_rate']:.1f}% OR")
+
+    # 4. Channels
     print("\n📊 Parsing channel analysis...")
     channel_records  = parse_channel_analysis()
     channels_total   = aggregate_channels_total(channel_records)
@@ -367,14 +448,25 @@ def main():
         if c["visits"] > 0:
             print(f"     {c['channel']:<22}: {c['visits']:>7,} visitas ({c['visit_share']:.1f}%)")
 
-    # 4. Forms
-    print("\n📋 Parsing forms (latest period)...")
+    # 5. Forms
+    print("\n📋 Parsing forms (latest period + by period)...")
     forms = parse_forms_latest()
+    forms_by_period, forms_totals_by_name = parse_forms_by_period()
     total_form_leads    = sum(f["leads"]    for f in forms)
     total_form_visitors = sum(f["visitors"] for f in forms)
+    total_mailing_leads = sum(p["mailing_leads"] for p in forms_by_period)
     print(f"   → {len(forms)} forms, {total_form_visitors:,} visitors, {total_form_leads:,} leads")
+    print(f"   → Mailing Home Site leads (all periods): {total_mailing_leads:,}")
 
-    # 5. Landing pages
+    # Aggregate all forms across all periods for complete totals
+    forms_all_periods = []
+    for name, d in forms_totals_by_name.items():
+        d["name"] = name
+        d["conv_rate"] = pct(d["leads"], d["visitors"]) if d["visitors"] else 0.0
+        forms_all_periods.append(d)
+    forms_all_periods.sort(key=lambda x: x["visitors"], reverse=True)
+
+    # 6. Landing pages
     print("\n🌐 Parsing landing pages (cumulative)...")
     landing_pages = parse_landing_pages_all()
     total_lp_visitors = sum(lp["visitors"] for lp in landing_pages)
@@ -390,17 +482,21 @@ def main():
             "total_emails": totals["total_campaigns"],
             "data_quality_note": (
                 "Jan/Feb 2025 exports have Entregues=0 (RD Station export bug). "
-                "Open/click rate KPIs use only Mar 2025–Feb 2026 where Entregues > 0."
+                "Open/click rate KPIs use only Mar 2025–Feb 2026 where Entregues > 0. "
+                "Jan/Feb 2025 shown in charts with visual indicator (has_estimated=True)."
             ),
         },
-        "totals":          totals,
-        "email_monthly":   monthly,
-        "emails":          emails,
-        "top_campaigns":   top_campaigns,
-        "channels":        channels_total,
-        "channel_by_period": channel_records,
-        "forms":           forms,
-        "landing_pages":   landing_pages,
+        "totals":              totals,
+        "email_monthly":       monthly,
+        "emails":              emails,
+        "top_campaigns":       top_campaigns,
+        "campaign_categories": campaign_categories,
+        "channels":            channels_total,
+        "channel_by_period":   channel_records,
+        "forms":               forms,
+        "forms_all_periods":   forms_all_periods,
+        "forms_by_period":     forms_by_period,
+        "landing_pages":       landing_pages,
     }
 
     out_path = DATA_DIR / "rdstation_email_exports.json"
@@ -415,13 +511,15 @@ def main():
     print(f"  Period:         {totals['period_start']} → {totals['period_end']}")
     print(f"  Campaigns:      {totals['total_campaigns']}")
     print(f"  Max list size:  {totals['max_list_size']:,} leads")
-    print(f"  Total opens:    {totals['total_opens']:,}")
+    print(f"  Total opens:    {totals['total_opens']:,} (all 14 months)")
     print(f"  Total clicks:   {totals['total_clicks']:,}")
-    print(f"  Avg open rate:  {totals['avg_open_rate']:.1f}%  (Mar 2025–Feb 2026)")
+    print(f"  Avg open rate:  {totals['avg_open_rate']:.1f}%  (Mar 2025–Feb 2026 clean)")
     print(f"  Avg CTR:        {totals['avg_ctr']:.2f}%")
     print(f"  Avg CTOR:       {totals['avg_ctor']:.2f}%")
     print(f"  Avg delivery:   {totals['avg_delivery_rate']:.1f}%")
     print(f"  Total unsubs:   {totals['total_unsub']:,}")
+    print(f"  Forms leads (Mailing, all periods): {total_mailing_leads:,}")
+    print(f"  Landing pages active: {len(landing_pages):,} ({total_lp_visitors:,} visitors)")
 
     return output
 

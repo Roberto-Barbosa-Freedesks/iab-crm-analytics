@@ -394,11 +394,17 @@ DATA = {
     "jobTitles": jobTitles,
     "funnels": funnels_data,
 
-    # RD Station Marketing — Email CSV exports (real data: opens, clicks, rates)
-    "rdsEmailMonthly":   rds_email_exports.get("email_monthly", []),
-    "rdsTopCampaigns":   rds_email_exports.get("top_campaigns", [])[:15],
-    "rdsChannels":       rds_email_exports.get("channels", []),
-    "rdsTotals":         rds_email_exports.get("totals", {}),
+    # RD Station Marketing — Email CSV exports (100% real data from manual exports)
+    "rdsEmailMonthly":      rds_email_exports.get("email_monthly", []),
+    "rdsTopCampaigns":      rds_email_exports.get("top_campaigns", []),   # top 20 by opens
+    "rdsCampaignCategories": rds_email_exports.get("campaign_categories", []),
+    "rdsCampaignsAll":      rds_email_exports.get("emails", []),          # all 157
+    "rdsChannels":          rds_email_exports.get("channels", []),
+    "rdsChannelByPeriod":   rds_email_exports.get("channel_by_period", []),
+    "rdsTotals":            rds_email_exports.get("totals", {}),
+    "rdsFormsByPeriod":     rds_email_exports.get("forms_by_period", []),
+    "rdsFormsAllPeriods":   rds_email_exports.get("forms_all_periods", []),
+    "rdsLandingPagesActive": rds_email_exports.get("landing_pages", [])[:20],
 
     # RD Station Marketing — list assets (analytics endpoints locked at current plan)
     "rdsWorkflows": [
