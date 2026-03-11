@@ -490,7 +490,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   <div class="mini-kpi-row">
     <div class="mini-kpi">
       <div class="mini-kpi-label">Total Campanhas</div>
-      <div class="mini-kpi-value" style="color:var(--orange)">200+</div>
+      <div class="mini-kpi-value" style="color:var(--orange)" data-metric="camp-total">188</div>
       <div class="mini-kpi-sub">Rastreadas no período</div>
     </div>
     <div class="mini-kpi">
@@ -500,18 +500,18 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </div>
     <div class="mini-kpi">
       <div class="mini-kpi-label">AdTech & Branding</div>
-      <div class="mini-kpi-value" style="color:var(--blue)">43%</div>
+      <div class="mini-kpi-value" style="color:var(--blue)" data-metric="camp-adtech-pct">43%</div>
       <div class="mini-kpi-sub">Das sessões email</div>
     </div>
     <div class="mini-kpi">
       <div class="mini-kpi-label">Newsletter</div>
-      <div class="mini-kpi-value" style="color:var(--purple)">22%</div>
+      <div class="mini-kpi-value" style="color:var(--purple)" data-metric="camp-newsletter-pct">22%</div>
       <div class="mini-kpi-sub">Das sessões email</div>
     </div>
     <div class="mini-kpi">
-      <div class="mini-kpi-label">Melhor CTR</div>
-      <div class="mini-kpi-value" style="color:var(--green)">IA Summit</div>
-      <div class="mini-kpi-sub">7,3% CTR médio</div>
+      <div class="mini-kpi-label">Melhor Categoria</div>
+      <div class="mini-kpi-value" style="color:var(--green)" data-metric="camp-best-cat">IA Summit</div>
+      <div class="mini-kpi-sub" data-metric="camp-best-cat-pct">sessões no período</div>
     </div>
   </div>
 
@@ -1432,6 +1432,23 @@ function getFilteredData(arr) {
   return arr.slice(r.start, r.end + 1);
 }
 
+// ── PERIOD SCALE FACTOR ─────────────────────────────────────────────────────
+// For data without date granularity, scale proportionally to the selected period
+function getScaleFactor() {
+  const total    = sumField(DATA.monthlyTrend, 'sessions') || 1;
+  const filtered = sumField(getFilteredData(DATA.monthlyTrend), 'sessions') || 0;
+  return Math.min(filtered / total, 1);
+}
+
+function scaledArr(arr, fields) {
+  const sf = getScaleFactor();
+  return arr.map(item => {
+    const out = {...item};
+    fields.forEach(f => { if (out[f] != null) out[f] = Math.round(out[f] * sf); });
+    return out;
+  });
+}
+
 // ── BI ANALYSIS BOXES ──────────────────────────────────────────────────────
 function biBox(type, title, text) {
   const cls = {desc:'bi-desc', diag:'bi-diag', pred:'bi-pred', presc:'bi-presc'}[type];
@@ -1540,6 +1557,21 @@ function updateAllMetrics() {
   setMetric('total-aberturas',  fmtNum(abertos));
   setMetric('email-sessions',   fmtNum(sessoes));
   setMetric('taxa-abertura-sub',((abertos/entregues)*100).toFixed(1) + '% taxa de abertura');
+  // Bounce rate (weighted avg)
+  const avgBounce = ga4.length > 0 ? (ga4.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4.length).toFixed(1) : '0';
+  setMetric('bounce-rate', avgBounce+'%');
+  // Tab 1 mini-KPIs — campaign category shares (scaled proportionally)
+  const sf = getScaleFactor();
+  const scaledCats   = DATA.campaignCategories.map(c=>({...c, sessions: Math.round(c.sessions*sf)}));
+  const totalCatSess = scaledCats.reduce((a,b)=>a+b.sessions,0) || 1;
+  const adtechCat    = scaledCats.find(c=>c.name.includes('AdTech')||c.name.includes('Branding')) || {sessions:0};
+  const newsCat      = scaledCats.find(c=>c.name.toLowerCase().includes('newsletter')||c.name.toLowerCase().includes('news')) || {sessions:0};
+  const topCat       = [...scaledCats].sort((a,b)=>b.sessions-a.sessions)[0] || {name:'—',sessions:0};
+  setMetric('camp-total',           DATA.campaigns.length.toString());
+  setMetric('camp-adtech-pct',      Math.round(adtechCat.sessions/totalCatSess*100)+'%');
+  setMetric('camp-newsletter-pct',  Math.round(newsCat.sessions/totalCatSess*100)+'%');
+  setMetric('camp-best-cat',        topCat.name);
+  setMetric('camp-best-cat-pct',    fmtNum(topCat.sessions)+' sessões no período');
   // Update funnel
   buildEmailFunnel(enviados, entregues, abertos, clicados);
 }
@@ -1660,10 +1692,12 @@ function shortName(name) {
 }
 
 function buildCampaignsTable() {
+  const tblSF = getScaleFactor();
+  const scaledCamps = DATA.campaigns.map(c=>({...c, sessions:Math.round(c.sessions*tblSF), users:Math.round(c.users*tblSF), engaged:Math.round(c.engaged*tblSF)}));
   // GA4 table
   const ga4Body = document.getElementById('campaignsGA4Body');
   if (ga4Body) {
-    ga4Body.innerHTML = DATA.campaigns.map((c,i) => {
+    ga4Body.innerHTML = scaledCamps.map((c,i) => {
       const cc = CAT_COLORS[c.category]||'#64748B';
       const br = c.bounce_rate > 10 ? 'color:var(--yellow)' : c.bounce_rate < 5 ? 'color:var(--green)' : 'color:var(--text)';
       return `<tr>
@@ -1681,7 +1715,7 @@ function buildCampaignsTable() {
   // RD Station estimated table
   const rdsBody = document.getElementById('campaignsRDSBody');
   if (rdsBody) {
-    rdsBody.innerHTML = DATA.campaigns.map((c,i) => {
+    rdsBody.innerHTML = scaledCamps.map((c,i) => {
       const enviados  = Math.round(c.sessions * 5.2);
       const entregues = Math.round(enviados * 0.98);
       const abertos   = Math.round(entregues * 0.32);
@@ -1705,7 +1739,9 @@ function buildCampaignsTable() {
 function buildPagesTable() {
   const tbody = document.getElementById('pagesTableBody');
   if (!tbody) return;
-  tbody.innerHTML = DATA.landingPages.map((p,i) => {
+  const pgSF = getScaleFactor();
+  const scaledLP = DATA.landingPages.map(p=>({...p, sessions:Math.round(p.sessions*pgSF), users:Math.round(p.users*pgSF)}));
+  tbody.innerHTML = scaledLP.map((p,i) => {
     const br = p.bounce_rate > 8 ? 'color:var(--yellow)' : p.bounce_rate === 0 ? 'color:var(--green)' : 'color:var(--text)';
     return `<tr>
       <td style="color:var(--muted);font-weight:700">${i+1}</td>
@@ -1889,20 +1925,23 @@ function initTab0Charts() {
     }
   });
 
-  // Channel Donut
+  // Channel Donut — scale all channels proportionally to selected period
   destroyChart('channelDonutChart');
+  const chSF = getScaleFactor();
+  const filtChans = DATA.channels.map(c => ({...c, sessions: Math.round(c.sessions * chSF)}));
+  const filtTotalSess = filtChans.reduce((a,b)=>a+b.sessions,0)||1;
   chartRegistry.channelDonutChart = new Chart(document.getElementById('channelDonutChart'), {
     type:'doughnut',
     data:{
-      labels: DATA.channels.map(c=>c.name),
-      datasets:[{ data:DATA.channels.map(c=>c.sessions), backgroundColor:DATA.channels.map(c=>c.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
+      labels: filtChans.map(c=>c.name),
+      datasets:[{ data:filtChans.map(c=>c.sessions), backgroundColor:filtChans.map(c=>c.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
     },
     options:{
       ...CHART_OPTS, cutout:'62%',
       plugins:{
         ...CHART_OPTS.plugins,
         legend:{ position:'bottom', labels:{...CHART_OPTS.plugins.legend.labels,padding:8} },
-        tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.parsed.toLocaleString('pt-BR')} (${DATA.channels[ctx.dataIndex].share}%)` } }
+        tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.parsed.toLocaleString('pt-BR')} (${Math.round(filtChans[ctx.dataIndex].sessions/filtTotalSess*100)}%)` } }
       }
     }
   });
@@ -1961,14 +2000,16 @@ function initTab0Charts() {
 // TAB 1 CHARTS — Campanhas & UTM
 // ════════════════════════════════════════════════════════════
 function initTab1Charts() {
-  // Category sessions bar
+  // Category sessions bar — scaled to selected period
   destroyChart('catSessionsChart');
+  const catSF = getScaleFactor();
+  const scaledCatData = DATA.campaignCategories.map(c=>({...c, sessions: Math.round(c.sessions*catSF)}));
   chartRegistry.catSessionsChart = new Chart(document.getElementById('catSessionsChart'), {
     type:'bar',
     data:{
-      labels: DATA.campaignCategories.map(c=>c.name),
+      labels: scaledCatData.map(c=>c.name),
       datasets:[
-        { label:'Sessões GA4', data:DATA.campaignCategories.map(c=>c.sessions), backgroundColor:DATA.campaignCategories.map(c=>hexAlpha(c.color,0.7)), borderColor:DATA.campaignCategories.map(c=>c.color), borderWidth:2, borderRadius:6 }
+        { label:'Sessões GA4', data:scaledCatData.map(c=>c.sessions), backgroundColor:scaledCatData.map(c=>hexAlpha(c.color,0.7)), borderColor:scaledCatData.map(c=>c.color), borderWidth:2, borderRadius:6 }
       ]
     },
     options:{
@@ -1981,13 +2022,13 @@ function initTab1Charts() {
     }
   });
 
-  // Category donut
+  // Category donut — scaled to selected period
   destroyChart('catDonutChart');
   chartRegistry.catDonutChart = new Chart(document.getElementById('catDonutChart'), {
     type:'doughnut',
     data:{
-      labels: DATA.campaignCategories.map(c=>c.name),
-      datasets:[{ data:DATA.campaignCategories.map(c=>c.sessions), backgroundColor:DATA.campaignCategories.map(c=>c.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
+      labels: scaledCatData.map(c=>c.name),
+      datasets:[{ data:scaledCatData.map(c=>c.sessions), backgroundColor:scaledCatData.map(c=>c.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
     },
     options:{
       ...CHART_OPTS, cutout:'60%',
@@ -2029,13 +2070,16 @@ function initTab2Charts() {
     }
   });
 
-  // Days of week — Opens
+  // Days of week — Opens (scaled to selected period)
+  const timingSF = getScaleFactor();
+  const scaledDays  = DATA.rdOpensByDay.map(d=>({...d, opens:Math.round(d.opens*timingSF), clicks:Math.round(d.clicks*timingSF)}));
+  const scaledHours = DATA.rdOpensByHour.map(d=>({...d, opens:Math.round(d.opens*timingSF), clicks:Math.round(d.clicks*timingSF)}));
   destroyChart('rdDaysOpenChart');
   chartRegistry.rdDaysOpenChart = new Chart(document.getElementById('rdDaysOpenChart'), {
     type:'bar',
     data:{
-      labels: DATA.rdOpensByDay.map(d=>d.day),
-      datasets:[{ label:'Aberturas', data:DATA.rdOpensByDay.map(d=>d.opens), backgroundColor:DATA.rdOpensByDay.map((_,i)=>i===0?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
+      labels: scaledDays.map(d=>d.day),
+      datasets:[{ label:'Aberturas', data:scaledDays.map(d=>d.opens), backgroundColor:scaledDays.map((_,i)=>i===0?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2052,8 +2096,8 @@ function initTab2Charts() {
   chartRegistry.rdDaysClickChart = new Chart(document.getElementById('rdDaysClickChart'), {
     type:'bar',
     data:{
-      labels: DATA.rdOpensByDay.map(d=>d.day),
-      datasets:[{ label:'Cliques', data:DATA.rdOpensByDay.map(d=>d.clicks), backgroundColor:DATA.rdOpensByDay.map((_,i)=>i===0?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledDays.map(d=>d.day),
+      datasets:[{ label:'Cliques', data:scaledDays.map(d=>d.clicks), backgroundColor:scaledDays.map((_,i)=>i===0?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2070,8 +2114,8 @@ function initTab2Charts() {
   chartRegistry.rdHoursOpenChart = new Chart(document.getElementById('rdHoursOpenChart'), {
     type:'bar',
     data:{
-      labels: DATA.rdOpensByHour.map(d=>d.hour),
-      datasets:[{ label:'Aberturas', data:DATA.rdOpensByHour.map(d=>d.opens), backgroundColor:DATA.rdOpensByHour.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
+      labels: scaledHours.map(d=>d.hour),
+      datasets:[{ label:'Aberturas', data:scaledHours.map(d=>d.opens), backgroundColor:scaledHours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2088,8 +2132,8 @@ function initTab2Charts() {
   chartRegistry.rdHoursClickChart = new Chart(document.getElementById('rdHoursClickChart'), {
     type:'bar',
     data:{
-      labels: DATA.rdOpensByHour.map(d=>d.hour),
-      datasets:[{ label:'Cliques', data:DATA.rdOpensByHour.map(d=>d.clicks), backgroundColor:DATA.rdOpensByHour.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledHours.map(d=>d.hour),
+      datasets:[{ label:'Cliques', data:scaledHours.map(d=>d.clicks), backgroundColor:scaledHours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2106,15 +2150,21 @@ function initTab2Charts() {
 // TAB 3 CHARTS — Páginas & Comportamento
 // ════════════════════════════════════════════════════════════
 function initTab3Charts() {
+  const pageSF = getScaleFactor();
+  const scaledPages   = DATA.landingPages.map(p=>({...p, sessions:Math.round(p.sessions*pageSF), users:Math.round(p.users*pageSF)}));
+  const scaledDevices = DATA.devices.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
+  const scaledEvents  = DATA.events.map(e=>({...e, count:Math.round(e.count*pageSF)}));
+  const scaledGa4Days  = DATA.ga4Days.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
+  const scaledGa4Hours = DATA.ga4Hours.map(d=>({...d, sessions:Math.round(d.sessions*pageSF)}));
   // Page duration horizontal bar
   destroyChart('pageDurationChart');
-  const pageLabels = DATA.landingPages.map(p => p.title.length > 22 ? p.title.substring(0,22)+'…' : p.title);
+  const pageLabels = scaledPages.map(p => p.title.length > 22 ? p.title.substring(0,22)+'…' : p.title);
   const durationGradient = ['#FF6B35','#FF8C42','#FFA64D','#FFB861','#FFCA75','#10B981','#10B981','#4ECDC4','#4ECDC4','#3B82F6'];
   chartRegistry.pageDurationChart = new Chart(document.getElementById('pageDurationChart'), {
     type:'bar',
     data:{
       labels: pageLabels,
-      datasets:[{ label:'Duração Média (s)', data:DATA.landingPages.map(p=>p.avg_duration), backgroundColor:durationGradient.map(c=>hexAlpha(c,0.75)), borderColor:durationGradient, borderWidth:2, borderRadius:6 }]
+      datasets:[{ label:'Duração Média (s)', data:scaledPages.map(p=>p.avg_duration), backgroundColor:durationGradient.map(c=>hexAlpha(c,0.75)), borderColor:durationGradient, borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2127,13 +2177,14 @@ function initTab3Charts() {
     }
   });
 
-  // Devices donut
+  // Devices donut — scaled
   destroyChart('devicesChart');
+  const devTotal = scaledDevices.reduce((a,b)=>a+b.sessions,0)||1;
   chartRegistry.devicesChart = new Chart(document.getElementById('devicesChart'), {
     type:'doughnut',
     data:{
-      labels: DATA.devices.map(d=>d.name+' ('+d.share+'%)'),
-      datasets:[{ data:DATA.devices.map(d=>d.sessions), backgroundColor:DATA.devices.map(d=>d.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
+      labels: scaledDevices.map(d=>d.name+' ('+Math.round(d.sessions/devTotal*100)+'%)'),
+      datasets:[{ data:scaledDevices.map(d=>d.sessions), backgroundColor:scaledDevices.map(d=>d.color), borderColor:'#1E293B', borderWidth:3, hoverOffset:6 }]
     },
     options:{
       ...CHART_OPTS, cutout:'62%',
@@ -2145,13 +2196,13 @@ function initTab3Charts() {
     }
   });
 
-  // Events bar
+  // Events bar — scaled
   destroyChart('eventsChart');
   chartRegistry.eventsChart = new Chart(document.getElementById('eventsChart'), {
     type:'bar',
     data:{
-      labels: DATA.events.map(e=>e.name),
-      datasets:[{ label:'Eventos', data:DATA.events.map(e=>e.count), backgroundColor:DATA.events.map(e=>hexAlpha(e.color,0.75)), borderColor:DATA.events.map(e=>e.color), borderWidth:2, borderRadius:6 }]
+      labels: scaledEvents.map(e=>e.name),
+      datasets:[{ label:'Eventos', data:scaledEvents.map(e=>e.count), backgroundColor:scaledEvents.map(e=>hexAlpha(e.color,0.75)), borderColor:scaledEvents.map(e=>e.color), borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2163,13 +2214,14 @@ function initTab3Charts() {
     }
   });
 
-  // GA4 Days
+  // GA4 Days — scaled
   destroyChart('ga4DaysChart');
+  const peakDayIdx = scaledGa4Days.reduce((pi,d,i,a)=>d.sessions>a[pi].sessions?i:pi,0);
   chartRegistry.ga4DaysChart = new Chart(document.getElementById('ga4DaysChart'), {
     type:'bar',
     data:{
-      labels: DATA.ga4Days.map(d=>d.day),
-      datasets:[{ label:'Sessões GA4', data:DATA.ga4Days.map(d=>d.sessions), backgroundColor:DATA.ga4Days.map((_,i)=>i===0?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledGa4Days.map(d=>d.day),
+      datasets:[{ label:'Sessões GA4', data:scaledGa4Days.map(d=>d.sessions), backgroundColor:scaledGa4Days.map((_,i)=>i===peakDayIdx?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2181,13 +2233,13 @@ function initTab3Charts() {
     }
   });
 
-  // GA4 Hours
+  // GA4 Hours — scaled
   destroyChart('ga4HoursChart');
   chartRegistry.ga4HoursChart = new Chart(document.getElementById('ga4HoursChart'), {
     type:'bar',
     data:{
-      labels: DATA.ga4Hours.map(d=>d.hour),
-      datasets:[{ label:'Sessões GA4', data:DATA.ga4Hours.map(d=>d.sessions), backgroundColor:DATA.ga4Hours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledGa4Hours.map(d=>d.hour),
+      datasets:[{ label:'Sessões GA4', data:scaledGa4Hours.map(d=>d.sessions), backgroundColor:scaledGa4Hours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.85)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2286,11 +2338,16 @@ function initTab4Charts() {
 // REFRESH CHARTS — called when period filter changes
 // ════════════════════════════════════════════════════════════
 function refreshCharts() {
-  // Always refresh Tab 0 charts (visible by default or if active)
   const activeIdx = [...document.querySelectorAll('.tab-panel')].findIndex(p=>p.classList.contains('active'));
-  // Destroy period-sensitive charts
-  ['monthlyTrendChart','rdMonthlyChart','rdEvolutionChart'].forEach(id=>destroyChart(id));
-  // Reinit active tab
+  // Destroy ALL registered charts
+  Object.keys(chartRegistry).forEach(id => destroyChart(id));
+  // Reset tabInited so every tab re-inits with fresh data when next visited
+  Object.keys(tabInited).forEach(k => delete tabInited[k]);
+  // Rebuild period-sensitive tables
+  buildCampaignsTable();
+  buildPagesTable();
+  // Re-init the currently visible tab immediately
+  tabInited[activeIdx] = true;
   initTabCharts(activeIdx);
 }
 
