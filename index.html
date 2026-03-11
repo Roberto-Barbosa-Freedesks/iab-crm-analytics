@@ -23,7 +23,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .site-header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
 .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; flex-wrap: wrap; }
 .header-brand { display: flex; align-items: center; gap: 16px; }
-.header-logo { width: 40px; height: 40px; background: linear-gradient(135deg, var(--orange), #FF8C42); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: white; flex-shrink: 0; }
+.header-logo { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
 .header-titles h1 { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.2; }
 .header-titles p { font-size: 11px; color: var(--muted); font-weight: 400; }
 .header-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -253,7 +253,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 <header class="site-header">
   <div class="header-inner">
     <div class="header-brand">
-      <div class="header-logo">IAB</div>
+      <div class="header-logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABUFBMVEVGQNT///////3///6iod4+N9UrulD///v//vpEQNaJiNbf3vFAOs321Q7///lGQdGNiN04MdP///U7OtFGP9t/ety+veZBOtpGQMawrOBGQc9AOtWtr+lSTcxEP9351wAlwEInuVsrvEjd2PK8ueYrI8wzJ9UxLMh6dt1HPOVCRsJTRtaUi9qSj9hkZdJOPdE7X7I7ep07g5ZAZKqAf9mcnuM6Tbo7m3sqv0c4p29GP8U+U7Q2sVsre5ZTTNJZTsTy7/8yJrdAcqM9lIRnZcx5cN09MOKFgeBQSbI2r2g3J+asrdi/wPg6bqlAjInIyubQzvvT2uVtY9nLwOHKzeTb3P11cMl8dulbWch7eMhjUrGcj3jBql60om6GfItIObjWwEhzW55AQbTu0jxtX5Z/cpn60B1bTZ+8rGdoZZHLtUxfXbW6pW/x2wD/0wCSg3zcf2ZhAAAJF0lEQVR4nO2a/1/bxhnHdZKFOCTurC9G8h2WAdkWYkC6BlJCMiMacNqE1oQERtpkTbaFtd3C/v/fdpKRsB07uIwgfnjeeb2wUU7JffQ893y5kyQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHA3oVhiEnYYcycajiUXU/HJMHNGj3CwZF9gqKqNb26q1wM72HEd514UrUw2nqlcNU1TNY0xj4Q5f1otZ6ytF62Q3nONr/789df3V5wxJhnCqVTnezzf4CNHYHcdZcho077J6V4Dx33wzdTSwtLWw/vRRDeYJZkkaDKqmiNHMAevbHspTNqWJntwXwjmMvzo8cLi1NTU0tTSXyLO6JX3CIU982jKGIWS5NZqUS2lveMV6qUiWHgPFxaXhMKpxYWlB+4EsxEKlc8rxP7ucbx7fOGnm6Nd+ZZwGP92a+nChotTT/gELnW1Qoaj0z1z72Q/oVIr1EtFYH+ytLi4lZhQuOmiJ11txKsVOkyi3PE6tm2uLzNeqJcylz9MXbTH4gORGa/iaoUJ2KzOq/ZTDQXFrkMHs0GFeKJIM4FCx36xxk1U/S4udh1i5j7pU/j9iv9HFI7LFgnM0fc7T9H2s+cH4wfdApRGP0wtpRrFWlz4kTs3ZUOJ6zPNoGF0nh+GNzjh68C+WXicSHw8tbD4yN2+iUiTgM3ncRedRmZQUm9yutfAefBwIVG4tPD9/QhPEBZyhbL8OS+N6Pzha8NnB3uFrkMBdVd+fLy1tTX15CvRMzg3FUsdLwrb7XattlNs1ZbOJaKP7n/7wyPmiEU4yoQY42ySlInhk3lptKcng6bjtaK9lDJRgriG6yfTHzOC0kSmQIQmpk6kkBnd4KTR2G8EV3vFF0a0h27EuevaeFwH7PiG+PsU7uLJFLpUP2mV5sNnL2aKXodSrdJjo3LU18lhbprNZtM0uSgC2hsXYyrLTFL78qFwQKwm45qmOtgGUlffMNfmOsZmo+hsoc6grBmaS0xCKXV8bNBKI4jjOGjMeC2jlje0unFpQ0KqJg93Nrt6HOsvV3cMQ2I0W8he51Wjsxcbze7BXVCYzFiblnsKRauvtqsiGRDFIrJFUGOnLWsXHXufQtElllozgbjTUoilERJsGFFeE/nG8qZqHFs6GrMRcHtcKtQuFEr2pmURIS21rCakVvM9iT6FQnT3lbiNWEo6zNLQ4Wnuqkw6ol4kNQ427KKzxbANJe51hcfKWmo2JbGeJf6MsKEirhINaUQjwp7igUxbcUXFNDUjduJyJNFO052gmP+yDCvktQCNpV/hCKYtNGP21iLmeimkFDM6wcbIbSlMvRSLtSNfU6GwtyafuKlXUmNPX2+1wlZTLXo3cciG5rymaNe1YTIirvF0v5ivvtBiXT/W14reTey3YYu5FUSsfLZK9mOsQosoWhqUkrikEKJMK410k9s3Ng+qBweNxtxfJ9tKvw2FslBoXy5CWRZBxLIGfHZIoUJ630Q8yi/JKG0m7km82bLvqa3WHVqH8hxXN3LziCxnxceHQaxZYxUmw0jcfamLu7MLxEpbXuobq7F4OMF64ecWA+uQz+VrUJNRuR2GYbv0GS9VtONltWUap43M0kQYsYZ7/26j/HQtiE/vUsZveXE+eSs4NX1H5LXwKLbGKJS1OZuLjgu74YxYicnTSZSuRsxhhl4NVdcMg6pxZxQKG+4pJBOI8t5cfY200QqRvu0mq4yK51DVSHZ5zmS+5OjLrsRWOgXvREmDNgzXSOZt1rzpX4xwzMPs8rDC11HaMwuFjh2TXLctkn7nVdkUqfFZd77oDrjfhs3qZSrcy88/vU7WfgwrjDH20gMr0ZCo3dzSMcPcNvfi19SVSoHkf+Z/vw0GskUDZYaIa/nEGD0apVAkiMBkLBvGN/PqNfb2+qJT+e5k/HEKsX06TmHLoZmloz6Fbamy3EM01gWfzAwprOYK0WWQd+yKPFqhbvv5LozZkLNRMfN5QnKOz43C92kGskUpj6VkU8Vpj5AUYPOjuqekjNnjLHnJwREJw+jlFEVJIw3DNHJVbkZR0atwSGElr77k2OMeS7YRqbsTj4ul3dAVRZkY5LTWCErqGpI0xh3RM5k//fzmzdu//eLeqarNrKHM0zTU3fV9zCRH3Q7yTDekkGiboirAjLlpJk2NKNrhVZVF0dvZ2fPz+sd37yc5V741haEZKLlCEuyEtmHunuhKXnQOV94aavw9NNXmbknI661DjaB1Lplv6uf1WUH9H/+8O7FUdMDqmoZ6u04yEk3F8Xypeoys6XR1jfJSxVLQYbXUiJNc2EuH0yiwpehD/Xw25az+TvhBoY464KV0O9YuO6HkujLQ8I/ogIe6YU1WyioNf6/PZtQ/0KjQeNpvQxWrq5p2mTE+4eoe30K6KTn/Opu9VPirXWwPPGBDzHhA0P+1iyGvq6zz22yfwt9Nb7J3kW5FIXWPEJHJOCv2K/xUZrrBUxKVnPPver/CjleoEYd2orBdSbyU9NlRLEV5VKTRyCfGtlBjl1LsbZ/1rcOfI6/QtD+0m0hx5wRZAzYUkUcblfGtYUtrFpq3XdFKMfM/mcKz+sf3mBaaEi8VZiczvB2Q/giqoBdoUGHvMkH6sMa1UKQGUQXhlfNc4Vvb6xQaS90ZInxSE4ayGhfdOA5XY5HqtOQ0QnzE5bZIkilEt4VCcVVLDipIqd0lmiK8VUteVkRznppt4bvvz84/zp7X6/U3hi8VW7fxNSSTdPboZabQV42ZuTiNHPHcRmifEtJTKOvbkl1CvV+S92nC06qO0nL9uFRrSk5+SNH56dez2frsu/+quOjmgrfLvRd6Z57uX9RXIlY4bmjs7C/vt0UH5Es4e+F3ZoPS6Ojie7l8hH1uh9768v4RNXl6DJ5BWee73z68/8Uttp5JwbbhqmryTnM2P9FRUCZUcsMQQQL7DG8nIxJcnzrU5lx8tV3bcWjyDrVoBTGlNNnLyOVgf8Xl3McRK/a9NgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxvI/zjLzUHiCYyQAAAAASUVORK5CYII=" alt="IAB Brasil" style="width:100%;height:100%;object-fit:contain;"></div>
       <div class="header-titles">
         <h1>IAB Brasil — Email Marketing Analytics</h1>
         <p>Análise Diagnóstica RD Station Email + GA4 · Ivoire Agency</p>
@@ -329,41 +329,80 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   <!-- RD Station Section -->
   <div class="src-header src-rds"><span class="src-dot rds"></span> RD Station Marketing — Métricas de Email</div>
   <div class="kpi-grid">
-    <!-- Card 1 -->
+    <!-- Card 1: Base Ativa -->
     <div class="kpi-card" style="--accent:var(--orange)">
       <div class="kpi-label">
-        <span class="tt">Total de Leads<span class="tt-icon">?</span><span class="tt-box">Total de contatos ativos na base do RD Station Marketing, incluindo todos os segmentos e listas.</span></span>
+        <span class="tt">Base Ativa<span class="tt-icon">?</span><span class="tt-box">Maior lista de envio utilizada nos disparos — representa o tamanho real da base de email marketing. Dado real extraído dos relatórios RD Station Marketing (Jan/25–Fev/26).</span></span>
       </div>
-      <div class="kpi-value" data-metric="total-leads">48.739</div>
-      <div class="kpi-sub">Base completa RD Station</div>
+      <div class="kpi-value" data-metric="total-leads">38.845</div>
+      <div class="kpi-sub">Leads ativos RD Station</div>
       <div class="kpi-icon">👥</div>
     </div>
-    <!-- Card 2 -->
+    <!-- Card 2: Taxa de Abertura -->
     <div class="kpi-card" style="--accent:var(--teal)">
       <div class="kpi-label">
-        <span class="tt">Leads Utilizados<span class="tt-icon">?</span><span class="tt-box">Quantidade de leads únicos selecionados para disparos de email no período analisado.</span></span>
+        <span class="tt">Taxa de Abertura<span class="tt-icon">?</span><span class="tt-box">Média ponderada: Abertos / Entregues × 100. Calculado sobre campanhas com entrega confirmada (Mar/25–Fev/26). Benchmark B2B: 20–25%.</span></span>
       </div>
-      <div class="kpi-value" data-metric="leads-utilizados">48.739</div>
-      <div class="kpi-sub">Base completa RD Station</div>
-      <div class="kpi-icon">🎯</div>
-    </div>
-    <!-- Card 3 -->
-    <div class="kpi-card" style="--accent:var(--green)">
-      <div class="kpi-label">
-        <span class="tt">Sessões Engajadas<span class="tt-icon">?</span><span class="tt-box">Sessões Engajadas (GA4) — sessões onde o usuário interagiu com o site por 10s ou mais, leu conteúdo ou clicou em link interno.</span></span>
-      </div>
-      <div class="kpi-value" data-metric="total-aberturas">19.264</div>
-      <div class="kpi-sub" data-metric="taxa-abertura-sub">93,5% sessões engajadas</div>
+      <div class="kpi-value" data-metric="rds-open-rate">23,5%</div>
+      <div class="kpi-sub">Benchmark B2B: 20–25%</div>
       <div class="kpi-icon">📬</div>
     </div>
-    <!-- Card 4 -->
+    <!-- Card 3: CTOR -->
+    <div class="kpi-card" style="--accent:var(--green)">
+      <div class="kpi-label">
+        <span class="tt">CTOR<span class="tt-icon">?</span><span class="tt-box">Click-to-Open Rate: Cliques / Abertos × 100. Mede relevância do conteúdo para quem abriu. Calculado sobre campanhas com entrega confirmada. Benchmark B2B: 4–8%.</span></span>
+      </div>
+      <div class="kpi-value" data-metric="rds-ctor">4,07%</div>
+      <div class="kpi-sub">Benchmark B2B: 4–8%</div>
+      <div class="kpi-icon">🎯</div>
+    </div>
+    <!-- Card 4: Taxa de Entrega -->
     <div class="kpi-card" style="--accent:var(--yellow)">
       <div class="kpi-label">
-        <span class="tt">Deals no Pipeline<span class="tt-icon">?</span><span class="tt-box">Oportunidades de negócio abertas no RD Station CRM, em diferentes estágios do funil de vendas.</span></span>
+        <span class="tt">Taxa de Entrega<span class="tt-icon">?</span><span class="tt-box">Entregues / Selecionados × 100. Indica a saúde e reputação da base de email. Calculado sobre campanhas com entrega confirmada. Benchmark excelente: >97%.</span></span>
       </div>
-      <div class="kpi-value">72</div>
-      <div class="kpi-sub">69 em andamento · 3 ganhos</div>
-      <div class="kpi-icon">💼</div>
+      <div class="kpi-value" data-metric="rds-delivery">98,5%</div>
+      <div class="kpi-sub">Benchmark excelente: >97%</div>
+      <div class="kpi-icon">✅</div>
+    </div>
+  </div>
+  <!-- RD Station Email — Volume Acumulado -->
+  <div class="kpi-grid">
+    <!-- Card 5: Campanhas Disparadas -->
+    <div class="kpi-card" style="--accent:var(--blue)">
+      <div class="kpi-label">
+        <span class="tt">Campanhas Disparadas<span class="tt-icon">?</span><span class="tt-box">Total de campanhas de email únicas disparadas no período (Jan/25–Fev/26), extraído dos relatórios RD Station Marketing.</span></span>
+      </div>
+      <div class="kpi-value" data-metric="rds-campaigns">157</div>
+      <div class="kpi-sub">Jan/25–Fev/26</div>
+      <div class="kpi-icon">📤</div>
+    </div>
+    <!-- Card 6: Total Entregues -->
+    <div class="kpi-card" style="--accent:var(--purple)">
+      <div class="kpi-label">
+        <span class="tt">Total Entregues<span class="tt-icon">?</span><span class="tt-box">Total de emails entregues na caixa de entrada. Dado real RD Station (Mar/25–Fev/26, sem estimativas). Jan/Fev-25 com exportação incompleta foram excluídos da taxa.</span></span>
+      </div>
+      <div class="kpi-value" data-metric="rds-total-entregues">2.281.659</div>
+      <div class="kpi-sub">Entregas confirmadas</div>
+      <div class="kpi-icon">📩</div>
+    </div>
+    <!-- Card 7: Total Aberturas -->
+    <div class="kpi-card" style="--accent:var(--cyan)">
+      <div class="kpi-label">
+        <span class="tt">Total Aberturas<span class="tt-icon">?</span><span class="tt-box">Total de emails abertos no período selecionado. Dado real extraído dos relatórios de email RD Station Marketing.</span></span>
+      </div>
+      <div class="kpi-value" data-metric="rds-total-opens">537.325</div>
+      <div class="kpi-sub">Aberturas reais RD Station</div>
+      <div class="kpi-icon">👁️</div>
+    </div>
+    <!-- Card 8: Total Cliques -->
+    <div class="kpi-card" style="--accent:var(--pink)">
+      <div class="kpi-label">
+        <span class="tt">Total Cliques<span class="tt-icon">?</span><span class="tt-box">Total de cliques em links dentro dos emails no período selecionado. Dado real extraído dos relatórios RD Station Marketing.</span></span>
+      </div>
+      <div class="kpi-value" data-metric="rds-total-clicks">21.876</div>
+      <div class="kpi-sub">Cliques reais RD Station</div>
+      <div class="kpi-icon">🖱️</div>
     </div>
   </div>
 
@@ -816,8 +855,8 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   <div class="kpi-grid-sm">
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
       <div class="kpi-label"><span class="tt">Base de Leads<span class="tt-icon">?</span><span class="tt-box">Base completa na plataforma RD Station. Inclui todos os segmentos e listas ativas.</span></span></div>
-      <div class="kpi-value kpi-value-sm" data-metric="total-leads-crm">48.739</div>
-      <div class="kpi-sub">Base completa RD Station</div>
+      <div class="kpi-value kpi-value-sm" data-metric="total-leads-crm">38.845</div>
+      <div class="kpi-sub">Base ativa RD Station</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
       <div class="kpi-label"><span class="tt">Sessões GA4 (email)<span class="tt-icon">?</span><span class="tt-box">Sessões no site originadas via email — rastreadas pelo GA4 com source=RD Station, medium=email.</span></span></div>
@@ -875,9 +914,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   <div class="row-heading">🏢 CRM & Pipeline — RD Station CRM <span class="section-src-badge ssb-rds" style="font-size:11px;">CRM</span></div>
   <div class="kpi-grid-5" id="crmKpiGrid">
     <div class="kpi-card" style="--accent:var(--orange)">
-      <div class="kpi-label"><span class="tt">Contatos CRM<span class="tt-icon">?</span><span class="tt-box">Contatos qualificados gerenciados no RD Station CRM. Diferente dos leads na base do Email Marketing. CRM = 524 | Email = 48.739.</span></span></div>
+      <div class="kpi-label"><span class="tt">Contatos CRM<span class="tt-icon">?</span><span class="tt-box">Contatos qualificados gerenciados no RD Station CRM. Diferente dos leads na base do Email Marketing. CRM = 524 | Email = 38.845.</span></span></div>
       <div class="kpi-value">524</div>
-      <div class="kpi-sub">Contatos CRM qualificados<br><small style="color:var(--subtle);font-size:10px;">(≠ 48.739 leads email)</small></div>
+      <div class="kpi-sub">Contatos CRM qualificados<br><small style="color:var(--subtle);font-size:10px;">(≠ 38.845 leads email)</small></div>
       <div class="kpi-icon">👤</div>
     </div>
     <div class="kpi-card" style="--accent:var(--teal)">
@@ -926,7 +965,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-header">
         <div>
           <div class="chart-title">Contatos CRM por Mês de Cadastro <span class="section-src-badge ssb-rds">CRM</span></div>
-          <div class="chart-sub">524 contatos CRM qualificados (≠ 48.739 leads email)</div>
+          <div class="chart-sub">524 contatos CRM qualificados (≠ 38.845 leads email)</div>
         </div>
       </div>
       <div class="chart-body" style="height:220px"><canvas id="crmContactsChart"></canvas></div>
@@ -1033,307 +1072,5819 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 // DATA OBJECT — All metrics and arrays
 // ════════════════════════════════════════════════════════════
 const DATA = {
-
-  // GA4 Monthly Sessions — real data (Mar/25 to Mar/26)
-  rdMonthly: [
-    { month:"Mar/25", sessions:653,  users:430,  engaged:584,  bounce_rate:10.6 },
-    { month:"Abr/25", sessions:1483, users:963,  engaged:1323, bounce_rate:10.8 },
-    { month:"Mai/25", sessions:1259, users:832,  engaged:1127, bounce_rate:10.5 },
-    { month:"Jun/25", sessions:1171, users:819,  engaged:1041, bounce_rate:11.1 },
-    { month:"Jul/25", sessions:1306, users:1084, engaged:1230, bounce_rate:5.8  },
-    { month:"Ago/25", sessions:3999, users:3468, engaged:3878, bounce_rate:3.0  },
-    { month:"Set/25", sessions:3646, users:2138, engaged:3439, bounce_rate:5.7  },
-    { month:"Out/25", sessions:739,  users:400,  engaged:659,  bounce_rate:10.8 },
-    { month:"Nov/25", sessions:286,  users:170,  engaged:253,  bounce_rate:11.5 },
-    { month:"Dez/25", sessions:497,  users:350,  engaged:463,  bounce_rate:6.8  },
-    { month:"Jan/26", sessions:2106, users:1804, engaged:2019, bounce_rate:4.1  },
-    { month:"Fev/26", sessions:1782, users:1255, engaged:1635, bounce_rate:8.2  },
-    { month:"Mar/26", sessions:1675, users:1506, engaged:1613, bounce_rate:3.7  }
+  "rdMonthly": [
+    {
+      "month": "Mar/25",
+      "sessions": 653,
+      "users": 430,
+      "engaged": 584,
+      "bounce_rate": 10.6
+    },
+    {
+      "month": "Abr/25",
+      "sessions": 1483,
+      "users": 963,
+      "engaged": 1323,
+      "bounce_rate": 10.8
+    },
+    {
+      "month": "Mai/25",
+      "sessions": 1259,
+      "users": 832,
+      "engaged": 1127,
+      "bounce_rate": 10.5
+    },
+    {
+      "month": "Jun/25",
+      "sessions": 1171,
+      "users": 819,
+      "engaged": 1041,
+      "bounce_rate": 11.1
+    },
+    {
+      "month": "Jul/25",
+      "sessions": 1306,
+      "users": 1084,
+      "engaged": 1230,
+      "bounce_rate": 5.8
+    },
+    {
+      "month": "Ago/25",
+      "sessions": 3999,
+      "users": 3468,
+      "engaged": 3878,
+      "bounce_rate": 3.0
+    },
+    {
+      "month": "Set/25",
+      "sessions": 3646,
+      "users": 2138,
+      "engaged": 3439,
+      "bounce_rate": 5.7
+    },
+    {
+      "month": "Out/25",
+      "sessions": 739,
+      "users": 400,
+      "engaged": 659,
+      "bounce_rate": 10.8
+    },
+    {
+      "month": "Nov/25",
+      "sessions": 286,
+      "users": 170,
+      "engaged": 253,
+      "bounce_rate": 11.5
+    },
+    {
+      "month": "Dez/25",
+      "sessions": 497,
+      "users": 350,
+      "engaged": 463,
+      "bounce_rate": 6.8
+    },
+    {
+      "month": "Jan/26",
+      "sessions": 2106,
+      "users": 1804,
+      "engaged": 2019,
+      "bounce_rate": 4.1
+    },
+    {
+      "month": "Fev/26",
+      "sessions": 1782,
+      "users": 1255,
+      "engaged": 1635,
+      "bounce_rate": 8.2
+    },
+    {
+      "month": "Mar/26",
+      "sessions": 1675,
+      "users": 1506,
+      "engaged": 1613,
+      "bounce_rate": 3.7
+    }
   ],
-
-  // GA4 Monthly Sessions (13 months) — real data
-  monthlyTrend: [
-    { month:"Mar/25", sessions:653,  users:430,  new_users:282,  engaged:584,  bounce_rate:10.6, avg_duration:194, screen_views:1125,  conversions:2727  },
-    { month:"Abr/25", sessions:1483, users:963,  new_users:726,  engaged:1323, bounce_rate:10.8, avg_duration:175, screen_views:2158,  conversions:5039  },
-    { month:"Mai/25", sessions:1259, users:832,  new_users:667,  engaged:1127, bounce_rate:10.5, avg_duration:135, screen_views:1711,  conversions:3853  },
-    { month:"Jun/25", sessions:1171, users:819,  new_users:650,  engaged:1041, bounce_rate:11.1, avg_duration:137, screen_views:1655,  conversions:3433  },
-    { month:"Jul/25", sessions:1306, users:1084, new_users:950,  engaged:1230, bounce_rate:5.8,  avg_duration:74,  screen_views:1812,  conversions:3714  },
-    { month:"Ago/25", sessions:3999, users:3468, new_users:3274, engaged:3878, bounce_rate:3.0,  avg_duration:62,  screen_views:5588,  conversions:11469 },
-    { month:"Set/25", sessions:3646, users:2138, new_users:1817, engaged:3439, bounce_rate:5.7,  avg_duration:185, screen_views:5458,  conversions:11312 },
-    { month:"Out/25", sessions:739,  users:400,  new_users:271,  engaged:659,  bounce_rate:10.8, avg_duration:182, screen_views:1275,  conversions:2613  },
-    { month:"Nov/25", sessions:286,  users:170,  new_users:114,  engaged:253,  bounce_rate:11.5, avg_duration:136, screen_views:469,   conversions:1047  },
-    { month:"Dez/25", sessions:497,  users:350,  new_users:286,  engaged:463,  bounce_rate:6.8,  avg_duration:135, screen_views:766,   conversions:1813  },
-    { month:"Jan/26", sessions:2106, users:1804, new_users:1666, engaged:2019, bounce_rate:4.1,  avg_duration:65,  screen_views:440,   conversions:3128  },
-    { month:"Fev/26", sessions:1782, users:1255, new_users:1062, engaged:1635, bounce_rate:8.2,  avg_duration:98,  screen_views:672,   conversions:3084  },
-    { month:"Mar/26", sessions:1675, users:1506, new_users:1411, engaged:1613, bounce_rate:3.7,  avg_duration:43,  screen_views:834,   conversions:2676  }
+  "monthlyTrend": [
+    {
+      "month": "Mar/25",
+      "sessions": 653,
+      "users": 430,
+      "new_users": 282,
+      "engaged": 584,
+      "bounce_rate": 10.6,
+      "avg_duration": 194,
+      "screen_views": 1125,
+      "conversions": 2727
+    },
+    {
+      "month": "Abr/25",
+      "sessions": 1483,
+      "users": 963,
+      "new_users": 726,
+      "engaged": 1323,
+      "bounce_rate": 10.8,
+      "avg_duration": 175,
+      "screen_views": 2158,
+      "conversions": 5039
+    },
+    {
+      "month": "Mai/25",
+      "sessions": 1259,
+      "users": 832,
+      "new_users": 667,
+      "engaged": 1127,
+      "bounce_rate": 10.5,
+      "avg_duration": 135,
+      "screen_views": 1711,
+      "conversions": 3853
+    },
+    {
+      "month": "Jun/25",
+      "sessions": 1171,
+      "users": 819,
+      "new_users": 650,
+      "engaged": 1041,
+      "bounce_rate": 11.1,
+      "avg_duration": 137,
+      "screen_views": 1655,
+      "conversions": 3433
+    },
+    {
+      "month": "Jul/25",
+      "sessions": 1306,
+      "users": 1084,
+      "new_users": 950,
+      "engaged": 1230,
+      "bounce_rate": 5.8,
+      "avg_duration": 74,
+      "screen_views": 1812,
+      "conversions": 3714
+    },
+    {
+      "month": "Ago/25",
+      "sessions": 3999,
+      "users": 3468,
+      "new_users": 3274,
+      "engaged": 3878,
+      "bounce_rate": 3.0,
+      "avg_duration": 62,
+      "screen_views": 5588,
+      "conversions": 11469
+    },
+    {
+      "month": "Set/25",
+      "sessions": 3646,
+      "users": 2138,
+      "new_users": 1817,
+      "engaged": 3439,
+      "bounce_rate": 5.7,
+      "avg_duration": 185,
+      "screen_views": 5458,
+      "conversions": 11312
+    },
+    {
+      "month": "Out/25",
+      "sessions": 739,
+      "users": 400,
+      "new_users": 271,
+      "engaged": 659,
+      "bounce_rate": 10.8,
+      "avg_duration": 182,
+      "screen_views": 1275,
+      "conversions": 2613
+    },
+    {
+      "month": "Nov/25",
+      "sessions": 286,
+      "users": 170,
+      "new_users": 114,
+      "engaged": 253,
+      "bounce_rate": 11.5,
+      "avg_duration": 136,
+      "screen_views": 469,
+      "conversions": 1047
+    },
+    {
+      "month": "Dez/25",
+      "sessions": 497,
+      "users": 350,
+      "new_users": 286,
+      "engaged": 463,
+      "bounce_rate": 6.8,
+      "avg_duration": 135,
+      "screen_views": 766,
+      "conversions": 1813
+    },
+    {
+      "month": "Jan/26",
+      "sessions": 2106,
+      "users": 1804,
+      "new_users": 1666,
+      "engaged": 2019,
+      "bounce_rate": 4.1,
+      "avg_duration": 65,
+      "screen_views": 440,
+      "conversions": 3128
+    },
+    {
+      "month": "Fev/26",
+      "sessions": 1782,
+      "users": 1255,
+      "new_users": 1062,
+      "engaged": 1635,
+      "bounce_rate": 8.2,
+      "avg_duration": 98,
+      "screen_views": 672,
+      "conversions": 3084
+    },
+    {
+      "month": "Mar/26",
+      "sessions": 1675,
+      "users": 1506,
+      "new_users": 1411,
+      "engaged": 1613,
+      "bounce_rate": 3.7,
+      "avg_duration": 43,
+      "screen_views": 834,
+      "conversions": 2676
+    }
   ],
-
-  // GA4 Channels — real data
-  channels: [
-    { name:"Organic Search",  sessions:41603, share:37.4, color:"#10B981" },
-    { name:"Direct",          sessions:31523, share:28.3, color:"#3B82F6" },
-    { name:"Email",           sessions:20767, share:18.6, color:"#FF6B35" },
-    { name:"Referral",        sessions:7718,  share:6.9,  color:"#8B5CF6" },
-    { name:"Unassigned",      sessions:5761,  share:5.2,  color:"#64748B" },
-    { name:"Organic Social",  sessions:3652,  share:3.3,  color:"#EC4899" },
-    { name:"Paid Search",     sessions:254,   share:0.2,  color:"#F59E0B" },
-    { name:"Organic Video",   sessions:60,    share:0.1,  color:"#06B6D4" },
-    { name:"Paid Social",     sessions:7,     share:0.0,  color:"#EF4444" },
-    { name:"Paid Other",      sessions:6,     share:0.0,  color:"#84CC16" },
-    { name:"Organic Shopping",sessions:4,     share:0.0,  color:"#F97316" }
+  "dailyData": [
+    {
+      "date": "20250310",
+      "sessions": 241,
+      "users": 210,
+      "new_users": 136,
+      "engaged": 227,
+      "bounce_rate": 5.8,
+      "avg_duration": 125,
+      "screen_views": 386,
+      "conversions": 933
+    },
+    {
+      "date": "20250311",
+      "sessions": 84,
+      "users": 66,
+      "new_users": 42,
+      "engaged": 77,
+      "bounce_rate": 8.3,
+      "avg_duration": 128,
+      "screen_views": 117,
+      "conversions": 280
+    },
+    {
+      "date": "20250312",
+      "sessions": 35,
+      "users": 25,
+      "new_users": 13,
+      "engaged": 30,
+      "bounce_rate": 14.3,
+      "avg_duration": 159,
+      "screen_views": 75,
+      "conversions": 159
+    },
+    {
+      "date": "20250313",
+      "sessions": 34,
+      "users": 25,
+      "new_users": 12,
+      "engaged": 30,
+      "bounce_rate": 11.8,
+      "avg_duration": 168,
+      "screen_views": 57,
+      "conversions": 129
+    },
+    {
+      "date": "20250314",
+      "sessions": 93,
+      "users": 77,
+      "new_users": 39,
+      "engaged": 87,
+      "bounce_rate": 6.5,
+      "avg_duration": 260,
+      "screen_views": 164,
+      "conversions": 457
+    },
+    {
+      "date": "20250315",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 70,
+      "screen_views": 4,
+      "conversions": 11
+    },
+    {
+      "date": "20250316",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 106,
+      "screen_views": 4,
+      "conversions": 11
+    },
+    {
+      "date": "20250317",
+      "sessions": 39,
+      "users": 23,
+      "new_users": 12,
+      "engaged": 29,
+      "bounce_rate": 25.6,
+      "avg_duration": 215,
+      "screen_views": 70,
+      "conversions": 191
+    },
+    {
+      "date": "20250318",
+      "sessions": 18,
+      "users": 12,
+      "new_users": 3,
+      "engaged": 16,
+      "bounce_rate": 11.1,
+      "avg_duration": 486,
+      "screen_views": 33,
+      "conversions": 79
+    },
+    {
+      "date": "20250319",
+      "sessions": 19,
+      "users": 11,
+      "new_users": 1,
+      "engaged": 13,
+      "bounce_rate": 31.6,
+      "avg_duration": 129,
+      "screen_views": 21,
+      "conversions": 53
+    },
+    {
+      "date": "20250320",
+      "sessions": 15,
+      "users": 10,
+      "new_users": 5,
+      "engaged": 12,
+      "bounce_rate": 20.0,
+      "avg_duration": 681,
+      "screen_views": 38,
+      "conversions": 83
+    },
+    {
+      "date": "20250321",
+      "sessions": 6,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 83,
+      "screen_views": 10,
+      "conversions": 28
+    },
+    {
+      "date": "20250322",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 106,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20250323",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 5,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20250324",
+      "sessions": 11,
+      "users": 9,
+      "new_users": 3,
+      "engaged": 10,
+      "bounce_rate": 9.1,
+      "avg_duration": 229,
+      "screen_views": 35,
+      "conversions": 83
+    },
+    {
+      "date": "20250325",
+      "sessions": 16,
+      "users": 13,
+      "new_users": 7,
+      "engaged": 15,
+      "bounce_rate": 6.2,
+      "avg_duration": 332,
+      "screen_views": 45,
+      "conversions": 89
+    },
+    {
+      "date": "20250326",
+      "sessions": 12,
+      "users": 5,
+      "new_users": 0,
+      "engaged": 9,
+      "bounce_rate": 25.0,
+      "avg_duration": 471,
+      "screen_views": 29,
+      "conversions": 62
+    },
+    {
+      "date": "20250327",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 326,
+      "screen_views": 6,
+      "conversions": 12
+    },
+    {
+      "date": "20250328",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 796,
+      "screen_views": 15,
+      "conversions": 32
+    },
+    {
+      "date": "20250330",
+      "sessions": 1,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 0,
+      "bounce_rate": 100.0,
+      "avg_duration": 0,
+      "screen_views": 0,
+      "conversions": 0
+    },
+    {
+      "date": "20250331",
+      "sessions": 14,
+      "users": 9,
+      "new_users": 3,
+      "engaged": 11,
+      "bounce_rate": 21.4,
+      "avg_duration": 211,
+      "screen_views": 12,
+      "conversions": 27
+    },
+    {
+      "date": "20250401",
+      "sessions": 203,
+      "users": 161,
+      "new_users": 91,
+      "engaged": 184,
+      "bounce_rate": 9.4,
+      "avg_duration": 175,
+      "screen_views": 345,
+      "conversions": 925
+    },
+    {
+      "date": "20250402",
+      "sessions": 66,
+      "users": 46,
+      "new_users": 26,
+      "engaged": 54,
+      "bounce_rate": 18.2,
+      "avg_duration": 235,
+      "screen_views": 108,
+      "conversions": 279
+    },
+    {
+      "date": "20250403",
+      "sessions": 53,
+      "users": 34,
+      "new_users": 17,
+      "engaged": 45,
+      "bounce_rate": 15.1,
+      "avg_duration": 194,
+      "screen_views": 79,
+      "conversions": 194
+    },
+    {
+      "date": "20250404",
+      "sessions": 25,
+      "users": 15,
+      "new_users": 5,
+      "engaged": 20,
+      "bounce_rate": 20.0,
+      "avg_duration": 140,
+      "screen_views": 44,
+      "conversions": 91
+    },
+    {
+      "date": "20250405",
+      "sessions": 5,
+      "users": 3,
+      "new_users": 3,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 40,
+      "screen_views": 5,
+      "conversions": 12
+    },
+    {
+      "date": "20250406",
+      "sessions": 4,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 257,
+      "screen_views": 11,
+      "conversions": 35
+    },
+    {
+      "date": "20250407",
+      "sessions": 53,
+      "users": 42,
+      "new_users": 31,
+      "engaged": 49,
+      "bounce_rate": 7.5,
+      "avg_duration": 92,
+      "screen_views": 71,
+      "conversions": 158
+    },
+    {
+      "date": "20250408",
+      "sessions": 56,
+      "users": 41,
+      "new_users": 25,
+      "engaged": 45,
+      "bounce_rate": 19.6,
+      "avg_duration": 134,
+      "screen_views": 68,
+      "conversions": 161
+    },
+    {
+      "date": "20250409",
+      "sessions": 31,
+      "users": 19,
+      "new_users": 10,
+      "engaged": 25,
+      "bounce_rate": 19.4,
+      "avg_duration": 99,
+      "screen_views": 34,
+      "conversions": 75
+    },
+    {
+      "date": "20250410",
+      "sessions": 33,
+      "users": 25,
+      "new_users": 15,
+      "engaged": 28,
+      "bounce_rate": 15.2,
+      "avg_duration": 216,
+      "screen_views": 53,
+      "conversions": 108
+    },
+    {
+      "date": "20250411",
+      "sessions": 77,
+      "users": 64,
+      "new_users": 35,
+      "engaged": 72,
+      "bounce_rate": 6.5,
+      "avg_duration": 189,
+      "screen_views": 108,
+      "conversions": 219
+    },
+    {
+      "date": "20250412",
+      "sessions": 8,
+      "users": 7,
+      "new_users": 5,
+      "engaged": 7,
+      "bounce_rate": 12.5,
+      "avg_duration": 127,
+      "screen_views": 14,
+      "conversions": 30
+    },
+    {
+      "date": "20250413",
+      "sessions": 6,
+      "users": 5,
+      "new_users": 3,
+      "engaged": 6,
+      "bounce_rate": 0.0,
+      "avg_duration": 81,
+      "screen_views": 7,
+      "conversions": 16
+    },
+    {
+      "date": "20250414",
+      "sessions": 38,
+      "users": 31,
+      "new_users": 13,
+      "engaged": 36,
+      "bounce_rate": 5.3,
+      "avg_duration": 280,
+      "screen_views": 69,
+      "conversions": 151
+    },
+    {
+      "date": "20250415",
+      "sessions": 21,
+      "users": 11,
+      "new_users": 5,
+      "engaged": 16,
+      "bounce_rate": 23.8,
+      "avg_duration": 318,
+      "screen_views": 42,
+      "conversions": 92
+    },
+    {
+      "date": "20250416",
+      "sessions": 282,
+      "users": 250,
+      "new_users": 204,
+      "engaged": 261,
+      "bounce_rate": 7.4,
+      "avg_duration": 97,
+      "screen_views": 376,
+      "conversions": 913
+    },
+    {
+      "date": "20250417",
+      "sessions": 89,
+      "users": 69,
+      "new_users": 51,
+      "engaged": 80,
+      "bounce_rate": 10.1,
+      "avg_duration": 203,
+      "screen_views": 125,
+      "conversions": 296
+    },
+    {
+      "date": "20250418",
+      "sessions": 5,
+      "users": 3,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 100,
+      "screen_views": 5,
+      "conversions": 9
+    },
+    {
+      "date": "20250419",
+      "sessions": 6,
+      "users": 3,
+      "new_users": 2,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 30,
+      "screen_views": 6,
+      "conversions": 15
+    },
+    {
+      "date": "20250420",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 560,
+      "screen_views": 6,
+      "conversions": 16
+    },
+    {
+      "date": "20250421",
+      "sessions": 6,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 428,
+      "screen_views": 11,
+      "conversions": 24
+    },
+    {
+      "date": "20250422",
+      "sessions": 39,
+      "users": 33,
+      "new_users": 19,
+      "engaged": 36,
+      "bounce_rate": 7.7,
+      "avg_duration": 261,
+      "screen_views": 57,
+      "conversions": 130
+    },
+    {
+      "date": "20250423",
+      "sessions": 46,
+      "users": 28,
+      "new_users": 16,
+      "engaged": 38,
+      "bounce_rate": 17.4,
+      "avg_duration": 397,
+      "screen_views": 75,
+      "conversions": 163
+    },
+    {
+      "date": "20250424",
+      "sessions": 24,
+      "users": 17,
+      "new_users": 11,
+      "engaged": 21,
+      "bounce_rate": 12.5,
+      "avg_duration": 479,
+      "screen_views": 31,
+      "conversions": 74
+    },
+    {
+      "date": "20250425",
+      "sessions": 48,
+      "users": 41,
+      "new_users": 18,
+      "engaged": 43,
+      "bounce_rate": 10.4,
+      "avg_duration": 115,
+      "screen_views": 56,
+      "conversions": 107
+    },
+    {
+      "date": "20250426",
+      "sessions": 5,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 40.0,
+      "avg_duration": 580,
+      "screen_views": 7,
+      "conversions": 14
+    },
+    {
+      "date": "20250427",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 173,
+      "screen_views": 3,
+      "conversions": 5
+    },
+    {
+      "date": "20250428",
+      "sessions": 109,
+      "users": 89,
+      "new_users": 55,
+      "engaged": 103,
+      "bounce_rate": 5.5,
+      "avg_duration": 120,
+      "screen_views": 141,
+      "conversions": 285
+    },
+    {
+      "date": "20250429",
+      "sessions": 94,
+      "users": 71,
+      "new_users": 48,
+      "engaged": 85,
+      "bounce_rate": 9.6,
+      "avg_duration": 171,
+      "screen_views": 141,
+      "conversions": 315
+    },
+    {
+      "date": "20250430",
+      "sessions": 42,
+      "users": 25,
+      "new_users": 12,
+      "engaged": 37,
+      "bounce_rate": 11.9,
+      "avg_duration": 216,
+      "screen_views": 60,
+      "conversions": 127
+    },
+    {
+      "date": "20250501",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 481,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20250502",
+      "sessions": 12,
+      "users": 8,
+      "new_users": 6,
+      "engaged": 10,
+      "bounce_rate": 16.7,
+      "avg_duration": 165,
+      "screen_views": 11,
+      "conversions": 21
+    },
+    {
+      "date": "20250503",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 0,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250504",
+      "sessions": 5,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 0.0,
+      "avg_duration": 638,
+      "screen_views": 7,
+      "conversions": 15
+    },
+    {
+      "date": "20250505",
+      "sessions": 48,
+      "users": 32,
+      "new_users": 27,
+      "engaged": 41,
+      "bounce_rate": 14.6,
+      "avg_duration": 111,
+      "screen_views": 46,
+      "conversions": 97
+    },
+    {
+      "date": "20250506",
+      "sessions": 41,
+      "users": 25,
+      "new_users": 10,
+      "engaged": 37,
+      "bounce_rate": 9.8,
+      "avg_duration": 95,
+      "screen_views": 69,
+      "conversions": 163
+    },
+    {
+      "date": "20250507",
+      "sessions": 30,
+      "users": 16,
+      "new_users": 7,
+      "engaged": 21,
+      "bounce_rate": 30.0,
+      "avg_duration": 176,
+      "screen_views": 30,
+      "conversions": 69
+    },
+    {
+      "date": "20250508",
+      "sessions": 20,
+      "users": 19,
+      "new_users": 6,
+      "engaged": 19,
+      "bounce_rate": 5.0,
+      "avg_duration": 289,
+      "screen_views": 27,
+      "conversions": 65
+    },
+    {
+      "date": "20250509",
+      "sessions": 219,
+      "users": 189,
+      "new_users": 128,
+      "engaged": 204,
+      "bounce_rate": 6.8,
+      "avg_duration": 211,
+      "screen_views": 389,
+      "conversions": 998
+    },
+    {
+      "date": "20250510",
+      "sessions": 16,
+      "users": 10,
+      "new_users": 8,
+      "engaged": 13,
+      "bounce_rate": 18.8,
+      "avg_duration": 109,
+      "screen_views": 15,
+      "conversions": 33
+    },
+    {
+      "date": "20250511",
+      "sessions": 4,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 502,
+      "screen_views": 6,
+      "conversions": 19
+    },
+    {
+      "date": "20250512",
+      "sessions": 57,
+      "users": 40,
+      "new_users": 24,
+      "engaged": 49,
+      "bounce_rate": 14.0,
+      "avg_duration": 138,
+      "screen_views": 90,
+      "conversions": 220
+    },
+    {
+      "date": "20250513",
+      "sessions": 44,
+      "users": 36,
+      "new_users": 25,
+      "engaged": 40,
+      "bounce_rate": 9.1,
+      "avg_duration": 166,
+      "screen_views": 52,
+      "conversions": 122
+    },
+    {
+      "date": "20250514",
+      "sessions": 37,
+      "users": 26,
+      "new_users": 21,
+      "engaged": 35,
+      "bounce_rate": 5.4,
+      "avg_duration": 98,
+      "screen_views": 45,
+      "conversions": 103
+    },
+    {
+      "date": "20250515",
+      "sessions": 55,
+      "users": 32,
+      "new_users": 18,
+      "engaged": 47,
+      "bounce_rate": 14.5,
+      "avg_duration": 164,
+      "screen_views": 53,
+      "conversions": 113
+    },
+    {
+      "date": "20250516",
+      "sessions": 19,
+      "users": 12,
+      "new_users": 2,
+      "engaged": 15,
+      "bounce_rate": 21.1,
+      "avg_duration": 386,
+      "screen_views": 25,
+      "conversions": 54
+    },
+    {
+      "date": "20250517",
+      "sessions": 10,
+      "users": 6,
+      "new_users": 4,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 1,
+      "screen_views": 9,
+      "conversions": 18
+    },
+    {
+      "date": "20250518",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 5,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20250519",
+      "sessions": 251,
+      "users": 237,
+      "new_users": 222,
+      "engaged": 243,
+      "bounce_rate": 3.2,
+      "avg_duration": 26,
+      "screen_views": 381,
+      "conversions": 760
+    },
+    {
+      "date": "20250520",
+      "sessions": 33,
+      "users": 22,
+      "new_users": 11,
+      "engaged": 30,
+      "bounce_rate": 9.1,
+      "avg_duration": 126,
+      "screen_views": 39,
+      "conversions": 78
+    },
+    {
+      "date": "20250521",
+      "sessions": 74,
+      "users": 49,
+      "new_users": 35,
+      "engaged": 60,
+      "bounce_rate": 18.9,
+      "avg_duration": 127,
+      "screen_views": 70,
+      "conversions": 157
+    },
+    {
+      "date": "20250522",
+      "sessions": 114,
+      "users": 69,
+      "new_users": 42,
+      "engaged": 104,
+      "bounce_rate": 8.8,
+      "avg_duration": 171,
+      "screen_views": 129,
+      "conversions": 294
+    },
+    {
+      "date": "20250523",
+      "sessions": 11,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 6,
+      "bounce_rate": 45.5,
+      "avg_duration": 1,
+      "screen_views": 6,
+      "conversions": 13
+    },
+    {
+      "date": "20250524",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 6,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250525",
+      "sessions": 5,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 3,
+      "bounce_rate": 40.0,
+      "avg_duration": 6,
+      "screen_views": 3,
+      "conversions": 5
+    },
+    {
+      "date": "20250526",
+      "sessions": 10,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 50.0,
+      "avg_duration": 5,
+      "screen_views": 7,
+      "conversions": 17
+    },
+    {
+      "date": "20250527",
+      "sessions": 9,
+      "users": 5,
+      "new_users": 4,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 16,
+      "screen_views": 10,
+      "conversions": 25
+    },
+    {
+      "date": "20250528",
+      "sessions": 18,
+      "users": 7,
+      "new_users": 0,
+      "engaged": 14,
+      "bounce_rate": 22.2,
+      "avg_duration": 128,
+      "screen_views": 22,
+      "conversions": 46
+    },
+    {
+      "date": "20250529",
+      "sessions": 87,
+      "users": 68,
+      "new_users": 50,
+      "engaged": 81,
+      "bounce_rate": 6.9,
+      "avg_duration": 163,
+      "screen_views": 133,
+      "conversions": 270
+    },
+    {
+      "date": "20250530",
+      "sessions": 23,
+      "users": 14,
+      "new_users": 8,
+      "engaged": 16,
+      "bounce_rate": 30.4,
+      "avg_duration": 79,
+      "screen_views": 27,
+      "conversions": 58
+    },
+    {
+      "date": "20250531",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 5,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20250602",
+      "sessions": 19,
+      "users": 14,
+      "new_users": 10,
+      "engaged": 17,
+      "bounce_rate": 10.5,
+      "avg_duration": 135,
+      "screen_views": 17,
+      "conversions": 34
+    },
+    {
+      "date": "20250603",
+      "sessions": 12,
+      "users": 9,
+      "new_users": 7,
+      "engaged": 11,
+      "bounce_rate": 8.3,
+      "avg_duration": 115,
+      "screen_views": 18,
+      "conversions": 37
+    },
+    {
+      "date": "20250604",
+      "sessions": 11,
+      "users": 6,
+      "new_users": 2,
+      "engaged": 8,
+      "bounce_rate": 27.3,
+      "avg_duration": 103,
+      "screen_views": 15,
+      "conversions": 36
+    },
+    {
+      "date": "20250605",
+      "sessions": 104,
+      "users": 78,
+      "new_users": 46,
+      "engaged": 90,
+      "bounce_rate": 13.5,
+      "avg_duration": 184,
+      "screen_views": 135,
+      "conversions": 271
+    },
+    {
+      "date": "20250606",
+      "sessions": 45,
+      "users": 25,
+      "new_users": 14,
+      "engaged": 34,
+      "bounce_rate": 24.4,
+      "avg_duration": 162,
+      "screen_views": 58,
+      "conversions": 125
+    },
+    {
+      "date": "20250607",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 17,
+      "screen_views": 4,
+      "conversions": 7
+    },
+    {
+      "date": "20250608",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 33.3,
+      "avg_duration": 5,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250609",
+      "sessions": 31,
+      "users": 21,
+      "new_users": 8,
+      "engaged": 27,
+      "bounce_rate": 12.9,
+      "avg_duration": 173,
+      "screen_views": 48,
+      "conversions": 93
+    },
+    {
+      "date": "20250610",
+      "sessions": 11,
+      "users": 8,
+      "new_users": 3,
+      "engaged": 9,
+      "bounce_rate": 18.2,
+      "avg_duration": 342,
+      "screen_views": 25,
+      "conversions": 51
+    },
+    {
+      "date": "20250611",
+      "sessions": 8,
+      "users": 6,
+      "new_users": 1,
+      "engaged": 7,
+      "bounce_rate": 12.5,
+      "avg_duration": 86,
+      "screen_views": 13,
+      "conversions": 26
+    },
+    {
+      "date": "20250612",
+      "sessions": 152,
+      "users": 127,
+      "new_users": 90,
+      "engaged": 140,
+      "bounce_rate": 7.9,
+      "avg_duration": 162,
+      "screen_views": 233,
+      "conversions": 415
+    },
+    {
+      "date": "20250613",
+      "sessions": 70,
+      "users": 45,
+      "new_users": 20,
+      "engaged": 53,
+      "bounce_rate": 24.3,
+      "avg_duration": 258,
+      "screen_views": 106,
+      "conversions": 229
+    },
+    {
+      "date": "20250614",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 639,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250615",
+      "sessions": 7,
+      "users": 7,
+      "new_users": 4,
+      "engaged": 7,
+      "bounce_rate": 0.0,
+      "avg_duration": 13,
+      "screen_views": 7,
+      "conversions": 15
+    },
+    {
+      "date": "20250616",
+      "sessions": 262,
+      "users": 246,
+      "new_users": 236,
+      "engaged": 255,
+      "bounce_rate": 2.7,
+      "avg_duration": 4,
+      "screen_views": 259,
+      "conversions": 520
+    },
+    {
+      "date": "20250617",
+      "sessions": 23,
+      "users": 15,
+      "new_users": 7,
+      "engaged": 16,
+      "bounce_rate": 30.4,
+      "avg_duration": 492,
+      "screen_views": 51,
+      "conversions": 109
+    },
+    {
+      "date": "20250618",
+      "sessions": 26,
+      "users": 21,
+      "new_users": 11,
+      "engaged": 24,
+      "bounce_rate": 7.7,
+      "avg_duration": 271,
+      "screen_views": 65,
+      "conversions": 155
+    },
+    {
+      "date": "20250619",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 34,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250620",
+      "sessions": 9,
+      "users": 6,
+      "new_users": 4,
+      "engaged": 9,
+      "bounce_rate": 0.0,
+      "avg_duration": 30,
+      "screen_views": 17,
+      "conversions": 36
+    },
+    {
+      "date": "20250621",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 3,
+      "screen_views": 2,
+      "conversions": 3
+    },
+    {
+      "date": "20250622",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 8,
+      "screen_views": 2,
+      "conversions": 3
+    },
+    {
+      "date": "20250623",
+      "sessions": 15,
+      "users": 9,
+      "new_users": 2,
+      "engaged": 10,
+      "bounce_rate": 33.3,
+      "avg_duration": 126,
+      "screen_views": 26,
+      "conversions": 55
+    },
+    {
+      "date": "20250624",
+      "sessions": 14,
+      "users": 10,
+      "new_users": 1,
+      "engaged": 12,
+      "bounce_rate": 14.3,
+      "avg_duration": 331,
+      "screen_views": 45,
+      "conversions": 100
+    },
+    {
+      "date": "20250625",
+      "sessions": 14,
+      "users": 10,
+      "new_users": 6,
+      "engaged": 11,
+      "bounce_rate": 21.4,
+      "avg_duration": 7,
+      "screen_views": 12,
+      "conversions": 22
+    },
+    {
+      "date": "20250626",
+      "sessions": 144,
+      "users": 113,
+      "new_users": 74,
+      "engaged": 130,
+      "bounce_rate": 9.7,
+      "avg_duration": 149,
+      "screen_views": 206,
+      "conversions": 489
+    },
+    {
+      "date": "20250627",
+      "sessions": 51,
+      "users": 35,
+      "new_users": 18,
+      "engaged": 43,
+      "bounce_rate": 15.7,
+      "avg_duration": 108,
+      "screen_views": 65,
+      "conversions": 132
+    },
+    {
+      "date": "20250628",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 2,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 388,
+      "screen_views": 6,
+      "conversions": 16
+    },
+    {
+      "date": "20250629",
+      "sessions": 7,
+      "users": 4,
+      "new_users": 4,
+      "engaged": 7,
+      "bounce_rate": 0.0,
+      "avg_duration": 44,
+      "screen_views": 9,
+      "conversions": 25
+    },
+    {
+      "date": "20250630",
+      "sessions": 119,
+      "users": 95,
+      "new_users": 74,
+      "engaged": 107,
+      "bounce_rate": 10.1,
+      "avg_duration": 176,
+      "screen_views": 205,
+      "conversions": 417
+    },
+    {
+      "date": "20250701",
+      "sessions": 25,
+      "users": 16,
+      "new_users": 9,
+      "engaged": 21,
+      "bounce_rate": 16.0,
+      "avg_duration": 95,
+      "screen_views": 41,
+      "conversions": 85
+    },
+    {
+      "date": "20250702",
+      "sessions": 14,
+      "users": 7,
+      "new_users": 2,
+      "engaged": 13,
+      "bounce_rate": 7.1,
+      "avg_duration": 65,
+      "screen_views": 20,
+      "conversions": 43
+    },
+    {
+      "date": "20250703",
+      "sessions": 43,
+      "users": 34,
+      "new_users": 27,
+      "engaged": 38,
+      "bounce_rate": 11.6,
+      "avg_duration": 65,
+      "screen_views": 47,
+      "conversions": 85
+    },
+    {
+      "date": "20250704",
+      "sessions": 25,
+      "users": 19,
+      "new_users": 15,
+      "engaged": 22,
+      "bounce_rate": 12.0,
+      "avg_duration": 122,
+      "screen_views": 37,
+      "conversions": 73
+    },
+    {
+      "date": "20250705",
+      "sessions": 4,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 4,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20250706",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 49,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250707",
+      "sessions": 17,
+      "users": 9,
+      "new_users": 2,
+      "engaged": 13,
+      "bounce_rate": 23.5,
+      "avg_duration": 128,
+      "screen_views": 18,
+      "conversions": 42
+    },
+    {
+      "date": "20250708",
+      "sessions": 10,
+      "users": 8,
+      "new_users": 2,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 269,
+      "screen_views": 15,
+      "conversions": 31
+    },
+    {
+      "date": "20250709",
+      "sessions": 6,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 100,
+      "screen_views": 10,
+      "conversions": 27
+    },
+    {
+      "date": "20250710",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 61,
+      "screen_views": 5,
+      "conversions": 9
+    },
+    {
+      "date": "20250711",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 27,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250712",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 9,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250713",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 34,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20250714",
+      "sessions": 6,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 6,
+      "bounce_rate": 0.0,
+      "avg_duration": 300,
+      "screen_views": 7,
+      "conversions": 13
+    },
+    {
+      "date": "20250715",
+      "sessions": 137,
+      "users": 115,
+      "new_users": 84,
+      "engaged": 129,
+      "bounce_rate": 5.8,
+      "avg_duration": 144,
+      "screen_views": 188,
+      "conversions": 379
+    },
+    {
+      "date": "20250716",
+      "sessions": 43,
+      "users": 26,
+      "new_users": 17,
+      "engaged": 32,
+      "bounce_rate": 25.6,
+      "avg_duration": 159,
+      "screen_views": 54,
+      "conversions": 114
+    },
+    {
+      "date": "20250717",
+      "sessions": 25,
+      "users": 15,
+      "new_users": 9,
+      "engaged": 19,
+      "bounce_rate": 24.0,
+      "avg_duration": 176,
+      "screen_views": 27,
+      "conversions": 61
+    },
+    {
+      "date": "20250718",
+      "sessions": 14,
+      "users": 10,
+      "new_users": 4,
+      "engaged": 11,
+      "bounce_rate": 21.4,
+      "avg_duration": 195,
+      "screen_views": 22,
+      "conversions": 46
+    },
+    {
+      "date": "20250720",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 86,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20250721",
+      "sessions": 23,
+      "users": 18,
+      "new_users": 11,
+      "engaged": 21,
+      "bounce_rate": 8.7,
+      "avg_duration": 240,
+      "screen_views": 28,
+      "conversions": 58
+    },
+    {
+      "date": "20250722",
+      "sessions": 10,
+      "users": 7,
+      "new_users": 1,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 395,
+      "screen_views": 13,
+      "conversions": 27
+    },
+    {
+      "date": "20250723",
+      "sessions": 13,
+      "users": 9,
+      "new_users": 5,
+      "engaged": 12,
+      "bounce_rate": 7.7,
+      "avg_duration": 34,
+      "screen_views": 20,
+      "conversions": 40
+    },
+    {
+      "date": "20250724",
+      "sessions": 19,
+      "users": 19,
+      "new_users": 14,
+      "engaged": 19,
+      "bounce_rate": 0.0,
+      "avg_duration": 228,
+      "screen_views": 29,
+      "conversions": 56
+    },
+    {
+      "date": "20250725",
+      "sessions": 11,
+      "users": 8,
+      "new_users": 5,
+      "engaged": 9,
+      "bounce_rate": 18.2,
+      "avg_duration": 149,
+      "screen_views": 17,
+      "conversions": 36
+    },
+    {
+      "date": "20250726",
+      "sessions": 3,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 33.3,
+      "avg_duration": 14,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20250728",
+      "sessions": 444,
+      "users": 433,
+      "new_users": 407,
+      "engaged": 436,
+      "bounce_rate": 1.8,
+      "avg_duration": 32,
+      "screen_views": 620,
+      "conversions": 1276
+    },
+    {
+      "date": "20250729",
+      "sessions": 43,
+      "users": 30,
+      "new_users": 19,
+      "engaged": 37,
+      "bounce_rate": 14.0,
+      "avg_duration": 92,
+      "screen_views": 71,
+      "conversions": 159
+    },
+    {
+      "date": "20250730",
+      "sessions": 283,
+      "users": 276,
+      "new_users": 259,
+      "engaged": 280,
+      "bounce_rate": 1.1,
+      "avg_duration": 26,
+      "screen_views": 407,
+      "conversions": 809
+    },
+    {
+      "date": "20250731",
+      "sessions": 73,
+      "users": 62,
+      "new_users": 47,
+      "engaged": 68,
+      "bounce_rate": 6.8,
+      "avg_duration": 62,
+      "screen_views": 97,
+      "conversions": 207
+    },
+    {
+      "date": "20250801",
+      "sessions": 161,
+      "users": 143,
+      "new_users": 119,
+      "engaged": 152,
+      "bounce_rate": 5.6,
+      "avg_duration": 79,
+      "screen_views": 200,
+      "conversions": 397
+    },
+    {
+      "date": "20250802",
+      "sessions": 8,
+      "users": 5,
+      "new_users": 4,
+      "engaged": 8,
+      "bounce_rate": 0.0,
+      "avg_duration": 208,
+      "screen_views": 32,
+      "conversions": 61
+    },
+    {
+      "date": "20250803",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 1261,
+      "screen_views": 14,
+      "conversions": 27
+    },
+    {
+      "date": "20250804",
+      "sessions": 51,
+      "users": 39,
+      "new_users": 26,
+      "engaged": 48,
+      "bounce_rate": 5.9,
+      "avg_duration": 213,
+      "screen_views": 87,
+      "conversions": 174
+    },
+    {
+      "date": "20250805",
+      "sessions": 37,
+      "users": 21,
+      "new_users": 10,
+      "engaged": 32,
+      "bounce_rate": 13.5,
+      "avg_duration": 185,
+      "screen_views": 65,
+      "conversions": 140
+    },
+    {
+      "date": "20250806",
+      "sessions": 31,
+      "users": 21,
+      "new_users": 6,
+      "engaged": 28,
+      "bounce_rate": 9.7,
+      "avg_duration": 206,
+      "screen_views": 39,
+      "conversions": 81
+    },
+    {
+      "date": "20250807",
+      "sessions": 408,
+      "users": 387,
+      "new_users": 368,
+      "engaged": 403,
+      "bounce_rate": 1.2,
+      "avg_duration": 53,
+      "screen_views": 823,
+      "conversions": 1655
+    },
+    {
+      "date": "20250808",
+      "sessions": 34,
+      "users": 25,
+      "new_users": 13,
+      "engaged": 32,
+      "bounce_rate": 5.9,
+      "avg_duration": 157,
+      "screen_views": 49,
+      "conversions": 115
+    },
+    {
+      "date": "20250809",
+      "sessions": 4,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 0,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20250810",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 2464,
+      "screen_views": 13,
+      "conversions": 30
+    },
+    {
+      "date": "20250811",
+      "sessions": 24,
+      "users": 18,
+      "new_users": 8,
+      "engaged": 22,
+      "bounce_rate": 8.3,
+      "avg_duration": 400,
+      "screen_views": 33,
+      "conversions": 66
+    },
+    {
+      "date": "20250812",
+      "sessions": 15,
+      "users": 9,
+      "new_users": 6,
+      "engaged": 14,
+      "bounce_rate": 6.7,
+      "avg_duration": 50,
+      "screen_views": 27,
+      "conversions": 60
+    },
+    {
+      "date": "20250813",
+      "sessions": 12,
+      "users": 9,
+      "new_users": 2,
+      "engaged": 11,
+      "bounce_rate": 8.3,
+      "avg_duration": 74,
+      "screen_views": 22,
+      "conversions": 53
+    },
+    {
+      "date": "20250814",
+      "sessions": 688,
+      "users": 651,
+      "new_users": 618,
+      "engaged": 677,
+      "bounce_rate": 1.6,
+      "avg_duration": 34,
+      "screen_views": 1072,
+      "conversions": 2191
+    },
+    {
+      "date": "20250815",
+      "sessions": 48,
+      "users": 35,
+      "new_users": 28,
+      "engaged": 42,
+      "bounce_rate": 12.5,
+      "avg_duration": 101,
+      "screen_views": 60,
+      "conversions": 133
+    },
+    {
+      "date": "20250816",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 16,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20250817",
+      "sessions": 9,
+      "users": 7,
+      "new_users": 4,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 44,
+      "screen_views": 12,
+      "conversions": 25
+    },
+    {
+      "date": "20250818",
+      "sessions": 30,
+      "users": 23,
+      "new_users": 10,
+      "engaged": 24,
+      "bounce_rate": 20.0,
+      "avg_duration": 142,
+      "screen_views": 40,
+      "conversions": 82
+    },
+    {
+      "date": "20250819",
+      "sessions": 17,
+      "users": 12,
+      "new_users": 2,
+      "engaged": 15,
+      "bounce_rate": 11.8,
+      "avg_duration": 155,
+      "screen_views": 20,
+      "conversions": 48
+    },
+    {
+      "date": "20250820",
+      "sessions": 15,
+      "users": 8,
+      "new_users": 2,
+      "engaged": 14,
+      "bounce_rate": 6.7,
+      "avg_duration": 185,
+      "screen_views": 43,
+      "conversions": 86
+    },
+    {
+      "date": "20250821",
+      "sessions": 1195,
+      "users": 1146,
+      "new_users": 1088,
+      "engaged": 1177,
+      "bounce_rate": 1.5,
+      "avg_duration": 49,
+      "screen_views": 1331,
+      "conversions": 2763
+    },
+    {
+      "date": "20250822",
+      "sessions": 33,
+      "users": 27,
+      "new_users": 10,
+      "engaged": 30,
+      "bounce_rate": 9.1,
+      "avg_duration": 90,
+      "screen_views": 54,
+      "conversions": 120
+    },
+    {
+      "date": "20250823",
+      "sessions": 5,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 11,
+      "screen_views": 6,
+      "conversions": 12
+    },
+    {
+      "date": "20250824",
+      "sessions": 10,
+      "users": 8,
+      "new_users": 3,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 17,
+      "screen_views": 12,
+      "conversions": 27
+    },
+    {
+      "date": "20250825",
+      "sessions": 20,
+      "users": 16,
+      "new_users": 5,
+      "engaged": 19,
+      "bounce_rate": 5.0,
+      "avg_duration": 159,
+      "screen_views": 41,
+      "conversions": 99
+    },
+    {
+      "date": "20250826",
+      "sessions": 23,
+      "users": 16,
+      "new_users": 10,
+      "engaged": 20,
+      "bounce_rate": 13.0,
+      "avg_duration": 146,
+      "screen_views": 25,
+      "conversions": 54
+    },
+    {
+      "date": "20250827",
+      "sessions": 969,
+      "users": 933,
+      "new_users": 897,
+      "engaged": 950,
+      "bounce_rate": 2.0,
+      "avg_duration": 32,
+      "screen_views": 1329,
+      "conversions": 2682
+    },
+    {
+      "date": "20250828",
+      "sessions": 51,
+      "users": 34,
+      "new_users": 17,
+      "engaged": 43,
+      "bounce_rate": 15.7,
+      "avg_duration": 204,
+      "screen_views": 73,
+      "conversions": 147
+    },
+    {
+      "date": "20250829",
+      "sessions": 26,
+      "users": 16,
+      "new_users": 5,
+      "engaged": 24,
+      "bounce_rate": 7.7,
+      "avg_duration": 417,
+      "screen_views": 52,
+      "conversions": 113
+    },
+    {
+      "date": "20250831",
+      "sessions": 7,
+      "users": 6,
+      "new_users": 5,
+      "engaged": 7,
+      "bounce_rate": 0.0,
+      "avg_duration": 128,
+      "screen_views": 7,
+      "conversions": 14
+    },
+    {
+      "date": "20250901",
+      "sessions": 29,
+      "users": 20,
+      "new_users": 8,
+      "engaged": 27,
+      "bounce_rate": 6.9,
+      "avg_duration": 259,
+      "screen_views": 73,
+      "conversions": 164
+    },
+    {
+      "date": "20250902",
+      "sessions": 31,
+      "users": 20,
+      "new_users": 3,
+      "engaged": 26,
+      "bounce_rate": 16.1,
+      "avg_duration": 307,
+      "screen_views": 46,
+      "conversions": 102
+    },
+    {
+      "date": "20250903",
+      "sessions": 66,
+      "users": 50,
+      "new_users": 38,
+      "engaged": 61,
+      "bounce_rate": 7.6,
+      "avg_duration": 137,
+      "screen_views": 92,
+      "conversions": 194
+    },
+    {
+      "date": "20250904",
+      "sessions": 181,
+      "users": 143,
+      "new_users": 95,
+      "engaged": 168,
+      "bounce_rate": 7.2,
+      "avg_duration": 127,
+      "screen_views": 261,
+      "conversions": 574
+    },
+    {
+      "date": "20250905",
+      "sessions": 770,
+      "users": 725,
+      "new_users": 700,
+      "engaged": 751,
+      "bounce_rate": 2.5,
+      "avg_duration": 40,
+      "screen_views": 1528,
+      "conversions": 3076
+    },
+    {
+      "date": "20250907",
+      "sessions": 10,
+      "users": 8,
+      "new_users": 6,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 92,
+      "screen_views": 9,
+      "conversions": 18
+    },
+    {
+      "date": "20250908",
+      "sessions": 726,
+      "users": 579,
+      "new_users": 436,
+      "engaged": 664,
+      "bounce_rate": 8.5,
+      "avg_duration": 142,
+      "screen_views": 839,
+      "conversions": 1682
+    },
+    {
+      "date": "20250909",
+      "sessions": 884,
+      "users": 404,
+      "new_users": 286,
+      "engaged": 842,
+      "bounce_rate": 4.8,
+      "avg_duration": 260,
+      "screen_views": 1079,
+      "conversions": 2155
+    },
+    {
+      "date": "20250910",
+      "sessions": 503,
+      "users": 194,
+      "new_users": 59,
+      "engaged": 469,
+      "bounce_rate": 6.8,
+      "avg_duration": 353,
+      "screen_views": 677,
+      "conversions": 1395
+    },
+    {
+      "date": "20250911",
+      "sessions": 57,
+      "users": 32,
+      "new_users": 11,
+      "engaged": 45,
+      "bounce_rate": 21.1,
+      "avg_duration": 133,
+      "screen_views": 53,
+      "conversions": 103
+    },
+    {
+      "date": "20250912",
+      "sessions": 35,
+      "users": 20,
+      "new_users": 8,
+      "engaged": 29,
+      "bounce_rate": 17.1,
+      "avg_duration": 225,
+      "screen_views": 48,
+      "conversions": 94
+    },
+    {
+      "date": "20250913",
+      "sessions": 7,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 7,
+      "bounce_rate": 0.0,
+      "avg_duration": 28,
+      "screen_views": 9,
+      "conversions": 20
+    },
+    {
+      "date": "20250914",
+      "sessions": 11,
+      "users": 5,
+      "new_users": 0,
+      "engaged": 10,
+      "bounce_rate": 9.1,
+      "avg_duration": 156,
+      "screen_views": 11,
+      "conversions": 20
+    },
+    {
+      "date": "20250915",
+      "sessions": 20,
+      "users": 10,
+      "new_users": 2,
+      "engaged": 19,
+      "bounce_rate": 5.0,
+      "avg_duration": 201,
+      "screen_views": 25,
+      "conversions": 49
+    },
+    {
+      "date": "20250916",
+      "sessions": 16,
+      "users": 10,
+      "new_users": 3,
+      "engaged": 15,
+      "bounce_rate": 6.2,
+      "avg_duration": 367,
+      "screen_views": 48,
+      "conversions": 97
+    },
+    {
+      "date": "20250917",
+      "sessions": 10,
+      "users": 5,
+      "new_users": 1,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 314,
+      "screen_views": 14,
+      "conversions": 28
+    },
+    {
+      "date": "20250918",
+      "sessions": 16,
+      "users": 8,
+      "new_users": 3,
+      "engaged": 16,
+      "bounce_rate": 0.0,
+      "avg_duration": 235,
+      "screen_views": 31,
+      "conversions": 58
+    },
+    {
+      "date": "20250919",
+      "sessions": 124,
+      "users": 99,
+      "new_users": 63,
+      "engaged": 114,
+      "bounce_rate": 8.1,
+      "avg_duration": 213,
+      "screen_views": 279,
+      "conversions": 758
+    },
+    {
+      "date": "20250920",
+      "sessions": 5,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 11,
+      "screen_views": 6,
+      "conversions": 11
+    },
+    {
+      "date": "20250921",
+      "sessions": 6,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 40,
+      "screen_views": 6,
+      "conversions": 18
+    },
+    {
+      "date": "20250922",
+      "sessions": 40,
+      "users": 25,
+      "new_users": 11,
+      "engaged": 34,
+      "bounce_rate": 15.0,
+      "avg_duration": 278,
+      "screen_views": 80,
+      "conversions": 203
+    },
+    {
+      "date": "20250923",
+      "sessions": 20,
+      "users": 14,
+      "new_users": 6,
+      "engaged": 19,
+      "bounce_rate": 5.0,
+      "avg_duration": 109,
+      "screen_views": 42,
+      "conversions": 86
+    },
+    {
+      "date": "20250924",
+      "sessions": 14,
+      "users": 7,
+      "new_users": 3,
+      "engaged": 12,
+      "bounce_rate": 14.3,
+      "avg_duration": 32,
+      "screen_views": 23,
+      "conversions": 50
+    },
+    {
+      "date": "20250925",
+      "sessions": 86,
+      "users": 76,
+      "new_users": 68,
+      "engaged": 84,
+      "bounce_rate": 2.3,
+      "avg_duration": 30,
+      "screen_views": 96,
+      "conversions": 195
+    },
+    {
+      "date": "20250926",
+      "sessions": 14,
+      "users": 10,
+      "new_users": 4,
+      "engaged": 13,
+      "bounce_rate": 7.1,
+      "avg_duration": 130,
+      "screen_views": 21,
+      "conversions": 42
+    },
+    {
+      "date": "20250927",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 327,
+      "screen_views": 5,
+      "conversions": 10
+    },
+    {
+      "date": "20250928",
+      "sessions": 5,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 4,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20250929",
+      "sessions": 13,
+      "users": 9,
+      "new_users": 1,
+      "engaged": 12,
+      "bounce_rate": 7.7,
+      "avg_duration": 127,
+      "screen_views": 31,
+      "conversions": 55
+    },
+    {
+      "date": "20250930",
+      "sessions": 10,
+      "users": 4,
+      "new_users": 0,
+      "engaged": 8,
+      "bounce_rate": 20.0,
+      "avg_duration": 126,
+      "screen_views": 22,
+      "conversions": 47
+    },
+    {
+      "date": "20251001",
+      "sessions": 8,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 7,
+      "bounce_rate": 12.5,
+      "avg_duration": 5,
+      "screen_views": 7,
+      "conversions": 13
+    },
+    {
+      "date": "20251002",
+      "sessions": 90,
+      "users": 75,
+      "new_users": 42,
+      "engaged": 84,
+      "bounce_rate": 6.7,
+      "avg_duration": 191,
+      "screen_views": 198,
+      "conversions": 396
+    },
+    {
+      "date": "20251003",
+      "sessions": 33,
+      "users": 25,
+      "new_users": 14,
+      "engaged": 29,
+      "bounce_rate": 12.1,
+      "avg_duration": 159,
+      "screen_views": 56,
+      "conversions": 130
+    },
+    {
+      "date": "20251004",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 19,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20251005",
+      "sessions": 4,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 3,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20251006",
+      "sessions": 25,
+      "users": 14,
+      "new_users": 3,
+      "engaged": 23,
+      "bounce_rate": 8.0,
+      "avg_duration": 266,
+      "screen_views": 55,
+      "conversions": 121
+    },
+    {
+      "date": "20251007",
+      "sessions": 18,
+      "users": 8,
+      "new_users": 1,
+      "engaged": 13,
+      "bounce_rate": 27.8,
+      "avg_duration": 258,
+      "screen_views": 44,
+      "conversions": 91
+    },
+    {
+      "date": "20251008",
+      "sessions": 10,
+      "users": 5,
+      "new_users": 1,
+      "engaged": 10,
+      "bounce_rate": 0.0,
+      "avg_duration": 94,
+      "screen_views": 14,
+      "conversions": 26
+    },
+    {
+      "date": "20251009",
+      "sessions": 9,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 7,
+      "bounce_rate": 22.2,
+      "avg_duration": 539,
+      "screen_views": 64,
+      "conversions": 121
+    },
+    {
+      "date": "20251010",
+      "sessions": 5,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 5,
+      "bounce_rate": 0.0,
+      "avg_duration": 6,
+      "screen_views": 5,
+      "conversions": 9
+    },
+    {
+      "date": "20251011",
+      "sessions": 5,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 5,
+      "bounce_rate": 0.0,
+      "avg_duration": 77,
+      "screen_views": 6,
+      "conversions": 15
+    },
+    {
+      "date": "20251012",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 3,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20251013",
+      "sessions": 9,
+      "users": 4,
+      "new_users": 1,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 100,
+      "screen_views": 17,
+      "conversions": 34
+    },
+    {
+      "date": "20251014",
+      "sessions": 15,
+      "users": 8,
+      "new_users": 2,
+      "engaged": 14,
+      "bounce_rate": 6.7,
+      "avg_duration": 566,
+      "screen_views": 42,
+      "conversions": 83
+    },
+    {
+      "date": "20251015",
+      "sessions": 9,
+      "users": 7,
+      "new_users": 2,
+      "engaged": 9,
+      "bounce_rate": 0.0,
+      "avg_duration": 443,
+      "screen_views": 37,
+      "conversions": 85
+    },
+    {
+      "date": "20251016",
+      "sessions": 104,
+      "users": 89,
+      "new_users": 54,
+      "engaged": 96,
+      "bounce_rate": 7.7,
+      "avg_duration": 154,
+      "screen_views": 155,
+      "conversions": 288
+    },
+    {
+      "date": "20251017",
+      "sessions": 75,
+      "users": 50,
+      "new_users": 35,
+      "engaged": 65,
+      "bounce_rate": 13.3,
+      "avg_duration": 91,
+      "screen_views": 91,
+      "conversions": 187
+    },
+    {
+      "date": "20251018",
+      "sessions": 8,
+      "users": 7,
+      "new_users": 4,
+      "engaged": 7,
+      "bounce_rate": 12.5,
+      "avg_duration": 230,
+      "screen_views": 22,
+      "conversions": 49
+    },
+    {
+      "date": "20251019",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 3,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20251020",
+      "sessions": 28,
+      "users": 16,
+      "new_users": 6,
+      "engaged": 20,
+      "bounce_rate": 28.6,
+      "avg_duration": 147,
+      "screen_views": 38,
+      "conversions": 70
+    },
+    {
+      "date": "20251021",
+      "sessions": 24,
+      "users": 12,
+      "new_users": 6,
+      "engaged": 18,
+      "bounce_rate": 25.0,
+      "avg_duration": 28,
+      "screen_views": 23,
+      "conversions": 45
+    },
+    {
+      "date": "20251022",
+      "sessions": 30,
+      "users": 15,
+      "new_users": 6,
+      "engaged": 25,
+      "bounce_rate": 16.7,
+      "avg_duration": 99,
+      "screen_views": 40,
+      "conversions": 80
+    },
+    {
+      "date": "20251023",
+      "sessions": 19,
+      "users": 13,
+      "new_users": 5,
+      "engaged": 19,
+      "bounce_rate": 0.0,
+      "avg_duration": 235,
+      "screen_views": 29,
+      "conversions": 60
+    },
+    {
+      "date": "20251024",
+      "sessions": 55,
+      "users": 43,
+      "new_users": 19,
+      "engaged": 50,
+      "bounce_rate": 9.1,
+      "avg_duration": 240,
+      "screen_views": 99,
+      "conversions": 239
+    },
+    {
+      "date": "20251025",
+      "sessions": 4,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 58,
+      "screen_views": 5,
+      "conversions": 9
+    },
+    {
+      "date": "20251026",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 3013,
+      "screen_views": 9,
+      "conversions": 22
+    },
+    {
+      "date": "20251027",
+      "sessions": 15,
+      "users": 8,
+      "new_users": 4,
+      "engaged": 11,
+      "bounce_rate": 26.7,
+      "avg_duration": 126,
+      "screen_views": 23,
+      "conversions": 52
+    },
+    {
+      "date": "20251028",
+      "sessions": 17,
+      "users": 14,
+      "new_users": 2,
+      "engaged": 16,
+      "bounce_rate": 5.9,
+      "avg_duration": 343,
+      "screen_views": 23,
+      "conversions": 52
+    },
+    {
+      "date": "20251029",
+      "sessions": 23,
+      "users": 12,
+      "new_users": 5,
+      "engaged": 21,
+      "bounce_rate": 8.7,
+      "avg_duration": 219,
+      "screen_views": 31,
+      "conversions": 67
+    },
+    {
+      "date": "20251030",
+      "sessions": 67,
+      "users": 55,
+      "new_users": 46,
+      "engaged": 65,
+      "bounce_rate": 3.0,
+      "avg_duration": 111,
+      "screen_views": 91,
+      "conversions": 172
+    },
+    {
+      "date": "20251031",
+      "sessions": 22,
+      "users": 16,
+      "new_users": 8,
+      "engaged": 19,
+      "bounce_rate": 13.6,
+      "avg_duration": 358,
+      "screen_views": 44,
+      "conversions": 83
+    },
+    {
+      "date": "20251102",
+      "sessions": 1,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 0,
+      "bounce_rate": 100.0,
+      "avg_duration": 0,
+      "screen_views": 0,
+      "conversions": 0
+    },
+    {
+      "date": "20251103",
+      "sessions": 26,
+      "users": 21,
+      "new_users": 12,
+      "engaged": 25,
+      "bounce_rate": 3.8,
+      "avg_duration": 52,
+      "screen_views": 31,
+      "conversions": 62
+    },
+    {
+      "date": "20251104",
+      "sessions": 16,
+      "users": 11,
+      "new_users": 2,
+      "engaged": 12,
+      "bounce_rate": 25.0,
+      "avg_duration": 85,
+      "screen_views": 20,
+      "conversions": 46
+    },
+    {
+      "date": "20251105",
+      "sessions": 9,
+      "users": 5,
+      "new_users": 3,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 35,
+      "screen_views": 13,
+      "conversions": 28
+    },
+    {
+      "date": "20251106",
+      "sessions": 44,
+      "users": 36,
+      "new_users": 31,
+      "engaged": 41,
+      "bounce_rate": 6.8,
+      "avg_duration": 88,
+      "screen_views": 72,
+      "conversions": 165
+    },
+    {
+      "date": "20251107",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 33.3,
+      "avg_duration": 42,
+      "screen_views": 5,
+      "conversions": 14
+    },
+    {
+      "date": "20251109",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 62,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20251110",
+      "sessions": 5,
+      "users": 5,
+      "new_users": 0,
+      "engaged": 5,
+      "bounce_rate": 0.0,
+      "avg_duration": 343,
+      "screen_views": 10,
+      "conversions": 23
+    },
+    {
+      "date": "20251111",
+      "sessions": 11,
+      "users": 4,
+      "new_users": 0,
+      "engaged": 10,
+      "bounce_rate": 9.1,
+      "avg_duration": 88,
+      "screen_views": 18,
+      "conversions": 37
+    },
+    {
+      "date": "20251112",
+      "sessions": 7,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 6,
+      "bounce_rate": 14.3,
+      "avg_duration": 140,
+      "screen_views": 11,
+      "conversions": 25
+    },
+    {
+      "date": "20251113",
+      "sessions": 36,
+      "users": 30,
+      "new_users": 19,
+      "engaged": 33,
+      "bounce_rate": 8.3,
+      "avg_duration": 64,
+      "screen_views": 62,
+      "conversions": 147
+    },
+    {
+      "date": "20251114",
+      "sessions": 22,
+      "users": 19,
+      "new_users": 13,
+      "engaged": 21,
+      "bounce_rate": 4.5,
+      "avg_duration": 214,
+      "screen_views": 41,
+      "conversions": 111
+    },
+    {
+      "date": "20251115",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 20,
+      "screen_views": 4,
+      "conversions": 11
+    },
+    {
+      "date": "20251117",
+      "sessions": 17,
+      "users": 11,
+      "new_users": 7,
+      "engaged": 15,
+      "bounce_rate": 11.8,
+      "avg_duration": 156,
+      "screen_views": 33,
+      "conversions": 76
+    },
+    {
+      "date": "20251118",
+      "sessions": 10,
+      "users": 5,
+      "new_users": 2,
+      "engaged": 7,
+      "bounce_rate": 30.0,
+      "avg_duration": 230,
+      "screen_views": 13,
+      "conversions": 30
+    },
+    {
+      "date": "20251120",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 3,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 15,
+      "screen_views": 3,
+      "conversions": 8
+    },
+    {
+      "date": "20251121",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 561,
+      "screen_views": 20,
+      "conversions": 39
+    },
+    {
+      "date": "20251122",
+      "sessions": 1,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 6,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20251124",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 88,
+      "screen_views": 4,
+      "conversions": 9
+    },
+    {
+      "date": "20251125",
+      "sessions": 8,
+      "users": 4,
+      "new_users": 0,
+      "engaged": 8,
+      "bounce_rate": 0.0,
+      "avg_duration": 535,
+      "screen_views": 14,
+      "conversions": 28
+    },
+    {
+      "date": "20251126",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 35,
+      "screen_views": 10,
+      "conversions": 17
+    },
+    {
+      "date": "20251127",
+      "sessions": 39,
+      "users": 27,
+      "new_users": 18,
+      "engaged": 34,
+      "bounce_rate": 12.8,
+      "avg_duration": 190,
+      "screen_views": 69,
+      "conversions": 137
+    },
+    {
+      "date": "20251128",
+      "sessions": 9,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 44.4,
+      "avg_duration": 124,
+      "screen_views": 7,
+      "conversions": 14
+    },
+    {
+      "date": "20251129",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 248,
+      "screen_views": 2,
+      "conversions": 6
+    },
+    {
+      "date": "20251130",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 89,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20251201",
+      "sessions": 10,
+      "users": 5,
+      "new_users": 0,
+      "engaged": 9,
+      "bounce_rate": 10.0,
+      "avg_duration": 227,
+      "screen_views": 18,
+      "conversions": 37
+    },
+    {
+      "date": "20251202",
+      "sessions": 16,
+      "users": 9,
+      "new_users": 4,
+      "engaged": 16,
+      "bounce_rate": 0.0,
+      "avg_duration": 367,
+      "screen_views": 38,
+      "conversions": 70
+    },
+    {
+      "date": "20251203",
+      "sessions": 139,
+      "users": 117,
+      "new_users": 86,
+      "engaged": 128,
+      "bounce_rate": 7.9,
+      "avg_duration": 160,
+      "screen_views": 217,
+      "conversions": 637
+    },
+    {
+      "date": "20251204",
+      "sessions": 69,
+      "users": 62,
+      "new_users": 52,
+      "engaged": 65,
+      "bounce_rate": 5.8,
+      "avg_duration": 50,
+      "screen_views": 76,
+      "conversions": 169
+    },
+    {
+      "date": "20251205",
+      "sessions": 36,
+      "users": 31,
+      "new_users": 25,
+      "engaged": 35,
+      "bounce_rate": 2.8,
+      "avg_duration": 58,
+      "screen_views": 41,
+      "conversions": 99
+    },
+    {
+      "date": "20251206",
+      "sessions": 4,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 854,
+      "screen_views": 15,
+      "conversions": 33
+    },
+    {
+      "date": "20251207",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 151,
+      "screen_views": 3,
+      "conversions": 13
+    },
+    {
+      "date": "20251208",
+      "sessions": 9,
+      "users": 6,
+      "new_users": 3,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 298,
+      "screen_views": 14,
+      "conversions": 38
+    },
+    {
+      "date": "20251209",
+      "sessions": 12,
+      "users": 7,
+      "new_users": 2,
+      "engaged": 10,
+      "bounce_rate": 16.7,
+      "avg_duration": 219,
+      "screen_views": 13,
+      "conversions": 25
+    },
+    {
+      "date": "20251210",
+      "sessions": 11,
+      "users": 7,
+      "new_users": 3,
+      "engaged": 10,
+      "bounce_rate": 9.1,
+      "avg_duration": 52,
+      "screen_views": 15,
+      "conversions": 37
+    },
+    {
+      "date": "20251211",
+      "sessions": 7,
+      "users": 6,
+      "new_users": 3,
+      "engaged": 7,
+      "bounce_rate": 0.0,
+      "avg_duration": 116,
+      "screen_views": 16,
+      "conversions": 33
+    },
+    {
+      "date": "20251212",
+      "sessions": 19,
+      "users": 15,
+      "new_users": 13,
+      "engaged": 17,
+      "bounce_rate": 10.5,
+      "avg_duration": 102,
+      "screen_views": 26,
+      "conversions": 49
+    },
+    {
+      "date": "20251214",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 485,
+      "screen_views": 8,
+      "conversions": 23
+    },
+    {
+      "date": "20251215",
+      "sessions": 6,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 16.7,
+      "avg_duration": 64,
+      "screen_views": 7,
+      "conversions": 16
+    },
+    {
+      "date": "20251216",
+      "sessions": 23,
+      "users": 16,
+      "new_users": 13,
+      "engaged": 22,
+      "bounce_rate": 4.3,
+      "avg_duration": 106,
+      "screen_views": 36,
+      "conversions": 85
+    },
+    {
+      "date": "20251217",
+      "sessions": 9,
+      "users": 7,
+      "new_users": 3,
+      "engaged": 9,
+      "bounce_rate": 0.0,
+      "avg_duration": 55,
+      "screen_views": 31,
+      "conversions": 62
+    },
+    {
+      "date": "20251218",
+      "sessions": 62,
+      "users": 56,
+      "new_users": 45,
+      "engaged": 59,
+      "bounce_rate": 4.8,
+      "avg_duration": 126,
+      "screen_views": 96,
+      "conversions": 195
+    },
+    {
+      "date": "20251219",
+      "sessions": 37,
+      "users": 30,
+      "new_users": 23,
+      "engaged": 34,
+      "bounce_rate": 8.1,
+      "avg_duration": 122,
+      "screen_views": 61,
+      "conversions": 123
+    },
+    {
+      "date": "20251220",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 3,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20251222",
+      "sessions": 10,
+      "users": 6,
+      "new_users": 4,
+      "engaged": 8,
+      "bounce_rate": 20.0,
+      "avg_duration": 66,
+      "screen_views": 16,
+      "conversions": 33
+    },
+    {
+      "date": "20251223",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 9,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20251224",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 1,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 45,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20251226",
+      "sessions": 4,
+      "users": 3,
+      "new_users": 0,
+      "engaged": 4,
+      "bounce_rate": 0.0,
+      "avg_duration": 69,
+      "screen_views": 7,
+      "conversions": 13
+    },
+    {
+      "date": "20251229",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 299,
+      "screen_views": 4,
+      "conversions": 7
+    },
+    {
+      "date": "20251230",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 253,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20260102",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 3,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20260104",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 1046,
+      "screen_views": 3,
+      "conversions": 9
+    },
+    {
+      "date": "20260105",
+      "sessions": 11,
+      "users": 8,
+      "new_users": 1,
+      "engaged": 9,
+      "bounce_rate": 18.2,
+      "avg_duration": 335,
+      "screen_views": 29,
+      "conversions": 72
+    },
+    {
+      "date": "20260106",
+      "sessions": 7,
+      "users": 4,
+      "new_users": 3,
+      "engaged": 5,
+      "bounce_rate": 28.6,
+      "avg_duration": 220,
+      "screen_views": 8,
+      "conversions": 23
+    },
+    {
+      "date": "20260107",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 165,
+      "screen_views": 4,
+      "conversions": 11
+    },
+    {
+      "date": "20260108",
+      "sessions": 2,
+      "users": 2,
+      "new_users": 2,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 5,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20260109",
+      "sessions": 2,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 50.0,
+      "avg_duration": 2,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20260110",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 9,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20260111",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 6,
+      "screen_views": 1,
+      "conversions": 2
+    },
+    {
+      "date": "20260112",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 6,
+      "screen_views": 2,
+      "conversions": 4
+    },
+    {
+      "date": "20260113",
+      "sessions": 5,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 756,
+      "screen_views": 14,
+      "conversions": 27
+    },
+    {
+      "date": "20260114",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 12,
+      "screen_views": 4,
+      "conversions": 8
+    },
+    {
+      "date": "20260115",
+      "sessions": 3,
+      "users": 3,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 19,
+      "screen_views": 6,
+      "conversions": 10
+    },
+    {
+      "date": "20260119",
+      "sessions": 3,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 33.3,
+      "avg_duration": 8,
+      "screen_views": 3,
+      "conversions": 6
+    },
+    {
+      "date": "20260121",
+      "sessions": 4,
+      "users": 2,
+      "new_users": 0,
+      "engaged": 3,
+      "bounce_rate": 25.0,
+      "avg_duration": 520,
+      "screen_views": 12,
+      "conversions": 22
+    },
+    {
+      "date": "20260122",
+      "sessions": 11,
+      "users": 6,
+      "new_users": 1,
+      "engaged": 10,
+      "bounce_rate": 9.1,
+      "avg_duration": 523,
+      "screen_views": 34,
+      "conversions": 61
+    },
+    {
+      "date": "20260123",
+      "sessions": 223,
+      "users": 196,
+      "new_users": 155,
+      "engaged": 207,
+      "bounce_rate": 7.2,
+      "avg_duration": 100,
+      "screen_views": 103,
+      "conversions": 465
+    },
+    {
+      "date": "20260124",
+      "sessions": 12,
+      "users": 9,
+      "new_users": 9,
+      "engaged": 11,
+      "bounce_rate": 8.3,
+      "avg_duration": 133,
+      "screen_views": 12,
+      "conversions": 27
+    },
+    {
+      "date": "20260125",
+      "sessions": 8,
+      "users": 4,
+      "new_users": 3,
+      "engaged": 7,
+      "bounce_rate": 12.5,
+      "avg_duration": 457,
+      "screen_views": 34,
+      "conversions": 66
+    },
+    {
+      "date": "20260126",
+      "sessions": 61,
+      "users": 47,
+      "new_users": 26,
+      "engaged": 55,
+      "bounce_rate": 9.8,
+      "avg_duration": 157,
+      "screen_views": 31,
+      "conversions": 111
+    },
+    {
+      "date": "20260127",
+      "sessions": 53,
+      "users": 33,
+      "new_users": 20,
+      "engaged": 47,
+      "bounce_rate": 11.3,
+      "avg_duration": 281,
+      "screen_views": 17,
+      "conversions": 109
+    },
+    {
+      "date": "20260128",
+      "sessions": 87,
+      "users": 64,
+      "new_users": 48,
+      "engaged": 81,
+      "bounce_rate": 6.9,
+      "avg_duration": 77,
+      "screen_views": 22,
+      "conversions": 142
+    },
+    {
+      "date": "20260129",
+      "sessions": 1491,
+      "users": 1425,
+      "new_users": 1353,
+      "engaged": 1467,
+      "bounce_rate": 1.6,
+      "avg_duration": 30,
+      "screen_views": 51,
+      "conversions": 1741
+    },
+    {
+      "date": "20260130",
+      "sessions": 101,
+      "users": 66,
+      "new_users": 41,
+      "engaged": 87,
+      "bounce_rate": 13.9,
+      "avg_duration": 124,
+      "screen_views": 44,
+      "conversions": 190
+    },
+    {
+      "date": "20260131",
+      "sessions": 7,
+      "users": 4,
+      "new_users": 3,
+      "engaged": 6,
+      "bounce_rate": 14.3,
+      "avg_duration": 123,
+      "screen_views": 0,
+      "conversions": 10
+    },
+    {
+      "date": "20260201",
+      "sessions": 5,
+      "users": 3,
+      "new_users": 3,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 17,
+      "screen_views": 1,
+      "conversions": 6
+    },
+    {
+      "date": "20260202",
+      "sessions": 69,
+      "users": 45,
+      "new_users": 30,
+      "engaged": 60,
+      "bounce_rate": 13.0,
+      "avg_duration": 59,
+      "screen_views": 24,
+      "conversions": 104
+    },
+    {
+      "date": "20260203",
+      "sessions": 159,
+      "users": 120,
+      "new_users": 78,
+      "engaged": 141,
+      "bounce_rate": 11.3,
+      "avg_duration": 200,
+      "screen_views": 245,
+      "conversions": 513
+    },
+    {
+      "date": "20260204",
+      "sessions": 38,
+      "users": 27,
+      "new_users": 19,
+      "engaged": 31,
+      "bounce_rate": 18.4,
+      "avg_duration": 27,
+      "screen_views": 32,
+      "conversions": 74
+    },
+    {
+      "date": "20260205",
+      "sessions": 265,
+      "users": 231,
+      "new_users": 202,
+      "engaged": 251,
+      "bounce_rate": 5.3,
+      "avg_duration": 79,
+      "screen_views": 19,
+      "conversions": 346
+    },
+    {
+      "date": "20260206",
+      "sessions": 95,
+      "users": 70,
+      "new_users": 57,
+      "engaged": 88,
+      "bounce_rate": 7.4,
+      "avg_duration": 110,
+      "screen_views": 43,
+      "conversions": 158
+    },
+    {
+      "date": "20260207",
+      "sessions": 7,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 5,
+      "bounce_rate": 28.6,
+      "avg_duration": 319,
+      "screen_views": 8,
+      "conversions": 21
+    },
+    {
+      "date": "20260208",
+      "sessions": 13,
+      "users": 5,
+      "new_users": 4,
+      "engaged": 13,
+      "bounce_rate": 0.0,
+      "avg_duration": 70,
+      "screen_views": 0,
+      "conversions": 17
+    },
+    {
+      "date": "20260209",
+      "sessions": 38,
+      "users": 18,
+      "new_users": 8,
+      "engaged": 31,
+      "bounce_rate": 18.4,
+      "avg_duration": 137,
+      "screen_views": 11,
+      "conversions": 55
+    },
+    {
+      "date": "20260210",
+      "sessions": 130,
+      "users": 113,
+      "new_users": 84,
+      "engaged": 123,
+      "bounce_rate": 5.4,
+      "avg_duration": 77,
+      "screen_views": 39,
+      "conversions": 223
+    },
+    {
+      "date": "20260211",
+      "sessions": 89,
+      "users": 56,
+      "new_users": 29,
+      "engaged": 78,
+      "bounce_rate": 12.4,
+      "avg_duration": 143,
+      "screen_views": 44,
+      "conversions": 181
+    },
+    {
+      "date": "20260212",
+      "sessions": 123,
+      "users": 99,
+      "new_users": 76,
+      "engaged": 115,
+      "bounce_rate": 6.5,
+      "avg_duration": 49,
+      "screen_views": 18,
+      "conversions": 167
+    },
+    {
+      "date": "20260213",
+      "sessions": 23,
+      "users": 16,
+      "new_users": 8,
+      "engaged": 22,
+      "bounce_rate": 4.3,
+      "avg_duration": 122,
+      "screen_views": 11,
+      "conversions": 63
+    },
+    {
+      "date": "20260214",
+      "sessions": 3,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 3,
+      "bounce_rate": 0.0,
+      "avg_duration": 4,
+      "screen_views": 0,
+      "conversions": 3
+    },
+    {
+      "date": "20260215",
+      "sessions": 1,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 427,
+      "screen_views": 0,
+      "conversions": 2
+    },
+    {
+      "date": "20260216",
+      "sessions": 1,
+      "users": 0,
+      "new_users": 0,
+      "engaged": 1,
+      "bounce_rate": 0.0,
+      "avg_duration": 0,
+      "screen_views": 0,
+      "conversions": 1
+    },
+    {
+      "date": "20260217",
+      "sessions": 2,
+      "users": 1,
+      "new_users": 0,
+      "engaged": 2,
+      "bounce_rate": 0.0,
+      "avg_duration": 100,
+      "screen_views": 1,
+      "conversions": 3
+    },
+    {
+      "date": "20260218",
+      "sessions": 14,
+      "users": 7,
+      "new_users": 3,
+      "engaged": 13,
+      "bounce_rate": 7.1,
+      "avg_duration": 116,
+      "screen_views": 11,
+      "conversions": 36
+    },
+    {
+      "date": "20260219",
+      "sessions": 127,
+      "users": 106,
+      "new_users": 89,
+      "engaged": 120,
+      "bounce_rate": 5.5,
+      "avg_duration": 87,
+      "screen_views": 45,
+      "conversions": 215
+    },
+    {
+      "date": "20260220",
+      "sessions": 47,
+      "users": 33,
+      "new_users": 26,
+      "engaged": 43,
+      "bounce_rate": 8.5,
+      "avg_duration": 104,
+      "screen_views": 18,
+      "conversions": 73
+    },
+    {
+      "date": "20260222",
+      "sessions": 9,
+      "users": 4,
+      "new_users": 2,
+      "engaged": 8,
+      "bounce_rate": 11.1,
+      "avg_duration": 15,
+      "screen_views": 3,
+      "conversions": 13
+    },
+    {
+      "date": "20260223",
+      "sessions": 137,
+      "users": 116,
+      "new_users": 90,
+      "engaged": 127,
+      "bounce_rate": 7.3,
+      "avg_duration": 107,
+      "screen_views": 39,
+      "conversions": 241
+    },
+    {
+      "date": "20260224",
+      "sessions": 63,
+      "users": 34,
+      "new_users": 20,
+      "engaged": 51,
+      "bounce_rate": 19.0,
+      "avg_duration": 113,
+      "screen_views": 10,
+      "conversions": 82
+    },
+    {
+      "date": "20260225",
+      "sessions": 20,
+      "users": 10,
+      "new_users": 3,
+      "engaged": 14,
+      "bounce_rate": 30.0,
+      "avg_duration": 138,
+      "screen_views": 5,
+      "conversions": 26
+    },
+    {
+      "date": "20260226",
+      "sessions": 139,
+      "users": 125,
+      "new_users": 107,
+      "engaged": 132,
+      "bounce_rate": 5.0,
+      "avg_duration": 55,
+      "screen_views": 26,
+      "conversions": 222
+    },
+    {
+      "date": "20260227",
+      "sessions": 159,
+      "users": 140,
+      "new_users": 118,
+      "engaged": 152,
+      "bounce_rate": 4.4,
+      "avg_duration": 86,
+      "screen_views": 19,
+      "conversions": 232
+    },
+    {
+      "date": "20260228",
+      "sessions": 5,
+      "users": 5,
+      "new_users": 4,
+      "engaged": 5,
+      "bounce_rate": 0.0,
+      "avg_duration": 364,
+      "screen_views": 0,
+      "conversions": 7
+    },
+    {
+      "date": "20260301",
+      "sessions": 5,
+      "users": 2,
+      "new_users": 1,
+      "engaged": 4,
+      "bounce_rate": 20.0,
+      "avg_duration": 13,
+      "screen_views": 0,
+      "conversions": 4
+    },
+    {
+      "date": "20260302",
+      "sessions": 139,
+      "users": 118,
+      "new_users": 105,
+      "engaged": 132,
+      "bounce_rate": 5.0,
+      "avg_duration": 54,
+      "screen_views": 12,
+      "conversions": 162
+    },
+    {
+      "date": "20260303",
+      "sessions": 77,
+      "users": 66,
+      "new_users": 53,
+      "engaged": 72,
+      "bounce_rate": 6.5,
+      "avg_duration": 84,
+      "screen_views": 54,
+      "conversions": 134
+    },
+    {
+      "date": "20260304",
+      "sessions": 481,
+      "users": 463,
+      "new_users": 444,
+      "engaged": 476,
+      "bounce_rate": 1.0,
+      "avg_duration": 24,
+      "screen_views": 146,
+      "conversions": 649
+    },
+    {
+      "date": "20260305",
+      "sessions": 656,
+      "users": 617,
+      "new_users": 576,
+      "engaged": 636,
+      "bounce_rate": 3.0,
+      "avg_duration": 44,
+      "screen_views": 467,
+      "conversions": 1209
+    },
+    {
+      "date": "20260306",
+      "sessions": 249,
+      "users": 222,
+      "new_users": 202,
+      "engaged": 235,
+      "bounce_rate": 5.6,
+      "avg_duration": 45,
+      "screen_views": 121,
+      "conversions": 394
+    },
+    {
+      "date": "20260307",
+      "sessions": 17,
+      "users": 14,
+      "new_users": 11,
+      "engaged": 15,
+      "bounce_rate": 11.8,
+      "avg_duration": 10,
+      "screen_views": 10,
+      "conversions": 30
+    },
+    {
+      "date": "20260308",
+      "sessions": 9,
+      "users": 3,
+      "new_users": 2,
+      "engaged": 5,
+      "bounce_rate": 44.4,
+      "avg_duration": 8,
+      "screen_views": 3,
+      "conversions": 9
+    },
+    {
+      "date": "20260309",
+      "sessions": 44,
+      "users": 34,
+      "new_users": 17,
+      "engaged": 39,
+      "bounce_rate": 11.4,
+      "avg_duration": 135,
+      "screen_views": 21,
+      "conversions": 85
+    }
   ],
-
-  // GA4 Best days of week (sessions) — real data
-  ga4Days: [
-    { day:"Qui", sessions:7272 },
-    { day:"Qua", sessions:3842 },
-    { day:"Seg", sessions:3532 },
-    { day:"Sex", sessions:3347 },
-    { day:"Ter", sessions:2819 },
-    { day:"Dom", sessions:207  },
-    { day:"Sáb", sessions:205  }
+  "channels": [
+    {
+      "name": "Organic Search",
+      "sessions": 41603,
+      "share": 37.4,
+      "color": "#10B981"
+    },
+    {
+      "name": "Direct",
+      "sessions": 31523,
+      "share": 28.3,
+      "color": "#3B82F6"
+    },
+    {
+      "name": "Email",
+      "sessions": 20767,
+      "share": 18.6,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "Referral",
+      "sessions": 7718,
+      "share": 6.9,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Unassigned",
+      "sessions": 5761,
+      "share": 5.2,
+      "color": "#64748B"
+    },
+    {
+      "name": "Organic Social",
+      "sessions": 3652,
+      "share": 3.3,
+      "color": "#EC4899"
+    },
+    {
+      "name": "Paid Search",
+      "sessions": 254,
+      "share": 0.2,
+      "color": "#F59E0B"
+    },
+    {
+      "name": "Organic Video",
+      "sessions": 60,
+      "share": 0.1,
+      "color": "#06B6D4"
+    },
+    {
+      "name": "Paid Social",
+      "sessions": 7,
+      "share": 0.0,
+      "color": "#EF4444"
+    },
+    {
+      "name": "Paid Other",
+      "sessions": 6,
+      "share": 0.0,
+      "color": "#84CC16"
+    },
+    {
+      "name": "Organic Shopping",
+      "sessions": 4,
+      "share": 0.0,
+      "color": "#F97316"
+    }
   ],
-
-  // GA4 Best hours — real data
-  ga4Hours: [
-    { hour:"11h", sessions:2988 },
-    { hour:"14h", sessions:2915 },
-    { hour:"9h",  sessions:2431 },
-    { hour:"15h", sessions:2295 },
-    { hour:"10h", sessions:2218 },
-    { hour:"16h", sessions:1758 },
-    { hour:"17h", sessions:1202 },
-    { hour:"12h", sessions:1185 },
-    { hour:"18h", sessions:1109 },
-    { hour:"13h", sessions:817  }
+  "ga4Days": [
+    {
+      "day": "Qui",
+      "sessions": 7272
+    },
+    {
+      "day": "Qua",
+      "sessions": 3842
+    },
+    {
+      "day": "Seg",
+      "sessions": 3532
+    },
+    {
+      "day": "Sex",
+      "sessions": 3347
+    },
+    {
+      "day": "Ter",
+      "sessions": 2819
+    },
+    {
+      "day": "Dom",
+      "sessions": 207
+    },
+    {
+      "day": "Sáb",
+      "sessions": 205
+    }
   ],
-
-  // Sessions by day — real GA4 data
-  rdOpensByDay: [
-    { day:"Qui", sessions:7272 },
-    { day:"Qua", sessions:3842 },
-    { day:"Seg", sessions:3532 },
-    { day:"Sex", sessions:3347 },
-    { day:"Ter", sessions:2819 },
-    { day:"Dom", sessions:207  },
-    { day:"Sáb", sessions:205  }
+  "ga4Hours": [
+    {
+      "hour": "11h",
+      "sessions": 2988
+    },
+    {
+      "hour": "14h",
+      "sessions": 2915
+    },
+    {
+      "hour": "9h",
+      "sessions": 2431
+    },
+    {
+      "hour": "15h",
+      "sessions": 2295
+    },
+    {
+      "hour": "10h",
+      "sessions": 2218
+    },
+    {
+      "hour": "16h",
+      "sessions": 1758
+    },
+    {
+      "hour": "17h",
+      "sessions": 1202
+    },
+    {
+      "hour": "12h",
+      "sessions": 1185
+    },
+    {
+      "hour": "18h",
+      "sessions": 1109
+    },
+    {
+      "hour": "13h",
+      "sessions": 817
+    }
   ],
-
-  // Sessions by hour — real GA4 data
-  rdOpensByHour: [
-    { hour:"9h",  sessions:2431 },
-    { hour:"10h", sessions:2218 },
-    { hour:"11h", sessions:2988 },
-    { hour:"12h", sessions:1185 },
-    { hour:"13h", sessions:817  },
-    { hour:"14h", sessions:2915 },
-    { hour:"15h", sessions:2295 },
-    { hour:"16h", sessions:1758 },
-    { hour:"17h", sessions:1202 },
-    { hour:"18h", sessions:1109 }
+  "rdOpensByDay": [
+    {
+      "day": "Qui",
+      "sessions": 7272
+    },
+    {
+      "day": "Qua",
+      "sessions": 3842
+    },
+    {
+      "day": "Seg",
+      "sessions": 3532
+    },
+    {
+      "day": "Sex",
+      "sessions": 3347
+    },
+    {
+      "day": "Ter",
+      "sessions": 2819
+    },
+    {
+      "day": "Dom",
+      "sessions": 207
+    },
+    {
+      "day": "Sáb",
+      "sessions": 205
+    }
   ],
-
-  // GA4 Heatmap — real data (sessions by day × hour)
-  heatmap: {
-    "Dom": {9:9,  10:6,  11:14, 12:11, 13:13, 14:17,  15:16, 16:11, 17:13, 18:14},
-    "Seg": {9:323,10:249,11:165,12:95, 13:181,14:508,  15:450,16:681,17:226,18:218},
-    "Ter": {9:264,10:295,11:257,12:137,13:199,14:317,  15:305,16:267,17:186,18:177},
-    "Qua": {9:216,10:680,11:1090,12:137,13:100,14:201, 15:345,16:195,17:163,18:334},
-    "Qui": {9:668,10:600,11:971,12:603,13:152,14:1655, 15:978,16:417,17:465,18:280},
-    "Sex": {9:939,10:374,11:475,12:190,13:160,14:208,  15:192,16:176,17:133,18:75 },
-    "Sáb": {9:12, 10:14, 11:16, 12:12, 13:12, 14:9,   15:9,  16:11, 17:16, 18:11 }
+  "rdOpensByHour": [
+    {
+      "hour": "11h",
+      "sessions": 2988
+    },
+    {
+      "hour": "14h",
+      "sessions": 2915
+    },
+    {
+      "hour": "9h",
+      "sessions": 2431
+    },
+    {
+      "hour": "15h",
+      "sessions": 2295
+    },
+    {
+      "hour": "10h",
+      "sessions": 2218
+    },
+    {
+      "hour": "16h",
+      "sessions": 1758
+    },
+    {
+      "hour": "17h",
+      "sessions": 1202
+    },
+    {
+      "hour": "12h",
+      "sessions": 1185
+    },
+    {
+      "hour": "18h",
+      "sessions": 1109
+    },
+    {
+      "hour": "13h",
+      "sessions": 817
+    }
+  ],
+  "heatmap": {
+    "Dom": {
+      "9": 9,
+      "10": 6,
+      "11": 14,
+      "12": 11,
+      "13": 13,
+      "14": 17,
+      "15": 16,
+      "16": 11,
+      "17": 13,
+      "18": 14
+    },
+    "Seg": {
+      "9": 323,
+      "10": 249,
+      "11": 165,
+      "12": 95,
+      "13": 181,
+      "14": 508,
+      "15": 450,
+      "16": 681,
+      "17": 226,
+      "18": 218
+    },
+    "Ter": {
+      "9": 264,
+      "10": 295,
+      "11": 257,
+      "12": 137,
+      "13": 199,
+      "14": 317,
+      "15": 305,
+      "16": 267,
+      "17": 186,
+      "18": 177
+    },
+    "Qua": {
+      "9": 216,
+      "10": 680,
+      "11": 1090,
+      "12": 137,
+      "13": 100,
+      "14": 201,
+      "15": 345,
+      "16": 195,
+      "17": 163,
+      "18": 334
+    },
+    "Qui": {
+      "9": 668,
+      "10": 600,
+      "11": 971,
+      "12": 603,
+      "13": 152,
+      "14": 1655,
+      "15": 978,
+      "16": 417,
+      "17": 465,
+      "18": 280
+    },
+    "Sex": {
+      "9": 939,
+      "10": 374,
+      "11": 475,
+      "12": 190,
+      "13": 160,
+      "14": 208,
+      "15": 192,
+      "16": 176,
+      "17": 133,
+      "18": 75
+    },
+    "Sáb": {
+      "9": 12,
+      "10": 14,
+      "11": 16,
+      "12": 12,
+      "13": 12,
+      "14": 9,
+      "15": 9,
+      "16": 11,
+      "17": 16,
+      "18": 11
+    }
   },
-
-  // Top 15 Campaigns — real GA4 UTM data
-  campaigns: [
-    { name:"iab_iab_ia_summit_-_email_save_the_date_-_base_geral_-_02",                    category:"IA Summit",         sessions:1719, users:1517, bounce_rate:3.4,  avg_duration:48,  engaged:1660 },
-    { name:"adtech__branding_-_newsletter_-_regua_12",                                       category:"AdTech & Branding", sessions:1460, users:606,  bounce_rate:8.0,  avg_duration:256, engaged:1343 },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_com_virada_de_lote",        category:"AdTech & Branding", sessions:1342, users:1248, bounce_rate:1.9,  avg_duration:43,  engaged:1316 },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_sem_virada_de_lote_v2",     category:"AdTech & Branding", sessions:1170, users:1094, bounce_rate:1.8,  avg_duration:47,  engaged:1149 },
-    { name:"iab_emkt_evento_adtech_-_regua_6",                                               category:"AdTech & Branding", sessions:769,  users:692,  bounce_rate:3.3,  avg_duration:39,  engaged:744  },
-    { name:"repique_adtech__branding_-_newsletter_-_regua_12",                               category:"AdTech & Branding", sessions:661,  users:330,  bounce_rate:4.5,  avg_duration:187, engaged:631  },
-    { name:"iab_evento_adtech_-_regua_11__e-mail_marketing",                                 category:"AdTech & Branding", sessions:570,  users:487,  bounce_rate:3.5,  avg_duration:61,  engaged:550  },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-1",                              category:"AdTech & Branding", sessions:538,  users:483,  bounce_rate:3.2,  avg_duration:42,  engaged:521  },
-    { name:"iab_iab_ia_summit_-_tema_painel_1__palestrantes__agenda__base_geral",           category:"IA Summit",         sessions:514,  users:496,  bounce_rate:1.2,  avg_duration:29,  engaged:508  },
-    { name:"iab_forum_de_politicas_publicas__save_the_date",                                 category:"RelGov",            sessions:489,  users:440,  bounce_rate:5.1,  avg_duration:52,  engaged:464  },
-    { name:"relgov_2025_boletim_de_transparencia_-_marco_2025",                             category:"RelGov",            sessions:469,  users:336,  bounce_rate:9.8,  avg_duration:133, engaged:423  },
-    { name:"i_institucional_iab_news__maio25",                                               category:"Newsletter",        sessions:466,  users:268,  bounce_rate:13.9, avg_duration:170, engaged:401  },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-2",                              category:"AdTech & Branding", sessions:454,  users:405,  bounce_rate:1.3,  avg_duration:87,  engaged:448  },
-    { name:"i_institucional_iab_news__marco25_semana_2",                                    category:"Newsletter",        sessions:454,  users:261,  bounce_rate:12.8, avg_duration:180, engaged:396  },
-    { name:"iab_news_iab_-_janeiro_-_semana_2_-_2",                                        category:"Newsletter",        sessions:448,  users:284,  bounce_rate:10.0, avg_duration:135, engaged:403  }
+  "campaigns": [
+    {
+      "name": "iab_iab_ia_summit_-_email_save_the_date_-_base_geral_-_02",
+      "category": "IA Summit",
+      "sessions": 1719,
+      "users": 1517,
+      "bounce_rate": 3.4,
+      "avg_duration": 48,
+      "engaged": 1660
+    },
+    {
+      "name": "adtech__branding_-_newsletter_-_regua_12",
+      "category": "AdTech & Branding",
+      "sessions": 1460,
+      "users": 606,
+      "bounce_rate": 8.0,
+      "avg_duration": 256,
+      "engaged": 1343
+    },
+    {
+      "name": "i_eventos_adtech__branding_-_newsletter_-_regua-7_-_com_virada_de_lote",
+      "category": "AdTech & Branding",
+      "sessions": 1342,
+      "users": 1248,
+      "bounce_rate": 1.9,
+      "avg_duration": 43,
+      "engaged": 1316
+    },
+    {
+      "name": "i_eventos_adtech__branding_-_newsletter_-_regua-7_-_sem_virada_de_lote_v2",
+      "category": "AdTech & Branding",
+      "sessions": 1170,
+      "users": 1094,
+      "bounce_rate": 1.8,
+      "avg_duration": 47,
+      "engaged": 1149
+    },
+    {
+      "name": "iab_emkt_evento_adtech_-_regua_6",
+      "category": "AdTech & Branding",
+      "sessions": 769,
+      "users": 692,
+      "bounce_rate": 3.3,
+      "avg_duration": 39,
+      "engaged": 744
+    },
+    {
+      "name": "repique_adtech__branding_-_newsletter_-_regua_12",
+      "category": "AdTech & Branding",
+      "sessions": 661,
+      "users": 330,
+      "bounce_rate": 4.5,
+      "avg_duration": 187,
+      "engaged": 631
+    },
+    {
+      "name": "iab_evento_adtech_-_regua_11__e-mail_marketing",
+      "category": "AdTech & Branding",
+      "sessions": 570,
+      "users": 487,
+      "bounce_rate": 3.5,
+      "avg_duration": 61,
+      "engaged": 550
+    },
+    {
+      "name": "i_eventos_adtech__branding_-_newsletter_-_regua-1",
+      "category": "AdTech & Branding",
+      "sessions": 538,
+      "users": 483,
+      "bounce_rate": 3.2,
+      "avg_duration": 42,
+      "engaged": 521
+    },
+    {
+      "name": "iab_iab_ia_summit_-_tema_painel_1__palestrantes__agenda__base_geral",
+      "category": "IA Summit",
+      "sessions": 514,
+      "users": 496,
+      "bounce_rate": 1.2,
+      "avg_duration": 29,
+      "engaged": 508
+    },
+    {
+      "name": "iab_forum_de_politicas_publicas__save_the_date",
+      "category": "Fórum",
+      "sessions": 489,
+      "users": 440,
+      "bounce_rate": 5.1,
+      "avg_duration": 52,
+      "engaged": 464
+    },
+    {
+      "name": "relgov_2025_boletim_de_transparencia_-_marco_2025",
+      "category": "RelGov",
+      "sessions": 469,
+      "users": 336,
+      "bounce_rate": 9.8,
+      "avg_duration": 133,
+      "engaged": 423
+    },
+    {
+      "name": "i_institucional_iab_news__maio25",
+      "category": "Newsletter",
+      "sessions": 466,
+      "users": 268,
+      "bounce_rate": 13.9,
+      "avg_duration": 170,
+      "engaged": 401
+    },
+    {
+      "name": "i_eventos_adtech__branding_-_newsletter_-_regua-2",
+      "category": "AdTech & Branding",
+      "sessions": 454,
+      "users": 405,
+      "bounce_rate": 1.3,
+      "avg_duration": 87,
+      "engaged": 448
+    },
+    {
+      "name": "i_institucional_iab_news__marco25_semana_2",
+      "category": "Newsletter",
+      "sessions": 454,
+      "users": 261,
+      "bounce_rate": 12.8,
+      "avg_duration": 180,
+      "engaged": 396
+    },
+    {
+      "name": "iab_news_iab_-_janeiro_-_semana_2_-_2",
+      "category": "Newsletter",
+      "sessions": 448,
+      "users": 284,
+      "bounce_rate": 10.0,
+      "avg_duration": 135,
+      "engaged": 403
+    }
   ],
-
-  // Campaign categories — real data
-  campaignCategories: [
-    { name:"AdTech & Branding", sessions:8298,  campaigns:27, color:"#FF6B35" },
-    { name:"Newsletter",        sessions:4624,  campaigns:49, color:"#4ECDC4" },
-    { name:"IA Summit",         sessions:3353,  campaigns:13, color:"#3B82F6" },
-    { name:"Outros",            sessions:1730,  campaigns:68, color:"#64748B" },
-    { name:"RelGov",            sessions:1433,  campaigns:6,  color:"#8B5CF6" },
-    { name:"Cursos",            sessions:736,   campaigns:15, color:"#10B981" },
-    { name:"Associação",        sessions:253,   campaigns:5,  color:"#F59E0B" },
-    { name:"Fórum",             sessions:174,   campaigns:5,  color:"#EC4899" }
+  "campaignCategories": [
+    {
+      "name": "AdTech & Branding",
+      "sessions": 8298,
+      "campaigns": 27,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "Newsletter",
+      "sessions": 4425,
+      "campaigns": 45,
+      "color": "#4ECDC4"
+    },
+    {
+      "name": "IA Summit",
+      "sessions": 3353,
+      "campaigns": 13,
+      "color": "#3B82F6"
+    },
+    {
+      "name": "Outros",
+      "sessions": 1732,
+      "campaigns": 71,
+      "color": "#64748B"
+    },
+    {
+      "name": "RelGov",
+      "sessions": 944,
+      "campaigns": 5,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Cursos",
+      "sessions": 933,
+      "campaigns": 16,
+      "color": "#10B981"
+    },
+    {
+      "name": "Fórum",
+      "sessions": 663,
+      "campaigns": 6,
+      "color": "#EC4899"
+    },
+    {
+      "name": "Associação",
+      "sessions": 253,
+      "campaigns": 5,
+      "color": "#F59E0B"
+    }
   ],
-
-  // Landing pages — real GA4 data
-  landingPages: [
-    { page:"/adtech-e-branding-2025",              title:"Adtech & Branding 2025",                         sessions:7815,  users:6820, bounce_rate:0.0,  avg_duration:94,  page_views:10544, conversions:21455 },
-    { page:"(not set)",                            title:"IAB IA Summit | 27 mar | SP",                   sessions:5040,  users:4265, bounce_rate:21.1, avg_duration:43,  page_views:0,     conversions:4842  },
-    { page:"/forum-de-politicas-publicas-para-publicidade-digital", title:"Fórum Políticas Públicas",     sessions:1434,  users:1309, bounce_rate:0.0,  avg_duration:107, page_views:1756,  conversions:3759  },
-    { page:"/",                                    title:"IAB Brasil (Homepage)",                          sessions:870,   users:783,  bounce_rate:0.0,  avg_duration:158, page_views:1021,  conversions:2082  },
-    { page:"/evento/adtech-branding-2025",         title:"Adtech & Branding 2025 - IAB Brasil",           sessions:802,   users:718,  bounce_rate:0.0,  avg_duration:151, page_views:932,   conversions:1751  },
-    { page:"/cursos",                              title:"Cursos IAB Brasil",                              sessions:458,   users:417,  bounce_rate:0.0,  avg_duration:114, page_views:533,   conversions:1047  },
-    { page:"/masterclass/inovacao-e-criatividade-em-novos-formatos", title:"Masterclass Inovação",        sessions:399,   users:381,  bounce_rate:0.0,  avg_duration:102, page_views:484,   conversions:1175  },
-    { page:"/guia-manual-de-conformidade-e-boas-praticas-sobre-inteligencia-artificial-na-publicidade-digital", title:"Manual IA Conformidade", sessions:327, users:278, bounce_rate:0.0, avg_duration:162, page_views:488, conversions:1385 },
-    { page:"/cursos/combo-start-no-digital-digital-marketing-digital-media-fundamentals-ia-para-publicidade", title:"Combo: Start no Digital", sessions:307, users:281, bounce_rate:0.0, avg_duration:103, page_views:325, conversions:643  },
-    { page:"/cursos/aplicacao-pratica-de-ferramentas-de-ia-para-publicidade-digital", title:"Aplicação IA Publicidade Digital", sessions:290, users:262, bounce_rate:0.0, avg_duration:131, page_views:319, conversions:619  }
+  "totalNamedCampaigns": 187,
+  "landingPages": [
+    {
+      "page": "/adtech-e-branding-2025",
+      "title": "Adtech & Branding 2025",
+      "sessions": 7815,
+      "users": 6820,
+      "bounce_rate": 0.0,
+      "avg_duration": 94,
+      "page_views": 10544,
+      "conversions": 21455
+    },
+    {
+      "page": "(not set)",
+      "title": "IAB IA Summit | 27 de março | São Paulo",
+      "sessions": 5040,
+      "users": 4265,
+      "bounce_rate": 21.1,
+      "avg_duration": 43,
+      "page_views": 0,
+      "conversions": 4842
+    },
+    {
+      "page": "/forum-de-politicas-publicas-para-publicidade-digital",
+      "title": "Forúm de Políticas Públicas para Publicidade Digital",
+      "sessions": 1434,
+      "users": 1309,
+      "bounce_rate": 0.0,
+      "avg_duration": 107,
+      "page_views": 1756,
+      "conversions": 3759
+    },
+    {
+      "page": "/",
+      "title": "IAB Brasil",
+      "sessions": 870,
+      "users": 783,
+      "bounce_rate": 0.0,
+      "avg_duration": 157,
+      "page_views": 1021,
+      "conversions": 2082
+    },
+    {
+      "page": "/evento/adtech-branding-2025",
+      "title": "Adtech & Branding 2025 - IAB Brasil",
+      "sessions": 802,
+      "users": 718,
+      "bounce_rate": 0.0,
+      "avg_duration": 151,
+      "page_views": 932,
+      "conversions": 1751
+    },
+    {
+      "page": "/cursos",
+      "title": "Cursos IAB - IAB Brasil",
+      "sessions": 458,
+      "users": 417,
+      "bounce_rate": 0.0,
+      "avg_duration": 114,
+      "page_views": 533,
+      "conversions": 1047
+    },
+    {
+      "page": "/masterclass/inovacao-e-criatividade-em-novos-formatos",
+      "title": "Inovação e criatividade em novos formatos - IAB Brasil",
+      "sessions": 399,
+      "users": 381,
+      "bounce_rate": 0.0,
+      "avg_duration": 101,
+      "page_views": 484,
+      "conversions": 1175
+    },
+    {
+      "page": "/guia-manual-de-conformidade-e-boas-praticas-sobre-inteligencia-artificial-na-publicidade-digital",
+      "title": "Manual de Conformidade e Boas Práticas sobre Inteligência Ar",
+      "sessions": 327,
+      "users": 278,
+      "bounce_rate": 0.0,
+      "avg_duration": 162,
+      "page_views": 488,
+      "conversions": 1385
+    },
+    {
+      "page": "/cursos/combo-start-no-digital-digital-marketing-digital-media-fundamentals-ia-para-publicidade",
+      "title": "Combo: Start no Digital | Digital Marketing + Digital Media ",
+      "sessions": 307,
+      "users": 281,
+      "bounce_rate": 0.0,
+      "avg_duration": 102,
+      "page_views": 325,
+      "conversions": 643
+    },
+    {
+      "page": "/cursos/aplicacao-pratica-de-ferramentas-de-ia-para-publicidade-digital",
+      "title": "Aplicação prática de ferramentas de IA para publicidade digi",
+      "sessions": 290,
+      "users": 262,
+      "bounce_rate": 0.0,
+      "avg_duration": 130,
+      "page_views": 319,
+      "conversions": 619
+    }
   ],
-
-  // Devices — real data
-  devices: [
-    { name:"Desktop", sessions:17334, share:84.1, color:"#FF6B35" },
-    { name:"Mobile",  sessions:3268,  share:15.9, color:"#4ECDC4" },
-    { name:"Tablet",  sessions:9,     share:0.0,  color:"#64748B" }
+  "devices": [
+    {
+      "name": "Desktop",
+      "sessions": 17334,
+      "share": 84.1,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "Mobile",
+      "sessions": 3268,
+      "share": 15.9,
+      "color": "#4ECDC4"
+    },
+    {
+      "name": "Tablet",
+      "sessions": 9,
+      "share": 0.0,
+      "color": "#64748B"
+    }
   ],
-
-  // GA4 Events — real data
-  events: [
-    { name:"page_view",              count:23963, color:"#FF6B35" },
-    { name:"session_start",          count:20641, color:"#4ECDC4" },
-    { name:"RD Landing Pages",       count:16197, color:"#3B82F6" },
-    { name:"first_visit",            count:13176, color:"#8B5CF6" },
-    { name:"user_engagement",        count:11930, color:"#10B981" },
-    { name:"RD Formulario Embutido", count:10114, color:"#F59E0B" },
-    { name:"scroll",                 count:3775,  color:"#EC4899" },
-    { name:"click",                  count:1999,  color:"#06B6D4" },
-    { name:"form_start",             count:1490,  color:"#EF4444" },
-    { name:"form_submit",            count:1360,  color:"#84CC16" },
-    { name:"file_download",          count:785,   color:"#F97316" },
-    { name:"view_search_results",    count:42,    color:"#94A3B8" }
+  "events": [
+    {
+      "name": "page_view",
+      "count": 23963,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "session_start",
+      "count": 20641,
+      "color": "#4ECDC4"
+    },
+    {
+      "name": "RD Landing Pages",
+      "count": 16197,
+      "color": "#3B82F6"
+    },
+    {
+      "name": "first_visit",
+      "count": 13176,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "user_engagement",
+      "count": 11930,
+      "color": "#10B981"
+    },
+    {
+      "name": "RD Formulario Embutido",
+      "count": 10114,
+      "color": "#F59E0B"
+    },
+    {
+      "name": "scroll",
+      "count": 3775,
+      "color": "#EC4899"
+    },
+    {
+      "name": "click",
+      "count": 1999,
+      "color": "#06B6D4"
+    },
+    {
+      "name": "form_start",
+      "count": 1490,
+      "color": "#EF4444"
+    },
+    {
+      "name": "form_submit",
+      "count": 1360,
+      "color": "#84CC16"
+    },
+    {
+      "name": "file_download",
+      "count": 785,
+      "color": "#F97316"
+    },
+    {
+      "name": "view_search_results",
+      "count": 42,
+      "color": "#94A3B8"
+    }
   ],
-
-  // CRM Contacts by month
-  crmContacts: [
-    { month:"Mar/24", contacts:1   },
-    { month:"Mai/24", contacts:16  },
-    { month:"Jun/24", contacts:19  },
-    { month:"Jul/24", contacts:2   },
-    { month:"Ago/24", contacts:29  },
-    { month:"Set/24", contacts:364 },
-    { month:"Out/24", contacts:93  }
+  "emailGeography": [
+    {
+      "country": "Brazil",
+      "sessions": 12431,
+      "users": 6557,
+      "new_users": 4834,
+      "color": "#FF6B35"
+    },
+    {
+      "country": "United States",
+      "sessions": 5874,
+      "users": 5827,
+      "new_users": 5816,
+      "color": "#4ECDC4"
+    },
+    {
+      "country": "Netherlands",
+      "sessions": 843,
+      "users": 841,
+      "new_users": 843,
+      "color": "#3B82F6"
+    },
+    {
+      "country": "Ireland",
+      "sessions": 824,
+      "users": 815,
+      "new_users": 820,
+      "color": "#8B5CF6"
+    },
+    {
+      "country": "United Kingdom",
+      "sessions": 511,
+      "users": 511,
+      "new_users": 512,
+      "color": "#10B981"
+    },
+    {
+      "country": "Germany",
+      "sessions": 58,
+      "users": 58,
+      "new_users": 58,
+      "color": "#F59E0B"
+    },
+    {
+      "country": "Canada",
+      "sessions": 55,
+      "users": 53,
+      "new_users": 54,
+      "color": "#EC4899"
+    },
+    {
+      "country": "France",
+      "sessions": 20,
+      "users": 20,
+      "new_users": 20,
+      "color": "#94A3B8"
+    }
   ],
-
-  // Deals by status
-  dealsByStatus: [
-    { name:"Em Andamento", count:69, color:"#3B82F6" },
-    { name:"Ganhos",       count:3,  color:"#10B981" }
+  "brazilRegions": [
+    {
+      "region": "Sao Paulo",
+      "sessions": 8618,
+      "users": 4140
+    },
+    {
+      "region": "Rio de Janeiro",
+      "sessions": 707,
+      "users": 440
+    },
+    {
+      "region": "Federal District",
+      "sessions": 601,
+      "users": 322
+    },
+    {
+      "region": "Parana",
+      "sessions": 478,
+      "users": 300
+    },
+    {
+      "region": "Rio Grande do Sul",
+      "sessions": 419,
+      "users": 260
+    },
+    {
+      "region": "Minas Gerais",
+      "sessions": 409,
+      "users": 269
+    },
+    {
+      "region": "Santa Catarina",
+      "sessions": 221,
+      "users": 148
+    },
+    {
+      "region": "Pernambuco",
+      "sessions": 162,
+      "users": 77
+    },
+    {
+      "region": "Bahia",
+      "sessions": 144,
+      "users": 98
+    },
+    {
+      "region": "Goias",
+      "sessions": 133,
+      "users": 93
+    },
+    {
+      "region": "Ceara",
+      "sessions": 121,
+      "users": 99
+    },
+    {
+      "region": "Espirito Santo",
+      "sessions": 107,
+      "users": 76
+    },
+    {
+      "region": "Rio Grande do Norte",
+      "sessions": 61,
+      "users": 38
+    },
+    {
+      "region": "Para",
+      "sessions": 36,
+      "users": 33
+    },
+    {
+      "region": "Alagoas",
+      "sessions": 36,
+      "users": 25
+    },
+    {
+      "region": "(not set)",
+      "sessions": 32,
+      "users": 31
+    },
+    {
+      "region": "Amazonas",
+      "sessions": 32,
+      "users": 14
+    },
+    {
+      "region": "Paraiba",
+      "sessions": 29,
+      "users": 26
+    },
+    {
+      "region": "Tocantins",
+      "sessions": 22,
+      "users": 21
+    },
+    {
+      "region": "Sergipe",
+      "sessions": 22,
+      "users": 19
+    },
+    {
+      "region": "Maranhao",
+      "sessions": 21,
+      "users": 15
+    },
+    {
+      "region": "Mato Grosso",
+      "sessions": 20,
+      "users": 13
+    }
   ],
-
-  // Product categories — real CRM data
-  productCategories: [
-    { name:"Associação",  count:53, color:"#FF6B35" },
-    { name:"Outros",      count:37, color:"#64748B" },
-    { name:"Patrocínio",  count:10, color:"#8B5CF6" },
-    { name:"Cursos",      count:4,  color:"#10B981" },
-    { name:"Eventos",     count:1,  color:"#4ECDC4" }
+  "crmContacts": [
+    {
+      "month": "Mar/24",
+      "contacts": 1
+    },
+    {
+      "month": "Mai/24",
+      "contacts": 16
+    },
+    {
+      "month": "Jun/24",
+      "contacts": 19
+    },
+    {
+      "month": "Jul/24",
+      "contacts": 2
+    },
+    {
+      "month": "Ago/24",
+      "contacts": 29
+    },
+    {
+      "month": "Set/24",
+      "contacts": 364
+    },
+    {
+      "month": "Out/24",
+      "contacts": 93
+    }
   ],
-
-  // Deal sources — real CRM data
-  dealsBySource: [
-    { name:"Desconhecida",            count:38, color:"#64748B" },
-    { name:"Cliente Ativo",           count:15, color:"#FF6B35" },
-    { name:"Contato por E-mail",      count:13, color:"#10B981" },
-    { name:"Contato por Telefone",    count:2,  color:"#4ECDC4" },
-    { name:"Indicação por Parceiros", count:2,  color:"#8B5CF6" },
-    { name:"Prospecção Ativa",        count:1,  color:"#F59E0B" },
-    { name:"Feiras e Eventos",        count:1,  color:"#EC4899" }
+  "dealsByStatus": [
+    {
+      "name": "Em Andamento",
+      "count": 69,
+      "color": "#3B82F6"
+    },
+    {
+      "name": "Ganhos",
+      "count": 3,
+      "color": "#10B981"
+    }
   ],
-
-  // Job titles
-  jobTitles: [
-    { title:"CMO",                  count:71 },
-    { title:"CEO",                  count:30 },
-    { title:"CONSELHO",             count:20 },
-    { title:"Sócio",                count:6  },
-    { title:"Diretora de Marketing",count:5  },
-    { title:"Co-President",         count:5  },
-    { title:"Diretor",              count:5  },
-    { title:"Managing Director",    count:5  }
+  "productCategories": [
+    {
+      "name": "Associação",
+      "count": 53,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "Outros",
+      "count": 37,
+      "color": "#64748B"
+    },
+    {
+      "name": "Patrocínio",
+      "count": 10,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Cursos",
+      "count": 4,
+      "color": "#10B981"
+    },
+    {
+      "name": "Eventos",
+      "count": 1,
+      "color": "#4ECDC4"
+    }
   ],
-
-  // Funnels
-  funnels: [
-    { name:"Associação",              stages:8 },
-    { name:"Educação In Company",     stages:8 },
-    { name:"Educação B2C",            stages:6 },
-    { name:"Patrocínio",              stages:7 },
-    { name:"Pós-Venda Associação",    stages:6 },
-    { name:"Pós-Venda Educação B2B",  stages:6 },
-    { name:"Pós-Venda Educação B2C",  stages:6 },
-    { name:"Pós-Venda Patrocínio",    stages:6 }
+  "dealsBySource": [
+    {
+      "name": "Desconhecida",
+      "count": 38,
+      "color": "#64748B"
+    },
+    {
+      "name": "Cliente Ativo",
+      "count": 15,
+      "color": "#FF6B35"
+    },
+    {
+      "name": "Contato por E-mail",
+      "count": 13,
+      "color": "#10B981"
+    },
+    {
+      "name": "Contato por Telefone",
+      "count": 2,
+      "color": "#4ECDC4"
+    },
+    {
+      "name": "Indicação por Parceiros",
+      "count": 2,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Prospecção Ativa",
+      "count": 1,
+      "color": "#F59E0B"
+    },
+    {
+      "name": "Feiras e Eventos",
+      "count": 1,
+      "color": "#EC4899"
+    }
   ],
-
-  // Insights
-  insights: [
-    { type:"positive", icon:"🏆", category:"Email Marketing", priority:"high",
-      title:"Base de 48.739 leads com taxa de engajamento GA4 de 93,5%",
-      detail:"Com 19.264 sessões engajadas em 20.602 sessões totais, o IAB Brasil demonstra alta relevância de conteúdo e excelente alinhamento entre CTAs e o conteúdo do site. Taxa de engajamento de 93,5% — excepcionalmente acima do benchmark B2B." },
-    { type:"positive", icon:"⭐", category:"Qualidade de Tráfego", priority:"high",
-      title:"Taxa de rejeição GA4 excepcionalmente baixa: 7,3% (média ponderada)",
-      detail:"A média do email marketing brasileiro fica entre 35-55%. As 20.602 sessões vindas de email chegam altamente engajadas — validando segmentação e alinhamento das CTAs com o conteúdo do site." },
-    { type:"positive", icon:"📈", category:"Sazonalidade", priority:"medium",
-      title:"Pico de tráfego em Ago/25: 3.999 sessões GA4 (IA Summit)",
-      detail:"Agosto 2025 registrou o maior volume do período (IA Summit: 3.999 sessões GA4, bounce rate 3,0%, taxa de engajamento 97%). Eventos próprios são o maior driver de email marketing — a régua do IA Summit deve ser replicada para todos os grandes eventos." },
-    { type:"positive", icon:"🎯", category:"Campanhas", priority:"high",
-      title:"AdTech & Branding gera 41% do tráfego email com menor bounce rate",
-      detail:"8.298 sessões GA4 reais em campanhas AdTech & Branding. Esta categoria tem o maior volume E boa taxa de engajamento (bounce 8%). Aumentar frequência e profundidade deste conteúdo é a ação de maior ROI." },
-    { type:"info", icon:"⏰", category:"Timing", priority:"medium",
-      title:"Melhor janela de envio: Quinta-feira entre 11h–14h",
-      detail:"Qui 11h: 2.988 sessões GA4; Qui 14h: 2.915. Este padrão é consistente nos dados reais de sessões GA4. Alinhar 100% dos disparos principais com esta janela pode aumentar engajamento em 10-15% sem custo adicional." },
-    { type:"alert", icon:"⚠️", category:"Bounce Rate", priority:"medium",
-      title:"Bounce rate médio de 7,3% — abaixo do benchmark mas variável por categoria",
-      detail:"Embora excepcionalmente baixo vs. benchmark B2B (35-55%), campanhas de Newsletter têm bounce rate de 10-14%, significativamente acima das de eventos (< 2%). Otimizar landing pages de newsletter pode reduzir bounce em 3-5 pontos." },
-    { type:"alert", icon:"📊", category:"UTM", priority:"high",
-      title:"Padronização UTM inconsistente compromete atribuição de campanhas",
-      detail:"Campanhas com prefixos variados (i_, iab_, institucional_) e 68 campanhas na categoria 'Outros' dificultam análise automatizada. Sem padronização UTM, até 23% do tráfego email pode estar sendo atribuído incorretamente no GA4." },
-    { type:"info", icon:"📱", category:"Dispositivos", priority:"low",
-      title:"84,1% do tráfego email via desktop — oportunidade mobile subutilizada",
-      detail:"Com 15,9% mobile (3.268 sessões) e crescimento do acesso a emails por smartphones, as landing pages de email (especialmente eventos) devem ser auditadas para experiência mobile. Otimizar CTAs mobile pode capturar tráfego adicional significativo." }
+  "jobTitles": [
+    {
+      "title": "CMO",
+      "count": 71
+    },
+    {
+      "title": "CEO",
+      "count": 30
+    },
+    {
+      "title": "CONSELHO",
+      "count": 20
+    },
+    {
+      "title": "Sócio",
+      "count": 6
+    },
+    {
+      "title": "Diretora de Marketing",
+      "count": 5
+    },
+    {
+      "title": "Co-President & Financial Dir., Latin America",
+      "count": 5
+    },
+    {
+      "title": "Diretor",
+      "count": 5
+    },
+    {
+      "title": "Managing Director",
+      "count": 5
+    }
   ],
-
-  // Recommendations
-  recommendations: [
-    { priority:1, area:"UTM & Rastreamento", action:"Padronizar 100% dos UTMs em todos os disparos",
-      detail:"Template obrigatório: utm_source=rdstation | utm_medium=email | utm_campaign=[categoria]_[nome]_[data]. Criar playbook de nomenclatura e treinamento da equipe.",
-      impact:"Alto", effort:"Baixo", kpi:"100% de atribuição de tráfego email no GA4", urgency:"Imediato" },
-    { priority:2, area:"Base de Leads", action:"Higienização e segmentação avançada dos 48.739 leads",
-      detail:"Com 48.739 leads ativos, segmentar por engajamento GA4: Ativos (visitaram o site via email nos últimos 90 dias), Inativos (90-180 dias — campanha reativação), Frios (+180 dias — sunset flow). Higienizar base trimestralmente.",
-      impact:"Alto", effort:"Médio", kpi:"Delivery rate >99%, bounce rate <1%", urgency:"Imediato" },
-    { priority:3, area:"Automações", action:"Criar Welcome Series automatizada para novos leads",
-      detail:"Fluxo 5 emails para novos leads: D+0 Boas-vindas IAB > D+3 Pesquisa de interesse > D+7 Conteúdo top (pesquisa/relatório) > D+14 Convite próximo evento > D+21 Call para associação.",
-      impact:"Alto", effort:"Médio", kpi:"+30% engajamento de novos leads nos primeiros 30 dias", urgency:"Curto prazo" },
-    { priority:4, area:"Eventos & Lançamentos", action:"Amplificar régua do IA Summit para todos os eventos IAB",
-      detail:"O IA Summit gerou 3.999 sessões GA4 em Ago/25 (bounce 3,0%, engajamento 97%). Replicar esta régua (Anúncio → Save the Date → Abertura → Early Bird → Last Call → Pós-evento) para AdTech & Branding 2025.",
-      impact:"Alto", effort:"Médio", kpi:"+25% inscrições via email em eventos", urgency:"Curto prazo" },
-    { priority:5, area:"Segmentação", action:"Criar trilhas de conteúdo segmentadas por cargo e interesse",
-      detail:"Com 71 CMOs, 30 CEOs e 20 membros de Conselho no CRM + 59 segmentos de organização, criar trilhas: Executivos (cases ROI), Agências (ferramentas/tendências), Anunciantes (pesquisas/benchmarks).",
-      impact:"Alto", effort:"Alto", kpi:"+15% taxa de engajamento por segmento relevante", urgency:"Médio prazo" },
-    { priority:6, area:"Newsletter", action:"Estruturar IAB News como produto editorial semanal",
-      detail:"Newsletter semanal consolidada: 1 destaque editorial, 1 pesquisa/relatório, 1 evento próximo, 1 comitê em destaque, 1 oportunidade de associação. Testar A/B assunto semanalmente.",
-      impact:"Médio", effort:"Médio", kpi:"+20% sessões GA4 via newsletter, -15% bounce rate na categoria", urgency:"Médio prazo" },
-    { priority:7, area:"Timing & Frequência", action:"Otimizar janela de envio para Qui entre 11h–13h",
-      detail:"Dados GA4 confirmam: Qui 11h = pico de sessões (2.988) e Qui 14h (2.915). Alinhar todos os disparos principais (newsletters, eventos) com esta janela. Para repiques, usar Seg 14h–16h como alternativa.",
-      impact:"Médio", effort:"Baixo", kpi:"+10-15% sessões GA4 via email sem aumento de volume", urgency:"Imediato" },
-    { priority:8, area:"A/B Testing", action:"Implementar A/B test sistemático de linha de assunto",
-      detail:"Em 100% dos disparos, testar 2 variações: urgência vs. curiosidade, número vs. sem número, personalizado vs. genérico. Documentar vencedores e criar banco de assuntos de alta performance.",
-      impact:"Médio", effort:"Baixo", kpi:"+10-15% sessões GA4 por campanha", urgency:"Curto prazo" },
-    { priority:9, area:"CRM & Nurturing", action:"Criar fluxo de reengajamento para 69 deals no pipeline",
-      detail:"Com 69 deals em andamento, identificar oportunidades sem atividade há 60+ dias e criar sequência automática de reengajamento via email com conteúdo relevante ao estágio do funil de cada produto.",
-      impact:"Alto", effort:"Médio", kpi:"+20% taxa de fechamento de deals parados", urgency:"Médio prazo" },
-    { priority:10, area:"Entregabilidade", action:"Auditoria técnica: SPF, DKIM, DMARC e reputação de IP",
-      detail:"Validar configurações técnicas do domínio iabbrasil.org.br. Com 48.739 leads ativos e 20.602 sessões GA4 via email no período, qualquer degradação de reputação pode impactar dezenas de milhares de entregas. Monitorar bounce rate e engajamento mensalmente.",
-      impact:"Alto", effort:"Médio", kpi:"Entregabilidade >99,5%, inbox placement >95%", urgency:"Médio prazo" }
-  ]
+  "funnels": [
+    {
+      "name": "Associação",
+      "stages": 8
+    },
+    {
+      "name": "Educação In company",
+      "stages": 8
+    },
+    {
+      "name": "Educação B2C",
+      "stages": 6
+    },
+    {
+      "name": "Patrocínio",
+      "stages": 7
+    },
+    {
+      "name": "Pós-Venda Associação",
+      "stages": 6
+    },
+    {
+      "name": "Pós-Venda Educação B2B",
+      "stages": 6
+    },
+    {
+      "name": "Pós-Venda Educação B2C",
+      "stages": 6
+    },
+    {
+      "name": "Pós-Venda Patrocínio",
+      "stages": 6
+    }
+  ],
+  "rdsEmailMonthly": [
+    {
+      "year_month": "2025-01",
+      "campaigns": 6,
+      "selecionados": 73445,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 54,
+      "clicks": 0,
+      "unsub": 2,
+      "spam": 0,
+      "has_estimated": true,
+      "open_rate": 0.07,
+      "ctr": 0.0,
+      "ctor": 0.0,
+      "delivery_rate": 0.0,
+      "denom_label": "selecionados"
+    },
+    {
+      "year_month": "2025-02",
+      "campaigns": 16,
+      "selecionados": 169851,
+      "entregues": 0,
+      "bounce": 0,
+      "opens": 219,
+      "clicks": 1,
+      "unsub": 6,
+      "spam": 0,
+      "has_estimated": true,
+      "open_rate": 0.13,
+      "ctr": 0.0,
+      "ctor": 0.46,
+      "delivery_rate": 0.0,
+      "denom_label": "selecionados"
+    },
+    {
+      "year_month": "2025-03",
+      "campaigns": 11,
+      "selecionados": 82338,
+      "entregues": 81854,
+      "bounce": 454,
+      "opens": 38144,
+      "clicks": 1634,
+      "unsub": 70,
+      "spam": 6,
+      "has_estimated": false,
+      "open_rate": 46.6,
+      "ctr": 2.0,
+      "ctor": 4.28,
+      "delivery_rate": 99.41,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-04",
+      "campaigns": 16,
+      "selecionados": 187376,
+      "entregues": 185894,
+      "bounce": 1455,
+      "opens": 79491,
+      "clicks": 3723,
+      "unsub": 265,
+      "spam": 2,
+      "has_estimated": false,
+      "open_rate": 42.76,
+      "ctr": 2.0,
+      "ctor": 4.68,
+      "delivery_rate": 99.21,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-05",
+      "campaigns": 16,
+      "selecionados": 118080,
+      "entregues": 115825,
+      "bounce": 2215,
+      "opens": 25529,
+      "clicks": 1008,
+      "unsub": 130,
+      "spam": 3,
+      "has_estimated": false,
+      "open_rate": 22.04,
+      "ctr": 0.87,
+      "ctor": 3.95,
+      "delivery_rate": 98.09,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-06",
+      "campaigns": 8,
+      "selecionados": 227019,
+      "entregues": 223518,
+      "bounce": 3485,
+      "opens": 44964,
+      "clicks": 2020,
+      "unsub": 158,
+      "spam": 4,
+      "has_estimated": false,
+      "open_rate": 20.12,
+      "ctr": 0.9,
+      "ctor": 4.49,
+      "delivery_rate": 98.46,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-07",
+      "campaigns": 7,
+      "selecionados": 225607,
+      "entregues": 220857,
+      "bounce": 4737,
+      "opens": 45499,
+      "clicks": 1464,
+      "unsub": 153,
+      "spam": 4,
+      "has_estimated": false,
+      "open_rate": 20.6,
+      "ctr": 0.66,
+      "ctor": 3.22,
+      "delivery_rate": 97.89,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-08",
+      "campaigns": 10,
+      "selecionados": 296655,
+      "entregues": 291748,
+      "bounce": 4877,
+      "opens": 63530,
+      "clicks": 2100,
+      "unsub": 201,
+      "spam": 4,
+      "has_estimated": false,
+      "open_rate": 21.78,
+      "ctr": 0.72,
+      "ctor": 3.31,
+      "delivery_rate": 98.35,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-09",
+      "campaigns": 12,
+      "selecionados": 196397,
+      "entregues": 193517,
+      "bounce": 2837,
+      "opens": 40656,
+      "clicks": 1560,
+      "unsub": 217,
+      "spam": 2,
+      "has_estimated": false,
+      "open_rate": 21.01,
+      "ctr": 0.81,
+      "ctor": 3.84,
+      "delivery_rate": 98.53,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-10",
+      "campaigns": 13,
+      "selecionados": 159482,
+      "entregues": 157474,
+      "bounce": 1982,
+      "opens": 34135,
+      "clicks": 1088,
+      "unsub": 315,
+      "spam": 13,
+      "has_estimated": false,
+      "open_rate": 21.68,
+      "ctr": 0.69,
+      "ctor": 3.19,
+      "delivery_rate": 98.74,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-11",
+      "campaigns": 8,
+      "selecionados": 119836,
+      "entregues": 117643,
+      "bounce": 2134,
+      "opens": 25274,
+      "clicks": 1457,
+      "unsub": 383,
+      "spam": 4,
+      "has_estimated": false,
+      "open_rate": 21.48,
+      "ctr": 1.24,
+      "ctor": 5.76,
+      "delivery_rate": 98.17,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2025-12",
+      "campaigns": 13,
+      "selecionados": 172313,
+      "entregues": 169242,
+      "bounce": 3053,
+      "opens": 33756,
+      "clicks": 1824,
+      "unsub": 383,
+      "spam": 2,
+      "has_estimated": false,
+      "open_rate": 19.95,
+      "ctr": 1.08,
+      "ctor": 5.4,
+      "delivery_rate": 98.22,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2026-01",
+      "campaigns": 4,
+      "selecionados": 115588,
+      "entregues": 113134,
+      "bounce": 2436,
+      "opens": 24444,
+      "clicks": 936,
+      "unsub": 374,
+      "spam": 3,
+      "has_estimated": false,
+      "open_rate": 21.61,
+      "ctr": 0.83,
+      "ctor": 3.83,
+      "delivery_rate": 97.88,
+      "denom_label": "entregues"
+    },
+    {
+      "year_month": "2026-02",
+      "campaigns": 17,
+      "selecionados": 416432,
+      "entregues": 410953,
+      "bounce": 5464,
+      "opens": 81630,
+      "clicks": 3062,
+      "unsub": 870,
+      "spam": 8,
+      "has_estimated": false,
+      "open_rate": 19.86,
+      "ctr": 0.75,
+      "ctor": 3.75,
+      "delivery_rate": 98.68,
+      "denom_label": "entregues"
+    }
+  ],
+  "rdsTopCampaigns": [
+    {
+      "sent_at": "2025-04-16 14:52:41",
+      "year_month": "2025-04",
+      "name": "[RELGOV 2025] Boletim de Transparência - Março 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37447,
+      "entregues": 36650,
+      "bounce": 783,
+      "opens": 13781,
+      "clicks": 451,
+      "unsub": 115,
+      "spam": 0,
+      "open_rate": 37.6,
+      "ctr": 1.23,
+      "ctor": 3.27,
+      "delivery_rate": 97.87,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-04-25 13:53:29",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] IAB News | Abril.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 20703,
+      "entregues": 20606,
+      "bounce": 96,
+      "opens": 9168,
+      "clicks": 365,
+      "unsub": 24,
+      "spam": 0,
+      "open_rate": 44.49,
+      "ctr": 1.77,
+      "ctor": 3.98,
+      "delivery_rate": 99.53,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-04-28 16:22:02",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] E-mail Marketing | Cursos Brand Safety - Abr.25",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 20665,
+      "entregues": 20603,
+      "bounce": 62,
+      "opens": 8967,
+      "clicks": 245,
+      "unsub": 32,
+      "spam": 0,
+      "open_rate": 43.52,
+      "ctr": 1.19,
+      "ctor": 2.73,
+      "delivery_rate": 99.7,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-10-16 13:00:00",
+      "year_month": "2025-10",
+      "name": "IAB News | Outubro.25 - 2 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38140,
+      "entregues": 37601,
+      "bounce": 528,
+      "opens": 8643,
+      "clicks": 216,
+      "unsub": 76,
+      "spam": 1,
+      "open_rate": 22.99,
+      "ctr": 0.57,
+      "ctor": 2.5,
+      "delivery_rate": 98.59,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-10-02 14:00:00",
+      "year_month": "2025-10",
+      "name": "IAB News | Outubro.25 - 1 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38055,
+      "entregues": 37549,
+      "bounce": 505,
+      "opens": 8445,
+      "clicks": 293,
+      "unsub": 75,
+      "spam": 7,
+      "open_rate": 22.49,
+      "ctr": 0.78,
+      "ctor": 3.47,
+      "delivery_rate": 98.67,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-08-14 11:43:34",
+      "year_month": "2025-08",
+      "name": "[IAB] EMKT Evento Adtech - Régua 6",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36784,
+      "entregues": 36334,
+      "bounce": 448,
+      "opens": 8439,
+      "clicks": 165,
+      "unsub": 30,
+      "spam": 1,
+      "open_rate": 23.23,
+      "ctr": 0.45,
+      "ctor": 1.96,
+      "delivery_rate": 98.78,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2026-01-29 14:05:00",
+      "year_month": "2026-01",
+      "name": "[IAB] IAB IA Summit - Email Save the date - Base geral - 02",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38091,
+      "entregues": 37635,
+      "bounce": 451,
+      "opens": 8430,
+      "clicks": 437,
+      "unsub": 156,
+      "spam": 0,
+      "open_rate": 22.4,
+      "ctr": 1.16,
+      "ctor": 5.18,
+      "delivery_rate": 98.8,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-08-15 10:00:00",
+      "year_month": "2025-08",
+      "name": "[I] [Institucional] Data Stories | Agosto 2025",
+      "period_label": "06-2025 a 08-2025",
+      "selecionados": 36700,
+      "entregues": 36180,
+      "bounce": 520,
+      "opens": 8421,
+      "clicks": 222,
+      "unsub": 26,
+      "spam": 1,
+      "open_rate": 23.28,
+      "ctr": 0.61,
+      "ctor": 2.64,
+      "delivery_rate": 98.58,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-05-29 09:00:00",
+      "year_month": "2025-05",
+      "name": "[Institucional] AdTech 2025: últimas oportunidades de patrocínio! - Reforço",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 37667,
+      "entregues": 36794,
+      "bounce": 865,
+      "opens": 8312,
+      "clicks": 134,
+      "unsub": 52,
+      "spam": 2,
+      "open_rate": 22.59,
+      "ctr": 0.36,
+      "ctor": 1.61,
+      "delivery_rate": 97.68,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-03-27 15:27:16",
+      "year_month": "2025-03",
+      "name": "[Conteúdo] Pesquisa de DOOH 2025 - 3º disparo",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16162,
+      "entregues": 16091,
+      "bounce": 71,
+      "opens": 8311,
+      "clicks": 418,
+      "unsub": 13,
+      "spam": 0,
+      "open_rate": 51.65,
+      "ctr": 2.6,
+      "ctor": 5.03,
+      "delivery_rate": 99.56,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-04-04 15:37:43",
+      "year_month": "2025-04",
+      "name": "[I] [Institucional] Data Stories | Abril 2025",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 15899,
+      "entregues": 15849,
+      "bounce": 50,
+      "opens": 8280,
+      "clicks": 421,
+      "unsub": 9,
+      "spam": 0,
+      "open_rate": 52.24,
+      "ctr": 2.66,
+      "ctor": 5.08,
+      "delivery_rate": 99.69,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-11-13 17:30:00",
+      "year_month": "2025-11",
+      "name": "IAB News | Novembro 25 - 2 Quinzena",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 38323,
+      "entregues": 37673,
+      "bounce": 646,
+      "opens": 8248,
+      "clicks": 136,
+      "unsub": 130,
+      "spam": 1,
+      "open_rate": 21.89,
+      "ctr": 0.36,
+      "ctor": 1.65,
+      "delivery_rate": 98.3,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-09-04 10:00:00",
+      "year_month": "2025-09",
+      "name": "[IAB] Evento Adtech - Régua 8 | E-mail Marketing",
+      "period_label": "09-2025 a 11-2025",
+      "selecionados": 37755,
+      "entregues": 37191,
+      "bounce": 559,
+      "opens": 8190,
+      "clicks": 205,
+      "unsub": 29,
+      "spam": 0,
+      "open_rate": 22.02,
+      "ctr": 0.55,
+      "ctor": 2.5,
+      "delivery_rate": 98.51,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2026-01-23 11:15:00",
+      "year_month": "2026-01",
+      "name": "[IAB] NEWS IAB - JANEIRO - SEMANA 2 - 2",
+      "period_label": "12-2025 a 02-2026",
+      "selecionados": 38684,
+      "entregues": 37465,
+      "bounce": 1212,
+      "opens": 8141,
+      "clicks": 313,
+      "unsub": 97,
+      "spam": 3,
+      "open_rate": 21.73,
+      "ctr": 0.84,
+      "ctor": 3.84,
+      "delivery_rate": 96.85,
+      "data_quality": "ok"
+    },
+    {
+      "sent_at": "2025-03-10 14:26:54",
+      "year_month": "2025-03",
+      "name": "[I] [Institucional] Masterclass Inovação e Criatividade",
+      "period_label": "03-2025 a 05-2025",
+      "selecionados": 16399,
+      "entregues": 16317,
+      "bounce": 82,
+      "opens": 8131,
+      "clicks": 436,
+      "unsub": 11,
+      "spam": 2,
+      "open_rate": 49.83,
+      "ctr": 2.67,
+      "ctor": 5.36,
+      "delivery_rate": 99.5,
+      "data_quality": "ok"
+    }
+  ],
+  "rdsChannels": [
+    {
+      "channel": "Busca Orgânica",
+      "channel_key": "organica",
+      "visits": 48002,
+      "conversoes": 1108,
+      "visit_share": 39.14,
+      "conv_rate": 2.31
+    },
+    {
+      "channel": "Tráfego Direto",
+      "channel_key": "direto",
+      "visits": 34195,
+      "conversoes": 2284,
+      "visit_share": 27.88,
+      "conv_rate": 6.68
+    },
+    {
+      "channel": "Email",
+      "channel_key": "email",
+      "visits": 20698,
+      "conversoes": 326,
+      "visit_share": 16.88,
+      "conv_rate": 1.58
+    },
+    {
+      "channel": "Referencias",
+      "channel_key": "referencia",
+      "visits": 9131,
+      "conversoes": 397,
+      "visit_share": 7.45,
+      "conv_rate": 4.35
+    },
+    {
+      "channel": "Outros Canais",
+      "channel_key": "outros",
+      "visits": 6096,
+      "conversoes": 315,
+      "visit_share": 4.97,
+      "conv_rate": 5.17
+    },
+    {
+      "channel": "Redes Sociais",
+      "channel_key": "social",
+      "visits": 4064,
+      "conversoes": 76,
+      "visit_share": 3.31,
+      "conv_rate": 1.87
+    },
+    {
+      "channel": "Midia Paga",
+      "channel_key": "pago",
+      "visits": 447,
+      "conversoes": 0,
+      "visit_share": 0.36,
+      "conv_rate": 0.0
+    },
+    {
+      "channel": "Display",
+      "channel_key": "display",
+      "visits": 0,
+      "conversoes": 0,
+      "visit_share": 0.0,
+      "conv_rate": 0.0
+    },
+    {
+      "channel": "Outras Publicidades",
+      "channel_key": "outras_pub",
+      "visits": 0,
+      "conversoes": 0,
+      "visit_share": 0.0,
+      "conv_rate": 0.0
+    },
+    {
+      "channel": "Desconhecido",
+      "channel_key": "desconhecido",
+      "visits": 0,
+      "conversoes": 13399,
+      "visit_share": 0.0,
+      "conv_rate": 0.0
+    }
+  ],
+  "rdsTotals": {
+    "total_campaigns": 157,
+    "total_selecionados": 2560419,
+    "total_entregues": 2281659,
+    "total_opens": 537325,
+    "total_clicks": 21877,
+    "total_unsub": 3527,
+    "total_spam": 55,
+    "max_list_size": 38845,
+    "avg_open_rate": 23.54,
+    "avg_ctr": 0.96,
+    "avg_ctor": 4.07,
+    "avg_bounce_email": 1.54,
+    "avg_delivery_rate": 98.47,
+    "period_start": "2025-01-21",
+    "period_end": "2026-02-27",
+    "rates_based_on": "entregues (Mar 2025 – Feb 2026, Entregues > 0)"
+  },
+  "rdsWorkflows": [
+    {
+      "name": "[H] Autoresponder - Fim dos cookies",
+      "status": "disabled",
+      "updated_at": "2024-12-02"
+    },
+    {
+      "name": "[H] Autoresponder - Publicidade para todes",
+      "status": "disabled",
+      "updated_at": "2024-12-02"
+    },
+    {
+      "name": "[H] Autoresponder I B2B Cursos",
+      "status": "disabled",
+      "updated_at": "2024-12-02"
+    },
+    {
+      "name": "[H] Fluxo Autoresponder -  Autoresponder Brand Safety",
+      "status": "disabled",
+      "updated_at": "2024-12-02"
+    },
+    {
+      "name": "[IAB] Conclua sua inscrição: IA Summit",
+      "status": "enabled",
+      "updated_at": "2026-02-06"
+    }
+  ],
+  "rdsLandingPages": [
+    {
+      "title": "[I] LP - APRESENTAÇÕES IAB NEXT 2023",
+      "status": "PUBLISHED",
+      "conversion_id": "iab-next-2023"
+    },
+    {
+      "title": "[I] [Eventos] RELGOV 2023 - Confirmação dos convidados  ",
+      "status": "PUBLISHED",
+      "conversion_id": "i-eventos-relgov-2023-confirmacao-dos-convidados"
+    },
+    {
+      "title": "[I] [Eventos] RELGOV 2023 - Confirmação dos convidados ",
+      "status": "PUBLISHED",
+      "conversion_id": "pesquisa-de-satisfacao-relgov"
+    },
+    {
+      "title": "[I] [Institucional] Comitê Áudio e Voz - TESTE",
+      "status": "PUBLISHED",
+      "conversion_id": "i-institucional-comite-audio-e-voz-teste"
+    },
+    {
+      "title": "[H] TYP - Brand Safety - V2",
+      "status": "PUBLISHED",
+      "conversion_id": "typ-brand-safety"
+    },
+    {
+      "title": "[H] Formulário de atualização de cadastro",
+      "status": "PUBLISHED",
+      "conversion_id": "formulario-de-atualizacao-de-cadastro"
+    },
+    {
+      "title": "[I][Versão 1] Fim dos Cookies",
+      "status": "PUBLISHED",
+      "conversion_id": "fim-dos-cookies"
+    },
+    {
+      "title": "[H] LP - INSIGHTS PARA 2023",
+      "status": "PUBLISHED",
+      "conversion_id": "insights-para-2023"
+    },
+    {
+      "title": "[H] LP - Brand Safety",
+      "status": "PUBLISHED",
+      "conversion_id": "lp-brand-safety"
+    },
+    {
+      "title": "[H] LP Publicidade para Todes",
+      "status": "PUBLISHED",
+      "conversion_id": "diversidade-publicidade-para-todes"
+    },
+    {
+      "title": "[I][Versão 2] Hub de conteudo",
+      "status": "PUBLISHED",
+      "conversion_id": "conteudos-fim-dos-cookies"
+    },
+    {
+      "title": "[I] Hub de conteúdo LGBTQIA+",
+      "status": "PUBLISHED",
+      "conversion_id": "conteudos-diversidade-publicidade-para-todes"
+    },
+    {
+      "title": "[I][TYP] Fim dos Cookies",
+      "status": "PUBLISHED",
+      "conversion_id": "conteudo-fim-dos-cookies"
+    },
+    {
+      "title": "[H] TYP Comitê",
+      "status": "PUBLISHED",
+      "conversion_id": "typ-comite-2022"
+    },
+    {
+      "title": "[I] Pack de Materiais | Transparência &amp; Segurança na Pub",
+      "status": "PUBLISHED",
+      "conversion_id": "pack-de-materiais-transparencia-amp-seguranca-na-publicidade-digital"
+    },
+    {
+      "title": "[H] TYP Publicidade para Todes",
+      "status": "PUBLISHED",
+      "conversion_id": "agradecimento-diversidade-publicidade-para-todes"
+    },
+    {
+      "title": "[H] TYP - B2B Cursos",
+      "status": "PUBLISHED",
+      "conversion_id": "agradecimento-b2b-cursos"
+    },
+    {
+      "title": "[I] Hub de conteúdo | LGPD",
+      "status": "PUBLISHED",
+      "conversion_id": "hub-conteudos-lgpd"
+    },
+    {
+      "title": "[I] LP - Associados",
+      "status": "PUBLISHED",
+      "conversion_id": "associados"
+    },
+    {
+      "title": "[I] [Conteúdo] LP - Digital AdSpend 2023",
+      "status": "PUBLISHED",
+      "conversion_id": "conteudo-digital-adspend-2023"
+    }
+  ],
+  "rdsForms": [
+    {
+      "title": "[I] Cadastrados Site",
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "[I][Inglês] Quero me associar",
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "[I][Português] Quero me associar ",
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "[I][formulário] Mailing Home Site",
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "[I][formulário] Newsletter",
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "[I][formulário] Recebimento de releases",
+      "status": "PUBLISHED"
+    }
+  ],
+  "rdsAnalyticsNote": "Endpoints de analytics (emails, funnel, assets) requerem plano Enterprise RD Station. Métricas de engajamento disponíveis via GA4 (source=RD Station, medium=email).",
+  "_meta": {
+    "fetched_at": "2026-03-10",
+    "property_id": "360425554",
+    "source_filter": "sessionSource='RD Station' AND sessionMedium='email'",
+    "period": "365daysAgo → até 2026-03-09",
+    "total_sessions": 20602,
+    "total_users": 15219,
+    "total_engaged": 19264,
+    "avg_bounce": 6.5,
+    "avg_duration": 115.0,
+    "email_pct": 18.6,
+    "desktop_pct": 84.1,
+    "mobile_pct": 15.9,
+    "top_day": "Qui",
+    "top_hour": "11h",
+    "pipeline_revenue": 634490,
+    "pipeline_revenue_note": "1 deal(s) with value > R$10M excluded as data-entry outliers",
+    "total_named_campaigns": 187,
+    "crm_contacts": 524,
+    "crm_deals": 72,
+    "crm_products": 105,
+    "crm_orgs": 355,
+    "crm_segments": 59,
+    "rds_workflows": 5,
+    "rds_landing_pages": 83,
+    "rds_forms": 6,
+    "rds_analytics_available": false,
+    "rds_total_campaigns": 157,
+    "rds_total_entregues": 2281659,
+    "rds_total_opens": 537325,
+    "rds_total_clicks": 21877,
+    "rds_total_unsub": 3527,
+    "rds_max_list_size": 38845,
+    "rds_avg_open_rate": 23.54,
+    "rds_avg_ctr": 0.96,
+    "rds_avg_ctor": 4.07,
+    "rds_avg_delivery_rate": 98.47
+  },
+  "insights": [],
+  "recommendations": []
 };
 
 DATA.opensHeatmap = DATA.heatmap; // Real GA4 sessions data
@@ -1496,7 +7047,7 @@ function updateBIBoxes() {
   const b4 = document.getElementById('bi-tab4');
   if (b4) b4.innerHTML =
     biBox('desc',  'Base e Pipeline CRM',
-      `48.739 leads na base RD Station. GA4 registra ${fmtNum(sessoes)} sessões via email no período. Pipeline CRM ativo com 69 deals em andamento — contatos C-Level (71 CMOs, 30 CEOs) dominam o perfil de leads qualificados.`) +
+      `${((DATA.rdsTotals&&DATA.rdsTotals.max_list_size)||38845).toLocaleString('pt-BR')} leads na base RD Station. GA4 registra ${fmtNum(sessoes)} sessões via email no período. Pipeline CRM ativo com 69 deals em andamento — contatos C-Level (71 CMOs, 30 CEOs) dominam o perfil de leads qualificados.`) +
     biBox('diag',  'Eficiência de Conversão',
       `Taxa de engajamento de ${engRate}% (sessões engajadas / total sessões). Leads C-Level (CMO, CEO) têm maior probabilidade de conversão em deals de associação e eventos premium.`) +
     biBox('pred',  'Projeção de Pipeline',
@@ -1517,8 +7068,25 @@ function updateAllMetrics() {
   const engaged = sumField(ga4f, 'engaged');
   const engRate = sessoes > 0 ? (engaged/sessoes*100).toFixed(1) : '0';
 
-  setMetric('total-leads',      '48.739');
-  setMetric('leads-utilizados', '48.739');
+  // RD Station Email — real from CSV exports
+  const rdsT = DATA.rdsTotals || {};
+  const baseAtiva = rdsT.max_list_size || 38845;
+  setMetric('total-leads',         baseAtiva.toLocaleString('pt-BR'));
+  setMetric('total-leads-crm',     baseAtiva.toLocaleString('pt-BR'));
+  setMetric('rds-open-rate',       (rdsT.avg_open_rate||23.5).toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('rds-ctor',            (rdsT.avg_ctor||4.07).toFixed(2).replace('.',',')+'\u00a0%');
+  setMetric('rds-delivery',        (rdsT.avg_delivery_rate||98.5).toFixed(1).replace('.',',')+'\u00a0%');
+  setMetric('rds-campaigns',       (rdsT.total_campaigns||157).toString());
+  // RD Station volume — filtered by period
+  const rdsf = getFilteredRdsMonthly();
+  const cleanRds = rdsf.filter(m => !m.has_estimated);
+  const fEntregues = cleanRds.reduce((a,b)=>a+(b.entregues||0),0);
+  const fOpens     = rdsf.reduce((a,b)=>a+(b.opens||0),0);
+  const fClicks    = rdsf.reduce((a,b)=>a+(b.clicks||0),0);
+  setMetric('rds-total-entregues', fEntregues > 0 ? fEntregues.toLocaleString('pt-BR') : (rdsT.total_entregues||2281659).toLocaleString('pt-BR'));
+  setMetric('rds-total-opens',     fOpens > 0     ? fOpens.toLocaleString('pt-BR')     : (rdsT.total_opens||537325).toLocaleString('pt-BR'));
+  setMetric('rds-total-clicks',    fClicks > 0    ? fClicks.toLocaleString('pt-BR')    : (rdsT.total_clicks||21876).toLocaleString('pt-BR'));
+  // GA4 metrics
   setMetric('total-aberturas',  fmtNum(engaged));
   setMetric('email-sessions',   fmtNum(sessoes));
   setMetric('taxa-abertura-sub', engRate + '% sessões engajadas');
@@ -1537,8 +7105,28 @@ function updateAllMetrics() {
   setMetric('camp-newsletter-pct', Math.round(newsCat.sessions/totalCatSess*100)+'%');
   setMetric('camp-best-cat',       topCat.name);
   setMetric('camp-best-cat-pct',   fmtNum(topCat.sessions)+' sessões no período');
-  // Update funnel with real GA4 data
-  buildEmailFunnel(sessoes, engaged);
+  // Update funnel with RD Station + GA4 real data
+  const rdsAll = DATA.rdsEmailMonthly || [];
+  const cleanAll = rdsAll.filter(m => !m.has_estimated);
+  buildEmailFunnel(sessoes, engaged, cleanAll.reduce((a,b)=>a+(b.entregues||0),0), rdsAll.reduce((a,b)=>a+(b.opens||0),0), rdsAll.reduce((a,b)=>a+(b.clicks||0),0));
+}
+
+function getFilteredRdsMonthly() {
+  if (!DATA.rdsEmailMonthly) return [];
+  const r = PERIOD_RANGES[currentPeriod];
+  const allMonths = DATA.monthlyTrend.map(m => m.month); // e.g. ['Mar/25','Abr/25',...]
+  const startMonth = allMonths[r.start];
+  const endMonth   = allMonths[r.end];
+  const MO_MAP = {'Jan':'01','Fev':'02','Mar':'03','Abr':'04','Mai':'05','Jun':'06',
+                  'Jul':'07','Ago':'08','Set':'09','Out':'10','Nov':'11','Dez':'12'};
+  function monthToYM(lbl) {
+    if (!lbl) return '';
+    const [mon, yr] = lbl.split('/');
+    return '20' + yr + '-' + (MO_MAP[mon] || '01');
+  }
+  const startYM = monthToYM(startMonth);
+  const endYM   = monthToYM(endMonth);
+  return DATA.rdsEmailMonthly.filter(m => m.year_month >= startYM && m.year_month <= endYM);
 }
 
 function setMetric(attr, val) {
@@ -1596,27 +7184,35 @@ function destroyChart(id) {
 // ════════════════════════════════════════════════════════════
 // EMAIL FUNNEL BUILDER — Real GA4 engagement funnel
 // ════════════════════════════════════════════════════════════
-function buildEmailFunnel(sessoes, engaged) {
+function buildEmailFunnel(sessoes, engaged, entregues, opens, clicks) {
   const container = document.getElementById('emailFunnel');
   if (!container) return;
-  const conversions = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
-  const sf = getScaleFactor();
-  const scaledSess = Math.round(sessoes);
-  const scaledEng  = Math.round(engaged);
-  const scaledConv = Math.round(conversions * sf);
-  const maxVal = scaledSess || 1;
-  const steps = [
-    { label:'Sessões',     value:scaledSess, rate:'100%',                                          color:'#3B82F6', width:100 },
-    { label:'Engajadas',   value:scaledEng,  rate:(scaledEng/maxVal*100).toFixed(1)+'%',           color:'#10B981', width:Math.round(scaledEng/maxVal*100) },
-    { label:'Conversões',  value:scaledConv, rate:(scaledConv/maxVal*100).toFixed(1)+'%',          color:'#FF6B35', width:Math.max(Math.round(scaledConv/maxVal*100),5) }
-  ];
+  entregues = entregues || 0; opens = opens || 0; clicks = clicks || 0;
+  let steps;
+  if (entregues > 0) {
+    // Full RD Station + GA4 funnel
+    const maxVal = entregues;
+    steps = [
+      { label:'Entregues',  src:'RD Station', value:entregues, rate:'100%',                                        color:'#8B5CF6', width:100 },
+      { label:'Abertos',    src:'RD Station', value:opens,     rate:(opens/maxVal*100).toFixed(1)+'%',             color:'#4ECDC4', width:Math.round(opens/maxVal*100) },
+      { label:'Clicados',   src:'RD Station', value:clicks,    rate:(clicks/maxVal*100).toFixed(1)+'%',            color:'#3B82F6', width:Math.max(Math.round(clicks/maxVal*100),4) },
+      { label:'Sessões GA4',src:'GA4',        value:sessoes,   rate:(sessoes/maxVal*100).toFixed(1)+'%',           color:'#FF6B35', width:Math.max(Math.round(sessoes/maxVal*100),4) }
+    ];
+  } else {
+    // GA4-only fallback
+    const maxVal = sessoes || 1;
+    steps = [
+      { label:'Sessões',    src:'GA4', value:sessoes,  rate:'100%',                                   color:'#3B82F6', width:100 },
+      { label:'Engajadas',  src:'GA4', value:engaged,  rate:(engaged/maxVal*100).toFixed(1)+'%',      color:'#10B981', width:Math.round(engaged/maxVal*100) }
+    ];
+  }
   container.innerHTML = steps.map((s,i) => `
     ${i>0?'<div class="funnel-arrow">→</div>':''}
     <div class="funnel-step">
       <div class="funnel-bar" style="width:${Math.max(s.width,30)}%;min-width:100px;max-width:200px;background:${s.color};">
         ${s.value.toLocaleString('pt-BR')}
       </div>
-      <div class="funnel-label">${s.label}</div>
+      <div class="funnel-label">${s.label}<small style="display:block;font-size:9px;opacity:0.6;">${s.src}</small></div>
       <div class="funnel-rate">${s.rate}</div>
     </div>
   `).join('');
@@ -1630,12 +7226,15 @@ function buildCRMFunnel() {
   const totalEngaged = DATA.monthlyTrend.reduce((a,b)=>a+(b.engaged||0),0);
   const totalConv    = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
   const steps = [
-    { label:'Base de Leads',  value:48739,         rate:'Base RD Station', color:'#8B5CF6' },
+  const baseLeads = (DATA.rdsTotals && DATA.rdsTotals.max_list_size) ? DATA.rdsTotals.max_list_size : 38845;
+  const steps2 = [
+    { label:'Base de Leads',  value:baseLeads,     rate:'Base RD Station', color:'#8B5CF6' },
     { label:'Sessões GA4',    value:totalSessoes,  rate:'Cliques em email', color:'#3B82F6' },
     { label:'Engajadas',      value:totalEngaged,  rate:(totalEngaged/totalSessoes*100).toFixed(1)+'%', color:'#10B981' },
     { label:'Conversões',     value:totalConv,     rate:(totalConv/totalSessoes*100).toFixed(1)+'%',    color:'#FF6B35' }
   ];
-  const maxV = 48739;
+  const steps = steps2;
+  const maxV = baseLeads;
   container.innerHTML = steps.map((s,i) => `
     ${i>0?'<div class="funnel-arrow" style="font-size:20px;padding:0 6px;color:#64748B;align-self:center;">→</div>':''}
     <div class="funnel-step" style="min-width:120px;">
@@ -1934,9 +7533,16 @@ function initTab0Charts() {
     }
   });
 
-  // Init funnel with real GA4 data
+  // Init funnel with RD Station + GA4 real data
   const ga4F = getFilteredData(DATA.monthlyTrend);
-  buildEmailFunnel(sumField(ga4F,'sessions'), sumField(ga4F,'engaged'));
+  const rdsAll0 = DATA.rdsEmailMonthly || [];
+  const cleanRds0 = rdsAll0.filter(m => !m.has_estimated);
+  buildEmailFunnel(
+    sumField(ga4F,'sessions'), sumField(ga4F,'engaged'),
+    cleanRds0.reduce((a,b)=>a+(b.entregues||0),0),
+    rdsAll0.reduce((a,b)=>a+(b.opens||0),0),
+    rdsAll0.reduce((a,b)=>a+(b.clicks||0),0)
+  );
 }
 
 // ════════════════════════════════════════════════════════════
