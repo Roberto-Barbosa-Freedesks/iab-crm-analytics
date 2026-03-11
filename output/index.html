@@ -10752,8 +10752,174 @@ const DATA = {
     "rds_avg_ctor": 4.07,
     "rds_avg_delivery_rate": 98.47
   },
-  "insights": [],
-  "recommendations": []
+  "insights": [
+    {
+      "type": "positive",
+      "icon": "🏆",
+      "category": "Email Marketing",
+      "priority": "low",
+      "title": "Open Rate 23.5% supera a média B2B do mercado",
+      "detail": "Com 537.325 aberturas em 2.28M de envios, o open rate médio de 23,54% está acima da referência B2B brasileira (~20%). Indica listas bem segmentadas e subject lines eficazes. Manter estratégia de segmentação e personalização de assunto como ativo competitivo."
+    },
+    {
+      "type": "alert",
+      "icon": "⚡",
+      "category": "Email Marketing",
+      "priority": "high",
+      "title": "Gap crítico: CTR 0.96% muito abaixo do CTOR 4.07%",
+      "detail": "Quem abre o e-mail clica (CTOR 4.07%), mas apenas 0.96% dos destinatários totais clicam. O gargalo não é o assunto — é o corpo do e-mail. CTAs pouco visíveis, múltiplos links dispersando atenção ou proposta de valor fraca no conteúdo explicam esse gap. Ação imediata: A/B test com 1 CTA único e botão destacado."
+    },
+    {
+      "type": "positive",
+      "icon": "📈",
+      "category": "Tráfego Web",
+      "priority": "low",
+      "title": "Taxa de engajamento 93.5% — e-mail atrai audiência de alta qualidade",
+      "detail": "19.264 de 20.602 sessões via e-mail foram classificadas como engajadas pelo GA4, com bounce de apenas 6.5% e duração média de 115s. Comparado a outros canais, e-mail entrega o tráfego de maior qualidade. Isso justifica aumentar investimento em frequência e segmentação de campanhas."
+    },
+    {
+      "type": "alert",
+      "icon": "📱",
+      "category": "UX / Mobile",
+      "priority": "high",
+      "title": "Mobile representa apenas 15.9% — crítico para mercado brasileiro",
+      "detail": "O GA4 registra 84.1% desktop e 15.9% mobile em acessos via e-mail. A média nacional de abertura mobile é ~60%. Isso indica que os templates de e-mail não são mobile-friendly ou que a experiência é suficientemente ruim para impedir o clique. Prioridade máxima: redesign responsivo dos templates."
+    },
+    {
+      "type": "info",
+      "icon": "🕐",
+      "category": "Timing",
+      "priority": "medium",
+      "title": "Quinta-feira às 11h é a janela de pico de engajamento",
+      "detail": "Análise do heatmap GA4 confirma que quinta-feira às 11h concentra o maior volume de sessões engajadas oriundas de e-mail. Esse padrão é consistente com comportamento B2B: profissionais estão ativos e receptivos antes do almoço no meio da semana. Centralizar o horário de disparo nessa janela pode aumentar open rate em até 10–15%."
+    },
+    {
+      "type": "alert",
+      "icon": "📉",
+      "category": "Tendência",
+      "priority": "high",
+      "title": "Queda de 80% em outubro — dependência de campanhas sazonais",
+      "detail": "O tráfego passou de 3.999 sessões (agosto) para 739 (outubro) — uma queda de 81.5%. O pico de ago-set foi impulsionado por eventos/campanhas pontuais, sem campanhas evergreen para sustentar o baseline. Risco: pipeline de receita concentrado em períodos sazonais. Solução: criar fluxos de nutrição perenes que mantenham engajamento constante."
+    },
+    {
+      "type": "positive",
+      "icon": "✉️",
+      "category": "Canais",
+      "priority": "medium",
+      "title": "E-mail representa 18.6% do tráfego total com melhor relação qualidade-custo",
+      "detail": "Com 15.219 usuários únicos em 12 meses e taxa de engajamento de 93.5%, o canal de e-mail entrega a melhor relação qualidade/volume entre todos os canais rastreados. Para uma organização B2B como IAB Brasil, e-mail é o canal primário de relacionamento — e os dados confirmam que a base é sólida para escalar."
+    },
+    {
+      "type": "alert",
+      "icon": "🔕",
+      "category": "CRM",
+      "priority": "medium",
+      "title": "3.527 descadastros indicam risco de fadiga de lista",
+      "detail": "Com 3.527 unsubscribes sobre uma lista máxima de 38.845 contatos, a taxa acumulada de descadastro é de ~9.1%. Com 157 campanhas em 12 meses (~13/mês), a frequência de envio pode estar gerando fadiga nos segmentos menos qualificados. Recomendado: segmentar por engajamento recente e reduzir frequência para contatos inativos há 60+ dias."
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": 1,
+      "area": "Email — CTA",
+      "action": "Redesenhar CTAs: 1 botão único e centralizado por e-mail",
+      "detail": "O gap CTR (0.96%) vs CTOR (4.07%) revela que o problema não é abertura — é conversão do corpo. Eliminar múltiplos links e testar 1 CTA principal com botão destacado, texto de ação claro e proposta de valor explícita. A/B test em próxima campanha com grupo controle.",
+      "kpi": "CTR ≥ 1.5% (aumento de 56%)",
+      "impact": "Alto",
+      "effort": "Baixo",
+      "urgency": "Imediato"
+    },
+    {
+      "priority": 2,
+      "area": "Email — Mobile",
+      "action": "Implementar templates responsivos mobile-first",
+      "detail": "Apenas 15.9% das sessões via e-mail vêm de mobile, contra ~60% da média nacional. Redesenhar templates com layout de coluna única, fonte mínima 16px, botões com altura mínima 44px e preview text otimizado. Testar em iOS Mail, Gmail Mobile e Outlook Mobile antes de publicar.",
+      "kpi": "Mobile sessions ≥ 30% do total via e-mail",
+      "impact": "Alto",
+      "effort": "Médio",
+      "urgency": "Imediato"
+    },
+    {
+      "priority": 3,
+      "area": "Email — Timing",
+      "action": "Centralizar todos os envios nas quintas-feiras entre 10h–12h",
+      "detail": "O heatmap GA4 confirma quinta-feira às 11h como pico de engajamento. Padronizar o calendário editorial com disparos nessa janela aumenta a probabilidade de abertura no momento de maior receptividade da audiência B2B. Para campanhas urgentes, segunda às 10h é a segunda melhor janela.",
+      "kpi": "Open rate médio +10% em campanhas com timing otimizado",
+      "impact": "Alto",
+      "effort": "Baixo",
+      "urgency": "Imediato"
+    },
+    {
+      "priority": 4,
+      "area": "CRM — Nurturing",
+      "action": "Criar workflows de nutrição para os top 5 segmentos CRM",
+      "detail": "Existem 59 segmentos no CRM, mas apenas 5 workflows ativos no RD Station. A maioria dos segmentos não tem fluxo de nutrição automatizado. Priorizar os 5 segmentos com maior volume de contatos ou maior histórico de conversão e criar sequências de 3–5 e-mails para cada, com conteúdo específico por perfil.",
+      "kpi": "Taxa de conversão dos workflows ativos +20%",
+      "impact": "Alto",
+      "effort": "Médio",
+      "urgency": "Curto prazo"
+    },
+    {
+      "priority": 5,
+      "area": "CRM — Reativação",
+      "action": "Lançar campanha win-back para contatos sem engajamento há 90+ dias",
+      "detail": "Com 3.527 descadastros e um volume desconhecido de contatos inativos, uma campanha de reativação pode recuperar parte dessa audiência antes de perdê-la definitivamente. Sequência recomendada: e-mail 1 ('Sentimos sua falta'), e-mail 2 (oferta exclusiva), e-mail 3 (última chance antes de remoção da lista).",
+      "kpi": "Taxa de reativação ≥ 10% dos contatados",
+      "impact": "Alto",
+      "effort": "Baixo",
+      "urgency": "Curto prazo"
+    },
+    {
+      "priority": 6,
+      "area": "Conteúdo — Evergreen",
+      "action": "Desenvolver 3–5 campanhas evergreen para sustentar tráfego no baixo período",
+      "detail": "A queda de 81.5% em outubro evidencia que o tráfego é 100% dependente de campanhas sazonais. Criar campanhas evergreen temáticas (ex.: conteúdo educativo sobre IAB, melhores práticas de marketing digital, cases do setor) que possam ser enviadas em loops para novos contatos e reativação, garantindo baseline mínimo de 1.000 sessões/mês.",
+      "kpi": "Mínimo 1.000 sessões/mês mesmo sem campanhas pontuais",
+      "impact": "Alto",
+      "effort": "Alto",
+      "urgency": "Curto prazo"
+    },
+    {
+      "priority": 7,
+      "area": "Landing Pages",
+      "action": "Mapear 83 LPs ao funil CRM e adicionar formulário nas de alto tráfego",
+      "detail": "O RD Station tem 83 landing pages publicadas, mas apenas 6 formulários ativos. A maioria das LPs provavelmente não captura leads de forma estruturada. Identificar as top 20 LPs por visitas, verificar qual etapa do funil CRM corresponde e garantir que cada uma tenha pelo menos 1 formulário de captura com campo de empresa e cargo.",
+      "kpi": "Taxa de conversão LP→Lead ≥ 5% nas LPs mapeadas",
+      "impact": "Alto",
+      "effort": "Médio",
+      "urgency": "Médio prazo"
+    },
+    {
+      "priority": 8,
+      "area": "CRM — Lead Scoring",
+      "action": "Implementar modelo de lead scoring baseado em comportamento digital",
+      "detail": "Com 524 contatos e 59 segmentos sem scoring, o time comercial não tem visibilidade de quais leads priorizar. Definir modelo de pontuação combinando: abertura de e-mail (+5), clique em e-mail (+10), visita à LP de produto (+15), preenchimento de formulário (+25), deal aberto (+50). Configurar alerta no CRM para leads que atingem threshold de SQL.",
+      "kpi": "% de SQLs identificados automaticamente antes do contato comercial",
+      "impact": "Alto",
+      "effort": "Alto",
+      "urgency": "Médio prazo"
+    },
+    {
+      "priority": 9,
+      "area": "CRM — Enriquecimento",
+      "action": "Sincronizar dados de abertura e clique do RD Station com registros CRM",
+      "detail": "Atualmente, métricas de e-mail (quem abriu, quando, quantas vezes) ficam isoladas no RD Station Marketing sem reflexo no CRM. Habilitar integração nativa RD Station Marketing → RD Station CRM para enriquecer o histórico de cada contato com comportamento de e-mail. Isso viabiliza segmentação por engajamento real dentro do CRM.",
+      "kpi": "≥ 80% dos contatos CRM com histórico de e-mail sincronizado",
+      "impact": "Médio",
+      "effort": "Médio",
+      "urgency": "Médio prazo"
+    },
+    {
+      "priority": 10,
+      "area": "Formulários",
+      "action": "Escalar de 6 para 20+ formulários ativos cobrindo LPs de maior tráfego",
+      "detail": "Com apenas 6 formulários para 83 landing pages, a capacidade de captura de leads está subutilizada. Criar templates de formulário padronizados (curto: nome + e-mail + empresa; completo: + cargo + telefone + interesse) e aplicar nas LPs com maior tráfego. Usar regra: qualquer LP com 10+ visitas/mês deve ter formulário de captura.",
+      "kpi": "Taxa de captação de leads por LP ≥ 5% nas LPs com formulário",
+      "impact": "Médio",
+      "effort": "Baixo",
+      "urgency": "Curto prazo"
+    }
+  ]
 };
 
 DATA.opensHeatmap = DATA.heatmap; // Real GA4 sessions data
