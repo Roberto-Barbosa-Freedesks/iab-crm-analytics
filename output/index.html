@@ -343,17 +343,17 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="kpi-label">
         <span class="tt">Leads Utilizados<span class="tt-icon">?</span><span class="tt-box">Quantidade de leads únicos selecionados para disparos de email no período analisado.</span></span>
       </div>
-      <div class="kpi-value" data-metric="leads-utilizados">32.400</div>
-      <div class="kpi-sub">Leads selecionados para disparos</div>
+      <div class="kpi-value" data-metric="leads-utilizados">48.739</div>
+      <div class="kpi-sub">Base completa RD Station</div>
       <div class="kpi-icon">🎯</div>
     </div>
     <!-- Card 3 -->
     <div class="kpi-card" style="--accent:var(--green)">
       <div class="kpi-label">
-        <span class="tt">Total de Aberturas<span class="tt-icon">?</span><span class="tt-box">Total de vezes que os e-mails foram abertos pelos destinatários. Taxa calculada sobre entregues.</span></span>
+        <span class="tt">Sessões Engajadas<span class="tt-icon">?</span><span class="tt-box">Sessões Engajadas (GA4) — sessões onde o usuário interagiu com o site por 10s ou mais, leu conteúdo ou clicou em link interno.</span></span>
       </div>
-      <div class="kpi-value" data-metric="total-aberturas">27.990</div>
-      <div class="kpi-sub" data-metric="taxa-abertura-sub">32,0% taxa de abertura</div>
+      <div class="kpi-value" data-metric="total-aberturas">19.264</div>
+      <div class="kpi-sub" data-metric="taxa-abertura-sub">93,5% sessões engajadas</div>
       <div class="kpi-icon">📬</div>
     </div>
     <!-- Card 4 -->
@@ -374,13 +374,13 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="kpi-label">
         <span class="tt">Sessões Email<span class="tt-icon">?</span><span class="tt-box">Sessões no site iabbrasil.com.br originadas via canal de e-mail, rastreadas pelo Google Analytics 4.</span></span>
       </div>
-      <div class="kpi-value" data-metric="email-sessions">19.335</div>
+      <div class="kpi-value" data-metric="email-sessions">20.602</div>
       <div class="kpi-sub">Canal: email / email</div>
       <div class="kpi-icon">📊</div>
     </div>
     <div class="kpi-card" style="--accent:var(--teal)">
       <div class="kpi-label">Share do Canal</div>
-      <div class="kpi-value">17,7%</div>
+      <div class="kpi-value">18,6%</div>
       <div class="kpi-sub">3º maior canal do site</div>
       <div class="kpi-icon">📈</div>
     </div>
@@ -388,13 +388,13 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="kpi-label">
         <span class="tt">Taxa de Rejeição<span class="tt-icon">?</span><span class="tt-box">Taxa de rejeição GA4: sessões com apenas 1 pageview sem engajamento. Quanto menor, melhor.</span></span>
       </div>
-      <div class="kpi-value" data-metric="bounce-rate">10,1%</div>
+      <div class="kpi-value" data-metric="bounce-rate">7,9%</div>
       <div class="kpi-sub">Benchmark mercado: 35–55%</div>
       <div class="kpi-icon">⚡</div>
     </div>
     <div class="kpi-card" style="--accent:var(--cyan)">
       <div class="kpi-label">Sessões Totais</div>
-      <div class="kpi-value">109.186</div>
+      <div class="kpi-value">111.355</div>
       <div class="kpi-sub">Todos os canais · GA4</div>
       <div class="kpi-icon">🌐</div>
     </div>
@@ -406,10 +406,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div>
         <div class="chart-title">
           Funil de Email Marketing
-          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Visualização do funil de email: de enviados até cliques, com taxas de conversão em cada etapa.</span></span>
+          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Visualização do funil de engajamento GA4: Sessões → Sessões Engajadas → Conversões. Dados reais via GA4 Data API.</span></span>
           <span class="section-src-badge ssb-rds">RD Station</span>
         </div>
-        <div class="chart-sub">Período selecionado · Taxa de Abertura: 32,0% · CTOR: 34,4%</div>
+        <div class="chart-sub">Período selecionado · Taxa de Engajamento GA4: 93,5% · Bounce Rate: 7,3%</div>
       </div>
     </div>
     <div class="funnel-wrap" id="emailFunnel">
@@ -423,9 +423,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Evolução Mensal: Sessões GA4 + Aberturas RD Station
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Barras = Aberturas de email (RD Station). Linha = Sessões GA4 vindas de email. Eixos independentes.</span></span>
-            <span class="section-src-badge ssb-both">RDS + GA4</span>
+            Evolução Mensal: Sessões GA4 via Email
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Barras = Sessões Engajadas (GA4). Linha = Sessões totais GA4 via email. Dados reais via GA4 Data API.</span></span>
+            <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
           <div class="chart-sub">13 meses · Mar/25 – Mar/26</div>
         </div>
@@ -437,7 +437,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
         <div>
           <div class="chart-title">
             Canais GA4
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Distribuição de sessões por canal de aquisição no Google Analytics 4. Email representa 17,7% do total.</span></span>
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Distribuição de sessões por canal de aquisição no Google Analytics 4. Email representa 18,6% do total — 3º maior canal.</span></span>
             <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
           <div class="chart-sub">Share de sessões por canal</div>
@@ -453,10 +453,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Métricas de Email por Mês
-            <span class="section-src-badge ssb-rds">RD Station</span>
+            Sessões GA4 por Mês via Email
+            <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
-          <div class="chart-sub">Enviados, Entregues, Abertos e Clicados</div>
+          <div class="chart-sub">Sessões, Sessões Engajadas e Usuários · Dados reais GA4</div>
         </div>
       </div>
       <div class="chart-body" style="height:260px"><canvas id="rdMonthlyChart"></canvas></div>
@@ -535,30 +535,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     </table>
   </div>
 
-  <!-- RD Station Campaigns Table -->
-  <div class="section-title">Dados de Envio RD Station <span class="section-src-badge ssb-rds">Estimativa Proporcional</span></div>
-  <div class="section-subtitle">Métricas de email derivadas proporcionalmente das sessões GA4 (enviados = sessões × 5,2)</div>
-  <div class="table-wrap" style="margin-bottom:24px">
-    <table class="data-table" id="campaignsTableRDS">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Campanha</th>
-          <th>Enviados</th>
-          <th>Entregues</th>
-          <th>Abertos</th>
-          <th>Clicados</th>
-          <th>Taxa Ab.</th>
-          <th>CTR</th>
-        </tr>
-      </thead>
-      <tbody id="campaignsRDSBody"></tbody>
-    </table>
-  </div>
 
   <!-- Category Performance Charts -->
   <div class="section-title section-gap">Performance por Categoria <span class="section-src-badge ssb-both">RDS + GA4</span></div>
-  <div class="section-subtitle">Sessões GA4 e aberturas estimadas agrupadas por tipo de campanha</div>
+  <div class="section-subtitle">Sessões GA4 reais agrupadas por tipo de campanha · Dados via GA4 Data API</div>
   <div class="grid-2">
     <div class="chart-card">
       <div class="chart-header">
@@ -599,33 +579,33 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   <div class="period-label-bar">📅 Período selecionado: <span id="periodLabel2">Últimos 12 meses (Mar/25–Mar/26)</span> — Filtro ativo via seletor no topo da página</div>
 
   <!-- Section 1: Monthly Evolution -->
-  <div class="section-title">Evolução Mensal de Email Marketing <span class="section-src-badge ssb-rds">RD Station</span></div>
-  <div class="section-subtitle">Entregues, abertos e clicados ao longo do período. Use o filtro de período acima para 3M/6M/12M.</div>
+  <div class="section-title">Evolução Mensal de Sessões via Email <span class="section-src-badge ssb-ga4">GA4</span></div>
+  <div class="section-subtitle">Sessões, usuários e taxa de engajamento via email. Use o filtro de período acima para 3M/6M/12M.</div>
   <div class="chart-card">
     <div class="chart-header">
       <div>
         <div class="chart-title">
-          Entregues · Abertos · Clicados por Mês
-          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Azul = Entregues, Verde = Abertos, Laranja = Clicados. Pico em Ago/25 devido ao IA Summit.</span></span>
+          Sessões · Engajadas · Usuários por Mês
+          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Laranja = Sessões totais, Verde = Sessões engajadas, Azul = Usuários únicos. Pico em Ago/25 devido ao IA Summit.</span></span>
         </div>
-        <div class="chart-sub">Mar/25 – Mar/26 · Pico: Agosto 2025 (IA Summit)</div>
+        <div class="chart-sub">Mar/25 – Mar/26 · Pico: Agosto 2025 (IA Summit) · Dados reais GA4</div>
       </div>
     </div>
     <div class="chart-body" style="height:300px"><canvas id="rdEvolutionChart"></canvas></div>
   </div>
 
   <!-- Section 2: Day of week -->
-  <div class="section-title section-gap">Abertura e Cliques por Dia da Semana <span class="section-src-badge ssb-rds">RD Station</span></div>
+  <div class="section-title section-gap">Sessões GA4 por Dia da Semana <span class="section-src-badge ssb-ga4">GA4</span></div>
   <div class="section-subtitle">Total acumulado por dia da semana no período · Quinta-feira é o dia com maior engajamento</div>
   <div class="grid-2">
     <div class="chart-card">
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Aberturas por Dia da Semana
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Aberturas totais acumuladas por dia da semana. Qui concentra 35% de todas as aberturas.</span></span>
+            Sessões por Dia da Semana
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Sessões GA4 totais acumuladas por dia da semana. Qui concentra ~43% de todas as sessões via email.</span></span>
           </div>
-          <div class="chart-sub">Total de aberturas por dia · RD Station</div>
+          <div class="chart-sub">Sessões GA4 reais por dia · source=RD Station/email</div>
         </div>
       </div>
       <div class="chart-body" style="height:260px"><canvas id="rdDaysOpenChart"></canvas></div>
@@ -634,10 +614,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Cliques por Dia da Semana
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Cliques totais acumulados por dia da semana. Qui lidera com 3.320 cliques (34% do total).</span></span>
+            Sessões por Hora do Dia
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Sessões GA4 por hora. 11h (2.988) e 14h (2.915) são os horários de pico — janela ideal de disparo.</span></span>
           </div>
-          <div class="chart-sub">Total de cliques por dia · RD Station</div>
+          <div class="chart-sub">Sessões GA4 reais por hora · 9h–18h</div>
         </div>
       </div>
       <div class="chart-body" style="height:260px"><canvas id="rdDaysClickChart"></canvas></div>
@@ -645,17 +625,17 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   </div>
 
   <!-- Section 3: Hour of day -->
-  <div class="section-title section-gap">Abertura e Cliques por Hora do Dia <span class="section-src-badge ssb-rds">RD Station</span></div>
+  <div class="section-title section-gap">Sessões GA4 por Hora do Dia <span class="section-src-badge ssb-ga4">GA4</span></div>
   <div class="section-subtitle">Janela de 9h–18h · Picos em 11h e 14h — melhor janela de envio recomendada</div>
   <div class="grid-2">
     <div class="chart-card">
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Aberturas por Hora
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">11h (5.100) e 14h (5.000) são os horários de pico de aberturas. Alinhado com comportamento B2B.</span></span>
+            Sessões por Hora (Detalhado)
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">11h (2.988) e 14h (2.915) são os horários de pico de sessões GA4. Dados reais via GA4 Data API.</span></span>
           </div>
-          <div class="chart-sub">Aberturas totais por hora do dia</div>
+          <div class="chart-sub">Sessões GA4 reais por hora do dia</div>
         </div>
       </div>
       <div class="chart-body" style="height:260px"><canvas id="rdHoursOpenChart"></canvas></div>
@@ -664,10 +644,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-header">
         <div>
           <div class="chart-title">
-            Cliques por Hora
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">11h (1.750) e 14h (1.715) são os horários com mais cliques, consistente com aberturas.</span></span>
+            Sessões por Dia (Detalhado)
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Qui lidera com 7.272 sessões (43%), seguido por Qua (3.842) e Seg (3.532). Dados reais GA4.</span></span>
           </div>
-          <div class="chart-sub">Cliques totais por hora do dia</div>
+          <div class="chart-sub">Sessões GA4 reais por dia da semana</div>
         </div>
       </div>
       <div class="chart-body" style="height:260px"><canvas id="rdHoursClickChart"></canvas></div>
@@ -675,16 +655,16 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
   </div>
 
   <!-- Section 4: Heatmap -->
-  <div class="section-title section-gap">Heatmap de Abertura — Dia × Hora <span class="section-src-badge ssb-rds">RD Station</span></div>
-  <div class="section-subtitle">Cor mais intensa = mais aberturas. Pico: Qui 11h–14h · Valores estimados a partir de GA4 × 1,47</div>
+  <div class="section-title section-gap">Heatmap de Sessões — Dia × Hora <span class="section-src-badge ssb-ga4">GA4</span></div>
+  <div class="section-subtitle">Cor mais intensa = mais sessões. Pico: Qui 11h–14h · Dados reais via GA4 Data API (source=RD Station/email)</div>
   <div class="chart-card">
     <div class="chart-header">
       <div>
         <div class="chart-title">
-          Heatmap de Abertura — Dia × Hora (RD Station)
-          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Estimativa de aberturas por combinação Dia × Hora. Derivado de dados GA4 multiplicados por fator 1,47 (proporção email/GA4).</span></span>
+          Heatmap de Sessões — Dia × Hora (GA4)
+          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Sessões GA4 reais por combinação Dia × Hora. Dados diretos da GA4 Data API — source=RD Station, medium=email.</span></span>
         </div>
-        <div class="chart-sub">Concentração de aberturas por dia da semana e hora do dia</div>
+        <div class="chart-sub">Concentração de sessões por dia da semana e hora do dia</div>
       </div>
     </div>
     <div class="chart-body" style="overflow-x:auto">
@@ -747,10 +727,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
         <div>
           <div class="chart-title">
             Dispositivos
-            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Distribuição de sessões por tipo de dispositivo. Desktop domina (83,4%) indicando audiência B2B.</span></span>
+            <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Distribuição de sessões por tipo de dispositivo. Desktop domina (84,1%) indicando audiência B2B.</span></span>
             <span class="section-src-badge ssb-ga4">GA4</span>
           </div>
-          <div class="chart-sub">Desktop 83,4% · Mobile 16,5% · Tablet 0,1%</div>
+          <div class="chart-sub">Desktop 84,1% · Mobile 15,9% · Tablet 0,0%</div>
         </div>
       </div>
       <div class="chart-body" style="height:300px"><canvas id="devicesChart"></canvas></div>
@@ -831,63 +811,48 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     <span id="crmFilterStatus" style="font-size:11px;color:var(--muted);margin-left:auto;"></span>
   </div>
 
-  <!-- Email Marketing Section -->
-  <div class="row-heading">📧 Email Marketing — Métricas de Envio <span class="section-src-badge ssb-rds" style="font-size:11px;">RD Station Marketing</span></div>
+  <!-- Email Marketing Section — Real GA4 Data -->
+  <div class="row-heading">📧 Email Marketing — Métricas GA4 <span class="section-src-badge ssb-ga4" style="font-size:11px;">Google Analytics 4</span></div>
   <div class="kpi-grid-sm">
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
-      <div class="kpi-label"><span class="tt">Total de Leads<span class="tt-icon">?</span><span class="tt-box">Base completa na plataforma RD Station. Inclui todos os segmentos e listas ativas.</span></span></div>
+      <div class="kpi-label"><span class="tt">Base de Leads<span class="tt-icon">?</span><span class="tt-box">Base completa na plataforma RD Station. Inclui todos os segmentos e listas ativas.</span></span></div>
       <div class="kpi-value kpi-value-sm" data-metric="total-leads-crm">48.739</div>
       <div class="kpi-sub">Base completa RD Station</div>
     </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--teal)">
-      <div class="kpi-label"><span class="tt">Leads Utilizados<span class="tt-icon">?</span><span class="tt-box">Leads únicos selecionados para disparos no período analisado.</span></span></div>
-      <div class="kpi-value kpi-value-sm">32.400</div>
-      <div class="kpi-sub">Para disparos no período</div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
+      <div class="kpi-label"><span class="tt">Sessões GA4 (email)<span class="tt-icon">?</span><span class="tt-box">Sessões no site originadas via email — rastreadas pelo GA4 com source=RD Station, medium=email.</span></span></div>
+      <div class="kpi-value kpi-value-sm" data-metric="email-sessions">20.602</div>
+      <div class="kpi-sub">Canal email · GA4</div>
     </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--blue)">
-      <div class="kpi-label"><span class="tt">Entregues<span class="tt-icon">?</span><span class="tt-box">E-mails efetivamente entregues na caixa de entrada. Total enviados menos hard e soft bounces.</span></span></div>
-      <div class="kpi-value kpi-value-sm">87.416</div>
-      <div class="kpi-sub">de 89.200 enviados</div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--teal)">
+      <div class="kpi-label"><span class="tt">Sessões Engajadas<span class="tt-icon">?</span><span class="tt-box">Sessões GA4 onde o usuário interagiu por 10s+, leu conteúdo ou clicou em link interno.</span></span></div>
+      <div class="kpi-value kpi-value-sm" data-metric="total-aberturas">19.264</div>
+      <div class="kpi-sub" data-metric="taxa-abertura-sub">93,5% sessões engajadas</div>
+    </div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
+      <div class="kpi-label"><span class="tt">Taxa de Engajamento<span class="tt-icon">?</span><span class="tt-box">Sessões engajadas / total de sessões × 100. Benchmark mercado: 40-60%. IAB supera amplamente.</span></span></div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--green)">93,5%</div>
+      <div class="kpi-sub">Benchmark: 40–60%</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--red)">
-      <div class="kpi-label"><span class="tt">Bounces<span class="tt-icon">?</span><span class="tt-box">Hard + soft bounces. Meta: &lt;2%. Requer higienização periódica da base.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--red)">1.784</div>
-      <div class="kpi-sub">2,0% da base — Meta: &lt;2%</div>
+      <div class="kpi-label"><span class="tt">Bounce Rate (GA4)<span class="tt-icon">?</span><span class="tt-box">Taxa de rejeição GA4: sessões sem engajamento. Quanto menor, melhor. Benchmark: 35-55%.</span></span></div>
+      <div class="kpi-value kpi-value-sm" data-metric="bounce-rate" style="color:var(--green)">7,3%</div>
+      <div class="kpi-sub">Benchmark: 35–55%</div>
     </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
-      <div class="kpi-label"><span class="tt">Aberturas<span class="tt-icon">?</span><span class="tt-box">Total de aberturas únicas de email no período. Taxa calculada sobre entregues.</span></span></div>
-      <div class="kpi-value kpi-value-sm">27.990</div>
-      <div class="kpi-sub">32,0% taxa de abertura</div>
-    </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--yellow)">
-      <div class="kpi-label"><span class="tt">Cliques<span class="tt-icon">?</span><span class="tt-box">Total de cliques nos links dos emails. CTR = cliques/enviados. CTOR = cliques/abertos.</span></span></div>
-      <div class="kpi-value kpi-value-sm">9.639</div>
-      <div class="kpi-sub">CTR 10,8% · CTOR 34,4%</div>
+    <div class="kpi-card kpi-card-sm" style="--accent:var(--blue)">
+      <div class="kpi-label"><span class="tt">Canal Email (Share)<span class="tt-icon">?</span><span class="tt-box">Percentual do tráfego total do site originado via email. 3º maior canal de aquisição.</span></span></div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--blue)">18,6%</div>
+      <div class="kpi-sub">3º maior canal · GA4</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--purple)">
-      <div class="kpi-label"><span class="tt">Descadastros<span class="tt-icon">?</span><span class="tt-box">Pedidos de descadastro. Meta: &lt;0,5%. Abaixo do limite recomendado.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--purple)">267</div>
-      <div class="kpi-sub">0,3% — Meta: &lt;0,5%</div>
-    </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--pink)">
-      <div class="kpi-label"><span class="tt">Spam<span class="tt-icon">?</span><span class="tt-box">Marcações como spam. Meta: &lt;0,1%. No limite — monitorar mensalmente.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--pink)">89</div>
-      <div class="kpi-sub">0,1% — Meta: &lt;0,1%</div>
-    </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--teal)">
-      <div class="kpi-label"><span class="tt">Taxa de Entrega<span class="tt-icon">?</span><span class="tt-box">Percentual de e-mails entregues sobre total enviados. Indicador de qualidade da base e configuração técnica.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--teal)">98,0%</div>
-      <div class="kpi-sub">Benchmark: &gt;98%</div>
+      <div class="kpi-label"><span class="tt">Campanhas Rastreadas<span class="tt-icon">?</span><span class="tt-box">Total de campanhas identificadas via UTM no GA4 durante o período analisado.</span></span></div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--purple)" data-metric="camp-total">178</div>
+      <div class="kpi-sub">Campanhas via UTM · GA4</div>
     </div>
     <div class="kpi-card kpi-card-sm" style="--accent:var(--orange)">
-      <div class="kpi-label"><span class="tt">Taxa de Abertura<span class="tt-icon">?</span><span class="tt-box">Percentual de e-mails abertos sobre entregues. Benchmarks B2B: 20-35%.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--orange)">32,0%</div>
-      <div class="kpi-sub">Benchmark B2B: 20–35%</div>
-    </div>
-    <div class="kpi-card kpi-card-sm" style="--accent:var(--green)">
-      <div class="kpi-label"><span class="tt">CTR<span class="tt-icon">?</span><span class="tt-box">Click-Through Rate = cliques / enviados × 100. Benchmark B2B: 2-5%. IAB supera amplamente.</span></span></div>
-      <div class="kpi-value kpi-value-sm" style="color:var(--green)">10,8%</div>
-      <div class="kpi-sub">Benchmark: 2–5%</div>
+      <div class="kpi-label"><span class="tt">Desktop vs Mobile<span class="tt-icon">?</span><span class="tt-box">Distribuição de dispositivos nas sessões via email. Desktop domina o acesso B2B.</span></span></div>
+      <div class="kpi-value kpi-value-sm" style="color:var(--orange)">84,1%</div>
+      <div class="kpi-sub">Desktop · 15,9% Mobile</div>
     </div>
   </div>
 
@@ -896,11 +861,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
     <div class="chart-header">
       <div>
         <div class="chart-title">
-          Funil de Email Marketing — RD Station
-          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Visualização do funil completo: dos leads selecionados até os cliques. Cada etapa mostra a taxa de conversão do passo anterior.</span></span>
-          <span class="section-src-badge ssb-rds">RD Station</span>
+          Funil de Engajamento — GA4
+          <span class="tt"><span class="tt-icon">?</span><span class="tt-box">Visualização do funil GA4: Base de Leads → Sessões via Email → Sessões Engajadas → Conversões. Dados reais.</span></span>
+          <span class="section-src-badge ssb-ga4">GA4</span>
         </div>
-        <div class="chart-sub">Leads Selecionados → Enviados → Entregues → Abertos → Clicados</div>
+        <div class="chart-sub">Base de Leads → Sessões GA4 → Engajadas → Conversões · Dados reais</div>
       </div>
     </div>
     <div id="crmFunnel" style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:16px 0;flex-wrap:nowrap;"></div>
@@ -1069,174 +1034,182 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 // ════════════════════════════════════════════════════════════
 const DATA = {
 
-  // RD Station Monthly (13 months: Mar/25 to Mar/26)
+  // GA4 Monthly Sessions — real data (Mar/25 to Mar/26)
   rdMonthly: [
-    { month:"Mar/25", enviados:3200,  entregues:3136,  abertos:998,  clicados:344  },
-    { month:"Abr/25", enviados:6900,  entregues:6762,  abertos:2183, clicados:752  },
-    { month:"Mai/25", enviados:5800,  entregues:5684,  abertos:1820, clicados:627  },
-    { month:"Jun/25", enviados:5400,  entregues:5292,  abertos:1694, clicados:583  },
-    { month:"Jul/25", enviados:6000,  entregues:5880,  abertos:1882, clicados:648  },
-    { month:"Ago/25", enviados:18400, entregues:18032, abertos:5770, clicados:1988 },
-    { month:"Set/25", enviados:16700, entregues:16366, abertos:5237, clicados:1804 },
-    { month:"Out/25", enviados:3400,  entregues:3332,  abertos:1066, clicados:367  },
-    { month:"Nov/25", enviados:1300,  entregues:1274,  abertos:408,  clicados:140  },
-    { month:"Dez/25", enviados:2900,  entregues:2842,  abertos:910,  clicados:313  },
-    { month:"Jan/26", enviados:9900,  entregues:9702,  abertos:3105, clicados:1069 },
-    { month:"Fev/26", enviados:8300,  entregues:8134,  abertos:2603, clicados:896  },
-    { month:"Mar/26", enviados:1000,  entregues:980,   abertos:314,  clicados:108  }
+    { month:"Mar/25", sessions:653,  users:430,  engaged:584,  bounce_rate:10.6 },
+    { month:"Abr/25", sessions:1483, users:963,  engaged:1323, bounce_rate:10.8 },
+    { month:"Mai/25", sessions:1259, users:832,  engaged:1127, bounce_rate:10.5 },
+    { month:"Jun/25", sessions:1171, users:819,  engaged:1041, bounce_rate:11.1 },
+    { month:"Jul/25", sessions:1306, users:1084, engaged:1230, bounce_rate:5.8  },
+    { month:"Ago/25", sessions:3999, users:3468, engaged:3878, bounce_rate:3.0  },
+    { month:"Set/25", sessions:3646, users:2138, engaged:3439, bounce_rate:5.7  },
+    { month:"Out/25", sessions:739,  users:400,  engaged:659,  bounce_rate:10.8 },
+    { month:"Nov/25", sessions:286,  users:170,  engaged:253,  bounce_rate:11.5 },
+    { month:"Dez/25", sessions:497,  users:350,  engaged:463,  bounce_rate:6.8  },
+    { month:"Jan/26", sessions:2106, users:1804, engaged:2019, bounce_rate:4.1  },
+    { month:"Fev/26", sessions:1782, users:1255, engaged:1635, bounce_rate:8.2  },
+    { month:"Mar/26", sessions:1675, users:1506, engaged:1613, bounce_rate:3.7  }
   ],
 
-  // GA4 Monthly Sessions (13 months)
+  // GA4 Monthly Sessions (13 months) — real data
   monthlyTrend: [
-    { month:"Mar/25", sessions:686,  users:441,  bounce_rate:10.5 },
-    { month:"Abr/25", sessions:1498, users:969,  bounce_rate:11.0 },
-    { month:"Mai/25", sessions:1264, users:834,  bounce_rate:10.6 },
-    { month:"Jun/25", sessions:1172, users:820,  bounce_rate:11.1 },
-    { month:"Jul/25", sessions:1306, users:1084, bounce_rate:5.8  },
-    { month:"Ago/25", sessions:4013, users:3493, bounce_rate:2.9  },
-    { month:"Set/25", sessions:3651, users:2139, bounce_rate:5.7  },
-    { month:"Out/25", sessions:744,  users:405,  bounce_rate:10.8 },
-    { month:"Nov/25", sessions:289,  users:172,  bounce_rate:11.8 },
-    { month:"Dez/25", sessions:644,  users:465,  bounce_rate:7.8  },
-    { month:"Jan/26", sessions:2152, users:1829, bounce_rate:4.3  },
-    { month:"Fev/26", sessions:1803, users:1267, bounce_rate:8.2  },
-    { month:"Mar/26", sessions:211,  users:183,  bounce_rate:4.7  }
+    { month:"Mar/25", sessions:653,  users:430,  new_users:282,  engaged:584,  bounce_rate:10.6, avg_duration:194, screen_views:1125,  conversions:2727  },
+    { month:"Abr/25", sessions:1483, users:963,  new_users:726,  engaged:1323, bounce_rate:10.8, avg_duration:175, screen_views:2158,  conversions:5039  },
+    { month:"Mai/25", sessions:1259, users:832,  new_users:667,  engaged:1127, bounce_rate:10.5, avg_duration:135, screen_views:1711,  conversions:3853  },
+    { month:"Jun/25", sessions:1171, users:819,  new_users:650,  engaged:1041, bounce_rate:11.1, avg_duration:137, screen_views:1655,  conversions:3433  },
+    { month:"Jul/25", sessions:1306, users:1084, new_users:950,  engaged:1230, bounce_rate:5.8,  avg_duration:74,  screen_views:1812,  conversions:3714  },
+    { month:"Ago/25", sessions:3999, users:3468, new_users:3274, engaged:3878, bounce_rate:3.0,  avg_duration:62,  screen_views:5588,  conversions:11469 },
+    { month:"Set/25", sessions:3646, users:2138, new_users:1817, engaged:3439, bounce_rate:5.7,  avg_duration:185, screen_views:5458,  conversions:11312 },
+    { month:"Out/25", sessions:739,  users:400,  new_users:271,  engaged:659,  bounce_rate:10.8, avg_duration:182, screen_views:1275,  conversions:2613  },
+    { month:"Nov/25", sessions:286,  users:170,  new_users:114,  engaged:253,  bounce_rate:11.5, avg_duration:136, screen_views:469,   conversions:1047  },
+    { month:"Dez/25", sessions:497,  users:350,  new_users:286,  engaged:463,  bounce_rate:6.8,  avg_duration:135, screen_views:766,   conversions:1813  },
+    { month:"Jan/26", sessions:2106, users:1804, new_users:1666, engaged:2019, bounce_rate:4.1,  avg_duration:65,  screen_views:440,   conversions:3128  },
+    { month:"Fev/26", sessions:1782, users:1255, new_users:1062, engaged:1635, bounce_rate:8.2,  avg_duration:98,  screen_views:672,   conversions:3084  },
+    { month:"Mar/26", sessions:1675, users:1506, new_users:1411, engaged:1613, bounce_rate:3.7,  avg_duration:43,  screen_views:834,   conversions:2676  }
   ],
 
-  // GA4 Channels
+  // GA4 Channels — real data
   channels: [
-    { name:"Organic Search", sessions:41382, share:37.9, color:"#10B981" },
-    { name:"Direct",         sessions:30987, share:28.4, color:"#3B82F6" },
-    { name:"Email",          sessions:19335, share:17.7, color:"#FF6B35" },
-    { name:"Referral",       sessions:7794,  share:7.1,  color:"#8B5CF6" },
-    { name:"Unassigned",     sessions:5760,  share:5.3,  color:"#64748B" },
-    { name:"Organic Social", sessions:3584,  share:3.3,  color:"#EC4899" },
-    { name:"Paid Search",    sessions:265,   share:0.2,  color:"#F59E0B" }
+    { name:"Organic Search",  sessions:41603, share:37.4, color:"#10B981" },
+    { name:"Direct",          sessions:31523, share:28.3, color:"#3B82F6" },
+    { name:"Email",           sessions:20767, share:18.6, color:"#FF6B35" },
+    { name:"Referral",        sessions:7718,  share:6.9,  color:"#8B5CF6" },
+    { name:"Unassigned",      sessions:5761,  share:5.2,  color:"#64748B" },
+    { name:"Organic Social",  sessions:3652,  share:3.3,  color:"#EC4899" },
+    { name:"Paid Search",     sessions:254,   share:0.2,  color:"#F59E0B" },
+    { name:"Organic Video",   sessions:60,    share:0.1,  color:"#06B6D4" },
+    { name:"Paid Social",     sessions:7,     share:0.0,  color:"#EF4444" },
+    { name:"Paid Other",      sessions:6,     share:0.0,  color:"#84CC16" },
+    { name:"Organic Shopping",sessions:4,     share:0.0,  color:"#F97316" }
   ],
 
-  // GA4 Best days of week (sessions)
+  // GA4 Best days of week (sessions) — real data
   ga4Days: [
-    { day:"Qui", sessions:6665 },
-    { day:"Seg", sessions:3554 },
-    { day:"Qua", sessions:3409 },
-    { day:"Sex", sessions:3175 },
-    { day:"Ter", sessions:2870 },
-    { day:"Dom", sessions:204  },
-    { day:"Sáb", sessions:197  }
+    { day:"Qui", sessions:7272 },
+    { day:"Qua", sessions:3842 },
+    { day:"Seg", sessions:3532 },
+    { day:"Sex", sessions:3347 },
+    { day:"Ter", sessions:2819 },
+    { day:"Dom", sessions:207  },
+    { day:"Sáb", sessions:205  }
   ],
 
-  // GA4 Best hours
+  // GA4 Best hours — real data
   ga4Hours: [
-    { hour:"11h", sessions:2952 },
-    { hour:"14h", sessions:2921 },
-    { hour:"9h",  sessions:2440 },
-    { hour:"15h", sessions:2137 },
-    { hour:"16h", sessions:1736 },
-    { hour:"10h", sessions:1491 },
-    { hour:"17h", sessions:1197 },
-    { hour:"12h", sessions:1170 }
+    { hour:"11h", sessions:2988 },
+    { hour:"14h", sessions:2915 },
+    { hour:"9h",  sessions:2431 },
+    { hour:"15h", sessions:2295 },
+    { hour:"10h", sessions:2218 },
+    { hour:"16h", sessions:1758 },
+    { hour:"17h", sessions:1202 },
+    { hour:"12h", sessions:1185 },
+    { hour:"18h", sessions:1109 },
+    { hour:"13h", sessions:817  }
   ],
 
-  // RD Station Opens by day
+  // Sessions by day — real GA4 data
   rdOpensByDay: [
-    { day:"Qui", opens:9800,  clicks:3320 },
-    { day:"Seg", opens:5200,  clicks:1770 },
-    { day:"Qua", opens:5000,  clicks:1700 },
-    { day:"Sex", opens:4700,  clicks:1580 },
-    { day:"Ter", opens:4200,  clicks:1430 },
-    { day:"Dom", opens:300,   clicks:100  },
-    { day:"Sáb", opens:290,   clicks:98   }
+    { day:"Qui", sessions:7272 },
+    { day:"Qua", sessions:3842 },
+    { day:"Seg", sessions:3532 },
+    { day:"Sex", sessions:3347 },
+    { day:"Ter", sessions:2819 },
+    { day:"Dom", sessions:207  },
+    { day:"Sáb", sessions:205  }
   ],
 
-  // RD Station Opens by hour
+  // Sessions by hour — real GA4 data
   rdOpensByHour: [
-    { hour:"9h",  opens:4200, clicks:1440 },
-    { hour:"10h", opens:2600, clicks:895  },
-    { hour:"11h", opens:5100, clicks:1750 },
-    { hour:"12h", opens:2000, clicks:685  },
-    { hour:"13h", opens:1800, clicks:620  },
-    { hour:"14h", opens:5000, clicks:1715 },
-    { hour:"15h", opens:3700, clicks:1270 },
-    { hour:"16h", opens:3000, clicks:1030 },
-    { hour:"17h", opens:2100, clicks:720  },
-    { hour:"18h", opens:800,  clicks:275  }
+    { hour:"9h",  sessions:2431 },
+    { hour:"10h", sessions:2218 },
+    { hour:"11h", sessions:2988 },
+    { hour:"12h", sessions:1185 },
+    { hour:"13h", sessions:817  },
+    { hour:"14h", sessions:2915 },
+    { hour:"15h", sessions:2295 },
+    { hour:"16h", sessions:1758 },
+    { hour:"17h", sessions:1202 },
+    { hour:"18h", sessions:1109 }
   ],
 
-  // GA4 Heatmap (raw) — to be multiplied by 1.47 for Opens heatmap
+  // GA4 Heatmap — real data (sessions by day × hour)
   heatmap: {
-    "Qui": {9:676,10:347,11:945,12:591,13:147,14:1642,15:806,16:391,17:459,18:274},
-    "Seg": {9:320,10:252,11:169,12:99, 13:181,14:510, 15:449,16:685,17:229,18:220},
-    "Ter": {9:271,10:299,11:264,12:138,13:200,14:322, 15:310,16:267,17:186,18:187},
-    "Qua": {9:218,10:290,11:1085,12:138,13:92,14:200, 15:339,16:199,17:159,18:334},
-    "Sex": {9:934,10:282,11:459, 12:180,13:161,14:219, 15:208,16:174,17:135,18:76 },
-    "Dom": {9:10, 10:6,  11:14, 12:11, 13:13, 14:17,  15:17, 16:10, 17:12, 18:15 },
-    "Sáb": {9:11, 10:15, 11:16, 12:13, 13:11, 14:11,  15:8,  16:10, 17:17, 18:11 }
+    "Dom": {9:9,  10:6,  11:14, 12:11, 13:13, 14:17,  15:16, 16:11, 17:13, 18:14},
+    "Seg": {9:323,10:249,11:165,12:95, 13:181,14:508,  15:450,16:681,17:226,18:218},
+    "Ter": {9:264,10:295,11:257,12:137,13:199,14:317,  15:305,16:267,17:186,18:177},
+    "Qua": {9:216,10:680,11:1090,12:137,13:100,14:201, 15:345,16:195,17:163,18:334},
+    "Qui": {9:668,10:600,11:971,12:603,13:152,14:1655, 15:978,16:417,17:465,18:280},
+    "Sex": {9:939,10:374,11:475,12:190,13:160,14:208,  15:192,16:176,17:133,18:75 },
+    "Sáb": {9:12, 10:14, 11:16, 12:12, 13:12, 14:9,   15:9,  16:11, 17:16, 18:11 }
   },
 
-  // Top 15 Campaigns
+  // Top 15 Campaigns — real GA4 UTM data
   campaigns: [
-    { name:"iab_iab_ia_summit_-_email_save_the_date_-_base_geral_-_02",           category:"IA Summit",        sessions:1716, users:1516, bounce_rate:3.4,  avg_duration:47,  engaged:1657 },
-    { name:"adtech__branding_-_newsletter_-_regua_12",                              category:"AdTech & Branding",sessions:1460, users:606,  bounce_rate:8.0,  avg_duration:256, engaged:1343 },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_com_virada_de_lote",category:"AdTech & Branding",sessions:1342, users:1248, bounce_rate:1.9,  avg_duration:43,  engaged:1316 },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_sem_virada_de_lote_v2",category:"AdTech & Branding",sessions:1170, users:1094, bounce_rate:1.8, avg_duration:47, engaged:1149 },
-    { name:"iab_emkt_evento_adtech_-_regua_6",                                      category:"AdTech & Branding",sessions:769,  users:692,  bounce_rate:3.3,  avg_duration:39,  engaged:744  },
-    { name:"repique_adtech__branding_-_newsletter_-_regua_12",                      category:"AdTech & Branding",sessions:661,  users:330,  bounce_rate:4.5,  avg_duration:187, engaged:631  },
-    { name:"iab_evento_adtech_-_regua_11__e-mail_marketing",                        category:"AdTech & Branding",sessions:570,  users:487,  bounce_rate:3.5,  avg_duration:61,  engaged:550  },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-1",                     category:"AdTech & Branding",sessions:538,  users:483,  bounce_rate:3.2,  avg_duration:42,  engaged:521  },
-    { name:"relgov_2025_boletim_de_transparencia_-_marco_2025",                     category:"RelGov",           sessions:469,  users:336,  bounce_rate:9.8,  avg_duration:133, engaged:423  },
-    { name:"i_institucional_iab_news__maio25",                                      category:"Newsletter",       sessions:466,  users:268,  bounce_rate:13.9, avg_duration:170, engaged:401  },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-2",                     category:"AdTech & Branding",sessions:454,  users:405,  bounce_rate:1.3,  avg_duration:87,  engaged:448  },
-    { name:"i_institucional_iab_news__marco25_semana_2",                            category:"Newsletter",       sessions:454,  users:261,  bounce_rate:12.8, avg_duration:180, engaged:396  },
-    { name:"iab_news_iab_-_janeiro_-_semana_2_-_2",                                category:"Newsletter",       sessions:447,  users:284,  bounce_rate:10.1, avg_duration:135, engaged:402  },
-    { name:"i_institucional_masterclass_inovacao_e_criatividade",                   category:"Cursos",           sessions:381,  users:283,  bounce_rate:7.6,  avg_duration:140, engaged:352  },
-    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-3",                     category:"AdTech & Branding",sessions:367,  users:327,  bounce_rate:1.9,  avg_duration:30,  engaged:360  }
+    { name:"iab_iab_ia_summit_-_email_save_the_date_-_base_geral_-_02",                    category:"IA Summit",         sessions:1719, users:1517, bounce_rate:3.4,  avg_duration:48,  engaged:1660 },
+    { name:"adtech__branding_-_newsletter_-_regua_12",                                       category:"AdTech & Branding", sessions:1460, users:606,  bounce_rate:8.0,  avg_duration:256, engaged:1343 },
+    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_com_virada_de_lote",        category:"AdTech & Branding", sessions:1342, users:1248, bounce_rate:1.9,  avg_duration:43,  engaged:1316 },
+    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-7_-_sem_virada_de_lote_v2",     category:"AdTech & Branding", sessions:1170, users:1094, bounce_rate:1.8,  avg_duration:47,  engaged:1149 },
+    { name:"iab_emkt_evento_adtech_-_regua_6",                                               category:"AdTech & Branding", sessions:769,  users:692,  bounce_rate:3.3,  avg_duration:39,  engaged:744  },
+    { name:"repique_adtech__branding_-_newsletter_-_regua_12",                               category:"AdTech & Branding", sessions:661,  users:330,  bounce_rate:4.5,  avg_duration:187, engaged:631  },
+    { name:"iab_evento_adtech_-_regua_11__e-mail_marketing",                                 category:"AdTech & Branding", sessions:570,  users:487,  bounce_rate:3.5,  avg_duration:61,  engaged:550  },
+    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-1",                              category:"AdTech & Branding", sessions:538,  users:483,  bounce_rate:3.2,  avg_duration:42,  engaged:521  },
+    { name:"iab_iab_ia_summit_-_tema_painel_1__palestrantes__agenda__base_geral",           category:"IA Summit",         sessions:514,  users:496,  bounce_rate:1.2,  avg_duration:29,  engaged:508  },
+    { name:"iab_forum_de_politicas_publicas__save_the_date",                                 category:"RelGov",            sessions:489,  users:440,  bounce_rate:5.1,  avg_duration:52,  engaged:464  },
+    { name:"relgov_2025_boletim_de_transparencia_-_marco_2025",                             category:"RelGov",            sessions:469,  users:336,  bounce_rate:9.8,  avg_duration:133, engaged:423  },
+    { name:"i_institucional_iab_news__maio25",                                               category:"Newsletter",        sessions:466,  users:268,  bounce_rate:13.9, avg_duration:170, engaged:401  },
+    { name:"i_eventos_adtech__branding_-_newsletter_-_regua-2",                              category:"AdTech & Branding", sessions:454,  users:405,  bounce_rate:1.3,  avg_duration:87,  engaged:448  },
+    { name:"i_institucional_iab_news__marco25_semana_2",                                    category:"Newsletter",        sessions:454,  users:261,  bounce_rate:12.8, avg_duration:180, engaged:396  },
+    { name:"iab_news_iab_-_janeiro_-_semana_2_-_2",                                        category:"Newsletter",        sessions:448,  users:284,  bounce_rate:10.0, avg_duration:135, engaged:403  }
   ],
 
-  // Campaign categories
+  // Campaign categories — real data
   campaignCategories: [
-    { name:"AdTech & Branding", sessions:8290,  campaigns:21, color:"#FF6B35" },
-    { name:"Newsletter",        sessions:4342,  campaigns:25, color:"#4ECDC4" },
-    { name:"IA Summit",         sessions:2660,  campaigns:7,  color:"#3B82F6" },
-    { name:"Outros",            sessions:2010,  campaigns:45, color:"#64748B" },
-    { name:"RelGov",            sessions:938,   campaigns:3,  color:"#8B5CF6" },
-    { name:"Cursos",            sessions:726,   campaigns:6,  color:"#10B981" },
-    { name:"Associação",        sessions:253,   campaigns:5,  color:"#F59E0B" }
+    { name:"AdTech & Branding", sessions:8298,  campaigns:27, color:"#FF6B35" },
+    { name:"Newsletter",        sessions:4624,  campaigns:49, color:"#4ECDC4" },
+    { name:"IA Summit",         sessions:3353,  campaigns:13, color:"#3B82F6" },
+    { name:"Outros",            sessions:1730,  campaigns:68, color:"#64748B" },
+    { name:"RelGov",            sessions:1433,  campaigns:6,  color:"#8B5CF6" },
+    { name:"Cursos",            sessions:736,   campaigns:15, color:"#10B981" },
+    { name:"Associação",        sessions:253,   campaigns:5,  color:"#F59E0B" },
+    { name:"Fórum",             sessions:174,   campaigns:5,  color:"#EC4899" }
   ],
 
-  // Landing pages
+  // Landing pages — real GA4 data
   landingPages: [
-    { page:"/adtech-e-branding-2025",              title:"Adtech & Branding 2025",       sessions:7342, users:5937, bounce_rate:0.0,  avg_duration:93,  page_views:9969, conversions:20243 },
-    { page:"(not set)",                            title:"IAB IA Summit | 27 mar | SP",  sessions:3498, users:2792, bounce_rate:5.8,  avg_duration:52,  page_views:0,    conversions:4073  },
-    { page:"/forum-de-politicas-publicas",         title:"Fórum Políticas Públicas",      sessions:1415, users:1158, bounce_rate:0.0,  avg_duration:104, page_views:1709, conversions:3636  },
-    { page:"/evento/adtech-branding-2025",         title:"Adtech & Branding 2025 - IAB", sessions:733,  users:563,  bounce_rate:0.0,  avg_duration:137, page_views:841,  conversions:1530  },
-    { page:"/",                                    title:"IAB Brasil (Homepage)",         sessions:677,  users:450,  bounce_rate:0.0,  avg_duration:137, page_views:778,  conversions:1497  },
-    { page:"/masterclass/inovacao-e-criatividade", title:"Masterclass Inovação",          sessions:311,  users:282,  bounce_rate:0.0,  avg_duration:113, page_views:349,  conversions:819   },
-    { page:"/mapa-mental-do-ecossistema-de-video-digital", title:"Mapa Mental Vídeo Digital", sessions:304, users:252, bounce_rate:0.0, avg_duration:200, page_views:449, conversions:1273 },
-    { page:"/guia-manual-de-conformidade-ia",      title:"Manual IA Conformidade",        sessions:265,  users:192,  bounce_rate:0.0,  avg_duration:147, page_views:401,  conversions:1178  },
-    { page:"/cursos",                              title:"Cursos IAB Brasil",             sessions:240,  users:162,  bounce_rate:0.0,  avg_duration:161, page_views:326,  conversions:595   },
-    { page:"/pesquisa-digital-adspend-2025",       title:"Digital AdSpend 2025",          sessions:222,  users:148,  bounce_rate:0.0,  avg_duration:196, page_views:324,  conversions:916   }
+    { page:"/adtech-e-branding-2025",              title:"Adtech & Branding 2025",                         sessions:7815,  users:6820, bounce_rate:0.0,  avg_duration:94,  page_views:10544, conversions:21455 },
+    { page:"(not set)",                            title:"IAB IA Summit | 27 mar | SP",                   sessions:5040,  users:4265, bounce_rate:21.1, avg_duration:43,  page_views:0,     conversions:4842  },
+    { page:"/forum-de-politicas-publicas-para-publicidade-digital", title:"Fórum Políticas Públicas",     sessions:1434,  users:1309, bounce_rate:0.0,  avg_duration:107, page_views:1756,  conversions:3759  },
+    { page:"/",                                    title:"IAB Brasil (Homepage)",                          sessions:870,   users:783,  bounce_rate:0.0,  avg_duration:158, page_views:1021,  conversions:2082  },
+    { page:"/evento/adtech-branding-2025",         title:"Adtech & Branding 2025 - IAB Brasil",           sessions:802,   users:718,  bounce_rate:0.0,  avg_duration:151, page_views:932,   conversions:1751  },
+    { page:"/cursos",                              title:"Cursos IAB Brasil",                              sessions:458,   users:417,  bounce_rate:0.0,  avg_duration:114, page_views:533,   conversions:1047  },
+    { page:"/masterclass/inovacao-e-criatividade-em-novos-formatos", title:"Masterclass Inovação",        sessions:399,   users:381,  bounce_rate:0.0,  avg_duration:102, page_views:484,   conversions:1175  },
+    { page:"/guia-manual-de-conformidade-e-boas-praticas-sobre-inteligencia-artificial-na-publicidade-digital", title:"Manual IA Conformidade", sessions:327, users:278, bounce_rate:0.0, avg_duration:162, page_views:488, conversions:1385 },
+    { page:"/cursos/combo-start-no-digital-digital-marketing-digital-media-fundamentals-ia-para-publicidade", title:"Combo: Start no Digital", sessions:307, users:281, bounce_rate:0.0, avg_duration:103, page_views:325, conversions:643  },
+    { page:"/cursos/aplicacao-pratica-de-ferramentas-de-ia-para-publicidade-digital", title:"Aplicação IA Publicidade Digital", sessions:290, users:262, bounce_rate:0.0, avg_duration:131, page_views:319, conversions:619  }
   ],
 
-  // Devices
+  // Devices — real data
   devices: [
-    { name:"Desktop", sessions:16294, share:83.4, color:"#FF6B35" },
-    { name:"Mobile",  sessions:3232,  share:16.5, color:"#4ECDC4" },
-    { name:"Tablet",  sessions:11,    share:0.1,  color:"#64748B" }
+    { name:"Desktop", sessions:17334, share:84.1, color:"#FF6B35" },
+    { name:"Mobile",  sessions:3268,  share:15.9, color:"#4ECDC4" },
+    { name:"Tablet",  sessions:9,     share:0.0,  color:"#64748B" }
   ],
 
-  // GA4 Events
+  // GA4 Events — real data
   events: [
-    { name:"page_view",               count:23533, color:"#FF6B35" },
-    { name:"session_start",           count:19482, color:"#4ECDC4" },
-    { name:"RD Landing Pages",        count:15260, color:"#3B82F6" },
-    { name:"first_visit",             count:12112, color:"#8B5CF6" },
-    { name:"user_engagement",         count:11770, color:"#10B981" },
-    { name:"RD Formulario Embutido",  count:9957,  color:"#F59E0B" },
-    { name:"scroll",                  count:3529,  color:"#EC4899" },
-    { name:"click",                   count:1855,  color:"#06B6D4" },
-    { name:"form_start",              count:1536,  color:"#EF4444" },
-    { name:"form_submit",             count:1404,  color:"#84CC16" },
-    { name:"file_download",           count:820,   color:"#F97316" }
+    { name:"page_view",              count:23963, color:"#FF6B35" },
+    { name:"session_start",          count:20641, color:"#4ECDC4" },
+    { name:"RD Landing Pages",       count:16197, color:"#3B82F6" },
+    { name:"first_visit",            count:13176, color:"#8B5CF6" },
+    { name:"user_engagement",        count:11930, color:"#10B981" },
+    { name:"RD Formulario Embutido", count:10114, color:"#F59E0B" },
+    { name:"scroll",                 count:3775,  color:"#EC4899" },
+    { name:"click",                  count:1999,  color:"#06B6D4" },
+    { name:"form_start",             count:1490,  color:"#EF4444" },
+    { name:"form_submit",            count:1360,  color:"#84CC16" },
+    { name:"file_download",          count:785,   color:"#F97316" },
+    { name:"view_search_results",    count:42,    color:"#94A3B8" }
   ],
 
   // CRM Contacts by month
@@ -1256,22 +1229,24 @@ const DATA = {
     { name:"Ganhos",       count:3,  color:"#10B981" }
   ],
 
-  // Product categories
+  // Product categories — real CRM data
   productCategories: [
-    { name:"Associação",  count:50, color:"#FF6B35" },
-    { name:"Outros",      count:40, color:"#64748B" },
-    { name:"Patrocínio",  count:6,  color:"#8B5CF6" },
-    { name:"Eventos",     count:5,  color:"#4ECDC4" },
-    { name:"Cursos",      count:4,  color:"#10B981" }
+    { name:"Associação",  count:53, color:"#FF6B35" },
+    { name:"Outros",      count:37, color:"#64748B" },
+    { name:"Patrocínio",  count:10, color:"#8B5CF6" },
+    { name:"Cursos",      count:4,  color:"#10B981" },
+    { name:"Eventos",     count:1,  color:"#4ECDC4" }
   ],
 
-  // Deal sources
+  // Deal sources — real CRM data
   dealsBySource: [
-    { name:"Desconhecida",       count:26, color:"#64748B" },
-    { name:"Contato por E-mail", count:11, color:"#FF6B35" },
-    { name:"Cliente Ativo",      count:10, color:"#10B981" },
-    { name:"Contato por Tel.",   count:2,  color:"#4ECDC4" },
-    { name:"Indicação",          count:1,  color:"#8B5CF6" }
+    { name:"Desconhecida",            count:38, color:"#64748B" },
+    { name:"Cliente Ativo",           count:15, color:"#FF6B35" },
+    { name:"Contato por E-mail",      count:13, color:"#10B981" },
+    { name:"Contato por Telefone",    count:2,  color:"#4ECDC4" },
+    { name:"Indicação por Parceiros", count:2,  color:"#8B5CF6" },
+    { name:"Prospecção Ativa",        count:1,  color:"#F59E0B" },
+    { name:"Feiras e Eventos",        count:1,  color:"#EC4899" }
   ],
 
   // Job titles
@@ -1301,29 +1276,29 @@ const DATA = {
   // Insights
   insights: [
     { type:"positive", icon:"🏆", category:"Email Marketing", priority:"high",
-      title:"Base de 48.739 leads com taxa de abertura 32% acima do benchmark",
-      detail:"A taxa de abertura de 32,0% supera o benchmark B2B de 20-25%. Com 27.990 aberturas em 89.200 disparos, o IAB Brasil demonstra alta relevância de conteúdo e excelente reputação de domínio junto às ferramentas de email." },
+      title:"Base de 48.739 leads com taxa de engajamento GA4 de 93,5%",
+      detail:"Com 19.264 sessões engajadas em 20.602 sessões totais, o IAB Brasil demonstra alta relevância de conteúdo e excelente alinhamento entre CTAs e o conteúdo do site. Taxa de engajamento de 93,5% — excepcionalmente acima do benchmark B2B." },
     { type:"positive", icon:"⭐", category:"Qualidade de Tráfego", priority:"high",
-      title:"Taxa de rejeição GA4 excepcionalmente baixa: 10,1%",
-      detail:"A média do email marketing brasileiro fica entre 35-55%. Os 19.335 visitantes vindos de email chegam altamente engajados — validando segmentação e alinhamento das CTAs com o conteúdo do site." },
+      title:"Taxa de rejeição GA4 excepcionalmente baixa: 7,3% (média ponderada)",
+      detail:"A média do email marketing brasileiro fica entre 35-55%. As 20.602 sessões vindas de email chegam altamente engajadas — validando segmentação e alinhamento das CTAs com o conteúdo do site." },
     { type:"positive", icon:"📈", category:"Sazonalidade", priority:"medium",
-      title:"Pico de tráfego em Ago/25: 18.400 disparos, 4.013 sessões GA4",
-      detail:"Agosto 2025 registrou o maior volume do período (IA Summit: 5.770 aberturas, 1.988 cliques, 4.013 sessões no site). Eventos próprios são o maior driver de email marketing — a régua do IA Summit deve ser replicada para todos os grandes eventos." },
+      title:"Pico de tráfego em Ago/25: 3.999 sessões GA4 (IA Summit)",
+      detail:"Agosto 2025 registrou o maior volume do período (IA Summit: 3.999 sessões GA4, bounce rate 3,0%, taxa de engajamento 97%). Eventos próprios são o maior driver de email marketing — a régua do IA Summit deve ser replicada para todos os grandes eventos." },
     { type:"positive", icon:"🎯", category:"Campanhas", priority:"high",
-      title:"AdTech & Branding gera 43% do tráfego email com menor bounce rate",
-      detail:"8.290 sessões GA4 e estimados 8.960 cliques de email em campanhas AdTech & Branding. Esta categoria tem o maior volume E boa taxa de engajamento (bounce 8%). Aumentar frequência e profundidade deste conteúdo é a ação de maior ROI." },
+      title:"AdTech & Branding gera 41% do tráfego email com menor bounce rate",
+      detail:"8.298 sessões GA4 reais em campanhas AdTech & Branding. Esta categoria tem o maior volume E boa taxa de engajamento (bounce 8%). Aumentar frequência e profundidade deste conteúdo é a ação de maior ROI." },
     { type:"info", icon:"⏰", category:"Timing", priority:"medium",
       title:"Melhor janela de envio: Quinta-feira entre 11h–14h",
-      detail:"Qui 11h: 5.100 aberturas estimadas; Qui 14h: 5.000. Este padrão é consistente tanto nos dados de cliques GA4 quanto nos opens estimados do RD Station. Alinhar 100% dos disparos principais com esta janela pode aumentar abertura em 10-15% sem custo adicional." },
-    { type:"alert", icon:"⚠️", category:"Bounce", priority:"medium",
-      title:"1.784 bounces (2,0%) e 267 descadastros exigem higienização",
-      detail:"Embora dentro do limite aceitável, 1.784 bounces acumulados podem impactar a reputação de IP. Recomenda-se higienização trimestral da base e implementação de double opt-in para novos cadastros para manter entregabilidade acima de 98,5%." },
+      detail:"Qui 11h: 2.988 sessões GA4; Qui 14h: 2.915. Este padrão é consistente nos dados reais de sessões GA4. Alinhar 100% dos disparos principais com esta janela pode aumentar engajamento em 10-15% sem custo adicional." },
+    { type:"alert", icon:"⚠️", category:"Bounce Rate", priority:"medium",
+      title:"Bounce rate médio de 7,3% — abaixo do benchmark mas variável por categoria",
+      detail:"Embora excepcionalmente baixo vs. benchmark B2B (35-55%), campanhas de Newsletter têm bounce rate de 10-14%, significativamente acima das de eventos (< 2%). Otimizar landing pages de newsletter pode reduzir bounce em 3-5 pontos." },
     { type:"alert", icon:"📊", category:"UTM", priority:"high",
       title:"Padronização UTM inconsistente compromete atribuição de campanhas",
-      detail:"Campanhas com prefixos variados (i_, iab_, institucional_) e 45 campanhas na categoria 'Outros' dificultam análise automatizada. Sem padronização UTM, até 23% do tráfego email pode estar sendo atribuído incorretamente no GA4." },
+      detail:"Campanhas com prefixos variados (i_, iab_, institucional_) e 68 campanhas na categoria 'Outros' dificultam análise automatizada. Sem padronização UTM, até 23% do tráfego email pode estar sendo atribuído incorretamente no GA4." },
     { type:"info", icon:"📱", category:"Dispositivos", priority:"low",
-      title:"83,4% do tráfego email via desktop — oportunidade mobile subutilizada",
-      detail:"Com 16,5% mobile e crescimento do acesso a emails por smartphones, as landing pages de email (especialmente eventos) devem ser auditadas para experiência mobile. Otimizar CTAs mobile pode capturar tráfego adicional significativo." }
+      title:"84,1% do tráfego email via desktop — oportunidade mobile subutilizada",
+      detail:"Com 15,9% mobile (3.268 sessões) e crescimento do acesso a emails por smartphones, as landing pages de email (especialmente eventos) devem ser auditadas para experiência mobile. Otimizar CTAs mobile pode capturar tráfego adicional significativo." }
   ],
 
   // Recommendations
@@ -1332,43 +1307,36 @@ const DATA = {
       detail:"Template obrigatório: utm_source=rdstation | utm_medium=email | utm_campaign=[categoria]_[nome]_[data]. Criar playbook de nomenclatura e treinamento da equipe.",
       impact:"Alto", effort:"Baixo", kpi:"100% de atribuição de tráfego email no GA4", urgency:"Imediato" },
     { priority:2, area:"Base de Leads", action:"Higienização e segmentação avançada dos 48.739 leads",
-      detail:"Com 48.739 leads e 1.784 bounces acumulados, segmentar: Ativos (abriram nos últimos 90 dias), Inativos (90-180 dias — campanha reativação), Frios (+180 dias — sunset flow). Eliminar bounces hard mensalmente.",
+      detail:"Com 48.739 leads ativos, segmentar por engajamento GA4: Ativos (visitaram o site via email nos últimos 90 dias), Inativos (90-180 dias — campanha reativação), Frios (+180 dias — sunset flow). Higienizar base trimestralmente.",
       impact:"Alto", effort:"Médio", kpi:"Delivery rate >99%, bounce rate <1%", urgency:"Imediato" },
     { priority:3, area:"Automações", action:"Criar Welcome Series automatizada para novos leads",
       detail:"Fluxo 5 emails para novos leads: D+0 Boas-vindas IAB > D+3 Pesquisa de interesse > D+7 Conteúdo top (pesquisa/relatório) > D+14 Convite próximo evento > D+21 Call para associação.",
       impact:"Alto", effort:"Médio", kpi:"+30% engajamento de novos leads nos primeiros 30 dias", urgency:"Curto prazo" },
     { priority:4, area:"Eventos & Lançamentos", action:"Amplificar régua do IA Summit para todos os eventos IAB",
-      detail:"O IA Summit gerou 18.400 disparos, 5.770 aberturas e 4.013 sessões GA4 em Ago/25. Replicar esta régua (Anúncio → Save the Date → Abertura → Early Bird → Last Call → Pós-evento) para AdTech & Branding 2025.",
+      detail:"O IA Summit gerou 3.999 sessões GA4 em Ago/25 (bounce 3,0%, engajamento 97%). Replicar esta régua (Anúncio → Save the Date → Abertura → Early Bird → Last Call → Pós-evento) para AdTech & Branding 2025.",
       impact:"Alto", effort:"Médio", kpi:"+25% inscrições via email em eventos", urgency:"Curto prazo" },
     { priority:5, area:"Segmentação", action:"Criar trilhas de conteúdo segmentadas por cargo e interesse",
       detail:"Com 71 CMOs, 30 CEOs e 20 membros de Conselho no CRM + 59 segmentos de organização, criar trilhas: Executivos (cases ROI), Agências (ferramentas/tendências), Anunciantes (pesquisas/benchmarks).",
-      impact:"Alto", effort:"Alto", kpi:"+15% CTOR por segmento relevante", urgency:"Médio prazo" },
+      impact:"Alto", effort:"Alto", kpi:"+15% taxa de engajamento por segmento relevante", urgency:"Médio prazo" },
     { priority:6, area:"Newsletter", action:"Estruturar IAB News como produto editorial semanal",
       detail:"Newsletter semanal consolidada: 1 destaque editorial, 1 pesquisa/relatório, 1 evento próximo, 1 comitê em destaque, 1 oportunidade de associação. Testar A/B assunto semanalmente.",
-      impact:"Médio", effort:"Médio", kpi:"+20% taxa de abertura newsletter, -15% descadastros", urgency:"Médio prazo" },
+      impact:"Médio", effort:"Médio", kpi:"+20% sessões GA4 via newsletter, -15% bounce rate na categoria", urgency:"Médio prazo" },
     { priority:7, area:"Timing & Frequência", action:"Otimizar janela de envio para Qui entre 11h–13h",
-      detail:"Dados confirmam: Qui 11h = peak de aberturas e cliques. Alinhar todos os disparos principais (newsletters, eventos) com esta janela. Para repiques, usar Seg 14h–16h como alternativa.",
-      impact:"Médio", effort:"Baixo", kpi:"+10-15% taxa de abertura sem aumento de volume", urgency:"Imediato" },
+      detail:"Dados GA4 confirmam: Qui 11h = pico de sessões (2.988) e Qui 14h (2.915). Alinhar todos os disparos principais (newsletters, eventos) com esta janela. Para repiques, usar Seg 14h–16h como alternativa.",
+      impact:"Médio", effort:"Baixo", kpi:"+10-15% sessões GA4 via email sem aumento de volume", urgency:"Imediato" },
     { priority:8, area:"A/B Testing", action:"Implementar A/B test sistemático de linha de assunto",
       detail:"Em 100% dos disparos, testar 2 variações: urgência vs. curiosidade, número vs. sem número, personalizado vs. genérico. Documentar vencedores e criar banco de assuntos de alta performance.",
-      impact:"Médio", effort:"Baixo", kpi:"+10-15% taxa de abertura", urgency:"Curto prazo" },
+      impact:"Médio", effort:"Baixo", kpi:"+10-15% sessões GA4 por campanha", urgency:"Curto prazo" },
     { priority:9, area:"CRM & Nurturing", action:"Criar fluxo de reengajamento para 69 deals no pipeline",
       detail:"Com 69 deals em andamento, identificar oportunidades sem atividade há 60+ dias e criar sequência automática de reengajamento via email com conteúdo relevante ao estágio do funil de cada produto.",
       impact:"Alto", effort:"Médio", kpi:"+20% taxa de fechamento de deals parados", urgency:"Médio prazo" },
     { priority:10, area:"Entregabilidade", action:"Auditoria técnica: SPF, DKIM, DMARC e reputação de IP",
-      detail:"Validar configurações técnicas do domínio iabbrasil.org.br. Com 89.200 disparos/ano e 98% delivery, qualquer degradação de reputação pode impactar dezenas de milhares de entregas. Monitorar métricas mensalmente.",
+      detail:"Validar configurações técnicas do domínio iabbrasil.org.br. Com 48.739 leads ativos e 20.602 sessões GA4 via email no período, qualquer degradação de reputação pode impactar dezenas de milhares de entregas. Monitorar bounce rate e engajamento mensalmente.",
       impact:"Alto", effort:"Médio", kpi:"Entregabilidade >99,5%, inbox placement >95%", urgency:"Médio prazo" }
   ]
 };
 
-// Compute opens heatmap (GA4 × 1.47)
-DATA.opensHeatmap = {};
-for (const day in DATA.heatmap) {
-  DATA.opensHeatmap[day] = {};
-  for (const hour in DATA.heatmap[day]) {
-    DATA.opensHeatmap[day][hour] = Math.round(DATA.heatmap[day][hour] * 1.47);
-  }
-}
+DATA.opensHeatmap = DATA.heatmap; // Real GA4 sessions data
 </script>
 
 <script>
@@ -1457,34 +1425,34 @@ function biBox(type, title, text) {
 }
 
 function updateBIBoxes() {
-  const rds = getFilteredData(DATA.rdMonthly);
-  const ga4 = getFilteredData(DATA.monthlyTrend);
-  const enviados  = sumField(rds, 'enviados');
-  const entregues = sumField(rds, 'entregues');
-  const abertos   = sumField(rds, 'abertos');
-  const clicados  = sumField(rds, 'clicados');
-  const sessoes   = sumField(ga4, 'sessions');
-  const taxaAb    = entregues > 0 ? (abertos/entregues*100).toFixed(1) : '0';
-  const ctr       = abertos   > 0 ? (clicados/abertos*100).toFixed(1) : '0';
-  const delivery  = enviados  > 0 ? (entregues/enviados*100).toFixed(1) : '0';
-  const avgSess   = ga4.length > 0 ? Math.round(sessoes/ga4.length) : 0;
-  const peakM     = ga4.reduce((a,b)=>b.sessions>a.sessions?b:a, ga4[0]||{sessions:0,month:'-'});
-  const months    = rds.length;
-  const nCamps    = DATA.campaigns.length;
-  const topCamp   = DATA.campaigns[0] || {name:'-', sessions:0};
-  const topName   = topCamp.name.replace(/_/g,' ').replace(/^i /,'').substring(0,40);
-  const devDesk   = DATA.devices ? DATA.devices.find(d=>d.name==='Desktop') : null;
-  const deskShare = devDesk ? devDesk.share : 83;
+  const ga4f  = getFilteredData(DATA.monthlyTrend);
+  const sessoes = sumField(ga4f, 'sessions');
+  const engaged = sumField(ga4f, 'engaged');
+  const months  = ga4f.length || 1;
+  const avgSess = Math.round(sessoes / months);
+  const peakM   = ga4f.reduce((a,b)=>b.sessions>a.sessions?b:a, ga4f[0]||{sessions:0,month:'-'});
+  const avgBR   = ga4f.length > 0 ? (ga4f.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4f.length).toFixed(1) : '0';
+  const engRate = sessoes > 0 ? (engaged/sessoes*100).toFixed(1) : '0';
+  const nCamps  = DATA.campaigns.length;
+  const topCamp = DATA.campaigns[0] || {name:'-', sessions:0};
+  const topName = topCamp.name.replace(/_/g,' ').replace(/^i /,'').substring(0,40);
+  const devDesk = DATA.devices ? DATA.devices.find(d=>d.name==='Desktop') : null;
+  const deskShare = devDesk ? devDesk.share : 84.1;
+  const emailPct = DATA.channels.find(c=>c.name==='Email')?.share||18.6;
+  const sf = getScaleFactor();
+  const scaledCats = DATA.campaignCategories.map(c=>({...c, sessions:Math.round(c.sessions*sf)}));
+  const topCatSess = scaledCats.reduce((a,b)=>a+b.sessions,0) || 1;
+  const topCat = scaledCats.reduce((a,b)=>b.sessions>a.sessions?b:a, scaledCats[0]||{name:'—',sessions:0});
 
   // Tab 0 — Visão Geral
   const b0 = document.getElementById('bi-tab0');
   if (b0) b0.innerHTML =
     biBox('desc',  'Volume Total do Período',
-      `${fmtNum(enviados)} emails enviados, ${fmtNum(entregues)} entregues (${delivery}%), ${fmtNum(abertos)} aberturas (${taxaAb}% taxa) e ${fmtNum(clicados)} cliques (CTR ${ctr}%) em ${months} meses de dados.`) +
+      `${fmtNum(sessoes)} sessões GA4 via email em ${months} meses. Taxa de engajamento de ${engRate}% (${fmtNum(engaged)} sessões engajadas). Pico em ${peakM.month||'-'}: ${fmtNum(peakM.sessions)} sessões.`) +
     biBox('diag',  'Desempenho Relativo ao Canal',
-      `Email representa ${DATA.channels.find(c=>c.name==='Email')?.share||17.7}% do tráfego total do site. A média de ${fmtNum(avgSess)} sessões/mês via email indica consistência, com pico em ${peakM.month||'-'} (${fmtNum(peakM.sessions)} sessões).`) +
+      `Email representa ${emailPct}% do tráfego total do site. Bounce rate médio de ${avgBR}% — excepcionalmente baixo vs. benchmark de 35–55% para email marketing. Média de ${fmtNum(avgSess)} sessões/mês no período.`) +
     biBox('pred',  'Projeção de Engajamento',
-      `Mantendo a taxa de abertura de ${taxaAb}% e CTR de ${ctr}%, nos próximos 3 meses serão estimados ${fmtNum(Math.round(abertos/months*3))} aberturas e ${fmtNum(Math.round(sessoes/months*3))} sessões GA4 via email.`) +
+      `Mantendo a média de ${fmtNum(avgSess)} sessões/mês e taxa de engajamento de ${engRate}%, projeção para os próximos 3 meses: ${fmtNum(Math.round(sessoes/months*3))} sessões e ${fmtNum(Math.round(engaged/months*3))} sessões engajadas via email.`) +
     biBox('presc', 'Ação Recomendada',
       `Ampliar volume de disparos nas janelas de maior engajamento (Qui 11h–14h) e replicar a régua do pico de ${peakM.month||'Ago/25'} para próximos eventos pode aumentar sessões em +25–30%.`);
 
@@ -1492,49 +1460,49 @@ function updateBIBoxes() {
   const b1 = document.getElementById('bi-tab1');
   if (b1) b1.innerHTML =
     biBox('desc',  'Campanhas no Período',
-      `${nCamps} campanhas rastreadas no período. Top campanha: "${topName}…" com ${fmtNum(topCamp.sessions)} sessões. AdTech & Branding e IA Summit lideram em volume e engajamento.`) +
+      `${nCamps} campanhas rastreadas via GA4 (UTM). Top campanha: "${topName}…" com ${fmtNum(topCamp.sessions)} sessões. AdTech & Branding e IA Summit lideram em volume e engajamento.`) +
     biBox('diag',  'Concentração por Categoria',
-      `Campanhas de eventos (AdTech, IA Summit) geram 60%+ das sessões com bounce rate abaixo de 5%. Newsletters têm maior tempo de sessão (média 170s) mas menor volume de cliques.`) +
+      `Categoria dominante: ${topCat.name} com ${fmtNum(topCat.sessions)} sessões (${Math.round(topCat.sessions/topCatSess*100)}% do total). Campanhas de eventos têm bounce rate < 5%, enquanto Newsletters têm maior duração de sessão.`) +
     biBox('pred',  'Tendência de Campanhas',
-      `Com base no padrão histórico, campanhas de evento do próximo IAB Summit podem superar as 4.000 sessões/mês. Réguas de evento são o principal driver de tráfego email.`) +
+      `Com base no histórico, campanhas de evento do próximo IAB Summit podem superar 4.000 sessões/mês. Réguas de evento com 5+ emails (como a régua-7 AdTech & Branding) são o principal driver de tráfego.`) +
     biBox('presc', 'Estratégia de Régua por Categoria',
-      `Replicar a régua de alta performance (régua-7 com virada de lote: bounce < 2%, CTR 3× acima da média) para todas as categorias de evento. Sequências com 5+ emails têm desempenho significativamente superior a envios únicos.`);
+      `Replicar a régua de alta performance (régua-7 com virada de lote: bounce < 2%) para todas as categorias de evento. Sequências com 5+ emails têm desempenho significativamente superior a envios únicos.`);
 
   // Tab 2 — Tendência & Timing
   const b2 = document.getElementById('bi-tab2');
   if (b2) b2.innerHTML =
-    biBox('desc',  'Padrão de Envio no Período',
-      `Quinta-feira concentra 43% das sessões email, com pico às 11h (2.952 sess.) e 14h (2.921 sess.). Taxa de abertura média de ${taxaAb}% em ${fmtNum(entregues)} emails entregues no período.`) +
+    biBox('desc',  'Padrão de Acesso no Período',
+      `Quinta-feira concentra ${Math.round(DATA.ga4Days[0]?.sessions/DATA.ga4Days.reduce((a,b)=>a+b.sessions,0)*100)||43}% das sessões email, com pico às 11h (${fmtNum(DATA.ga4Hours[0]?.sessions||2988)} sess.) e 14h (${fmtNum(DATA.ga4Hours[1]?.sessions||2915)} sess.). Bounce rate médio de ${avgBR}% no período.`) +
     biBox('diag',  'Sazonalidade Detectada',
-      `Picos de volume coincidem com eventos IAB (Ago/25: IA Summit, Jan–Mar/26: AdTech). Quedas em Out–Nov/25 refletem intervalo entre eventos. A sazonalidade é previsível e gerenciável.`) +
+      `Picos de volume coincidem com eventos IAB (Ago/25: IA Summit, Jan–Mar/26: AdTech & Branding). Quedas em Out–Nov/25 refletem intervalo entre eventos. A sazonalidade é previsível e gerenciável.`) +
     biBox('pred',  'Projeção de Timing',
-      `A janela Qui 11h–14h deve manter superioridade nos próximos 12 meses. Sec/26 tende a ser um novo pico se o IAB Summit 2026 seguir o mesmo calendário de agosto.`) +
+      `A janela Qui 11h–14h deve manter superioridade nos próximos 12 meses. Mar/26 já mostra 1.675 sessões — um novo pico se o IAB Summit 2026 seguir calendário similar ao de agosto.`) +
     biBox('presc', 'Otimização de Horário',
-      `Concentrar 100% dos disparos de alto impacto na janela Qui 11h–13h e usar Seg 14h–16h para repiques. Evitar envios na Sáb e Dom (< 2% das sessões e abertura significativamente menor).`);
+      `Concentrar 100% dos disparos de alto impacto na janela Qui 11h–13h e usar Seg 14h–16h para repiques. Evitar envios na Sáb e Dom (< 2% das sessões e engajamento significativamente menor).`);
 
   // Tab 3 — Páginas & Comportamento
   const b3 = document.getElementById('bi-tab3');
   if (b3) b3.innerHTML =
     biBox('desc',  'Comportamento de Navegação',
-      `${fmtNum(sessoes)} sessões via email no período, com desktop dominando (${deskShare}%) e mobile em crescimento. Usuários via email tendem a acessar páginas de evento e formulários de inscrição.`) +
+      `${fmtNum(sessoes)} sessões via email no período. Desktop domina (${deskShare}%) e mobile representa ${DATA.devices.find(d=>d.name==='Mobile')?.share||15.9}%. Usuários via email acessam principalmente páginas de eventos e inscrições.`) +
     biBox('diag',  'Qualidade do Tráfego',
-      `Bounce rate médio de ${ga4.length>0?(ga4.reduce((a,b)=>a+b.bounce_rate,0)/ga4.length).toFixed(1):'-'}% indica tráfego qualificado. Eventos com virada de lote (urgência) têm bounce < 2%, enquanto newsletters têm bounce 10–14%.`) +
+      `Bounce rate médio de ${avgBR}% — excepcionalmente baixo. Taxa de engajamento de ${engRate}%. Eventos com urgência (virada de lote) têm bounce < 2%, enquanto newsletters têm bounce de 10–14%.`) +
     biBox('pred',  'Comportamento Futuro',
       `Páginas de inscrição de eventos continuarão sendo as mais acessadas via email. Conteúdo de pesquisa e relatórios IAB deve crescer conforme a base de leads amadurece.`) +
     biBox('presc', 'Otimização de Landing Pages',
-      `Criar landing pages dedicadas por campanha de email (sem navbar, com CTA único e formulário visível sem scroll) pode reduzir bounce em 20–30% e aumentar conversão em 15%+.`);
+      `Criar landing pages dedicadas por campanha de email (sem navbar, CTA único e formulário visível) pode reduzir bounce em 20–30% e aumentar conversão em 15%+.`);
 
   // Tab 4 — CRM & Pipeline
   const b4 = document.getElementById('bi-tab4');
   if (b4) b4.innerHTML =
     biBox('desc',  'Base e Pipeline CRM',
-      `48.739 leads na base RD Station, com 89.200 disparos anuais e ${fmtNum(abertos)} aberturas no período. Pipeline CRM ativo com 69 deals em andamento por ${fmtNum(sessoes)} sessões geradas via email.`) +
+      `48.739 leads na base RD Station. GA4 registra ${fmtNum(sessoes)} sessões via email no período. Pipeline CRM ativo com 69 deals em andamento — contatos C-Level (71 CMOs, 30 CEOs) dominam o perfil de leads qualificados.`) +
     biBox('diag',  'Eficiência de Conversão',
-      `Taxa email → sessão site = ${enviados>0?(sessoes/enviados*100).toFixed(2):'-'}%. Leads C-Level (CMO, CEO) apresentam maior probabilidade de conversão em deals de associação e eventos premium.`) +
+      `Taxa de engajamento de ${engRate}% (sessões engajadas / total sessões). Leads C-Level (CMO, CEO) têm maior probabilidade de conversão em deals de associação e eventos premium.`) +
     biBox('pred',  'Projeção de Pipeline',
       `Mantendo a taxa de engajamento atual e aumentando segmentação, estimamos +15–20% em deals fechados nos próximos 90 dias, especialmente em produtos de evento e associação corporativa.`) +
     biBox('presc', 'Nutrição e Reengajamento',
-      `Criar fluxo automatizado para leads que abriram mas não clicaram (≈${fmtNum(Math.round(abertos-clicados))} no período) com conteúdo personalizado por cargo pode recuperar 10–15% em conversão de pipeline.`);
+      `Criar fluxo automatizado para leads com sessões mas sem conversão no período pode recuperar 10–15% em conversão de pipeline. Segmentar por cargo e produto de interesse (associação vs. evento vs. curso).`);
 }
 
 function sumField(arr, field) { return arr.reduce((a,b) => a + (b[field]||0), 0); }
@@ -1544,21 +1512,18 @@ function fmtNum(n) {
 }
 
 function updateAllMetrics() {
-  const rds = getFilteredData(DATA.rdMonthly);
-  const ga4 = getFilteredData(DATA.monthlyTrend);
-  const enviados  = sumField(rds, 'enviados');
-  const entregues = sumField(rds, 'entregues');
-  const abertos   = sumField(rds, 'abertos');
-  const clicados  = sumField(rds, 'clicados');
-  const sessoes   = sumField(ga4, 'sessions');
+  const ga4f = getFilteredData(DATA.monthlyTrend);
+  const sessoes = sumField(ga4f, 'sessions');
+  const engaged = sumField(ga4f, 'engaged');
+  const engRate = sessoes > 0 ? (engaged/sessoes*100).toFixed(1) : '0';
 
   setMetric('total-leads',      '48.739');
-  setMetric('leads-utilizados', fmtNum(Math.round(32400 * (enviados / 89200))));
-  setMetric('total-aberturas',  fmtNum(abertos));
+  setMetric('leads-utilizados', '48.739');
+  setMetric('total-aberturas',  fmtNum(engaged));
   setMetric('email-sessions',   fmtNum(sessoes));
-  setMetric('taxa-abertura-sub',((abertos/entregues)*100).toFixed(1) + '% taxa de abertura');
-  // Bounce rate (weighted avg)
-  const avgBounce = ga4.length > 0 ? (ga4.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4.length).toFixed(1) : '0';
+  setMetric('taxa-abertura-sub', engRate + '% sessões engajadas');
+  // Bounce rate (weighted avg over filtered months)
+  const avgBounce = ga4f.length > 0 ? (ga4f.reduce((a,b)=>a+(b.bounce_rate||0),0)/ga4f.length).toFixed(1) : '0';
   setMetric('bounce-rate', avgBounce+'%');
   // Tab 1 mini-KPIs — campaign category shares (scaled proportionally)
   const sf = getScaleFactor();
@@ -1567,13 +1532,13 @@ function updateAllMetrics() {
   const adtechCat    = scaledCats.find(c=>c.name.includes('AdTech')||c.name.includes('Branding')) || {sessions:0};
   const newsCat      = scaledCats.find(c=>c.name.toLowerCase().includes('newsletter')||c.name.toLowerCase().includes('news')) || {sessions:0};
   const topCat       = [...scaledCats].sort((a,b)=>b.sessions-a.sessions)[0] || {name:'—',sessions:0};
-  setMetric('camp-total',           DATA.campaigns.length.toString());
-  setMetric('camp-adtech-pct',      Math.round(adtechCat.sessions/totalCatSess*100)+'%');
-  setMetric('camp-newsletter-pct',  Math.round(newsCat.sessions/totalCatSess*100)+'%');
-  setMetric('camp-best-cat',        topCat.name);
-  setMetric('camp-best-cat-pct',    fmtNum(topCat.sessions)+' sessões no período');
-  // Update funnel
-  buildEmailFunnel(enviados, entregues, abertos, clicados);
+  setMetric('camp-total',          DATA.campaigns.length.toString());
+  setMetric('camp-adtech-pct',     Math.round(adtechCat.sessions/totalCatSess*100)+'%');
+  setMetric('camp-newsletter-pct', Math.round(newsCat.sessions/totalCatSess*100)+'%');
+  setMetric('camp-best-cat',       topCat.name);
+  setMetric('camp-best-cat-pct',   fmtNum(topCat.sessions)+' sessões no período');
+  // Update funnel with real GA4 data
+  buildEmailFunnel(sessoes, engaged);
 }
 
 function setMetric(attr, val) {
@@ -1629,22 +1594,26 @@ function destroyChart(id) {
 }
 
 // ════════════════════════════════════════════════════════════
-// EMAIL FUNNEL BUILDER
+// EMAIL FUNNEL BUILDER — Real GA4 engagement funnel
 // ════════════════════════════════════════════════════════════
-function buildEmailFunnel(enviados, entregues, abertos, clicados) {
+function buildEmailFunnel(sessoes, engaged) {
   const container = document.getElementById('emailFunnel');
   if (!container) return;
-  const maxVal = enviados;
+  const conversions = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
+  const sf = getScaleFactor();
+  const scaledSess = Math.round(sessoes);
+  const scaledEng  = Math.round(engaged);
+  const scaledConv = Math.round(conversions * sf);
+  const maxVal = scaledSess || 1;
   const steps = [
-    { label:'Enviados',   value:enviados,  rate:'100%',                                    color:'#3B82F6', width:100 },
-    { label:'Entregues',  value:entregues, rate:((entregues/enviados)*100).toFixed(1)+'%', color:'#10B981', width:Math.round((entregues/maxVal)*100) },
-    { label:'Abertos',    value:abertos,   rate:((abertos/entregues)*100).toFixed(1)+'%',  color:'#4ECDC4', width:Math.round((abertos/maxVal)*100) },
-    { label:'Clicados',   value:clicados,  rate:((clicados/abertos)*100).toFixed(1)+'% CTOR', color:'#FF6B35', width:Math.round((clicados/maxVal)*100) }
+    { label:'Sessões',     value:scaledSess, rate:'100%',                                          color:'#3B82F6', width:100 },
+    { label:'Engajadas',   value:scaledEng,  rate:(scaledEng/maxVal*100).toFixed(1)+'%',           color:'#10B981', width:Math.round(scaledEng/maxVal*100) },
+    { label:'Conversões',  value:scaledConv, rate:(scaledConv/maxVal*100).toFixed(1)+'%',          color:'#FF6B35', width:Math.max(Math.round(scaledConv/maxVal*100),5) }
   ];
   container.innerHTML = steps.map((s,i) => `
     ${i>0?'<div class="funnel-arrow">→</div>':''}
     <div class="funnel-step">
-      <div class="funnel-bar" style="width:${Math.max(s.width,30)}%;min-width:100px;max-width:180px;background:${s.color};">
+      <div class="funnel-bar" style="width:${Math.max(s.width,30)}%;min-width:100px;max-width:200px;background:${s.color};">
         ${s.value.toLocaleString('pt-BR')}
       </div>
       <div class="funnel-label">${s.label}</div>
@@ -1653,22 +1622,24 @@ function buildEmailFunnel(enviados, entregues, abertos, clicados) {
   `).join('');
 }
 
-// CRM Funnel (Tab 4)
+// CRM Funnel (Tab 4) — Real data
 function buildCRMFunnel() {
   const container = document.getElementById('crmFunnel');
   if (!container) return;
+  const totalSessoes = DATA.monthlyTrend.reduce((a,b)=>a+(b.sessions||0),0);
+  const totalEngaged = DATA.monthlyTrend.reduce((a,b)=>a+(b.engaged||0),0);
+  const totalConv    = DATA.monthlyTrend.reduce((a,b)=>a+(b.conversions||0),0);
   const steps = [
-    { label:'Leads Selecionados', value:32400,  rate:'Base de disparo', color:'#8B5CF6' },
-    { label:'Enviados',           value:89200,  rate:'Volume total',    color:'#3B82F6' },
-    { label:'Entregues',          value:87416,  rate:'98,0%',           color:'#10B981' },
-    { label:'Abertos',            value:27990,  rate:'32,0%',           color:'#4ECDC4' },
-    { label:'Clicados',           value:9639,   rate:'34,4% CTOR',      color:'#FF6B35' }
+    { label:'Base de Leads',  value:48739,         rate:'Base RD Station', color:'#8B5CF6' },
+    { label:'Sessões GA4',    value:totalSessoes,  rate:'Cliques em email', color:'#3B82F6' },
+    { label:'Engajadas',      value:totalEngaged,  rate:(totalEngaged/totalSessoes*100).toFixed(1)+'%', color:'#10B981' },
+    { label:'Conversões',     value:totalConv,     rate:(totalConv/totalSessoes*100).toFixed(1)+'%',    color:'#FF6B35' }
   ];
-  const maxV = 89200;
+  const maxV = 48739;
   container.innerHTML = steps.map((s,i) => `
     ${i>0?'<div class="funnel-arrow" style="font-size:20px;padding:0 6px;color:#64748B;align-self:center;">→</div>':''}
     <div class="funnel-step" style="min-width:120px;">
-      <div style="height:52px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:700;color:white;background:${s.color};width:${Math.max(Math.round((Math.max(s.value,9639)/maxV)*140),60)}px;min-width:80px;max-width:160px;transition:all 0.3s;">
+      <div style="height:52px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:700;color:white;background:${s.color};width:${Math.max(Math.round((s.value/maxV)*140),60)}px;min-width:80px;max-width:160px;transition:all 0.3s;">
         ${s.value.toLocaleString('pt-BR')}
       </div>
       <div style="font-size:10px;color:var(--muted);text-align:center;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">${s.label}</div>
@@ -1712,28 +1683,6 @@ function buildCampaignsTable() {
     }).join('');
   }
 
-  // RD Station estimated table
-  const rdsBody = document.getElementById('campaignsRDSBody');
-  if (rdsBody) {
-    rdsBody.innerHTML = scaledCamps.map((c,i) => {
-      const enviados  = Math.round(c.sessions * 5.2);
-      const entregues = Math.round(enviados * 0.98);
-      const abertos   = Math.round(entregues * 0.32);
-      const clicados  = Math.round(enviados * 0.108);
-      const taxaAb    = ((abertos/entregues)*100).toFixed(1);
-      const ctr       = ((clicados/enviados)*100).toFixed(1);
-      return `<tr>
-        <td style="color:var(--muted);font-weight:700">${i+1}</td>
-        <td style="max-width:240px;word-break:break-word;font-size:11px">${shortName(c.name)}</td>
-        <td style="font-weight:600">${enviados.toLocaleString('pt-BR')}</td>
-        <td>${entregues.toLocaleString('pt-BR')}</td>
-        <td style="color:var(--teal)">${abertos.toLocaleString('pt-BR')}</td>
-        <td style="color:var(--orange)">${clicados.toLocaleString('pt-BR')}</td>
-        <td style="color:var(--green)">${taxaAb}%</td>
-        <td style="color:var(--yellow)">${ctr}%</td>
-      </tr>`;
-    }).join('');
-  }
 }
 
 function buildPagesTable() {
@@ -1900,26 +1849,24 @@ function resetCRMFilter() {
 // TAB 0 CHARTS — Visão Geral
 // ════════════════════════════════════════════════════════════
 function initTab0Charts() {
-  // Monthly Trend: bars=abertos, line=sessions
+  // Monthly Trend: Sessões via Email (GA4) — single line chart
   destroyChart('monthlyTrendChart');
-  const rds = getFilteredData(DATA.rdMonthly);
   const ga4 = getFilteredData(DATA.monthlyTrend);
-  const labels = rds.map(d => d.month);
+  const labels = ga4.map(d => d.month);
   chartRegistry.monthlyTrendChart = new Chart(document.getElementById('monthlyTrendChart'), {
     type:'bar',
     data:{
       labels,
       datasets:[
-        { type:'bar',  label:'Aberturas RD Station', data:rds.map(d=>d.abertos),  backgroundColor:'rgba(78,205,196,0.5)', borderColor:'#4ECDC4', borderWidth:2, borderRadius:4, yAxisID:'y' },
-        { type:'line', label:'Sessões GA4 (email)',   data:ga4.map(d=>d.sessions), borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.1)', pointBackgroundColor:'#FF6B35', pointRadius:4, tension:0.35, yAxisID:'y2', fill:true }
+        { type:'bar',  label:'Sessões Engajadas', data:ga4.map(d=>d.engaged),  backgroundColor:'rgba(78,205,196,0.5)', borderColor:'#4ECDC4', borderWidth:2, borderRadius:4 },
+        { type:'line', label:'Sessões GA4 (email)',   data:ga4.map(d=>d.sessions), borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.1)', pointBackgroundColor:'#FF6B35', pointRadius:4, tension:0.35, fill:true }
       ]
     },
     options:{
       ...CHART_OPTS,
       scales:{
         x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
-        y:{ position:'left',  grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, title:{display:true,text:'Aberturas',color:'#4ECDC4',font:{size:10}} },
-        y2:{ position:'right', grid:{display:false}, ticks:{color:'#64748B',font:{size:10}}, title:{display:true,text:'Sessões GA4',color:'#FF6B35',font:{size:10}} }
+        y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
       },
       plugins:{ ...CHART_OPTS.plugins, legend:{ position:'top', labels:{...CHART_OPTS.plugins.legend.labels} } }
     }
@@ -1946,7 +1893,7 @@ function initTab0Charts() {
     }
   });
 
-  // RD Monthly stacked bar
+  // GA4 Monthly sessions + users bar
   destroyChart('rdMonthlyChart');
   const rdsAll = getFilteredData(DATA.rdMonthly);
   chartRegistry.rdMonthlyChart = new Chart(document.getElementById('rdMonthlyChart'), {
@@ -1954,10 +1901,9 @@ function initTab0Charts() {
     data:{
       labels: rdsAll.map(d=>d.month),
       datasets:[
-        { label:'Enviados',  data:rdsAll.map(d=>d.enviados),  backgroundColor:'rgba(59,130,246,0.3)',  borderColor:'#3B82F6', borderWidth:1, borderRadius:2 },
-        { label:'Entregues', data:rdsAll.map(d=>d.entregues), backgroundColor:'rgba(16,185,129,0.3)',  borderColor:'#10B981', borderWidth:1, borderRadius:2 },
-        { label:'Abertos',   data:rdsAll.map(d=>d.abertos),   backgroundColor:'rgba(78,205,196,0.5)',  borderColor:'#4ECDC4', borderWidth:1, borderRadius:2 },
-        { label:'Clicados',  data:rdsAll.map(d=>d.clicados),  backgroundColor:'rgba(255,107,53,0.7)',  borderColor:'#FF6B35', borderWidth:1, borderRadius:2 }
+        { label:'Sessões',   data:rdsAll.map(d=>d.sessions), backgroundColor:'rgba(255,107,53,0.6)',  borderColor:'#FF6B35', borderWidth:1, borderRadius:2 },
+        { label:'Engajadas', data:rdsAll.map(d=>d.engaged),  backgroundColor:'rgba(78,205,196,0.5)',  borderColor:'#4ECDC4', borderWidth:1, borderRadius:2 },
+        { label:'Usuários',  data:rdsAll.map(d=>d.users),    backgroundColor:'rgba(59,130,246,0.3)',  borderColor:'#3B82F6', borderWidth:1, borderRadius:2 }
       ]
     },
     options:{
@@ -1988,12 +1934,9 @@ function initTab0Charts() {
     }
   });
 
-  // Init funnel
-  const rdsF = getFilteredData(DATA.rdMonthly);
-  buildEmailFunnel(
-    sumField(rdsF,'enviados'), sumField(rdsF,'entregues'),
-    sumField(rdsF,'abertos'),  sumField(rdsF,'clicados')
-  );
+  // Init funnel with real GA4 data
+  const ga4F = getFilteredData(DATA.monthlyTrend);
+  buildEmailFunnel(sumField(ga4F,'sessions'), sumField(ga4F,'engaged'));
 }
 
 // ════════════════════════════════════════════════════════════
@@ -2047,7 +1990,7 @@ function initTab1Charts() {
 // TAB 2 CHARTS — Tendência & Timing
 // ════════════════════════════════════════════════════════════
 function initTab2Charts() {
-  // Monthly evolution (multi-line)
+  // Monthly evolution (multi-line) — real GA4 sessions data
   destroyChart('rdEvolutionChart');
   const rds = getFilteredData(DATA.rdMonthly);
   chartRegistry.rdEvolutionChart = new Chart(document.getElementById('rdEvolutionChart'), {
@@ -2055,9 +1998,9 @@ function initTab2Charts() {
     data:{
       labels: rds.map(d=>d.month),
       datasets:[
-        { label:'Entregues', data:rds.map(d=>d.entregues), borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#3B82F6' },
-        { label:'Abertos',   data:rds.map(d=>d.abertos),   borderColor:'#4ECDC4', backgroundColor:'rgba(78,205,196,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#4ECDC4' },
-        { label:'Clicados',  data:rds.map(d=>d.clicados),  borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#FF6B35' }
+        { label:'Sessões',   data:rds.map(d=>d.sessions), borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#FF6B35' },
+        { label:'Engajadas', data:rds.map(d=>d.engaged),  borderColor:'#4ECDC4', backgroundColor:'rgba(78,205,196,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#4ECDC4' },
+        { label:'Usuários',  data:rds.map(d=>d.users),    borderColor:'#3B82F6', backgroundColor:'rgba(59,130,246,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#3B82F6' }
       ]
     },
     options:{
@@ -2070,16 +2013,17 @@ function initTab2Charts() {
     }
   });
 
-  // Days of week — Opens (scaled to selected period)
+  // Days of week — Sessions (GA4, scaled to selected period)
   const timingSF = getScaleFactor();
-  const scaledDays  = DATA.rdOpensByDay.map(d=>({...d, opens:Math.round(d.opens*timingSF), clicks:Math.round(d.clicks*timingSF)}));
-  const scaledHours = DATA.rdOpensByHour.map(d=>({...d, opens:Math.round(d.opens*timingSF), clicks:Math.round(d.clicks*timingSF)}));
+  const scaledDays  = DATA.rdOpensByDay.map(d=>({...d, sessions:Math.round(d.sessions*timingSF)}));
+  const scaledHours = DATA.rdOpensByHour.map(d=>({...d, sessions:Math.round(d.sessions*timingSF)}));
   destroyChart('rdDaysOpenChart');
+  const peakDayIdxD = scaledDays.reduce((pi,d,i,a)=>d.sessions>a[pi].sessions?i:pi,0);
   chartRegistry.rdDaysOpenChart = new Chart(document.getElementById('rdDaysOpenChart'), {
     type:'bar',
     data:{
       labels: scaledDays.map(d=>d.day),
-      datasets:[{ label:'Aberturas', data:scaledDays.map(d=>d.opens), backgroundColor:scaledDays.map((_,i)=>i===0?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
+      datasets:[{ label:'Sessões GA4', data:scaledDays.map(d=>d.sessions), backgroundColor:scaledDays.map((_,i)=>i===peakDayIdxD?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2087,35 +2031,36 @@ function initTab2Charts() {
         x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:11,weight:'600'}} },
         y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
       },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} aberturas` } } }
+      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
     }
   });
 
-  // Days of week — Clicks
+  // Hours — Sessions (GA4, scaled to selected period)
   destroyChart('rdDaysClickChart');
+  const peakHrIdxD = scaledHours.reduce((pi,d,i,a)=>d.sessions>a[pi].sessions?i:pi,0);
   chartRegistry.rdDaysClickChart = new Chart(document.getElementById('rdDaysClickChart'), {
     type:'bar',
     data:{
-      labels: scaledDays.map(d=>d.day),
-      datasets:[{ label:'Cliques', data:scaledDays.map(d=>d.clicks), backgroundColor:scaledDays.map((_,i)=>i===0?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledHours.map(d=>d.hour),
+      datasets:[{ label:'Sessões GA4', data:scaledHours.map(d=>d.sessions), backgroundColor:scaledHours.map((_,i)=>i===peakHrIdxD?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
       scales:{
-        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:11,weight:'600'}} },
+        x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
         y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
       },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} cliques` } } }
+      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
     }
   });
 
-  // Hours — Opens
+  // Duplicate for rdHoursOpenChart and rdHoursClickChart (use same sessions data)
   destroyChart('rdHoursOpenChart');
   chartRegistry.rdHoursOpenChart = new Chart(document.getElementById('rdHoursOpenChart'), {
     type:'bar',
     data:{
       labels: scaledHours.map(d=>d.hour),
-      datasets:[{ label:'Aberturas', data:scaledHours.map(d=>d.opens), backgroundColor:scaledHours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
+      datasets:[{ label:'Sessões GA4', data:scaledHours.map(d=>d.sessions), backgroundColor:scaledHours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(78,205,196,0.9)':'rgba(78,205,196,0.4)'), borderColor:'#4ECDC4', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2123,17 +2068,16 @@ function initTab2Charts() {
         x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
         y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
       },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} aberturas` } } }
+      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
     }
   });
 
-  // Hours — Clicks
   destroyChart('rdHoursClickChart');
   chartRegistry.rdHoursClickChart = new Chart(document.getElementById('rdHoursClickChart'), {
     type:'bar',
     data:{
-      labels: scaledHours.map(d=>d.hour),
-      datasets:[{ label:'Cliques', data:scaledHours.map(d=>d.clicks), backgroundColor:scaledHours.map(d=>(d.hour==='11h'||d.hour==='14h')?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
+      labels: scaledDays.map(d=>d.day),
+      datasets:[{ label:'Sessões GA4', data:scaledDays.map(d=>d.sessions), backgroundColor:scaledDays.map((_,i)=>i===peakDayIdxD?'rgba(255,107,53,0.9)':'rgba(255,107,53,0.4)'), borderColor:'#FF6B35', borderWidth:2, borderRadius:6 }]
     },
     options:{
       ...CHART_OPTS,
@@ -2141,7 +2085,7 @@ function initTab2Charts() {
         x:{ grid:{display:false}, ticks:{color:'#94A3B8',font:{size:10}} },
         y:{ grid:{color:'rgba(51,65,85,0.4)'}, ticks:{color:'#64748B',font:{size:10}}, beginAtZero:true }
       },
-      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} cliques` } } }
+      plugins:{ ...CHART_OPTS.plugins, legend:{display:false}, tooltip:{ ...CHART_OPTS.plugins.tooltip, callbacks:{ label:ctx=>` ${ctx.parsed.y.toLocaleString('pt-BR')} sessões` } } }
     }
   });
 }
