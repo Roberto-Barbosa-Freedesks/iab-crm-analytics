@@ -141,12 +141,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .data-table tr:last-child td { border-bottom: none; }
 .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
 
-/* UTM ALERT */
-.utm-alert { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
-.utm-alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-.utm-alert-body h4 { font-size: 13px; font-weight: 700; color: var(--yellow); margin-bottom: 4px; }
-.utm-alert-body p { font-size: 12px; color: var(--muted); line-height: 1.6; }
-
 /* INSIGHT CARDS */
 .insight-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start; transition: border-color 0.2s; }
 .insight-card:hover { border-color: var(--orange); }
@@ -213,7 +207,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 .btn-apply-custom:hover { opacity:0.85; }
 
 /* BI ANALYSIS BOXES */
-.bi-boxes { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px; padding-top:20px; border-top:1px solid var(--border); }
+.bi-section { margin-top:36px; padding-top:24px; border-top:2px solid var(--border); }
+.bi-section-label { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.bi-section-label span { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); }
+.bi-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.bi-boxes { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 @media (max-width:1024px) { .bi-boxes { grid-template-columns:1fr 1fr; } }
 @media (max-width:640px) { .bi-boxes { grid-template-columns:1fr; } }
 .bi-box { border-radius:10px; padding:16px; border:1px solid var(--border); position:relative; overflow:hidden; }
@@ -476,8 +474,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-body" style="height:260px"><canvas id="productCatChart0"></canvas></div>
     </div>
   </div>
+  <div class="bi-section">
+    <div class="bi-section-label"><span>Camada de Análise</span></div>
+    <div class="bi-boxes" id="bi-tab0"></div>
+  </div>
 </div>
-  <div class="bi-boxes" id="bi-tab0"></div>
 <!-- END TAB 0 -->
 
 
@@ -485,14 +486,6 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
      TAB 1 — CAMPANHAS & UTM
 ══════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab1">
-
-  <div class="utm-alert">
-    <div class="utm-alert-icon">⚠️</div>
-    <div class="utm-alert-body">
-      <h4>Atenção: Padronização de UTM Inconsistente</h4>
-      <p>Campanhas identificadas com prefixos variados (<code>i_</code>, <code>iab_</code>, <code>institucional_</code>, <code>repique_</code>). Sem padronização, até 23% do tráfego email pode estar sendo atribuído incorretamente no GA4. Recomenda-se implementar template padrão: <strong>utm_source=rdstation | utm_medium=email | utm_campaign=[categoria]_[nome]_[data]</strong>.</p>
-    </div>
-  </div>
 
   <div class="mini-kpi-row">
     <div class="mini-kpi">
@@ -586,8 +579,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-body" style="height:280px"><canvas id="catDonutChart"></canvas></div>
     </div>
   </div>
+  <div class="bi-section">
+    <div class="bi-section-label"><span>Camada de Análise</span></div>
+    <div class="bi-boxes" id="bi-tab1"></div>
+  </div>
 </div>
-  <div class="bi-boxes" id="bi-tab1"></div>
 <!-- END TAB 1 -->
 
 <!-- ══════════════════════════════════════════════════
@@ -695,8 +691,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <table class="heatmap-table" id="heatmapTable"></table>
     </div>
   </div>
+  <div class="bi-section">
+    <div class="bi-section-label"><span>Camada de Análise</span></div>
+    <div class="bi-boxes" id="bi-tab2"></div>
+  </div>
 </div>
-  <div class="bi-boxes" id="bi-tab2"></div>
 <!-- END TAB 2 -->
 
 
@@ -797,8 +796,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div class="chart-body" style="height:240px"><canvas id="ga4HoursChart"></canvas></div>
     </div>
   </div>
+  <div class="bi-section">
+    <div class="bi-section-label"><span>Camada de Análise</span></div>
+    <div class="bi-boxes" id="bi-tab3"></div>
+  </div>
 </div>
-  <div class="bi-boxes" id="bi-tab3"></div>
 <!-- END TAB 3 -->
 
 <!-- ══════════════════════════════════════════════════
@@ -1017,8 +1019,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
       <div id="funnelList"></div>
     </div>
   </div>
+  <div class="bi-section">
+    <div class="bi-section-label"><span>Camada de Análise</span></div>
+    <div class="bi-boxes" id="bi-tab4"></div>
+  </div>
 </div>
-  <div class="bi-boxes" id="bi-tab4"></div>
 <!-- END TAB 4 -->
 
 
@@ -1475,8 +1480,8 @@ function updateBIBoxes() {
       `Campanhas de eventos (AdTech, IA Summit) geram 60%+ das sessões com bounce rate abaixo de 5%. Newsletters têm maior tempo de sessão (média 170s) mas menor volume de cliques.`) +
     biBox('pred',  'Tendência de Campanhas',
       `Com base no padrão histórico, campanhas de evento do próximo IAB Summit podem superar as 4.000 sessões/mês. Réguas de evento são o principal driver de tráfego email.`) +
-    biBox('presc', 'Padronização de UTM',
-      `Adotar template único: utm_source=rdstation | utm_medium=email | utm_campaign=[categoria]_[evento]_[data] garante 100% de atribuição correta e permite comparação entre eventos ao longo do tempo.`);
+    biBox('presc', 'Estratégia de Régua por Categoria',
+      `Replicar a régua de alta performance (régua-7 com virada de lote: bounce < 2%, CTR 3× acima da média) para todas as categorias de evento. Sequências com 5+ emails têm desempenho significativamente superior a envios únicos.`);
 
   // Tab 2 — Tendência & Timing
   const b2 = document.getElementById('bi-tab2');
