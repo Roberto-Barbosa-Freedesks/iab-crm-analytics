@@ -1,257 +1,228 @@
 #!/usr/bin/env python3
 """
-GA4 Data API — Fetch email traffic analytics for IAB Brasil.
-Pulls sessions, users, conversions from email/newsletter source.
+GA4 Data API — Fetch RD Station email traffic analytics for IAB Brasil.
+Filter: sessionSource EXACT "RD Station" AND sessionMedium EXACT "email"
+Auth: OAuth2 refresh token from credentials/ga4_token.json
 """
 import json
-import os
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
 from google.analytics.data_v1beta.types import (
     DateRange, Dimension, Metric, RunReportRequest,
-    FilterExpression, Filter, FilterExpressionList,
-    OrderBy
+    FilterExpression, Filter, FilterExpressionList, OrderBy
 )
-from google.oauth2 import service_account
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
 
-BASE_DIR = Path(__file__).parent.parent
-CONFIG_FILE = BASE_DIR / "credentials" / "config.json"
-DATA_DIR = BASE_DIR / "data"
+BASE_DIR  = Path(__file__).parent.parent
+CREDS_DIR = BASE_DIR / "credentials"
+DATA_DIR  = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
-def load_config():
-    with open(CONFIG_FILE) as f:
-        return json.load(f)
+PROPERTY_ID = (CREDS_DIR / "ga4_property_id.txt").read_text().strip()
+TOKEN_FILE  = CREDS_DIR / "ga4_token.json"
 
-def get_ga4_client(config):
-    sa_file = BASE_DIR / config["ga4"]["service_account_file"]
-    if not sa_file.exists():
-        print(f"❌ Service Account não encontrada: {sa_file}")
-        print("   Siga o SETUP_GUIDE.md para criar a Service Account.")
-        exit(1)
+# ── AUTH ─────────────────────────────────────────────────────────────────────
 
-    credentials = service_account.Credentials.from_service_account_file(
-        str(sa_file),
-        scopes=["https://www.googleapis.com/auth/analytics.readonly"]
+def get_client():
+    with open(TOKEN_FILE) as f:
+        tok = json.load(f)
+
+    creds = Credentials(
+        token             = tok.get("token"),
+        refresh_token     = tok["refresh_token"],
+        token_uri         = tok.get("token_uri", "https://oauth2.googleapis.com/token"),
+        client_id         = tok["client_id"],
+        client_secret     = tok["client_secret"],
+        scopes            = tok.get("scopes", ["https://www.googleapis.com/auth/analytics.readonly"]),
+        quota_project_id  = "iab-data-analytics"
     )
-    return BetaAnalyticsDataClient(credentials=credentials)
+    if not creds.valid:
+        creds.refresh(Request())
+        tok["token"] = creds.token
+        with open(TOKEN_FILE, "w") as f:
+            json.dump(tok, f, indent=2)
 
-def run_report(client, property_id, dimensions, metrics, date_ranges,
-               dimension_filter=None, order_bys=None, limit=10000):
-    """Run a GA4 Data API report."""
-    request = RunReportRequest(
-        property=f"properties/{property_id}",
-        dimensions=[Dimension(name=d) for d in dimensions],
-        metrics=[Metric(name=m) for m in metrics],
-        date_ranges=date_ranges,
-        dimension_filter=dimension_filter,
-        order_bys=order_bys or [],
-        limit=limit
+    return BetaAnalyticsDataClient(credentials=creds)
+
+# ── HELPERS ───────────────────────────────────────────────────────────────────
+
+def run_report(client, dims, mets, date_ranges, fltr=None, order_bys=None, limit=10000):
+    req = RunReportRequest(
+        property    = f"properties/{PROPERTY_ID}",
+        dimensions  = [Dimension(name=d) for d in dims],
+        metrics     = [Metric(name=m) for m in mets],
+        date_ranges = date_ranges,
+        dimension_filter = fltr,
+        order_bys   = order_bys or [],
+        limit       = limit
     )
-    response = client.run_report(request)
-    return response
-
-def response_to_dict(response):
-    """Convert GA4 response to list of dicts."""
-    rows = []
-    dim_headers = [h.name for h in response.dimension_headers]
-    met_headers = [h.name for h in response.metric_headers]
-
-    for row in response.rows:
-        r = {}
-        for i, dim in enumerate(row.dimension_values):
-            r[dim_headers[i]] = dim.value
-        for i, met in enumerate(row.metric_values):
-            r[met_headers[i]] = met.value
+    resp = client.run_report(req)
+    dim_h = [h.name for h in resp.dimension_headers]
+    met_h = [h.name for h in resp.metric_headers]
+    rows  = []
+    for row in resp.rows:
+        r = {dim_h[i]: row.dimension_values[i].value for i in range(len(dim_h))}
+        r.update({met_h[i]: row.metric_values[i].value for i in range(len(met_h))})
         rows.append(r)
     return rows
 
-def email_source_filter():
-    """Filter for email/newsletter traffic."""
+def rds_email_filter():
+    """RD Station / email — the ONLY email UTM from RD Station Marketing."""
     return FilterExpression(
-        or_group=FilterExpressionList(
-            expressions=[
-                FilterExpression(
-                    filter=Filter(
-                        field_name="sessionDefaultChannelGroup",
-                        string_filter=Filter.StringFilter(
-                            value="Email",
-                            match_type=Filter.StringFilter.MatchType.EXACT
-                        )
-                    )
-                ),
-                FilterExpression(
-                    filter=Filter(
-                        field_name="sessionMedium",
-                        string_filter=Filter.StringFilter(
-                            value="email",
-                            match_type=Filter.StringFilter.MatchType.EXACT
-                        )
-                    )
-                )
-            ]
-        )
+        and_group=FilterExpressionList(expressions=[
+            FilterExpression(filter=Filter(
+                field_name="sessionSource",
+                string_filter=Filter.StringFilter(
+                    value="RD Station",
+                    match_type=Filter.StringFilter.MatchType.EXACT))),
+            FilterExpression(filter=Filter(
+                field_name="sessionMedium",
+                string_filter=Filter.StringFilter(
+                    value="email",
+                    match_type=Filter.StringFilter.MatchType.EXACT)))
+        ])
     )
 
-def fetch_all_ga4_data():
-    config = load_config()
-    property_id = config["ga4"]["property_id"]
+def date_ranges_from(start="365daysAgo", end="yesterday"):
+    return [DateRange(start_date=start, end_date=end)]
 
-    if not property_id or property_id == "SEU_PROPERTY_ID":
-        print("❌ Configure o property_id do GA4 em credentials/config.json")
-        exit(1)
+def order_desc(metric):
+    return [OrderBy(metric=OrderBy.MetricOrderBy(metric_name=metric), desc=True)]
 
-    client = get_ga4_client(config)
-    data = {}
+def order_asc(metric):
+    return [OrderBy(metric=OrderBy.MetricOrderBy(metric_name=metric), desc=False)]
 
-    print("\n" + "=" * 60)
-    print("  GA4 Data API — Coletando dados de tráfego email")
-    print("=" * 60)
-    print(f"  Property ID: {property_id}")
+def order_dim_asc(dimension):
+    return [OrderBy(dimension=OrderBy.DimensionOrderBy(dimension_name=dimension), desc=False)]
 
-    # Date ranges: last 12 months + year ago comparison
-    date_ranges_12m = [DateRange(start_date="365daysAgo", end_date="today")]
-    date_ranges_compare = [
-        DateRange(start_date="365daysAgo", end_date="today", name="current"),
-        DateRange(start_date="730daysAgo", end_date="366daysAgo", name="previous")
-    ]
+# ── MAIN FETCH ────────────────────────────────────────────────────────────────
 
-    # 1. Overall email traffic overview
-    print("\n📊 Tráfego geral por canal (últimos 365 dias)...")
-    resp = run_report(client, property_id,
-        dimensions=["sessionDefaultChannelGroup", "sessionMedium", "sessionSource"],
-        metrics=["sessions", "activeUsers", "newUsers", "bounceRate",
-                 "averageSessionDuration", "screenPageViewsPerSession"],
-        date_ranges=date_ranges_12m
-    )
-    data["channel_overview"] = response_to_dict(resp)
+def fetch_all():
+    print("\n" + "="*60)
+    print("  GA4 Data API — IAB Brasil · RD Station / email only")
+    print("="*60)
+    print(f"  Property: {PROPERTY_ID}")
+    print(f"  Filter:   sessionSource='RD Station' AND sessionMedium='email'")
+    print(f"  Period:   365 dias → yesterday ({date.today() - timedelta(1)})")
+
+    client = get_client()
+    dr     = date_ranges_from("365daysAgo", "yesterday")
+    fltr   = rds_email_filter()
+    data   = {}
+
+    # 1. Channel overview (all sources — for benchmark comparison)
+    print("\n📊 1. Channel overview (all sources, benchmark)...")
+    data["channel_overview"] = run_report(client,
+        dims=["sessionDefaultChannelGroup", "sessionSource", "sessionMedium"],
+        mets=["sessions","activeUsers","newUsers","bounceRate",
+              "averageSessionDuration","engagedSessions","conversions"],
+        date_ranges=dr,
+        order_bys=order_desc("sessions"))
     print(f"   → {len(data['channel_overview'])} rows")
 
-    # 2. Email traffic by month (trend)
-    print("\n📅 Tráfego de email por mês...")
-    resp = run_report(client, property_id,
-        dimensions=["yearMonth", "sessionDefaultChannelGroup"],
-        metrics=["sessions", "activeUsers", "newUsers", "engagedSessions",
-                 "bounceRate", "averageSessionDuration"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter()
-    )
-    data["email_by_month"] = response_to_dict(resp)
-    print(f"   → {len(data['email_by_month'])} rows")
+    # 2. RD Station email by month
+    print("\n📅 2. RD Station/email por mês...")
+    data["email_by_month"] = run_report(client,
+        dims=["yearMonth"],
+        mets=["sessions","activeUsers","newUsers","engagedSessions",
+              "bounceRate","averageSessionDuration","screenPageViews","conversions"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_dim_asc("yearMonth"))
+    print(f"   → {len(data['email_by_month'])} months")
 
-    # 3. Email traffic: landing pages
-    print("\n🌐 Landing pages de tráfego email...")
-    resp = run_report(client, property_id,
-        dimensions=["landingPage", "landingPagePlusQueryString"],
-        metrics=["sessions", "activeUsers", "newUsers", "bounceRate",
-                 "averageSessionDuration", "conversions", "totalRevenue"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter(),
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="sessions"), desc=True)],
-        limit=100
-    )
-    data["email_landing_pages"] = response_to_dict(resp)
-    print(f"   → {len(data['email_landing_pages'])} landing pages")
+    # 3. RD Station email by date (daily granularity for custom filter)
+    print("\n📅 3. RD Station/email diário (granularidade para filtro customizado)...")
+    data["email_by_date"] = run_report(client,
+        dims=["date"],
+        mets=["sessions","activeUsers","newUsers","engagedSessions",
+              "bounceRate","averageSessionDuration","screenPageViews","conversions"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_dim_asc("date"), limit=400)
+    print(f"   → {len(data['email_by_date'])} days")
 
-    # 4. Email traffic by UTM campaign
-    print("\n🎯 Campanhas por UTM (email)...")
-    resp = run_report(client, property_id,
-        dimensions=["sessionCampaignName", "sessionSource", "sessionMedium"],
-        metrics=["sessions", "activeUsers", "newUsers", "bounceRate",
-                 "averageSessionDuration", "engagedSessions", "conversions"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter(),
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="sessions"), desc=True)],
-        limit=200
-    )
-    data["email_campaigns_utm"] = response_to_dict(resp)
-    print(f"   → {len(data['email_campaigns_utm'])} campanhas UTM")
+    # 4. UTM campaigns (from RD Station / email)
+    print("\n🎯 4. Campanhas UTM (RD Station / email)...")
+    data["email_campaigns_utm"] = run_report(client,
+        dims=["sessionCampaignName"],
+        mets=["sessions","activeUsers","newUsers","bounceRate",
+              "averageSessionDuration","engagedSessions","conversions"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_desc("sessions"), limit=300)
+    print(f"   → {len(data['email_campaigns_utm'])} campaigns")
 
-    # 5. Email traffic by device
-    print("\n📱 Dispositivos (tráfego email)...")
-    resp = run_report(client, property_id,
-        dimensions=["deviceCategory", "operatingSystem", "browser"],
-        metrics=["sessions", "activeUsers", "bounceRate", "averageSessionDuration"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter()
-    )
-    data["email_devices"] = response_to_dict(resp)
-    print(f"   → {len(data['email_devices'])} rows")
+    # 5. Landing pages (daily for period filter)
+    print("\n🌐 5. Landing pages diário...")
+    data["email_landing_pages"] = run_report(client,
+        dims=["date","landingPage","pageTitle"],
+        mets=["sessions","activeUsers","bounceRate",
+              "averageSessionDuration","conversions","screenPageViews"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_desc("sessions"), limit=2000)
+    print(f"   → {len(data['email_landing_pages'])} rows")
 
-    # 6. Email traffic by day of week
-    print("\n📆 Tráfego email por dia da semana...")
-    resp = run_report(client, property_id,
-        dimensions=["dayOfWeek", "hour"],
-        metrics=["sessions", "activeUsers", "engagedSessions", "bounceRate"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter()
-    )
-    data["email_by_dayofweek"] = response_to_dict(resp)
+    # 6. Day of week + hour (daily granularity preserved for period filter)
+    print("\n📆 6. Dia da semana e hora (diário)...")
+    data["email_by_dayofweek"] = run_report(client,
+        dims=["date","dayOfWeek","hour"],
+        mets=["sessions","activeUsers","engagedSessions","bounceRate"],
+        date_ranges=dr, fltr=fltr, limit=15000)
     print(f"   → {len(data['email_by_dayofweek'])} rows")
 
-    # 7. Events from email traffic
-    print("\n⚡ Eventos de tráfego email...")
-    resp = run_report(client, property_id,
-        dimensions=["eventName", "pageTitle"],
-        metrics=["eventCount", "totalUsers"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter(),
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="eventCount"), desc=True)],
-        limit=100
-    )
-    data["email_events"] = response_to_dict(resp)
-    print(f"   → {len(data['email_events'])} eventos")
+    # 7. Devices (daily)
+    print("\n📱 7. Dispositivos (diário)...")
+    data["email_devices"] = run_report(client,
+        dims=["date","deviceCategory"],
+        mets=["sessions","activeUsers","bounceRate","averageSessionDuration"],
+        date_ranges=dr, fltr=fltr)
+    print(f"   → {len(data['email_devices'])} rows")
 
-    # 8. Geographic distribution of email users
-    print("\n🗺️  Distribuição geográfica...")
-    resp = run_report(client, property_id,
-        dimensions=["country", "region", "city"],
-        metrics=["activeUsers", "sessions", "newUsers"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter(),
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="activeUsers"), desc=True)],
-        limit=50
-    )
-    data["email_geography"] = response_to_dict(resp)
+    # 8. Events
+    print("\n⚡ 8. Eventos...")
+    data["email_events"] = run_report(client,
+        dims=["eventName"],
+        mets=["eventCount","totalUsers","conversions"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_desc("eventCount"), limit=50)
+    print(f"   → {len(data['email_events'])} events")
+
+    # 9. Pages
+    print("\n📝 9. Páginas visitadas (diário)...")
+    data["email_pages"] = run_report(client,
+        dims=["date","pagePath","pageTitle"],
+        mets=["screenPageViews","activeUsers","averageSessionDuration",
+              "bounceRate","engagedSessions"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_desc("screenPageViews"), limit=2000)
+    print(f"   → {len(data['email_pages'])} rows")
+
+    # 10. Geography
+    print("\n🗺  10. Distribuição geográfica...")
+    data["email_geography"] = run_report(client,
+        dims=["country","region"],
+        mets=["activeUsers","sessions","newUsers"],
+        date_ranges=dr, fltr=fltr,
+        order_bys=order_desc("activeUsers"), limit=50)
     print(f"   → {len(data['email_geography'])} locations")
 
-    # 9. Content engagement from email traffic
-    print("\n📝 Páginas mais visitadas via email...")
-    resp = run_report(client, property_id,
-        dimensions=["pagePath", "pageTitle"],
-        metrics=["screenPageViews", "activeUsers", "averageSessionDuration",
-                 "bounceRate", "engagedSessions"],
-        date_ranges=date_ranges_12m,
-        dimension_filter=email_source_filter(),
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="screenPageViews"), desc=True)],
-        limit=100
-    )
-    data["email_pages"] = response_to_dict(resp)
-    print(f"   → {len(data['email_pages'])} páginas")
+    # Save metadata
+    data["_meta"] = {
+        "fetched_at"   : datetime.now().isoformat(),
+        "property_id"  : PROPERTY_ID,
+        "source_filter": "sessionSource='RD Station' AND sessionMedium='email'",
+        "period_start" : "365daysAgo",
+        "period_end"   : "yesterday",
+        "period_label" : f"até {date.today() - timedelta(1)}"
+    }
 
-    # 10. Overall site metrics for benchmark
-    print("\n📊 Benchmark geral do site...")
-    resp = run_report(client, property_id,
-        dimensions=["sessionDefaultChannelGroup"],
-        metrics=["sessions", "activeUsers", "newUsers", "bounceRate",
-                 "averageSessionDuration", "engagedSessions", "conversions"],
-        date_ranges=date_ranges_12m,
-        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="sessions"), desc=True)]
-    )
-    data["site_benchmark"] = response_to_dict(resp)
-    print(f"   → {len(data['site_benchmark'])} canais para benchmark")
-
-    # Save all data
-    output_file = DATA_DIR / "ga4_raw_data.json"
-    with open(output_file, "w", encoding="utf-8") as f:
+    out = DATA_DIR / "ga4_raw_data.json"
+    with open(out, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2, default=str)
 
-    print(f"\n✅ Dados GA4 salvos em: {output_file}")
-    print(f"   Tamanho: {output_file.stat().st_size / 1024:.1f} KB")
-
+    print(f"\n✅ Salvo em: {out}  ({out.stat().st_size/1024:.1f} KB)")
     return data
 
 if __name__ == "__main__":
-    fetch_all_ga4_data()
+    fetch_all()
